@@ -17,5 +17,4 @@ echo '<hr>';
 echo '</h1>';
 echo 'DWES - Curso 22/23' ;
 
-
 ?>
