@@ -1,0 +1,5 @@
+<?php
+
+$usuario = "David Guiérrez";
+
+?>
