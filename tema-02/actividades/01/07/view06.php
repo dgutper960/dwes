@@ -38,6 +38,16 @@
             <td><?= $Modulo;?></td>
         </tr>
     </table>
+
+    <p>El alunno <?=$Nombre;?> <?=$Apellidos?> natural de la villa de <?=$Poblacion?>,
+    <br>
+    está cursando el <?=$Curso?>º Curso del CFGS <?=$Ciclo?>,
+    <br>
+    cullo módulo de más horas es el de <?=$Modulo?>
+    <br>
+    y todo esto lo está haciendo a la edad de <?=$Edad?> años.</p>
+    <p>"Estoy deseando incorporame a este mercado laboral."</p>
+    <p>Afirmó el citado <?=$Nombre?> <?=$Apellidos?>.</p>
     
 </body>
 </html>
