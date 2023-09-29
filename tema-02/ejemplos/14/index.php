@@ -61,10 +61,51 @@
 
     ## is_empty()
     // Determina si una variable está vacía
-    // Con variables no definidas da true pero genera aviso
-    // Cadenas con un cero da true
+    // Con variables no definidas da true y NO genera aviso
+    // Cadenas con un cero da true y con todo lo que represente algo sin valor
 
-    
+    # Casos
+
+    $var; 
+    var_dump(empty($var)); // true
+
+    echo '<br>';
+
+    $var = null; 
+    var_dump(empty($var)); // true
+
+    echo '<br>';
+
+    $var = 0; 
+    var_dump(empty($var)); // true
+
+    echo '<br>';
+
+    $var = [];
+    var_dump(empty($var)); // true
+
+    echo '<br>';
+
+    $var = false; 
+    var_dump(empty($var)); // true
+
+    echo '<br>';
+
+    $var = true; 
+    var_dump(empty($var)); // false
+
+    echo '<br>';
+
+    $var = ""; 
+    var_dump(empty($var)); // true
+
+    echo '<br>';
+
+    $var = "0"; 
+    var_dump(empty($var)); // true
+
+
+
 
 
 
