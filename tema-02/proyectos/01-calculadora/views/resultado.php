@@ -34,14 +34,14 @@
           <!-- valor-2 por el usuario -->
           <div class="mb-3">
             <label class="form-label">Valor 2</label>
-            <<input type="number" class="form-control" value="<?=$valor2?>" readonly>
+            <input type="number" class="form-control" value="<?=$valor2?>" readonly>
             <!-- <small id="helpId" class="text-muted">Introduzca valor numérico</small> --> <!--para comentar en la casilla de usuario-->
           </div>
 
             <!-- Nuevo campo para mostrar el resultado -->
           <div class="mb-3">
             <label class="form-label"><?=$operacion?></label>
-            <<input type="number" class="form-control" value="<?=$resultado?>" readonly>
+            <input type="number" class="form-control" value="<?=$resultado?>" readonly>
             <!-- <small id="helpId" class="text-muted">Introduzca valor numérico</small> --> <!--para comentar en la casilla de usuario-->
           </div>
 
@@ -59,7 +59,7 @@
     <footer class="footer mt-auto py-3 fixed-bottom bg-light">
         <div class="container">
             <span class="text-muted">© 2023
-                Juan Carlos Moreno - DWES - 2º DAW - Curso 23/24</span>
+                David Gutiérrez Pérez - DWES - 2º DAW - Curso 23/24</span>
         </div>
     </footer>
 
