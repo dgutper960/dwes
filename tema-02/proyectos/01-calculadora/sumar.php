@@ -2,6 +2,6 @@
 
     include "models/suma.php";
 
-    include "resultado.php";
+    include "views/resultado.php";
 
 ?>
