@@ -2,7 +2,7 @@
 
     // definimos todas las variables
     // gravedad es una constante
-    Define("G", 9.8);
+    define("G", 9.8);
 
     // tomamos los valores del usuario
     $v0 = $_POST['v0'];
@@ -19,7 +19,7 @@
     $vy = $v0 * sin($a0);
 
     // Alcance Máximo
-    $xmax = (pow($v0, 2))*(sin(2*$a0))/(G);
+    $xmax = pow($v0, 2)*(sin(2*$a0))/G;
 
     // Tiempo de vuelo
     $t = (2*$vy)/G;
