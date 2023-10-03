@@ -18,39 +18,64 @@
         <!-- HEADER = Información para el SEO -->
         <header class="pb-3 mb-4 border-bottom">
             <i class="bi bi-calculator"></i>        
-            <span class="fs-6">Proyecto 2.2 - Lanzamiento de Proyectiles</span>
+            <span class="fs-6">Proyecto 2.1 - Calculadora Básica</span>
         </header>
 
         <legend>Resultado</legend>
         <form method="POST">
 
           <!-- valor-1 por el usuario -->
-          <div class="mb-3">
-            <label class="form-label">Valores Iniciales</label>
-            <!-- Hacer tabla -->
-            <input type="number" class="form-control" value="<?=$valor1?>" readonly>
-            <!-- <small id="helpId" class="text-muted">Introduzca valor numérico</small> --> <!--para comentar en la casilla de usuario-->
-          </div>
+          <table class="table">
+            <thead class="table-light">
+              <tr>
+                <th>Valores Iniciales</th>
+                <th></th>
+              </tr>
+              <tr>
+                <td>Velocidad inicial:</td>
+                <td><?=$v0?> m/s</td>
+              </tr>
+              <td>Ángulo Inclinación</td>
+                <td><?=$angulo?> º</td>
+              </tr>
+              <tr>
+                <th>Resultados</th>
+                <th></th>
+              </tr>
+              <td>Angulos Radianes:</td>
+                <td><?=$a0?> º</td>
+              </tr>
+              <tr>
+                <td>Velocidad Inicial X:</td>
+                <td><?=$vx?> m/s</td>
+              </tr>
+              <tr>
+                <td>Velocidad Inicial Y:</td>
+                <td><?=$vy?> m/s</td>
+              </tr>
+              <tr>
+                <td>Alcance Máximo del Proyectil:</td>
+                <td><?=$xmax?> m</td>
+              </tr>
+              <tr>
+                <td>Tiempo de Vuelo del Proyectil:</td>
+                <td><?=$t?> m</td>
+              </tr>
+              <tr>
+                <td>Altura Máxima del Proyectil:</td>
+                <td><?=$ymax?> m</td>
+              </tr>
 
-          <!-- valor-2 por el usuario -->
-          <!-- Hacer tabla -->
-          <div class="mb-3">
-            <label class="form-label">Resultado Calculos</label>
-            <input type="number" class="form-control" value="<?=$valor2?>" readonly>
-            <!-- <small id="helpId" class="text-muted">Introduzca valor numérico</small> --> <!--para comentar en la casilla de usuario-->
-          </div>
+            </thead>
+            <tbody>
 
-            <!-- Nuevo campo para mostrar el resultado -->
-          <div class="mb-3">
-            <label class="form-label"><?=$operacion?></label>
-            <input type="number" class="form-control" value="<?=$resultado?>" readonly>
-            <!-- <small id="helpId" class="text-muted">Introduzca valor numérico</small> --> <!--para comentar en la casilla de usuario-->
-          </div>
+            </tbody>
+          </table>
 
           <!-- botones de accion -->
           <div class="btn-group" role="group">
 
-            <a class="btn btn-primary" href="index.html" role="button">Volver</a>
+            <a class="btn btn-primary" href="index.php" role="button">Volver</a>
 
           </div>
 
