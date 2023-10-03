@@ -2,7 +2,7 @@
 
 // definimos todas las variables
 // gravedad es una constante
-define('g', 9.81);
+define('g', 9.8);
 
 // tomamos los valores del usuario
 $v0 = $_POST['v0'];
