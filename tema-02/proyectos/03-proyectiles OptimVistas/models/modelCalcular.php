@@ -28,7 +28,7 @@
     $ymax = (pow($v0, 2)*pow(sin($a0), 2))/(2*G);
 
     // Formatear el resultado -> Buscamos PHP number format y seguimos las instrucciones
-    
+    // $vx = number_format()
 
 
 
