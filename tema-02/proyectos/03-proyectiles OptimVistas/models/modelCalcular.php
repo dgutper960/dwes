@@ -28,8 +28,14 @@
     $ymax = (pow($v0, 2)*pow(sin($a0), 2))/(2*G);
 
     // Formatear el resultado -> Buscamos PHP number format y seguimos las instrucciones
-    // $vx = number_format()
-
+    $v0 = number_format($v0,2,",",".");
+    $angulo = number_format($angulo,0);
+    $a0 = number_format($a0,5,",",".");
+    $vx = number_format($vx,2,",",".");
+    $vy = number_format($vy,2,",",".");
+    $xmax = number_format($xmax,2,",",".");
+    $t = number_format($t,2,",",".");
+    $ymax = number_format($ymax,2,",",".");
 
 
 ?>
