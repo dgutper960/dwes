@@ -31,30 +31,30 @@
     echo '<br>';
 
     // Usamos settype()
-    settype($var6, "integer");
-    settype($var7, "boolean");
-    settype($var8, "string");
-    settype($var9, "float");
+    settype($var2, "integer");
+    settype($var3, "boolean");
+    settype($var4, "string");
+    settype($var5, "float");
 
     // mostramos el valor de las variables
-    var_dump($var6);
-    var_dump($var7);
-    var_dump($var8);
-    var_dump($var9);
+    var_dump($var2);
+    var_dump($var3);
+    var_dump($var4);
+    var_dump($var5);
 
     echo '<br>';
 
     // Forma inplícita
-    $var10 = (integer) $var1;
-    $var11 = (boolean) $var1;
-    $var12 = (string) $var1;
-    $var13 = (float) $var1;
+    $var2 = (integer) $var1;
+    $var3 = (boolean) $var1;
+    $var4 = (string) $var1;
+    $var5 = (float) $var1;
     
     // mostramos el valor de las variables
-    var_dump($var10);
-    var_dump($var11);
-    var_dump($var12);
-    var_dump($var13);
+    var_dump($var2);
+    var_dump($var3);
+    var_dump($var4);
+    var_dump($var5);
 
 
 ?>
