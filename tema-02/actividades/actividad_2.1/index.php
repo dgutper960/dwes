@@ -13,6 +13,9 @@
     // Haciendo la conversión de forma implícita, (int) $var
 
     $var1 = '4';
+    var_dump($var1);
+
+    echo '<br>';
     // Usamos intval()
     $var2 = intval($var1);
     $var3 = boolval($var1);
@@ -20,7 +23,6 @@
     $var5 = floatval($var1);
 
     // mostramos el valor de las variables
-    var_dump($var1);
     var_dump($var2);
     var_dump($var3);
     var_dump($var4);
@@ -34,6 +36,7 @@
     settype($var8, "string");
     settype($var9, "float");
 
+    // mostramos el valor de las variables
     var_dump($var6);
     var_dump($var7);
     var_dump($var8);
@@ -47,12 +50,11 @@
     $var12 = (string) $var1;
     $var13 = (float) $var1;
     
+    // mostramos el valor de las variables
     var_dump($var10);
     var_dump($var11);
     var_dump($var12);
     var_dump($var13);
-
-
 
 
 ?>
