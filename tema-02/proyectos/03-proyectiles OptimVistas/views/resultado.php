@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
   <head>
-      <?php include 'views/plantilla/head.php' ?>
+      <?php include 'views/plantilla/head.html' ?>
       <title>Plantilla Bootstrap 5.3.2</title>
   </head>
   <body>
@@ -11,7 +11,7 @@
         <!-- HEADER = Información para el SEO -->
         <header class="pb-3 mb-4 border-bottom">
             <i class="bi bi-calculator"></i>        
-            <span class="fs-6">Proyecto 2.1 - Calculadora Básica</span>
+            <span class="fs-6">Proyecto 2.1 - Lanzamiento Proyectiles</span>
         </header>
 
         <legend>Resultado</legend>
@@ -78,7 +78,7 @@
     <!-- Pie del documento -->
     <?php include 'views/plantilla/footer.html' ?>
 
-     <!-- Bootstrap Javascript y popper -->
-     <?php include 'views/plantilla/javascript.html' ?>
+    <!-- Bootstrap Javascript y popper -->
+    <?php include 'views/plantilla/javascript.html' ?>
   </body>
 </html>
