@@ -4,8 +4,6 @@
 
 $a = 7;
 
-
-
 if ($a < 5) {
     echo "La nota es insuficiente";
 } elseif ($a == 5) {
@@ -19,7 +17,5 @@ if ($a < 5) {
 } else{
     echo 'el valor no es correcto';
 }
-
-
 
 ?>
