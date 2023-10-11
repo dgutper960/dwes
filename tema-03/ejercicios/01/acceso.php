@@ -8,10 +8,11 @@
     */
 
     # Model
+    include 'modelAcceso.php';
     
 
     # carga la vista
-    include 'views/viewIndex.php';
+    include 'views/viewAcceso.php';
     
 
 ?>
