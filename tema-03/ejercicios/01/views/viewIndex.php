@@ -42,16 +42,16 @@
 
                 <!-- password de confirmación-->
                 <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="passwordConfirm" name="password" class="form-control" id="exampleInputPassword1">
+                    <label class="form-label">Confirmar Password</label>
+                    <input type="password" name="passConfirm" class="form-control" id="exampleInputPassword2">
                 </div>
 
                 <!-- perfiles -->
-                <select class="form-select" neme="perfil" aria-label="Default select example">
-                    <option disabled>Seleccione su Perfil</option>
+                <select class="form-select" name="perfil" aria-label="Default select example">
+                    <option selected disabled>Seleccione su Perfil</option>
                     <option value="1">Administrador</option> // devuelve el valor de value
                     <option value="2">Editor</option> // devuelve el valor de value
-                    <option selected value="3">Usuario</option> // devuelve el valor de value
+                    <option value="3">Usuario</option> // devuelve el valor de value
                 </select>
 
                 <br>

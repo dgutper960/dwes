@@ -19,23 +19,45 @@
         <legend>Detalles del Usuario</legend>
 
         <!-- menu -->
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Nuevo</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Eliminar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Actualizar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Consultar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Disabled</a>
-            </li>
-        </ul>
+        <?php if ($perfil == 1): ?>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Nuevo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Eliminar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Actualizar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Consultar</a>
+                </li>
+            </ul>
+        <?php elseif ($perfil == 2): ?>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Nuevo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Actualizar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Consultar</a>
+                </li>
+            </ul>
+        <?php elseif ($perfil == 3): ?>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Consultar</a>
+                </li>
+            </ul>
+        <?php endif; ?>
+<!-- 
+        <li class="nav-item">
+            <a class="nav-link">Disabled</a>
+        </li> -->
+
 
         <!-- Pié del documento -->
         <?php include 'views/layouts/footer.html' ?>

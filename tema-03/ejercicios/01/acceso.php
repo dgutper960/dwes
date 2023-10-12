@@ -8,7 +8,7 @@
     */
 
     # Model
-    include 'modelAcceso.php';
+    include 'models/modelAcceso.php';
     
 
     # carga la vista

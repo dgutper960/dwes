@@ -12,7 +12,7 @@
     $password = $_POST['password'];
 
     // passwordConfirm
-    $passwordConfirm = $_POST['passwordConfirm'];
+    $passConfirm = $_POST['passConfirm'];
 
     // perfil
     $perfil = $_POST['perfil'];
