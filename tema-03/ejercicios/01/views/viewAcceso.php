@@ -12,13 +12,14 @@
 
         <!-- cabecera documento -->
         <header class="pb-3 mb-4 border-bottom">
-            <i class="bi bi-calculator"></i>
+            <i class="bi bi-building-fill-up"></i>
             <span class="fs-6">Actividad 3.1 - Vista resultado</span>
         </header>
 
-        <legend>Detalles del Usuario</legend>
+        <legend>Opciones</legend>
 
         <!-- menu -->
+        <!-- Hacemos una única consulta ifelse que abarque todas las posibilidades -->
         <?php if ($perfil == 1): ?>
             <ul class="nav">
                 <li class="nav-item">
@@ -53,10 +54,28 @@
                 </li>
             </ul>
         <?php endif; ?>
-<!-- 
-        <li class="nav-item">
-            <a class="nav-link">Disabled</a>
-        </li> -->
+
+        <legend>Detalles del Usuario</legend>
+
+        <!-- Mostramos los datos introducidos por el Usuario -->
+        <table class="table table-success table-striped">
+            <tr>
+                <th>Nombre Usuario</th>
+                <td><?= $usuario ?></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><?= $email ?></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><?= $password ?></td>
+            </tr>
+            <tr>
+                <th>Password de confirmación</th>
+                <td><?= $passConfirm ?></td>
+            </tr>
+        </table>
 
 
         <!-- Pié del documento -->
