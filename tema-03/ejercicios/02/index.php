@@ -3,7 +3,8 @@
 // nos retorna el número del mes
 $mes = date('m');
 
-// creamos un swich para que imprima el nombre del més 
+// creamos un swich para que imprima 
+// el nombre del més partiendo del valor $mes
 switch ($mes) {
     case 1:
         echo 'Enero';
@@ -33,8 +34,8 @@ switch ($mes) {
         echo 'Septiembre';
         break;
     case 10:
-        echo 'Octubre';
-        break;
+        echo 'Octubre'; // Imprime esto
+        break; // <-la ejecución para aquí, en el momento de hacer este ejercicio
     case 11:
         echo 'Noviembre';
         break;
