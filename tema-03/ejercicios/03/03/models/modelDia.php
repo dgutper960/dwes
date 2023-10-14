@@ -12,7 +12,7 @@ if ($date == 0) {
     $date = 7;
 }
 $dia; // en esta variable vamos a almacenar el nombre del día
-for ($i = 0; $i >= $date; $i++) {
+for ($i = 1; $i <= $date; $i++) {
     switch ($i) {
         case 1:
             $dia = 'Lunes';

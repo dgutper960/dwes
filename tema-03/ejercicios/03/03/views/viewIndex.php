@@ -13,7 +13,7 @@
         <!-- cabecera documento -->
         <header class="pb-3 mb-4 border-bottom">
             <i class="bi bi-building-fill-up"></i>
-            <span class="fs-6">Act 3.3 #· Formulario diá semana</span>
+            <span class="fs-6">Act 3.3 # Formulario días semana</span>
         </header>
 
         <legend>Días en esta semana</legend>
