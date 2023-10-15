@@ -19,13 +19,43 @@
         <legend>Días en esta semana</legend>
 
         <form>
-            <?php include 'models/modelDia.php' ?>
-            <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label"><?= $dia ?></label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">Introduzca entrada para el <?= $dia ?></div>
-            </div>
-            <br>
+            <?php
+            $date = date('w');
+            if ($date == 0):
+                $date = 7;
+            endif;
+            for ($i = 1; $i <= $date; $i++):
+                switch ($i):
+                    case 1:
+                        $dia = 'Lunes';
+                        break;
+                    case 2:
+                        $dia = 'Martes';
+                        break;
+                    case 3:
+                        $dia = 'Miercoles';
+                        break;
+                    case 4:
+                        $dia = 'Jueves';
+                        break;
+                    case 5:
+                        $dia = 'Viernes';
+                        break;
+                    case 6:
+                        $dia = 'Sábado';
+                        break;
+                    case 7:
+                        $dia = 'Domingo';
+                        break;
+                endswitch;
+                ?>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"><?= $dia ?></label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">Introduzca entrada para el <?= $dia ?></div>
+                </div>
+                <br>
+            <?php endfor ?>
 
             <!-- Fuera del bucle -->
             <button type="submit" class="btn btn-primary">Enviar</button>
