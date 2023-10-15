@@ -8,11 +8,14 @@ Usar bucle for */
 
 // obtenemos el día de la semana con date()
 $date = date("w"); // retorna un numérico correspondiente al día de la semana
+// date nos retorna un 0 si es domingo
 if ($date == 0) {
-    $date = 7;
+    $date = 7; // en ese caso lo cambiamos a 7 
 }
-$dia; // en esta variable vamos a almacenar el nombre del día
+$dia; // en esta variable vamos a almacenar el nombre del día (lo mostraremos en la vista)
+// igualamos el número de ciclos al número retornado por date()
 for ($i = 1; $i <= $date; $i++) {
+    // asignamos el nombre del dia según el contador de ciclos
     switch ($i) {
         case 1:
             $dia = 'Lunes';
@@ -36,8 +39,9 @@ for ($i = 1; $i <= $date; $i++) {
             $dia = 'Domingo';
             break;
     }
+    // adaptamos la plantilla de Bootstrap a comandos echo
     echo '<div class="mb-3">';
-    echo '<label for="exampleInputEmail1" class="form-label">'.$dia.'</label>';
+    echo '<label for="exampleInputEmail1" class="form-label">'.$dia.'</label>'; 
     echo '<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">';
     echo '<div id="emailHelp" class="form-text">Introduzca entrada para el '.$dia.'</div>';
     echo '</div>';
