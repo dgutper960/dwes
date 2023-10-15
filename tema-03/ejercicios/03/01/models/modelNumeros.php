@@ -13,7 +13,7 @@ while ($i < 10) {
     // con este bucle generamos las columnas
     while ($j < 10) {
         // calculamos el número a mostrar en la casilla
-        $numero = ($i * 10) + $j + 1; // la primera iteración i-j valen (sumamos 1)
+        $numero = ($i * 10) + $j + 1; // la primera iteración i-j valen 0 (sumamos 1)
         // por cada vuelta mostramos una columna
         echo "<td>" . $numero . "</td>";
         $j++;
