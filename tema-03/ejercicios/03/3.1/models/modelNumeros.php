@@ -21,5 +21,18 @@ while ($i < 10) {
     $i++; 
 }
 
+/**
+ * VARIABLE INICIALIZADA A 1
+ * MIENTRAS < 100
+ * INICIALIZAR VARIALBLE J (Culomna) inicializada a 1
+ * resto entre 10 = 0 salta de columna
+ */
+
+ /**
+  * Se imprime de a 100 con i
+  * Se usa j para marcar el cambio de fila (reiniciar a 1)
+
+  */
+
 
 ?>

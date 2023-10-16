@@ -20,10 +20,8 @@
 
         <form>
             <?php
-            $date = date('w');
-            if ($date == 0):
-                $date = 7;
-            endif;
+            $date = date('N');
+            
             for ($i = 1; $i <= $date; $i++):
                 switch ($i):
                     case 1:
