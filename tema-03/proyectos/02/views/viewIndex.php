@@ -35,7 +35,7 @@
 
             </thead>
             <!-- llamada al método borrar -->
-            <?php ?>
+            <?php eliminar($libros, 2); ?>
 
             <tbody>
                 <?php foreach($libros as $libro): ?>
