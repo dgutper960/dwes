@@ -15,8 +15,7 @@ if($indice_editar !== false){
     // edita el libro seleccionado
     $libros = $libros[$indice_editar];
     
-    $print_r($libro);
-    exit();
+
 }else{
     echo 'ERROR: LIBRO NO ENCONTRADO';
     exit();
