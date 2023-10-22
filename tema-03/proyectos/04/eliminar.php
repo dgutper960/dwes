@@ -1,12 +1,16 @@
 <?php
-# Libreria
-include 'libs/crud_funciones.php';
+    /*
+        Controlador: eliminar.php
+        Descripción: permite eliminar un elemento de la tabla
+     */
 
-# Modelo
-include 'models/modelIndex.php';
-include 'models/modelEliminar.php';
+    #Libreria
+    include 'libs/crud_funciones.php';
 
-# Vista
-include 'views/viewIndex.php';
+    # Modelo
+    include 'models/modelIndex.php';
+    include 'models/modelEliminar.php'; // No se puede varios modelos en un controladorr
 
+    # Vista
+    include 'views/viewIndex.php';
 ?>

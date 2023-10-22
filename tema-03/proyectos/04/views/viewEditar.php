@@ -16,38 +16,40 @@
             <span class="fs-6">Proyecto 3.1 - Gestión de libros</span>
         </header>
 
-        <legend>Formulario Nuevo Libro</legend>
+        <legend>Formulario Editar Libro</legend>
 
-        <!-- Formulario Nuevo Libro -->
-        <form action="update.php?id=<? $id ?>" method="POST">
+        <!-- Formulario Editar Libro -->
+        <!-- la variable id está en el model editar -->
+        <!-- Se pasa por la url -->
+        <form action="update.php?id=<?=$id?>" method="POST">
             <!-- id -->
             <div class="mb-3">
                 <label for="titulo" class="form-label">Id</label>
-                <input type="text" class="form-control" name="id" value="<?= $libro['id']?>" readonly>
+                <input type="text" class="form-control" name="id" value="<?=$libro['id']?>" readonly>
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
             <!-- Título -->
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título</label>
-                <input type="text" class="form-control" name="titulo" value="<?= $libro['titulo']?>">
+                <input type="text" class="form-control" name="titulo" value="<?=$libro['titulo']?>">
                 <!-- <div class="form-text">Introduzca título libro existente</div> -->
             </div>
             <!-- Autor -->
             <div class="mb-3">
                 <label for="autor" class="form-label">Autor</label>
-                <input type="text" class="form-control" name="autor" value="<?= $libro['autor']?>">
+                <input type="text" class="form-control" name="autor" value="<?=$libro['autor']?>">
                 <!-- <div class="form-text">Introduzca Autor del libro</div> -->
             </div>
             <!-- Género -->
             <div class="mb-3">
                 <label for="genero" class="form-label">Género</label>
-                <input type="text" class="form-control" name="genero" value="<?= $libro['genero']?>">
+                <input type="text" class="form-control" name="genero" value="<?=$libro['genero']?>">
                 <!-- <div class="form-text">Género del libro</div> -->
             </div>
             <!-- Precio -->
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $libro['precio']?>">
+                <input type="number" class="form-control" name="precio" step="0.01" value="<?=$libro['precio']?>">
                 <!-- <div class="form-text">Introduzca Precio</div> -->
             </div>
 

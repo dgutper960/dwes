@@ -1,19 +1,15 @@
 <?php
+    // Controlador: update.php
+    // Descripción: actualiza los detalles de un libros
 
-/**
- * controlador uodate
- * permite actualizar detalles de un libo
- * 
- */
+    // Librería (Necesitamos buscar)
+    include 'libs/crud_funciones.php';
 
-# Libreria
-include 'libs/crud_funciones.php';
 
-# Modelo
-include 'models/modelIndex.php';
-include 'models/modelUpdate.php';
+    // Modelos
+    include 'models/modelIndex.php'; // Cargamos el array de libros
+    include 'models/modelUpdate.php'; // Cargo los detalles del libro a editar
 
-# Vista
-include 'views/viewIndex.php';
-
+    // vista
+    include "views/viewIndex.php"; // Mostrar la vista con los detalles del libro
 ?>

@@ -1,99 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <!-- Incluir head -->
-    <?php include 'views/layouts/head.html'; ?>
-</head>
+    <!-- Usaremos una plantilla, que será usada para todos los proyectos -->
+    <?php include 'layouts/head.html'?>
+    <title>Proyecto 3.1 - Gestión de libros</title>
 
+</head>
 <body>
     <!-- Capa principal -->
     <div class="container">
-
-        <!-- cabecera documento -->
+        <!-- Cabecera -->
         <header class="pb-3 mb-4 border-bottom">
-            <i class="bi bi-calculator"></i>
-
-            <span class="fs-6">Librería</span>
+            <i class="bi bi-book-half"></i>
+            <span class="fs-4">Proyecto 3.1 - Gestión de libros</span>
         </header>
+        <legend>Tabla con los libros</legend>
 
-        <legend>Tabla Libros</legend>
+        <!-- Menu principal -->
+         <?php include 'partials/menu_prin.php'; ?>
 
-        <menu>
-            <?php include 'views/partials/menu_print.php' ?>
-        </menu>
-
-        
-        <table class="table table-success table-striped">
-            <!-- encabezado tabla -->
+         <!-- Muestra los datos de la tabla -->
+        <table class="table table-light">
             <thead>
+                <!-- Encabezado de la tabla -->
                 <tr>
-                    <!-- Uso de foreach para encabezado -->
-                    <!-- <//?php foreach(array_keys($libros[0]) as $clave): ?>
-                        <th><//?=$clave?></th>
-                    <//?php endforeach; ?> -->
-
-                    <!-- personalizado -->
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Género</th>
-                    <th>Precio</th>
-                    <th>Acciones</th>
+                    <?php
+                        foreach (array_keys($libros[0]) as $clave): ?>
+                            <th><?=ucfirst($clave) ?></th> <!-- Forma de convertir el primer caracter en mayuscula -->
+                     <?php endforeach; ?>
+                     <th>Acciones</th>
                 </tr>
-
-            </thead>
-            <!-- llamada al método borrar -->
-            <!-- <//?php eliminar($libros, 2); ?> -->
-
-            <tbody>
-
-                <?php foreach ($libros as $libro): ?>
+            </thead>            
+            <tbdoy>
+                <?php foreach($libros as $libro):?> <!-- Indexado -->
                     <tr>
-                        <!-- Mismo formato a cad campo de lo tabla -->
-                        <?php foreach ($libro as $campo): ?>
+                        <!-- Mismo formato a cada campo de la tabla -->
+                        <?php foreach($libro as $campo): ?> <!-- Asociativo -->
                             <td>
                                 <?= $campo ?>
                             </td>
-                        <?php endforeach ?>
-
-                        <!-- Con formato para cada campo -->
-                        <!-- <td><?= $libro['id'] ?></td>
-                        <td><?= $libro['titulo'] ?></td> -->
-
-                        <!-- Botones de acción -->
-                        <td>
-                            <!-- borrar -->
-                            <a href="eliminar.php?id=<?= $libro['id']?>" title="Eliminar">
-                            <i class="bi bi-trash-fill"></i></a>
-
-                            <!-- editar -->
-                            <a href="editar.php?id=<?= $libro['id']?>" title="Editar">
-                            <i class="bi bi-pencil-scuare"></i></a>
-                        </td>
-
+                        <?php endforeach; ?>
+                        <!-- Botón eliminar y editar-->
+                            <td>
+                             <a href="eliminar.php?id=<?=$libro['id']?>" title="eliminar">
+                            <i class="bi bi-trash"></i>
+                            <a href="editar.php?id=<?=$libro['id']?>"title="editar">   
+                             <i class="bi bi-pencil-square"></i>
+                            </td>
                     </tr>
                 <?php endforeach; ?>
-
-
             </tbody>
-            <!-- Para mostrar el pié de una tabla -->
             <tfoot>
-                <tr colspan="5">Nº de libros
-                    <?= count($libros) ?>
+                <tr>
+                    <td colspan="5"><b>Numero de libros: <?=count($libros)?></b></td>
                 </tr>
             </tfoot>
-
         </table>
-
-
-        <!-- Pié del documento -->
-        <?php include 'views/layouts/footer.html' ?>
-
+        <!-- Pie de documento -->
+        <?php
+            include 'layouts/footer.html';
+        ?>
     </div>
 
-    <!-- javascript bootstrap 532 -->
-    <?php include 'views/layouts/javascript.html' ?>
-</body>
 
+    <!-- js bootstrap 532-->
+    <?php
+        include 'layouts/javascript.html';
+    ?>
+</body>
 </html>

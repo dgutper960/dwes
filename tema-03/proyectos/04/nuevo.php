@@ -1,12 +1,8 @@
 <?php
-# Libreria
-// include 'libs/crud_funciones.php';
+    // Controlador: nuevo.php
+    // Descripción: Mostrar un formulario que permita añadir nuevo libro
 
-# Modelo
-// include 'models/modelIndex.php';
-// include 'models/modelEliminar.php';
 
-# Vista
-include 'views/viewNuevo.php';
-
+    // Solo nos hará falta la vista con el formulario
+    include "views/viewNuevo.php";
 ?>

@@ -1,20 +1,15 @@
 <?php
+    // Controlador: editar.php
+    // Descripción: Mostrar un formulario con los detalles editables del libro seleccionado
 
-/**
- * controlador create
- * permite añadir a la tabla un libo
- * lo va a mostrar en la vista principal
- * 
- */
+    // Cargamos en la libreria (necesitamos buscar)
+    include 'libs/crud_funciones.php';
 
-# Libreria
-include 'libs/crud_funciones.php';
 
-# Modelo
-include 'models/modelIndex.php';
-include 'models/modelEditar.php';
+    // Modelos
+    include 'models/modelIndex.php'; // Cargamos el array de libros
+    include 'models/modelEditar.php'; // Cargo los detalles del libro a editar
 
-# Vista
-include 'views/viewEditar.php';
-
+    // vista
+    include "views/viewEditar.php"; // Mostrar la vista con los detalles del libro
 ?>

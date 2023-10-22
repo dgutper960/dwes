@@ -1,25 +1,26 @@
 <?php
+/*
+        Modelo: modelEditar.php
+        Descripción: editar los detalles de un libro
 
-/* Modelo: model.editar 
-   Descripcion: edita un libro por id
-   
-   Metodo GET:
-        - id del libro
-   
-*/
-$id = $_GET['id'];
+        Método GET:
+            - id del libro que quiero editar
+            - id 
+    */
 
-$indice_editar = buscar_en_talabla($libros, 'id', $id);
- // comparación estricta que distinge false de 0 en caso del primer indice
-if($indice_editar !== false){
-    // edita el libro seleccionado
-    $libros = $libros[$indice_editar];
+    // Extraemos el valor del id a través del metodo get
+    $id = $_GET['id'];
     
-
-}else{
-    echo 'ERROR: LIBRO NO ENCONTRADO';
-    exit();
-}
+    // El problema de buscar el primer valor (1) es que entiende que se trata de 0, por lo que sería false
+    $indice_editar = buscar_en_tabla($libros,'id',$id);
+    // Comparación estricta para distinguir el false de 0
+    if ($indice_editar !==false){
+        // Obtengo el array del libro
+        $libro = $libros[$indice_editar];
+    } else{
+        echo 'ERROR: Libro no encontrado';
+        exit();
+    }
 
 
 ?>
