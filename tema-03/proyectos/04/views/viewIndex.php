@@ -17,7 +17,13 @@
             <span class="fs-6">Librería</span>
         </header>
 
-        <legend>Gestión de libros</legend>
+        <legend>Tabla Libros</legend>
+
+        <menu>
+            <?php include 'views/partials/menu_print.php' ?>
+        </menu>
+
+        
         <table class="table table-success table-striped">
             <!-- encabezado tabla -->
             <thead>
@@ -55,9 +61,15 @@
                         <!-- <td><?= $libro['id'] ?></td>
                         <td><?= $libro['titulo'] ?></td> -->
 
+                        <!-- Botones de acción -->
                         <td>
-                            <a href="eliminar.php?id=<?= $libro['id']?>"</a>
+                            <!-- borrar -->
+                            <a href="eliminar.php?id=<?= $libro['id']?>" title="Eliminar">
                             <i class="bi bi-trash-fill"></i></a>
+
+                            <!-- editar -->
+                            <a href="editar.php?id=<?= $libro['id']?>" title="Editar">
+                            <i class="bi bi-pencil-scuare"></i></a>
                         </td>
 
                     </tr>
