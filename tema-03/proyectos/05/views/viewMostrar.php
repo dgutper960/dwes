@@ -54,7 +54,7 @@
             </div>
 
 
-            <a class="btn btn-secondary" href="index.php" role="button">Volver</a>
+            <a class="btn btn-primary" href="index.php" role="button">Volver</a>
 
         </form>
 
