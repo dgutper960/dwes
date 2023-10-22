@@ -16,7 +16,7 @@
             <span class="fs-6">Proyecto 3.1 - Gestión de libros</span>
         </header>
 
-        <legend>Formulario Mostrar Libro</legend>
+        <legend>Formulario Mostrar Libro (no editable)</legend>
 
         <!-- Formulario Editar Libro -->
         <!-- la variable id está en el model editar -->
