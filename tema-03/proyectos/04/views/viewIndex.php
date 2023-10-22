@@ -17,7 +17,7 @@
         <legend>Tabla con los libros</legend>
 
         <!-- Menu principal -->
-         <?php include 'partials/menu_prin.php'; ?>
+         <?php include 'partials/menu_print.php'; ?>
 
          <!-- Muestra los datos de la tabla -->
         <table class="table table-light">
