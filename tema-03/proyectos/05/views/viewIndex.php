@@ -44,12 +44,14 @@
                                 <?= $campo ?>
                             </td>
                         <?php endforeach; ?>
-                        <!-- Botón eliminar, editar -->
+                        <!-- Botón eliminar, editar y mostrar -->
                         <td>
                             <a href="eliminar.php?id=<?= $libro['id'] ?>" title="eliminar">
                             <i class="bi bi-trash"></i>
                             <a href="editar.php?id=<?= $libro['id'] ?>" title="editar">
                             <i class="bi bi-pencil-square"></i>
+                            <a href="mostrar.php?id=<?= $libro['id'] ?>" title="mostrar">
+                            <i class="bi bi-eye"></i>
                         </td>
                     </tr>
                 <?php endforeach; ?>
