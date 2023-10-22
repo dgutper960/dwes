@@ -7,16 +7,16 @@
     $libros = [
         [
             'id' => 1,
-            'titulo' => 'Nuevas Aventuras de Paco Pepe',
-            'autor' => 'Elena Gómez',
-            'genero' => 'Fantasía',
+            'titulo' => 'El Arte de la Cocina Creativa',
+            'autor' => 'Sofia Ramírez',
+            'genero' => 'Cocina',
             'precio' => 9.99
         ],
         [
             'id' => 2,
-            'titulo' => 'Valderrama: Una Comedia Inolvidable',
-            'autor' => 'Luis Martínez',
-            'genero' => 'Comedia',
+            'titulo' => 'La Ciudad de los Sueños Perdidos',
+            'autor' => 'Daniel Sánchez',
+            'genero' => 'Fantasía',
             'precio' => 19.99
         ],
         [
@@ -28,9 +28,9 @@
         ],
         [
             'id' => 4,
-            'titulo' => 'El Viajero del Futuro',
-            'autor' => 'Alberto Pérez',
-            'genero' => 'Ciencia Ficción',
+            'titulo' => 'Vida y obra de Chiquito de la Calzada',
+            'autor' => 'Ian Gibson',
+            'genero' => 'Biografía',
             'precio' => 199.99
         ],
         [
