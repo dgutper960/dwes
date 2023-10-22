@@ -53,6 +53,13 @@
             'autor' => 'Carlos Ruiz',
             'genero' => 'Programación',
             'precio' => 7.99
+        ],
+        [
+            'id' => 8,
+            'titulo' => 'Como pasar el Ghosts\'n Goblins con una moneda',
+            'autor' => 'Spinecard',
+            'genero' => 'Ciencia Ficción',
+            'precio' => 9.99
         ]
     ];
     
