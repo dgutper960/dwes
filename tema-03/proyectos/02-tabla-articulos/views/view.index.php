@@ -15,9 +15,10 @@
     <!-- cargamos la cabecera de la vista -->
     <?php include 'views/partials/header.php' ?>
 
-    <!-- mostramos la tabla de artículos -->
+    <!-- Cargamos el menú para nuevo, ordenar y buscar -->
+    <?php include 'views/partials/menu_print.php' ?>
 
-    <!-- mostramos la tabla -->
+    <!-- mostramos la tabla de artículos -->
     <table class="table">
         <thead>
             <tr>

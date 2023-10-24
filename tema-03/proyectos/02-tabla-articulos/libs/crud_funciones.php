@@ -49,15 +49,29 @@ function generar_tabla(){
             'descripcion' => 'PC Sobremesa - Lenovo',
             'modelo' => 'Lenovo 255',
             'categoria' => '1',
-            'unidades'=> '106',
+            'unidades'=> '159',
             'precio'=> '748'
         ],[
             'id'=> 4,
             'descripcion' => 'LG - Ultra Gear 4k 144.GHz',
             'modelo' => 'LG Ultra Gear',
+            'categoria' => '3',
+            'unidades'=> '106',
+            'precio'=> '168.05'
+        ],[
+            'id'=> 5,
+            'descripcion' => 'Tarjeta gráfica Nvidia',
+            'modelo' => 'RTX-4070.ti',
             'categoria' => '2',
             'unidades'=> '106',
-            'precio'=> '748'
+            'precio'=> '408'
+        ],[
+            'id'=> 6,
+            'descripcion' => 'CPU - Intel Inside 12th',
+            'modelo' => 'core i5 128907 - 4.9 GHz',
+            'categoria' => '2',
+            'unidades'=> '216',
+            'precio'=> '212'
         ]
         
         
@@ -65,6 +79,17 @@ function generar_tabla(){
 
     return $articulos;
 
+}
+
+function ultimoID($articulos){  
+    $ultimoID = 0;
+    // recorremos el array
+    foreach ($articulos as $value) {
+        if ($value['id'] > $ultimoID){
+            $ultimoID = $value['id'];
+        }
+    }
+    return $ultimoID;
 }
 
 
