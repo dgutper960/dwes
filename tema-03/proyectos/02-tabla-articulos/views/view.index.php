@@ -12,8 +12,12 @@
 
 <body>
 
+    <div class="container">
+
     <!-- cargamos la cabecera de la vista -->
     <?php include 'views/partials/header.php' ?>
+
+
 
     <!-- Cargamos el menú para nuevo, ordenar y buscar -->
     <?php include 'views/partials/menu_print.php' ?>
@@ -40,12 +44,24 @@
             <?php foreach ($articulos as $articulo): ?>
                 <tr>
                     <!-- mostramos los valores directamente -->
-                    <td><?= $articulo['id'] ?></td>
-                    <td><?= $articulo['descripcion'] ?></td>
-                    <td><?= $articulo['modelo']?></td>
-                    <td><?= $categoria[$articulo['categoria']] ?></td> <!-- el indice de $articulo corresponde al valor del indice $categoría -->
-                    <td class="tex-end"><?= $articulo['unidades'] ?></td>
-                    <td class="tex-end"><?= number_format($articulo['precio'],2, ', ', ' ');   ?></td>
+                    <td>
+                        <?= $articulo['id'] ?>
+                    </td>
+                    <td>
+                        <?= $articulo['descripcion'] ?>
+                    </td>
+                    <td>
+                        <?= $articulo['modelo'] ?>
+                    </td>
+                    <td>
+                        <?= $categorias[$articulo['categoria']] ?>
+                    </td> <!-- el indice de $articulo corresponde al valor del indice $categoría -->
+                    <td class="tex-end">
+                        <?= $articulo['unidades'] ?>
+                    </td>
+                    <td class="tex-end">
+                        <?= number_format($articulo['precio'], 2, ',', '.'); ?> €
+                    </td>
 
                 </tr>
             <?php endforeach; ?>
@@ -57,7 +73,7 @@
     </table>
 
 
-
+    </div>
 
 
 

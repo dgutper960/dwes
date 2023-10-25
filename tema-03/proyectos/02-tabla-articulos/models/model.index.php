@@ -3,7 +3,7 @@
 llamamos a las categorias
  */
 
-$categoria = generar_categoria();
+$categorias = generar_categoria();
 
 /*
 llamamos a la tabla de artículos

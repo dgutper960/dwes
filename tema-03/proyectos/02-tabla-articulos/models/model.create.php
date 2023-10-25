@@ -43,7 +43,7 @@ $articulo = [
 ];
 
 # Cargamos el array en la matriz
-array_push($articulos, $articulo);
-//$articulos [] = $articulo;
+//array_push($articulos, $articulo);
+$articulos [] = $articulo;
 
 ?>

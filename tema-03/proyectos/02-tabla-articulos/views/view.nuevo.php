@@ -22,8 +22,6 @@
         <form action="create.php" method="POST">
             <!-- id No lo introduce el usuario (autoincremento) -->
 
-                <!-- <div class="form-text">Introduzca identificador del libro</div> -->
-            </div>
             <!-- Descripción -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
@@ -39,10 +37,11 @@
             <!-- Categoría -->
             <div class="mb-3">
                 <label class="form-label">Categoría</label>
-                <select class="form-select" aria-label="Default select example" name="categorias">
-                    <option selected disabled>Seleccione</option>
-                    <?php foreach($categorias as $key => $categoria): ?>
-                        <option value="<?=$key?>"><?=$categoria?></option>
+                <select class="form-select" aria-label="Default select example" name="categoria">
+                    <!-- Lista desplegable dinámica -->
+                    <option selected disabled>Seleccione una categoría</option>
+                    <?php foreach($categorias as $key => $value): ?>
+                        <option value="<?= $key ?>"><?= $value ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -76,10 +75,12 @@
         <!-- Pié del documento -->
         <?php include 'views/partials/footer.html' ?>
 
-    </div>
+    
 
     <!-- javascript bootstrap 532 -->
     <?php include 'views/layouts/javascript.html' ?>
+
+    </div>
 </body>
 
 </html>
