@@ -63,10 +63,17 @@
                         <?= number_format($articulo['precio'], 2, ',', '.'); ?> €
                     </td>
 
+
+                    <!-- mostramos los botones -->
+                    <td>
+                        <a href="editar.php" class="bi bi-pencil-square"></a>
+                    </td>
+
                 </tr>
             <?php endforeach; ?>
 
-            <!-- mostramos los botones -->
+            
+
 
         </tbody>
 

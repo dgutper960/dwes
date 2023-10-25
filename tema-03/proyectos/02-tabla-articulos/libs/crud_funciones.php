@@ -92,6 +92,14 @@ function ultimoID($articulos){
     return $ultimoID;
 }
 
+function nuevo($articulos){
+// codigo
+}
+
+function editar($articulos){
+    // codigo
+}
+
 
 
 
