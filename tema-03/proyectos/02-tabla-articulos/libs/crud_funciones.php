@@ -111,6 +111,11 @@ function buscar_en_tabla($tabla = [], $columna,$valor){
 }
 
 
+function nuevo($articulos, $articulo){
+    $articulos[] = $articulo;
+    return $articulo;
+}
+
 
 
 ?>

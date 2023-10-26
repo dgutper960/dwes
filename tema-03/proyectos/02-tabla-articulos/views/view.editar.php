@@ -19,7 +19,7 @@
         <legend>Formulario Editar Artículo</legend>
 
         <!-- Formulario Nuevo Artículo -->
-        <form action="editar.php?id=<?= $id?>" method="POST">
+        <form action="update.php?id=<?= $id?>" method="POST">
             <!-- id No lo introduce el usuario (autoincremento) -->
 
             <!-- Descripción -->
