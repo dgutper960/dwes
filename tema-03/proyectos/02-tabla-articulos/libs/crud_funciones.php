@@ -92,12 +92,22 @@ function ultimoID($articulos){
     return $ultimoID;
 }
 
-function nuevo($articulos){
-// codigo
-}
+/*
+    Funcion: buscar_en_tabla()
+    Descripción: busca un valor en una determinada columna de una tabla
+    parametros: 
+        -tabla
+        -nombre de la columna - busqueda
+        -valor - lo que se busca
+    salida:
+        -indice del array donde se encuentra el valor
+        -false -  en caso de no lo encuentre
+*/
 
-function editar($articulos){
-    // codigo
+function buscar_en_tabla($tabla = [], $columna,$valor){
+    
+    $columna_valores = array_column($tabla, $columna);
+    return array_search($valor, $columna_valores,false);
 }
 
 

@@ -38,17 +38,20 @@
             <div class="mb-3">
                 <label class="form-label">Categoría</label>
                 <select class="form-select" aria-label="Default select example" name="categoria">
-                    <!-- Lista desplegable dinámica -->
+                    <!-- Lista con categoría preseleccionada de forma dinámica -->
                     <option selected disabled>Seleccione una categoría</option>
                     <?php foreach($categorias as $key => $value): ?>
-                        <option value="<?= $key ?>"><?= $value ?></option>
+                        <option value="<?= $key ?>"
+                        <?= ($articulo['categoria'] == $key)? 'selected' : null ?>
+                        >
+                        <?= $value ?>
                     <?php endforeach; ?>
                 </select>
             </div>
             <!-- Unidades -->
             <div class="mb-3">
                 <label for="unidades" class="form-label">Unidades</label>
-                <input type="text" class="form-control" name="unidades">
+                <input type="number" class="form-control" name="unidades">
                 <!-- <div class="form-text">Género del libro</div> -->
             </div>
             <!-- Precio -->
@@ -61,7 +64,7 @@
 
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
             <button type="reset" class="btn btn-danger">Borrar</button>
-            <button type="submit" class="btn btn-primary">Añadir</button>
+            <button type="submit" class="btn btn-primary">Editar</button>
 
         </form>
 

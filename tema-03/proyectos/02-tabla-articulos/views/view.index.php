@@ -66,7 +66,8 @@
 
                     <!-- mostramos los botones -->
                     <td>
-                        <a href="editar.php" class="bi bi-pencil-square"></a>
+                        <!-- enviamos id por GET -->
+                        <a href="editar.php?id=<?= $articulo['id']?>" class="bi bi-pencil-square" title="editar"></a></a>
                     </td>
 
                 </tr>
