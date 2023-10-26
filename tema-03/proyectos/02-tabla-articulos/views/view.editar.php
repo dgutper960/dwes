@@ -19,25 +19,25 @@
         <legend>Formulario Editar Artículo</legend>
 
         <!-- Formulario Nuevo Artículo -->
-        <form action="editar.php" method="POST">
+        <form action="editar.php?id=<?= $id?>" method="POST">
             <!-- id No lo introduce el usuario (autoincremento) -->
 
             <!-- Descripción -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion">
+                <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion']?>">
                 <!-- <div class="form-text">Introduzca título libro existente</div> -->
             </div>
             <!-- Modelo -->
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo">
+                <input type="text" class="form-control" name="modelo" value="<?= $articulo['modelo']?>">
                 <!-- <div class="form-text">Introduzca Autor del libro</div> -->
             </div>
             <!-- Categoría -->
             <div class="mb-3">
                 <label class="form-label">Categoría</label>
-                <select class="form-select" aria-label="Default select example" name="categoria">
+                <select class="form-select" aria-label="Default select example" name="categoria" value="<?= $articulo['categoria']?>">
                     <!-- Lista con categoría preseleccionada de forma dinámica -->
                     <option selected disabled>Seleccione una categoría</option>
                     <?php foreach($categorias as $key => $value): ?>
@@ -51,13 +51,13 @@
             <!-- Unidades -->
             <div class="mb-3">
                 <label for="unidades" class="form-label">Unidades</label>
-                <input type="number" class="form-control" name="unidades">
+                <input type="number" class="form-control" name="unidades" value="<?= $articulo['unidades']?>">
                 <!-- <div class="form-text">Género del libro</div> -->
             </div>
             <!-- Precio -->
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01">
+                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo['precio']?>">
                 <!-- <div class="form-text">Introduzca Precio</div> -->
             </div>
 
