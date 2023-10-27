@@ -20,12 +20,15 @@ $articulos = generar_tabla(); // cargamos la matriz de articulos
 # Cargamos las categoías
 $categorias = generar_categoria();
 
+$marcas = generar_marcas(); 
+
 
 
 # Capturamos los datos del formulario
 $descripcion = $_POST['descripcion'];
 $modelo = $_POST['modelo'];
-$categoria = $_POST['categoria'];
+$marca = $_POST['marca'];
+$categorias = $_POST['$categorias'];
 $unidades = $_POST['unidades'];
 $precio = $_POST['precio'];
 

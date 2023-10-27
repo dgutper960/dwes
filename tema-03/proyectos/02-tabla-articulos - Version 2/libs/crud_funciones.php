@@ -78,6 +78,7 @@ function generar_tabla(){
             'descripcion' => 'Portatil - HP 15-DR009',
             'modelo' => 'HP 15',
             'marca' => '0',
+            'categorias' => [1, 3, 4],
             'unidades'=> '120',
             'precio'=> '378'
         
@@ -86,6 +87,7 @@ function generar_tabla(){
             'descripcion' => 'Portatil - AMD A4-913',
             'modelo' => 'HP 255',
             'marca' => '0',
+            'categorias' => [0, 3],
             'unidades'=> '56',
             'precio'=> '348'
         ],[
@@ -93,6 +95,7 @@ function generar_tabla(){
             'descripcion' => 'PC Sobremesa - Lenovo',
             'modelo' => 'Lenovo 255',
             'marca' => '1',
+            'categorias' => [1, 2],
             'unidades'=> '159',
             'precio'=> '748'
         ],[
@@ -100,6 +103,7 @@ function generar_tabla(){
             'descripcion' => 'LG - Ultra Gear 4k 144.GHz',
             'modelo' => 'LG Ultra Gear',
             'marca' => '3',
+            'categorias' => [1],
             'unidades'=> '106',
             'precio'=> '168.05'
         ],[
@@ -107,6 +111,7 @@ function generar_tabla(){
             'descripcion' => 'Tarjeta gráfica Nvidia',
             'modelo' => 'RTX-4070.ti',
             'marca' => '2',
+            'categorias' => [0, 3,
             'unidades'=> '106',
             'precio'=> '408'
         ],[
@@ -114,6 +119,7 @@ function generar_tabla(){
             'descripcion' => 'CPU - Intel Inside 12th',
             'modelo' => 'core i5 128907 - 4.9 GHz',
             'marca' => '2',
+            'categorias' => [0, 4],
             'unidades'=> '216',
             'precio'=> '212'
         ]
@@ -160,6 +166,7 @@ function buscar_en_tabla($tabla = [], $columna,$valor){
     $columna_valores = array_column($tabla, $columna);
     return array_search($valor, $columna_valores,false);
 }
+
 
 
 function nuevo($articulos, $articulo){
