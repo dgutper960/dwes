@@ -54,7 +54,10 @@
                         <?= $articulo['modelo'] ?>
                     </td>
                     <td>
-                        <?= $categorias[$articulo['categoria']] ?>
+                        <?= $articulos[$categoria['categoria']] ?>
+                    </td>
+                    <td>
+                        <?= $articulos[$marca['marca']] ?>
                     </td> <!-- el indice de $articulo corresponde al valor del indice $categoría -->
                     <td class="tex-end">
                         <?= $articulo['unidades'] ?>

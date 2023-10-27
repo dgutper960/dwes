@@ -1,18 +1,14 @@
 <?php
-
 /*
-        Modelo: modelEditar.php
-        Descripción: editar los detalles de un libro
+        Modelo: model.mostrar.php
+        Descripción: muestra un elemento de la tabla.
 
         Método GET:
-            - id del libro que quiero editar
-            - id 
+            - id del elemento a mostrar
     */
 
 # Cargamos la tabla
 $articulos = generar_tabla();
-
-# Cargamos las categorías
 $categorias = generar_categoria();
 
 // Extraemos el valor del id a través del metodo get
@@ -28,5 +24,6 @@ if ($indice_editar !== false) {
     echo 'ERROR: Libro no encontrado';
     exit();
 }
+
 
 ?>
