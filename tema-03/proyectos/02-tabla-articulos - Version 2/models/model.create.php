@@ -28,7 +28,7 @@ $marcas = generar_marcas();
 $descripcion = $_POST['descripcion'];
 $modelo = $_POST['modelo'];
 $marca = $_POST['marca'];
-$categorias = $_POST['$categorias'];
+$categorias = $_POST['$categorias']; // recibo un array de categorías con los indices 
 $unidades = $_POST['unidades'];
 $precio = $_POST['precio'];
 

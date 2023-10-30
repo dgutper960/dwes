@@ -111,7 +111,7 @@ function generar_tabla(){
             'descripcion' => 'Tarjeta gráfica Nvidia',
             'modelo' => 'RTX-4070.ti',
             'marca' => '2',
-            'categorias' => [0, 3,
+            'categorias' => [0, 3],
             'unidades'=> '106',
             'precio'=> '408'
         ],[
@@ -173,6 +173,18 @@ function nuevo($articulos, $articulo){
     $articulos[] = $articulo;
     return $articulo;
 }
+
+
+function mostrar_categoria($categorias, $categoriaArticulo){
+
+$arrayCategorias = [];
+foreach($categoriaArticulo as $indice){
+    $arrayCategorias = $categorias[$indice];
+    }
+    asort($arrayCategorias);
+    return $arrayCategorias;
+}
+
 
 
 

@@ -37,7 +37,7 @@ $articulo =[
     'id' => $id_articulo,
     'descripcion' => $descripcion,
     'modelo'=> $modelo,
-    'categoria'=> $categoria,
+    'categorias'=> $categorias,
     'unidades'=> $unidades,
     'precio'=> $precio
     ];
