@@ -16,20 +16,20 @@
         <legend>Tabla Artículos</legend>
 
         <!-- Menu Principal -->
-        <?php include 'views/partials/menu_prin.php' ?>
+        <?php include 'views/partials/menu.php' ?>
 
         <!-- Muestra datos de la tabla -->
         <table class="table">
             <!-- Encabezado tabla -->
             <thead>
                 <tr>
-                    <!-- personalizado -->
+                    <!-- cabecera personalizada -->
                     <th>Id</th>
                     <th>Descripción</th>
                     <th>Modelo</th>
                     <th>Marca</th>
                     <th>Categorias</th>
-                    <th class="text-end">Stock</th>
+                    <th class="text-end">Stock</th> <!-- class="text-end" para que salga al final-->
                     <th class="text-end">Precio</th>
                     <th>Acciones</th>
                 </tr>
@@ -41,14 +41,14 @@
                     <tr>
                         <!-- Formatos distintos para cada  columna -->
 
-                        <!-- Detalles de artículos -->
+                        <!-- Iteramos y mostramos los detalles de los artículos -->
                         <td><?= $articulo['id'] ?></td>
                         <td><?= $articulo['descripcion'] ?></td>
                         <td><?= $articulo['modelo'] ?></td>
-                        <td><?= $marcas[$articulo['marca']] ?></td>
-                        <td><?= implode(', ', mostrarCategorias($categorias, $articulo['categorias'])) ?></td>
+                        <td><?= $marcas[$articulo['marca']] ?></td> <!-- el valor de $articulo['marca'] corresponde al indice de la marca -->
+                        <td><?= implode(', ', mostrar_categorias($categorias, $articulo['categorias'])) ?></td> <!-- lo mostramos en un array -->
                         <td class="text-end"><?= $articulo['unidades'] ?></td>
-                        <td class="text-end"><?= number_format($articulo['precio'], 2, ',', '.')?> €</td>
+                        <td class="text-end"><?= number_format($articulo['precio'], 2, ',', '.')?> €</td> <!-- [Ndecimales],[separDec],[separMil] -->
 
                         <!-- botones de acción -->
                         <td>
