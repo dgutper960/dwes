@@ -4,10 +4,10 @@
 include 'libs/crud_funciones.php';
 
 # Cargamos el modelo
-include 'models/model.editar.php';
+include 'models/model.eliminar.php';
 
 # Cargamos la vista
-include 'views/view.editar.php';
+include 'views/view.index.php';
 
 
 ?>
