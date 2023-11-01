@@ -19,6 +19,7 @@
         <!-- Ordenar -->
           </a>
           <ul class="dropdown-menu">
+                                        <!-- GET -> criterio -> ordenar.php -->
             <li><a class="dropdown-item" href="ordenar.php?criterio=titulo">Titulo</a></li>
             <li><a class="dropdown-item" href="ordenar.php?criterio=autor">Autor</a></li>
             <li><a class="dropdown-item" href="ordenar.php?criterio=genero">Género</a></li>
@@ -26,7 +27,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          <a class="nav-link" aria-disabled="false">Ordenar Por:</a>
         </li>
       </ul>
       <form class="d-flex" role="search" method="GET" action="buscar.php">
