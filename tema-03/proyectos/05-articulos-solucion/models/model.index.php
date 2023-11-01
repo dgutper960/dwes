@@ -1,18 +1,10 @@
 <?php
-
     /*
-
-        Modelo: model.index.php
-        Descripcion: genera en array los datos de los artículos
-
+        Modelo: modelIndex
+        Descripcion: genera un array con datos de los artículos
     */
-
-    setlocale(LC_MONETARY,"es_ES");
-    $categorias = generar_tabla_categorias();
-    $marcas = generar_tabla_marcas();
+    setlocale(LC_MONETARY,"es_ES"); // Indicamos 
     $articulos = generar_tabla();
-   
-
-    
-
+    $categorias = generar_tabla_categorías();
+    $marcas = generar_tabla_marcas();
 ?>

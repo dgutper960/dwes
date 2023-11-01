@@ -2,84 +2,78 @@
 <html lang="es">
 
 <head>
-    <?php include 'views/layouts/head.html' ?>
-    <title>Proyecto 3.1 - Gestión de libros</title>
+    <?php include 'layouts/head.html' ?>
 </head>
 
 <body>
     <!-- Capa principal -->
     <div class="container">
+        <!-- Cabecera -->
+        <?php include 'partials/header.html' ?>
+        <legend>Formulario Añadir Artículo</legend>
 
-        <!-- cabecera documento -->
-        <?php include 'views/partials/header.php' ?>
+        <!-- Añadimos el menú -->
+        <?php include 'partials/menu.php' ?>
 
-        <legend>Formulario Mostrar Artículo</legend>
-
-        <!-- Formulario Mostrar Artículo -->
-        <form>
-
-            <!-- id -->
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Id</label>
-                <input type="text" class="form-control" name="id" value="<?= $articulo['id'] ?>" disabled>
+       
+         <!-- Formulario Nuevo Artículo -->
+         <form>
+             <!-- id -->
+             <div class="mb-3">
+                <label class="form-label">id</label>
+                <input type="text" class="form-control" value="<?=$articulo['id']?>"disabled>
+                <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
-            <!-- Descripción -->
+            <!-- descripción -->
             <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion'] ?>"
-                    disabled>
+                <label class="form-label">Descripción</label>
+                <input type="text" class="form-control" value="<?=$articulo['descripcion']?>"disabled>
+                <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
             <!-- Modelo -->
             <div class="mb-3">
-                <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo" value="<?= $articulo['modelo'] ?>" disabled>
+                <label for="titulo" class="form-label">Modelo</label>
+                <input type="text" class="form-control" value="<?=$articulo['modelo']?>"disabled>
+                <!-- <div class="form-text">Introduzca título libro existente</div> -->
             </div>
-            <!-- Marca Select -->
+
+            <!-- Marcas -->
             <div class="mb-3">
-                <label for="marca" class="form-label">Marca</label>
-                <input type="text" class="form-control" name="categoria"
-                    value="<?= $marcas[$articulo['marca']] ?>" disabled>
+                <label class="form-label">Categoría</label>
+                <input type="text" class="form-control" value="<?=$marcas[$articulo['marca']]?>"disabled>
             </div>
+
+            <!-- Categoría -->
+            <div class="mb-3">
+                <label class="form-label">Categoría</label>
+                <input type="text" class="form-control" value="<?=implode(', ', mostrarCategorias($categorias,$articulo['categorias'])) ?>"disabled>
+            </div>
+
             <!-- Unidades -->
             <div class="mb-3">
-                <label for="unidades" class="form-label">Unidades</label>
-                <input type="number" class="form-control" name="unidades" step="0.01"
-                    value="<?= $articulo['unidades'] ?>" disabled>
+                <label class="form-label">Unidades</label>
+                <input type="number" class="form-control" value="<?=$articulo['unidades']?>"disabled>
+                <!-- <div class="form-text">Género del libro</div> -->
             </div>
             <!-- Precio -->
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo['precio'] ?>"
-                    disabled>
-            </div>
-
-             <!-- Categorías -->
-             <div class="mb-3">
-                <label for="marca" class="form-label">Categorías</label>
-                <input type="text" class="form-control" name="categorias"
-                    value="<?= implode(', ', mostrarCategorias($categorias, $articulo['categorias'])) ?>" disabled>
+                <input type="number" class="form-control" value="<?=$articulo['precio']?>"disabled>
+                <!-- <div class="form-text">Introduzca Precio</div> -->
             </div>
 
 
-            <!-- botones de acción -->
-            <a class="btn btn-primary" href="index.php" role="button">Volver</a>
-
+            <a class="btn btn-secondary" href="index.php" role="button">Volver</a>
         </form>
-
-        <br>
-        <br>
-        <br>
-
-
-
-
-        <!-- Pié del documento -->
-        <?php include 'views/partials/footer.html' ?>
+        
 
     </div>
+    <!-- Pie de documento -->
+     <?php include 'partials/footer.html' ?>
 
-    <!-- javascript bootstrap 532 -->
-    <?php include 'views/layouts/javascript.html' ?>
+
+    <!-- js bootstrap 532-->
+    <?php include 'layouts/javascript.html' ?>
 </body>
 
 </html>

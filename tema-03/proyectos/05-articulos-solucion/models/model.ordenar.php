@@ -1,28 +1,20 @@
 <?php
-
-    /*
-
-        Modelo: model.ordenar.php
-        Descripcion: muestra los artículos  a partir de un  criterio de ordenación
+/*
+        Modelo: ordenar.php
+        Descripción: muestra los libros a partir de un criterio
 
         Método GET:
-                    - critero: descripcion, modelo,  categoria, unidades, precio
+            - criterio: titulo, autor, genero, precio.
     */
 
-    # cargamos los datos
-    $categorias = generar_tabla_categorias();
+    // Cargamos las correspondientes tablas
     $articulos = generar_tabla();
-
-    # Cargo el criterio de ordenación
+    $categorias = generar_tabla_categorías();
+    $marcas = generar_tabla_marcas();
+    // Caargo el criterio de ordenación
     $criterio = $_GET['criterio'];
 
-    // Validar  criterio
-    if (!in_array($criterio, array_keys($articulos[0]))) {
-        echo "ERROR:  Criterio de  ordenación inxistente";
-        exit();
-    }
-
-    # Ordenar tabla articulos
+    // Invocamos la función que se encargará de ordenar el contenido de la vista
     $articulos = ordenar($articulos, $criterio);
-
+    
 ?>

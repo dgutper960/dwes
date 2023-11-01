@@ -1,23 +1,20 @@
 <?php
-
-    /*
-
+    /* 
         Modelo: model.buscar.php
-        Descripcion: filtra los artículos  a partir de la expresión búsqueda
+        Descripcion: filtra los artículos a partir de la expresión búsqueda
 
         Método GET:
-                    - expresion: prompt o expresión de búsqueda
+            - expresión: expresión de busqueda
     */
 
-    # Cargo los datos
-    $categorias = generar_tabla_categorias();
+    // Cargamos los datos
     $articulos = generar_tabla();
+    $categorias = generar_tabla_categorías();
+    $marcas = generar_tabla_marcas();
 
-    # Cargo la expresion de búsqueda
+    // Cargamos la expresion
     $expresion = $_GET['expresion'];
 
-    # Filtrar la tabla  a partir de esa expresión
-    $articulos  = filtrar($articulos, $expresion);
-
-
+    // Invocamos la funcion
+    $articulos = filtrar($articulos,$expresion);
 ?>

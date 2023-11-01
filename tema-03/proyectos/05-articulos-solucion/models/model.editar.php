@@ -1,37 +1,27 @@
 <?php
-
     /*
-
-        Modelo: model.editar.php
-        Descripcion: edita los detalles de un articulo
+        Modelo: modelEditar.php
+        Descripción: editar los detalles de un artículo
 
         Método GET:
-                    - id del libro que quiero editar
-
+            - id del articulo que quiero editar
     */
-
-    // Cargamos los datos
+    // Cargamos los valores
     $articulos = generar_tabla();
-    $categorias = generar_tabla_categorias();
+    $categorias = generar_tabla_categorías();
     $marcas = generar_tabla_marcas();
 
-    // ordenamos las categorias
-    asort($categorias);
+    // Extraemos el id
+    $idArticulo = $_GET['id'];
 
-
-    # obtener  el id  del artículo que quiero  editar
-    $id_editar = $_GET['id'];
-
-    # obtener el índice  del  libro
-    $indice_editar = buscar_en_tabla($articulos, 'id', $id_editar);
-
-    // comparación estricta para distinguir el false del 0
-    if ($indice_editar !== false) {
-        // obtengo el array del artículo a  editar
-        $articulo = $articulos[$indice_editar];
-
-    }  else { 
-        echo 'ERROR: artículo  no encontrado';
+    // cargamos el array de ese artículo
+    $indiceArticulo = buscar($articulos,'id',$idArticulo);
+    if ($indiceArticulo !==false){
+        // Obtengo el array del libro
+        $articulo = $articulos[$indiceArticulo];
+    } else{
+        echo 'ERROR: Artículo no encontrado';
         exit();
     }
+
 ?>

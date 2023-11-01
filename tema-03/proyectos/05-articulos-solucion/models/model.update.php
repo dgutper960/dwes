@@ -1,44 +1,48 @@
 <?php
-
     /*
+        Modelo: modelUpdate.php
+        Descripción: actualiza los detalle de un articulo
 
-        Modelo: model.update.php
-        Descripcion: actualiza los detalles de un  artículo
-
-        Método POST:
-                    - descripcion
-                    - modelo
-                    - genero
-                    - unidades
-                    - precio
-
-        Método GET:
-                    - indice -> índice  del articulo que quiero editar
-
+        Método POST 
+            - descripcion
+            - modelo
+            - Marca
+            - categorias (valor númerico)
+            - unidades
+            - precio
+        
+        Método GET
+            - id
     */
-
+    // Cargamos las tablas
     $articulos = generar_tabla();
+    $categorias = generar_tabla_categorías();
     $marcas = generar_tabla_marcas();
-    $categorias = generar_tabla_categorias();
 
-    // Extraer índice del artículo que voy a editar
-    $indice = $_GET['indice'];
+    // Con el metodo post recogeremos los datos de los campos
+    $descripcion = $_POST['descripcion'];
+    $modelo = $_POST['modelo'];
+    $marca = $_POST['marca'];
+    $categoria = $_POST['categorias'];
+    $unidades = $_POST['unidades'];
+    $precio = $_POST['precio'];
 
-    // Extraer los detalles del formulario
-    $edit_articulo = [
+    // Obtendremos el id del artículo a actualizar a través de una url dinámica (método GET)
+    $idArticulo = $_GET['id'];
 
-        'id' => $_POST['id'],
-        'descripcion'=>$_POST['descripcion'],
-        'modelo'=>$_POST['modelo'],
-        'marca'=>$_POST['marca'] ,
-        'categorias'=>$_POST['categorias'],
-        'unidades'=> $_POST['unidades'],
-        'precio'=> $_POST['precio']
+    // Buscaremos dicho artículo
+    $indiceActualizar = buscar($articulos,'id',$idArticulo);
 
+    // Con los datos obtenidos del metodo POST, crearemos un array que contendrá los valores actualizados
+    $articulo =  [
+        'id' => $idArticulo,
+        'descripcion' => $descripcion,
+        'modelo' => $modelo,
+        'marca'=> $marca,
+        'categorias' => $categoria,
+        'unidades' => $unidades,
+        'precio' => $precio
     ];
-
-    // $articulos = update($articulos, $edit_articulo, $indice);
-
-    $articulos[$indice] = $edit_articulo;
-
+    // Añadimos el articulo actualizado a la tabla
+    $articulos=actualizar($articulos,$indiceActualizar,$articulo);
 ?>

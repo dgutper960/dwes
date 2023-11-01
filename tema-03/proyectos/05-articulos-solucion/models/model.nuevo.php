@@ -1,15 +1,11 @@
 <?php
-
     /*
-
-        Modelo: model.nuevo.php
-        Descripcion: carga array categorias generar el select dinámico de categorías
-
+        Modelo: modelNuevo.php
+        Descripción: introducir un nuevo elemento a la tabla
     */
 
-    # cargamos la tabla
-    $categorias = generar_tabla_categorias();
+    // Cargamos los datos de categorias
+    $articulos=generar_tabla();
+    $categorias = generar_tabla_categorías();
     $marcas = generar_tabla_marcas();
-
-
 ?>

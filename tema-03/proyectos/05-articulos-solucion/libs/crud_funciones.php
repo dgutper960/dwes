@@ -1,264 +1,207 @@
 <?php
 
-/* *******************************************
-    function buscar_en_tabla()
-    descripcion: busca un valor en una determinada columna de una tabla
-    parámetros:
-                - tabla
-                - columna - búsqueda
-                - valor - que quiero buscar
-    salida:
-                - indice del array donde se encuentra el valor
-                - false - en caso de no lo encuentre
-*/
-
-function buscar_en_tabla($tabla = [], $columna, $valor)
-{
-
-    $columna_valores = array_column($tabla, $columna);
-    return array_search($valor, $columna_valores, false);
-
+// Buscar en tabla
+function buscar($tabla = [],$columna,$valor){
+    $columnaValores = array_column($tabla, $columna);
+    return array_search($valor, $columnaValores,false);
 }
 
-/* ************************************************
-    Generar la tabla de marcas
-*/
-# Genero la tabla de marcas
-function generar_tabla_categorias(){
 
+// Generar tabla de categorías
+function generar_tabla_categorías()
+{
     $categorias = [
         'Portátiles',
-        'PCs sobremesa',
+        'PCs Sobremesa',
         'Componentes',
         'Pantallas',
         'Impresoras',
         'Tablets',
         'Móviles',
         'Fotografía',
-        'Imagen'
+        'Imagen',
+        'Accesorios'
+
     ];
-
+    // Ordenamos el array, manteniendo la asociación de indices
     asort($categorias);
-
     return $categorias;
 }
 
-/* ************************************************
-    Generar la tabla de marcas
-*/
-# Genero la tabla de marcas
-function generar_tabla_marcas(){
+// Generar tabla con las marcas
 
+function generar_tabla_marcas()
+{
     $marcas = [
-        'Xiaomi',
-        'Acer',
-        'Aoc',
-        'Nokia',
         'Apple',
-        'Lenovo',
-        'IBM'
-    ];
+        'Xiaomi',
+        'Casio',
+        'Nokia',
+        'Logitech',
+        'IBM',
+        'BQ',
+        'Hacendado'
 
+    ];
+    // Ordenamos el array, manteniendo la asociación de indices
     asort($marcas);
     return $marcas;
 }
 
-/* ***************************************
-    function generar_tabla()
-    descripcion: genera la tabla de datos con la que vamos a trabajar
-    parámetros:
-                
-    salida:
-                - tabla de datos
-        
-*/
+
+// Generar tabla de artículos
 function generar_tabla()
 {
-
     $tabla = [
-
         [
             'id' => 1,
-            'descripcion' => 'Portátil HP MD12345',
-            'modelo' => 'HP 15-1234-20',
+            'descripcion' => 'Laptop Acer Aspire 15',
+            'modelo' => 'A315-42',
             'marca' => 0,
             'categorias' => [1,2,3],
-            'unidades' => 12,
-            'precio' => 550.50
+            'unidades' => 10,
+            'precio' => 799.99
         ],
         [
             'id' => 2,
-            'descripcion' => 'Tablet - Samsung Galaxy Tab A (2019)',
-            'modelo' => 'Exynos',
-            'marca' => 5,
-            'categorias' => [2,3,5],
-            'unidades' => 200,
-            'precio' => 300
+            'descripcion' => 'Monitor HP 27 pulgadas',
+            'modelo' => 'HP27X',
+            'marca' => 3,
+            'categorias' => [1,2,0],
+            'unidades' => 15,
+            'precio' => 299.99
         ],
         [
             'id' => 3,
-            'descripcion' => 'Impresora multifunción - HP',
-            'modelo' => 'DeskJet 3762',
-            'marca' => 4,
-            'categorias' => [2,4,1],
-            'unidades' => 2000,
-            'precio' => 69
+            'descripcion' => 'Teclado inalámbrico Logitech',
+            'modelo' => 'K780',
+            'marca' => 5,
+            'categorias' => [1,4],
+            'unidades' => 20,
+            'precio' => 49.99
         ],
         [
             'id' => 4,
-            'descripcion' => 'TV LED 40" - Thomson 40FE5606 - Full HD',
-            'modelo' => 'Thomson 40FE5606',
-            'marca' => 3,
-            'categorias' => [1,3,4],
-            'unidades' => 300,
-            'precio' => 259
+            'descripcion' => 'Impresora Epson EcoTank',
+            'modelo' => 'ET-2750',
+            'marca' => 4,
+            'categorias' => [1],
+            'unidades' => 5,
+            'precio' => 349.99
         ],
         [
             'id' => 5,
-            'descripcion' => 'PC Sobremesa - Acer Aspire XC-830',
-            'modelo' => 'Acer Aspire XC-830',
-            'marca' => 1,
-            'categorias' => [3,5],
-            'unidades' => 20,
-            'precio' => 329
+            'descripcion' => 'Disco Duro Externo Seagate 2TB',
+            'modelo' => 'STEA2000400',
+            'marca' => 2,
+            'categorias' => [2,3],
+            'unidades' => 12,
+            'precio' => 79.99
+        ],
+        [
+            'id' => 6,
+            'descripcion' => 'Router Wi-Fi TP-Link Archer C7',
+            'modelo' => 'AC1750',
+            'marca' => 5,
+            'categorias' => [4],
+            'unidades' => 8,
+            'precio' => 89.99
+        ],
+        [
+            'id' => 7,
+            'descripcion' => 'Tarjeta gráfica NVIDIA GeForce RTX 3080',
+            'modelo' => 'RTX 3080',
+            'marca' => 2,
+            'categorias'=> [2,3],
+            'unidades' => 3,
+            'precio' => 899.99
         ]
-
     ];
-
     return $tabla;
-
 }
 
- /* ***************************
-    Function: nuevo()
-    Descripción: Añade un nuevo elemento a la tabla
-    Entrada:
-            - tabla (array)
-            - nuevo registro de la tabla (array indexado)
-    Salida:
-            - tabla actualizada
-*/
-function nuevo($tabla, $registro) {
 
-    $tabla[] = $registro;
+// Funcion nuevo
+function nuevo($tabla =[],$elemento){
+    // añadismo el nuevo elemento en la tabla
+    $tabla[] = $elemento;
+    
     return $tabla;
+} 
 
-}
-
-/* ***************************************************
-    Function: read()
-    Descripción: Obtiene un valor a partir del índice de un array
-    Entrada:
-            - tabla (array)
-            - indice
-    Salida:
-            - registro
-*/
-function read($tabla, $indice) {
-
-    $registro = $tabla[$indice];
-    return $registro;
-
-}
-
-/* **************************************
-    Function: update()
-    Descripción: Actualiza los datos de un articulo
-    Entrada:
-            - tabla (array)
-            - registro
-            - indice
-    Salida:
-            - tabla actualizada
-*/
-    function update($tabla, $registro, $indice) {
-
-        $tabla[$indice] = $registro;
-        return $tabla;
-
-    }
-
-/* *****************************************
-    Function: ordenar()
-    Descripción: Ordena la tabla por alguno de los campos. Ascendente
-    Entrada:
-            - tabla (array)
-            - criterio de ordenación
-    Salida:
-            - tabla ordenada
-*/
-function ordenar($tabla, $criterio) {
-
-    # Crea un array con los valores del campo 
-    # por el que quiero ordenar
-    $aux = array_column($tabla, $criterio);
-
-    array_multisort($aux, SORT_ASC, $tabla);
-
-    return ($tabla);
-
-}
-
-/* *********************************************
-    Function: filtrar()
-    Descripción: filtra la tabla a partir de una expresión de búsqueda
-    Entrada:
-            - tabla (array)
-            - criterio de búsqueda
-    Salida:
-            - tabla filtrada
-*/
-function filtrar($tabla, $expresion) {
-
-    # Recorro la tabla
-    # Busco la expresión en cada registro mediante la función in_array()
-    
-    $aux=[];
-
-    foreach ($tabla as $registro) {
-        if  (array_search($expresion, $registro)) {
-            
-                $aux[] = $registro;
-        }
-    }
-
-    if (empty($aux)){
-        $aux = $tabla;
-    }
-    
-    return ($aux);
-
-}
-
-/* ***************************************
-    function: generar_id()
-    descripción: genera el próximo id de la tabla
-    parametros:
-        - $tabla de datos
-*/
-function generar_id($tabla) {
-
+// Funcion ultimoId
+function ultimoId($tabla = []){
     $array_id = array_column($tabla,'id');
     asort($array_id);
-    return  end($array_id) + 1;
-
+    return end($array_id)+1;
 }
 
-function mostrarCategorias($categorias, $categoriasArticulo) {
 
-    $arrayCategorias = [];
+// Funcion actualizar
+function actualizar($tabla = [],$indice,$elemento){
+    $tabla[$indice] = $elemento;
+    return $tabla;
+}
 
-    foreach($categoriasArticulo as $indice) {
+// Funcion eliminar
+function eliminar($tabla = [], $id) {
+    // Buscar el índice a eliminar
+    $indiceEliminar = buscar($tabla, 'id', $id);
 
-        $arrayCategorias[] = $categorias[$indice];
+    if ($indiceEliminar !== false) {
+        // Eliminamos el artículo seleccionado
+        unset($tabla[$indiceEliminar]);
 
+        // Reconstruimos el array para quitar huecos
+        $tabla = array_values($tabla);
     }
 
-    asort($arrayCategorias);
-    return $arrayCategorias;
-
+    return $tabla;
 }
 
+// Funcion ordenar
+function ordenar($tabla=[], $criterio) {
+    // Comprueba si el criterio existe
+    if (!in_array($criterio, array_keys($tabla[0]))) {
+        echo "ERROR: Criterio de ordenación no existe";
+        exit();
+    } 
 
+    // Carga en un array todos los valores del criterio de ordenación
+    $aux = array_column($tabla, $criterio);
+
+    // Usa array_multisort para ordenar el array
+    array_multisort($aux, SORT_ASC, $tabla);
+
+    // Devuelve el array ordenado
+    return $tabla;
+}
+
+// Funcion filtrar
+function filtrar($tabla = [],$expresion){
+     // Crearemos un array vacío donde cargaremos las filas que cumpla la expresion de busqueda
+     $aux = [];
+     foreach ($tabla as $elemento){
+         if(array_search($expresion,$elemento)){
+             $aux[] = $elemento;
+         }
+     }
+ 
+     // Validaremos la busqueda
+     if(!empty($aux)){
+         $tabla = $aux;
+     }
+     return $aux;
+}
+
+// $categorias 
+function mostrarCategorias($categorias,$categoriasArticulo=[],){
+    $arrayCategorias = [];
+    foreach($categoriasArticulo as $indice){
+        $arrayCategorias[]=$categorias[$indice];
+    }
+    asort($arrayCategorias);
+    return $arrayCategorias;
+}
 
 ?>

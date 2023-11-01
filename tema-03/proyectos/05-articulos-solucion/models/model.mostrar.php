@@ -1,34 +1,27 @@
 <?php
-
-    /*
-
-        Modelo: model.mostrar.php
-        Descripcion: muestra los detalles de un artículo sin edición
+    /* 
+        Modelo: modelMostrar.php
+        Descripción: muestra los detalles de un artículo
 
         Método GET:
-                    - id del artículo que quiero editar
-
+            - id del artículo que quiero mostrar
     */
 
-    # cargamos los  datos
+    // cargamos los datos
     $articulos = generar_tabla();
-    $categorias = generar_tabla_categorias();
+    $categorias = generar_tabla_categorías();
     $marcas = generar_tabla_marcas();
 
-    # id del  artículo que quiero mostrar
+    // obtenemos el id a través del método GET
     $id = $_GET['id'];
 
-    # busco el  índice de la  tabla  correspondiente a ese  id
-    $indice_mostrar = buscar_en_tabla($articulos, 'id', $id);
-
-    // comparación estricta para distinguer el false del 0
-    if ($indice_mostrar !== false) {
-        // obtengo el array del libro a  editar
-        $articulo = $articulos[$indice_mostrar];
-
-    }  else { 
-        echo 'ERROR: artículo  no encontrado';
+    // cargamos el array de ese artículo
+    $indiceArticulo = buscar($articulos,'id',$id);
+    if ($indiceArticulo !==false){
+        // Obtengo el array del libro
+        $articulo = $articulos[$indiceArticulo];
+    } else{
+        echo 'ERROR: Libro no encontrado';
         exit();
     }
-
 ?>

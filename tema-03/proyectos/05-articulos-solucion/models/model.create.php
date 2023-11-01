@@ -1,37 +1,49 @@
 <?php
-
     /*
+        Modelo: modelCreate.php
+        Descripción: Cargaremos los datos del formulario nuevo y los introducimos al array original de artículos
 
-        Modelo: model.create.php
-        Descripcion: añade un nuevo  artículo en a la tabla
-
-        Método POST:
-                    - descripcion
-                    - modelo
-                    - genero
-                    - unidades
-                    - precio
-
+        Método POST 
+            - descripcion
+            - modelo
+            - categorias (valor númerico)
+            - unidades
+            - precio
+        
+        El id será generado de forma automatica por la función ultimoId()
     */
 
+
+    // Carga de datos
+    $categorias = generar_tabla_categorías();
     $articulos = generar_tabla();
-    $categorias = generar_tabla_categorias();
     $marcas = generar_tabla_marcas();
 
-    $new_articulo = [
+    // Recogemos los datos del formulario
+    $descripcion = $_POST['descripcion'];
+    $modelo = $_POST['modelo'];
+    $marca = $_POST['marcas'];
+    $categori = $_POST['categorias'];
+    $unidades = $_POST['unidades'];
+    $precio = $_POST['precio'];
 
-        'id' => generar_id($articulos),
-        'descripcion'=>$_POST['descripcion'],
-        'modelo'=>$_POST['modelo'],
-        'marca'=>$_POST['marca'],
-        'categorias'=>$_POST['categorias'], // array de  categorias
-        'unidades'=> $_POST['unidades'],
-        'precio'=> $_POST['precio']
+    // Deberemos crear la estructura de un array asociativo
+    // Al no pedir introducir un id, deberá generarse automaticamente
+    $id = ultimoId($articulos);
 
+    // Invocamos a la función nuevo(), que nos permitirá introducir
+    //nuevo($articulos,$id,$descripcion,$modelo,$categori,$unidades,$precio);
+    $articulo = [
+        'id' => $id,
+        'descripcion'=> $descripcion,
+        'modelo'=> $modelo,
+        'marca' => $marca,
+        'categorias'=> $categori,
+        'unidades'=> $unidades,
+        'precio'=> $precio
     ];
 
-    // $articulos = nuevo($articulos, $new_articulo);
-
-    $articulos[] = $new_articulo;
+    // Añadimos el artículo usando la funcion nuevo
+    $articulos = nuevo($articulos, $articulo);
 
 ?>
