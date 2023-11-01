@@ -40,7 +40,7 @@
                 <input type="decimal" class="form-control" name="precio" aria-describedby="emailHelp">
             </div>
             <!-- botones de acción -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Añadir</button>
             <button type="reset" class="btn btn-primary">Borar</button>
             <a class="btn btn-primary" href="index.php" role="button">Volver</a>
         </form>

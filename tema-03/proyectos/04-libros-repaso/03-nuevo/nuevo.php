@@ -1,7 +1,7 @@
 <?php
 
-# Cargamos el crud_funciones
-include 'libs/crud_funciones.php';
+// # Cargamos el crud_funciones
+// include 'libs/crud_funciones.php';
 
 
 # Cargamos la vista
