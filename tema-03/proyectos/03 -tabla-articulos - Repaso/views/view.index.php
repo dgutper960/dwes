@@ -58,7 +58,7 @@
                             <?= $marcas[$articulo['marca']] ?>
                         </td>
                         <td>
-                            <?= implode(', ', mostrarCategorias($categorias, $articulo['categorias'])) ?>
+                            <?= implode(', ', mostrar_categorias($categorias, $articulo['categorias'])) ?>
                         </td> <!-- el indice de $articulo corresponde al valor del indice $categoría -->
                         <td class="tex-end"> <!--lo coloca a l final-->
                             <?= $articulo['unidades'] ?>

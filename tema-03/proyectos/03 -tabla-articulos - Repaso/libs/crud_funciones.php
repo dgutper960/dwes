@@ -53,6 +53,16 @@ function generar_tabla(){
     return $articulos;
 }
 
+
+function generar_id($articulos){
+    // array_column -> funcion interna de php
+    $array_id = array_column($articulos,"id");
+    asort($array_id);
+    return end($array_id)+1;
+}
+
+
+
 # Creamos el array de categoría
 function generar_categorias(){
     $categorias = [
@@ -83,14 +93,15 @@ function generar_marcas(){
 }
 
 // Funcion mostrarCategorias
-function mostrarCategorias($tabla,$categoriasTabla=[]){
-    $arrayCategoria = [];
-    foreach($categoriasTabla as $indice){
-        $arrayCategoria[]=$tabla[$indice];
+function mostrar_categorias($categorias, $categoriaArticulo){
+    $arrayCategorias = [];
+    foreach($categoriaArticulo as $indice){
+        $arrayCategorias = $categorias[$indice];
     }
-    asort($arrayCategoria);
-    return $arrayCategoria;
+    asort($arrayCategorias);
+    return $arrayCategorias;
 }
+
 
 
 
