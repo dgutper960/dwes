@@ -1,7 +1,7 @@
 <?php
 
 # Cargamos el crud_funciones
-include 'libs/curd_funciones.php';
+include 'libs/crud_funciones.php';
 
 # Cargamos el modelo
 include 'models/model.eliminar.php';
