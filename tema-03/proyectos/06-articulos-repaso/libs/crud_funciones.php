@@ -115,6 +115,12 @@ function generar_tabla()
     return $tabla;
 }
 
+function ultimoId($tabla = []){
+    $array_id = array_column($tabla,'id');
+    asort($array_id);   
+    return end($array_id)+1;
+}
+
 
 
 function mostrar_categorias($categorias, $categoriasArticulo=[]) {
