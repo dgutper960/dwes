@@ -131,4 +131,22 @@ asort($arrayCategorias);
 return $arrayCategorias;
 }
 
+function buscar_en_tabla($tabla=[], $columna, $valor){
+    $columnaValores = array_column($tabla, $columna);
+    return array_search($valor, $columnaValores, false);
+}
+
+// creamos la funcion eliminar en tabla que a su vez, requiere de buscar en tabla
+function eliminar_en_tabla($tabla = [], $id) {
+    // buscamos la columna que corresponde al id que se pretende borrar
+    $indiceEliminar = buscar_en_tabla($tabla,'id', $id);
+    // si contiene valor borramos ese indice
+    if ($indiceEliminar !== false) {
+        unset($tabla[$indiceEliminar]);
+        // reordenamos los huecos del array
+        $tabla = array_values($tabla);
+    }
+    return $tabla;
+}
+
 ?>
