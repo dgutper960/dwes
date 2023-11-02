@@ -61,14 +61,15 @@
 
             <!-- Categoría en CheckBox retorna un array -->
             <div class="mb-3">
-                <label for="categoria" class="form-label">Seleccione Categorías</label>
+                <label class="form-label">Seleccionar Categorías</label>
                 <div class="form-control">
                     <?php foreach ($categorias as $indice => $categoria): ?>
                         <div class="form-check">
-                            <input class="form-check-input" type="checbox" value="<?= $indice ?>" name="categorias[]">
-                            <label class="form-chek-label">
+                            <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]">
+                            <!--Al ser múltiples opciones, se deberan recoger dichos valores en un array-->
+                            <label class="form-check-label" for="">
                                 <?= $categoria ?>
-                            </label>
+                                <label>
                         </div>
                     <?php endforeach; ?>
                 </div>

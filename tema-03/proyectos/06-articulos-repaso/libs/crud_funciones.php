@@ -137,6 +137,7 @@ asort($arrayCategorias);
 return $arrayCategorias;
 }
 
+
 function buscar_en_tabla($tabla=[], $columna, $valor){
     $columnaValores = array_column($tabla, $columna);
     return array_search($valor, $columnaValores, false);

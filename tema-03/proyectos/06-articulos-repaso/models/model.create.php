@@ -2,7 +2,7 @@
 
 # Cargamos los arrays
 $marcas = generar_marcas();
-$categorias = generar_categoria();  
+$categorias = generar_categorias();  
 $articulos = generar_tabla();
 
 # El id es incrementado, mediante función
