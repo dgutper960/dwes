@@ -127,7 +127,7 @@ function mostrar_categorias($categorias, $categoriasArticulo=[]) {
 // declaramos array vacio
 $arrayCategorias = [];
 
-// iteramos las categorías del articulo
+// iteramos las categorías del articulo (que llega por entrada)
 foreach ($categoriasArticulo as $indice) {
     // cargamos cada categoría en el nuevo array
     $arrayCategorias[] = $categorias[$indice];

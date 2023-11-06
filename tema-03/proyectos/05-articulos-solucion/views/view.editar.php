@@ -20,7 +20,7 @@
          <form action="update.php?id=<?=$idArticulo?>" method="POST">
          <div class="mb-3">
                 <label class="form-label">id</label>
-                <input type="number" class="form-control" name="id" value="<?=$articulo['id']?>" readonly>
+                <input type="number" class="form-control" name="id" value="<?=$articulo['id']?>" disabled>
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
             <!-- descripción -->
@@ -42,7 +42,7 @@
                     <?php foreach($marcas as $key => $marca): ?>
                         <option value="<?=$key?>"
                         <?=($articulo['marca'] == $key)?'selected':null ?>
-                        >
+                        > <!-- operador ternario para ver el articulo preseleccionado -->
                         <?=$marca?></option>
                     <?php endforeach; ?>
                 </select>
@@ -68,7 +68,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]"
                             <?=(in_array($indice,$articulo['categorias']) ? 'checked': null)?>
-                            >
+                            > <!-- operador ternario para ver los articulos preseleccionados -->
                             <!--Al ser múltiples opciones, se deberan recoger dichos valores en un array-->
                             <label class="form-check-label" for="">
                                 <?= $categoria ?>
