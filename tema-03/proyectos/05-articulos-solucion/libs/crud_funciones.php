@@ -1,14 +1,14 @@
 <?php
 
 // Buscar en tabla
-function buscar($tabla = [],$columna,$valor){
+function buscar($tabla = [], $columna, $valor){
     $columnaValores = array_column($tabla, $columna);
-    return array_search($valor, $columnaValores,false);
+    return array_search($valor, $columnaValores, false);
 }
 
 
 // Generar tabla de categorías
-function generar_tabla_categorías()
+function generar_tabla_categorías() 
 {
     $categorias = [
         'Portátiles',
@@ -122,7 +122,7 @@ function generar_tabla()
 
 
 // Funcion nuevo
-function nuevo($tabla =[],$elemento){
+function nuevo($tabla =[], $elemento){
     // añadismo el nuevo elemento en la tabla
     $tabla[] = $elemento;
     
@@ -138,7 +138,7 @@ function ultimoId($tabla = []){
 
 
 // Funcion actualizar
-function actualizar($tabla = [],$indice,$elemento){
+function actualizar($tabla = [], $indice, $elemento){
     $tabla[$indice] = $elemento;
     return $tabla;
 }
@@ -178,11 +178,11 @@ function ordenar($tabla=[], $criterio) {
 }
 
 // Funcion filtrar
-function filtrar($tabla = [],$expresion){
+function filtrar($tabla = [], $expresion){
      // Crearemos un array vacío donde cargaremos las filas que cumpla la expresion de busqueda
      $aux = [];
      foreach ($tabla as $elemento){
-         if(array_search($expresion,$elemento)){
+         if(array_search($expresion, $elemento)){
              $aux[] = $elemento;
          }
      }
@@ -195,7 +195,7 @@ function filtrar($tabla = [],$expresion){
 }
 
 // $categorias 
-function mostrarCategorias($categorias,$categoriasArticulo=[],){
+function mostrarCategorias($categorias, $categoriasArticulo=[]){
     $arrayCategorias = [];
     foreach($categoriasArticulo as $indice){
         $arrayCategorias[]=$categorias[$indice];
