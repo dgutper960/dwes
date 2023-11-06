@@ -20,6 +20,12 @@ echo'<br>';
  * SE SOBREESCRIBE EL CONSTRUCTOR DE LA CLASE PADRE
  */
 
+ echo'<br>';
+ $coche_2->velocidadMax(); 
+ // debería dar error si el atributo es private (atributos no accesibles para hijos)
+ // debería funcionar si los atributos son protected (atributos accesibles para hijos)
+ var_dump($coche_2->getVelocidad());
+
 
 
 

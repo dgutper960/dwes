@@ -130,7 +130,7 @@ class Vehiculo
    */
 	public function aumentaVel()
 	{
-		$this->velocidad += 10;
+		$this->velocidad += 10; // con atributo padre private solo mediante setter
 	}
 }
 

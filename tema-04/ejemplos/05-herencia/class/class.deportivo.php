@@ -73,5 +73,16 @@ class Deportivo extends Vehiculo
 		$this->km = $km;
 		return $this;
 	}
+
+/***
+ * INTENTAMOS USAR UN ATRIBUTO DE LA CLASE PADE
+ */
+public function velocidadMax(){
+	$this->velocidad = 500; // en la implementacion no da error
+} // al llamar a este método vamos a tener error
+// El atributo velocidad de padre tiene visibilidad privada
+// Solo accestible mediante getter y setter
+
+
 }
 ?>
