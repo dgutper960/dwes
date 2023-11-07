@@ -25,17 +25,17 @@ function getGeneros()
         'Aventura',
         'Comedia',
         'Drama',
-        'Deportes',
-        'Ensayo',
+        'Romance',
+        'Histórico',
         'Terror',
         'Bélica',
         'Suspense',
-        'Histórico'
+        'Ciencia Ficción'
 
     ];
 
-    # Ordenamos el array
-    asort($generos);
+    // # Ordenamos el array
+    // asort($generos);
     # Retornamos
     return $generos;
 }
@@ -48,35 +48,35 @@ function getPeliculas()
     $tabla = [
         [
             'id' => 1,
-            'titulo' => 'Amélie',
-            'pais' => 53, // Francia
-            'director' => 'Jean-Pierre Jeunet',
+            'titulo' => 'Primos',
+            'pais' => 58, // España
+            'director' => 'Daniel Sánchez Arévalo',
             'generos' => [1, 2, 4], // Comedia, Romance, Aventura
-            'año' => 2001
+            'año' => 2011
         ],
         [
             'id' => 2,
             'titulo' => 'La vida de los otros',
             'pais' => 2, // Alemania
             'director' => 'Florian Henckel von Donnersmarck',
-            'generos' => [0, 3], // Drama, Ciencia Ficción
+            'generos' => [3, 5], 
             'año' => 2006
         ],
         [
             'id' => 3,
-            'titulo' => 'Cinema Paradiso',
-            'pais' => 86, // Italia
-            'director' => 'Giuseppe Tornatore',
-            'generos' => [0, 2], // Drama, Romance
-            'año' => 1988
+            'titulo' => 'Teza',
+            'pais' => 61, // Etiopía
+            'director' => 'Haile Gerima',
+            'generos' => [2, 3], 
+            'año' => 2008
         ],
         [
             'id' => 4,
-            'titulo' => 'El quinto elemento',
-            'pais' => 53, // Francia
-            'director' => 'Luc Besson',
-            'generos' => [3, 4], // Ciencia Ficción, Aventura
-            'año' => 1997
+            'titulo' => 'Los Cronocrímenes',
+            'pais' => 58, // España
+            'director' => 'Luc Nacho Vigalondo',
+            'generos' => [0, 1, 9], // Ciencia Ficción, Aventura, Acción
+            'año' => 2007
         ]
     ];
 
@@ -88,10 +88,24 @@ function getPeliculas()
 }
 
 # Devuelve el array de géneros que le corresponden a una película
-function mostrarGeneros($generos, $indiceGeneros)
+function mostrarGeneros($generos, $indiceGeneros=[])
 {
-    $aux = [];
-    return $aux;
+  /**
+   * Tomamos como entrada el array de generos y el índice de los generos 
+   */
+  // declaramos un array auxiliar para almacenar los valores
+  $aux = [];
+  // recorremos el array de indices
+  foreach($indiceGeneros as $indice){
+    // llenamos el array nuevo con los valores de cada indice que coincida con el array generos
+    $aux[] = $generos[$indice];
+  }
+  // ordenamos el nuevo array 
+  asort($aux);
+  // lo convertimos a string
+  $categoriasString = implode(', ', $aux); // Indicamos separador
+
+  return $categoriasString;
 }
 
 

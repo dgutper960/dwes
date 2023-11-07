@@ -34,14 +34,15 @@
       <tbody>
         <!-- Mostramos los detalles de las películas -->
         <tr>
-            <?php foreach ($peliculas as $key => $value): ?>
-              <th> <!-- muestra los valores repetidos -->
-                <?= ucfirst($key) ?>
-              </th>
-            <?php endforeach; ?>      
-          </tr>
-          <!-- Muestro los datos de la película -->
-          <?php foreach($peliculas as $pelicula): ?>
+          <?php foreach (array_keys($peliculas[0]) as $key): ?> <!-- Iteramos solo sobre un índice -->
+            <!-- usamos la funcion array_keys() busca claves en un array -->
+            <th>
+              <?= ucfirst($key); ?>
+            </th> <!-- usamos la funcion ucfirst() Pone la primera latra en mayúscula -->
+          <?php endforeach; ?>
+        </tr>
+        <!-- Muestro los datos de la película -->
+        <?php foreach ($peliculas as $pelicula): ?>
           <tr>
             <td>
               <?= $pelicula['id'] ?>
@@ -55,7 +56,10 @@
             <td>
               <?= $pelicula['director'] ?>
             </td>
-             <!-- Crear funcion para mostrar generos -->
+            <!-- Crear funcion para mostrar generos -->
+            <td>
+              <?= mostrarGeneros($generos, $pelicula['generos']); ?> <!--$pelicula['generos'] retorna un array -->
+            </td>
             <td>
               <?= $pelicula['año'] ?>
             </td>
