@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Cabecera -->
         <?php include 'views/partials/header.html' ?>
-        <legend>Proyecto Calculadora</legend>
+        <legend>Introduzca los Valores</legend>
 
         <!-- Formulario Nuevo Artículo -->
         <form action="calcular.php" method="POST">
