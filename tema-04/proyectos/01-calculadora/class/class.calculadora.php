@@ -9,11 +9,16 @@ class Calculadora
 	private $resultado;
 
 	# Constructor con valores a cero
-	public function __construct()
-	{
+	public function __construct(
 		/** Requerimiento inicializar valores */
-		$valor1 = 0;
-		$valor2 = 0;
+		$valor1 = 0,
+		$valor2 = 0,
+		$operacion = null,
+		$resultado = 0
+
+	)
+	{
+
 		$this->valor1 = 0;
 		$this->valor2 = 0;
 		$this->operacion = null;
