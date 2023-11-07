@@ -10,37 +10,32 @@
     <div class="container">
         <!-- Cabecera -->
         <?php include 'views/partials/header.html' ?>
-        <legend>Proyecto Calculadora</legend>
+        <legend>Resultado <?= $operacion ?> <?= $valor1 ?> y <?= $valor2 ?>  </legend>
 
         <!-- Formulario Nuevo Artículo -->
         <form action="calcular.php" method="POST">
             <!-- valor 1 -->
             <div class="mb-3">
                 <label class="form-label">Valor 1</label>
-                <input type="number" class="form-control" name="valor1" step="0.01" placeholder="0">
+                <input type="number" class="form-control" value="<?= $calcular->getValor1() ?>" disabled disabled>
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
             <!-- valor 2 -->
             <div class="mb-3">
                 <label class="form-label">Valor 2</label>
-                <input type="number" class="form-control" name="valor2" step="0.01" placeholder="0">
+                <input type="number" class="form-control" value="<?= $calcular->getValor2() ?>" disabled disabled>
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
 
             <!-- resultado -->
             <div class="mb-3">
                 <label class="form-label">Resultado</label>
-                <input type="number" class="form-control" name="resultado" step="0.01" placeholder="0" disabled>
+                <input type="number" class="form-control" value="<?= $calcular->getResultado() ?>" disabled>
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
 
             <!-- Botones de acción -->
-            <button type="reset" class="btn btn-danger">Borrar</button>
-            <button type="submit" class="btn btn-primary" name="operacion" value="sumar">Sumar</button>
-            <button type="submit" class="btn btn-primary" name="operacion" value="restar">Restar</button>
-            <button type="submit" class="btn btn-primary" name="operacion" value="multiplicar">Multiplicar</button>
-            <button type="submit" class="btn btn-primary" name="operacion" value="dividir">Dividir</button>
-            <button type="submit" class="btn btn-primary" name="operacion" value="potencia">Potencia</button>
+            <a href="index.php" class="btn btn-danger">Volver</a>
     </div>
 
     </form>

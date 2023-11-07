@@ -1,7 +1,7 @@
 <?php
 
 #cargamos la clase
-include("class.class.calculadora.php");
+include("class/class.calculadora.php");
 
 
 # cargamos el modelo

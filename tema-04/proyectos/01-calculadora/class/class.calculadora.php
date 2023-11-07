@@ -19,10 +19,10 @@ class Calculadora
 	)
 	{
 
-		$this->valor1 = 0;
-		$this->valor2 = 0;
-		$this->operacion = null;
-		$this->resultado = null;
+		$this->valor1 = $valor1;
+		$this->valor2 = $valor2;
+		$this->operacion = $operacion;
+		$this->resultado = $resultado;
 	}
 
 	# Atributos privados requieren de getters y setters para ser vistos y manipulados
