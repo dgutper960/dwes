@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Cabecera -->
         <?php include 'views/partials/header.html' ?>
-        <legend>Resultado <?= $operacion ?> <?= $valor1 ?> y <?= $valor2 ?>  </legend>
+        <legend>Resultado de <?= $operacion ?> <?= $valor1 ?> y <?= $valor2 ?>  </legend>
 
         <!-- Formulario Nuevo Artículo -->
         <form action="calcular.php" method="POST">

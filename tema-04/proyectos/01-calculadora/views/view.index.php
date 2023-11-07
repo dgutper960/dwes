@@ -27,12 +27,12 @@
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
 
-            <!-- resultado -->
+            <!-- resultado
             <div class="mb-3">
                 <label class="form-label">Resultado</label>
                 <input type="number" class="form-control" name="resultado" step="0.01" placeholder="0" disabled>
-                <!-- <div class="form-text">Introduzca identificador del libro</div> -->
-            </div>
+
+            </div> -->
 
             <!-- Botones de acción -->
             <button type="reset" class="btn btn-danger">Borrar</button>
