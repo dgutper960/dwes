@@ -109,4 +109,14 @@ function mostrarGeneros($generos, $indiceGeneros=[])
 }
 
 
+function nuevoId($tabla){
+    // almacenamos los valores de la columna id
+    $ids = array_column($tabla, 'id');
+    // retornamos el mayor de los valores
+    $mayorId = max($ids)+1; //sumamos 1 al mayor
+    
+    return $mayorId; // retornamos el mayor más 1 
+    
+}
+
 ?>
