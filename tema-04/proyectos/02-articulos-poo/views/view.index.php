@@ -32,41 +32,41 @@
             </thead>
             <!-- Mostraremos el contenido de cada artículo -->
             <tbody>
-                <?php foreach ($articulos as $articulo): ?>
+                <?php foreach ($articulos->getTabla() as $indice => $articulo): ?>
                     <tr>
                         <th>
-                            <?= $articulo['id'] ?>
+                            <?= $articulo->getId() ?>
                         </th>
                         <td>
-                            <?= $articulo['descripcion'] ?>
+                            <?= $articulo->getDescripcion() ?>
                         </td>
                         <td>
-                            <?= $articulo['modelo'] ?>
+                            <?= $articulo->getModelo() ?>
                         </td>
                         <td>
-                            <?= $marcas[$articulo['marca']] ?>
+                            <?= $marcas[$articulo->getMarca()] ?>
                         </td>
-                        <td>
-                            <?= implode(', ', mostrarCategorias($categorias, $articulo['categorias'])) ?>
+                        <td> <!-- metodo estatico mostrar categoría -->
+                            <?= implode(', ', ArrayArticulos::mostrarCategorias($categorias, $articulo->getCategorias())) ?>
                         </td>
                         <td class="text-end">
-                            <?= $articulo['unidades'] ?>
+                            <?= $articulo->getUnidades(); ?>
                         </td>
                         <td class="text-end">
-                            <?= number_format($articulo['precio'], 2, ',', '.') ?> €
+                            <?= number_format($articulo->getPrecio(), 2, ',', '.') ?> €
                         </td>
                         <td>
                             <!-- Botón eliminar GET id -> eliminar.php  -->
-                            <a href="eliminar.php?id=<?= $articulo['id'] ?>" title="Eliminar">
+                            <a href="eliminar.php?id=<?= $indice?>" title="Eliminar">
                                 <i class="bi bi-trash-fill"></i>
                             </a>
 
                             <!-- Botón editar GET id -> editar.php -->
-                            <a href="editar.php?id=<?= $articulo['id'] ?>" title="Editar">
+                            <a href="editar.php?id=<?= $indice ?>" title="Editar">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
                             <!-- Botón mostrar GET id -> mostrar.php -->
-                            <a href="mostrar.php?id=<?= $articulo['id'] ?>" title="Mostrar">
+                            <a href="mostrar.php?id=<?= $indice ?>" title="Mostrar">
                                 <i class="bi bi-tv"></i>
                             </a>
                         </td>
@@ -79,7 +79,7 @@
                 <tr>
                     <!-- muestra el n articulos (colspan=ocupa n columnas) -->
                     <td colspan="7"><b>Nº de Articulos=
-                            <?= count($articulos) ?>
+                            <?= count($articulos->getTabla()) ?>
                         </b></td>
                 </tr>
             </tfoot>

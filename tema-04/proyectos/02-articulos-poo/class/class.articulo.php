@@ -21,7 +21,7 @@ class Articulo
         $descripcion = null,
         $modelo = null,
         $marca = null,
-        $categorias = null,
+        $categorias = [], // sabemos que debe ser un array
         $unidades = null,
         $precio = null
 

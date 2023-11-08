@@ -1,10 +1,20 @@
 <?php
     /*
         Modelo: modelIndex
-        Descripcion: genera un array con datos de los artículos
+        Descripcion: genera un array de objetos de artículos
     */
-    setlocale(LC_MONETARY,"es_ES"); // Indicamos 
-    $articulos = generar_tabla();
-    $categorias = generar_tabla_categorías();
-    $marcas = generar_tabla_marcas();
+    setlocale(LC_MONETARY,"es_ES"); // Indicamos
+
+    # Cargamos los datos a partir de los métodos estáticos dde la clase
+    $categorias = ArrayArticulos::getCategorias();
+    $marcas = ArrayArticulos::getMarcas();
+
+    # Creamos un objeto de la clase ArrayArticulos
+    $articulos = new ArrayArticulos();
+
+    # Cargo los datos
+    $articulos->getDatos();
+
+
+
 ?>
