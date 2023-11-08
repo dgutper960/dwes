@@ -21,7 +21,7 @@
         $pais = $_POST['pais'];
         $director = $_POST['director'];
         $year = $_POST['año'];
-        $generos = $_POST['generos'];
+        $generos_ = $_POST['generos'];
 
         # Almacenamos los valores en un array
         $pelicula = [
@@ -31,7 +31,7 @@
             'pais'=> $pais,
             'director'=> $director,
             'año'=> $year,
-            'generos'=> $generos
+            'generos'=> $generos_
 
         ];
 

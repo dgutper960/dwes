@@ -63,7 +63,7 @@
           <!-- Generar dinámicamente lista checkbox de géneros -->
           <?php foreach($generos as $key => $value):?> <!-- recorremos el array de categorías -->
             <div class="form-chek"> <!-- Almacenamos un array con los valores seleccionados -->
-              <input type="checkbox" value="<?= $key ?>" name="generos">
+              <input type="checkbox" value="<?= $key ?>" name="generos[]">
               <label class="form-check-label" for="">
                 <?= $value ?> <!-- Valor de la casilla a seleccionar -->
               </label>
