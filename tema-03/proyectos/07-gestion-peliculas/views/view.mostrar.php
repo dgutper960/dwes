@@ -20,7 +20,7 @@
 
     <form action="create.php" method="POST"> <!-- envia datos al controlador create.php método POST -->
       <!-- Campo ID Oculto-->
-      <div class="mb3" hidden>
+      <div class="mb3">
         <label class="form-label">Id</label>
         <input name="id" type="text" class="form-control" value="<?= $pelicula['id'] ?>" disabled>
       </div>
@@ -32,17 +32,9 @@
       </div>
 
       <!-- País Select -->
-      <div class="mb-3">
-        <label for="pais" class="form-label">País</label>
-        <select class="form-select" aria-label="Default select example" name="pais" disabled>
-          <option selected disabled>Seleccione País</option>
-          <!-- Generar dinámicamente select  -->
-          <?php foreach ($paises as $key => $value): ?> <!-- recorremos el array de paises para generar options dinamicas -->
-            <option value="<?= $key ?>"> <!-- El valor capturado va a corresponder con el indice del pais correspondiente -->
-              <?= $value ?>
-            </option>
-          <?php endforeach; ?>
-        </select>
+      <div class="mb3">
+        <label class="form-label">País</label>
+        <input name="titulo" type="text" class="form-control" value="<?= $paises[$pelicula['pais']] ?>" disabled>
       </div>
 
       <!-- Campo director -->
@@ -58,19 +50,9 @@
       </div>
 
       <!-- Categorías -->
-      <div class="mb-3">
-        <label class="form-label">Géneros</label>
-        <div class="form-control">
-          <!-- Generar dinámicamente lista checkbox de géneros -->
-          <?php foreach($generos as $key => $value):?> <!-- recorremos el array de categorías -->
-            <div class="form-chek"> <!-- Almacenamos un array con los valores seleccionados -->
-              <input type="checkbox" value="<?= $key ?>" name="generos[]"  disabled>
-              <label class="form-check-label" for="">
-                <?= $value ?> <!-- Valor de la casilla a seleccionar -->
-              </label>
-            </div>
-            <?php endforeach; ?>
-        </div>
+      <div class="mb3">
+        <label class="form-label">Categorías</label>
+        <input name="director" type="text" class="form-control" value="<?= mostrarGeneros($generos, $pelicula['generos']); ?>" disabled>
       </div>
 
       <br>
