@@ -119,4 +119,10 @@ function nuevoId($tabla){
     
 }
 
+# Funcion para buscar en tabla
+// Buscar en tabla
+function buscar($tabla = [], $columna, $valor){
+    $columnaValores = array_column($tabla, $columna);
+    return array_search($valor, $columnaValores, false);
+}
 ?>
