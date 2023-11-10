@@ -20,6 +20,12 @@
         <form action="create.php" method="POST">
             <!-- descripción -->
             <div class="mb-3">
+                <label class="form-label">id</label>
+                <input type="number" class="form-control" name="id">
+                <!-- <div class="form-text">Introduzca identificador del libro</div> -->
+            </div>
+            <!-- descripción -->
+            <div class="mb-3">
                 <label class="form-label">Descripción</label>
                 <input type="text" class="form-control" name="descripcion">
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
@@ -83,7 +89,7 @@
         <br>
         <br>
         <!-- Pie de documento -->
-    <?php include 'partials/footer.html' ?>
+        <?php include 'partials/footer.html' ?>
 
     </div>
 

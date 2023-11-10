@@ -3,10 +3,10 @@
     /*
 
         Controlador: nuevo.php
-        Descripción: mostrar un formulario que permita añadir nuevo libro
+        Descripción: mostrar un formulario que permita añadir nuevo articulo
     */
 
-    # Librería
+    # Librería -> Cargamos las clases
     include 'class/class.articulo.php';
     include 'class/class.arrayArticulos.php';
 

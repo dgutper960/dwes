@@ -174,6 +174,11 @@ class ArrayArticulos
         return $tabla;
     }
 
+    public function create(Articulo $data){
+        // añadismo el nuevo elemento en la tabla
+        $this->tabla[] = $data;
+    } 
+
     /** 
      * podemos declararlo como estatico porque no modifica ningun atributo de la clase  
      * */
