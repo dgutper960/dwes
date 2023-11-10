@@ -7,8 +7,9 @@
         del libro seleccionado
     */
 
-    # Librería
-    include 'libs/crud_funciones.php';
+    # Librería -> Cargamos las clases
+    include 'class/class.articulo.php';
+    include 'class/class.arrayArticulos.php';
 
     # Model
     include 'models/model.editar.php';

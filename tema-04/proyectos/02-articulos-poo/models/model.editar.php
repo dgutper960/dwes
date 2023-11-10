@@ -6,22 +6,15 @@
         Método GET:
             - id del articulo que quiero editar
     */
-    // Cargamos los valores
-    $articulos = generar_tabla();
-    $categorias = generar_tabla_categorías();
-    $marcas = generar_tabla_marcas();
+    setlocale(LC_MONETARY,"es_ES"); // Indicamos
 
-    // Extraemos el id
-    $idArticulo = $_GET['id'];
+    # Cargamos los datos a partir de los métodos estáticos de la clase
+    $categorias = ArrayArticulos::getCategorias(); // getCategorias -> Método estático
+    $marcas = ArrayArticulos::getMarcas(); // getMarcas -> Método estático
 
-    // cargamos el array de ese artículo
-    $indiceArticulo = buscar($articulos,'id',$idArticulo);
-    if ($indiceArticulo !==false){
-        // Obtengo el array del libro
-        $articulo = $articulos[$indiceArticulo];
-    } else{
-        echo 'ERROR: Artículo no encontrado';
-        exit();
-    }
+    # Cargamos los datos
+    $articulos = new ArrayArticulos();
+
+    $articulos->getDatos();
 
 ?>
