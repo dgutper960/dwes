@@ -174,9 +174,19 @@ class ArrayArticulos
         return $tabla;
     }
 
+       /** Metodo create() */
+
     public function create(Articulo $data){
         // añadismo el nuevo elemento en la tabla
         $this->tabla[] = $data;
+    } 
+
+    /** Metodo delete() */
+    public function delete($indice){
+        // eliminamos el objeto correspondiente a ese id
+        unset($this->tabla[$indice]);
+        // ordenamos la tabla -> Al ser un array hay que eliminar los huecos
+        array_values($this->tabla);
     } 
 
     /** 

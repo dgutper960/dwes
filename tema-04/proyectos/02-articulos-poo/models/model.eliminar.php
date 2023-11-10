@@ -1,21 +1,31 @@
 <?php
-    /*
-        Modelo: modelEliminar.php
-        Descripción: eliminar un elemento de la tabla
+/*
+    Modelo: model.eliminar.php
+    Descripción: eliminar un elemento de la tabla
 
-        Método GET:
-            - id del artículo que quiero eliminar
-    */
+    Método GET:
+        - id del artículo que quiero eliminar
+*/
+setlocale(LC_MONETARY, "es_ES"); // Indicamos
 
-    // cargamos las tablas
-    $articulos = generar_tabla();
-    $categorias = generar_tabla_categorías();
-    $marcas = generar_tabla_marcas();
+# Cargamos los datos a partir de los métodos estáticos de la clase
+$categorias = ArrayArticulos::getCategorias(); // getCategorias -> Método estático
+$marcas = ArrayArticulos::getMarcas(); // getMarcas -> Método estático
 
-    // Extraemos el id a través del método get
-    $id = $_GET['id'];
+# Creamos un objeto de articulos
+$articulos = new ArrayArticulos;
+
+# Cargo los datos
+$articulos->getDatos();
+
+// Extraemos el id a través del método get
+$id = $_GET['id'];
+
+# Accedemos al método delete de la clase
+$articulos->delete($id);
+
+# Generamos una notificación
+$notificacion = 'Articulo eliminado con éxito';
 
 
-    // invocamos a la función eliminar
-    $articulos = eliminar($articulos,$id);
 ?>
