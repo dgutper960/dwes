@@ -29,16 +29,20 @@ $articulo = new Articulo();
 # Cargo los datos
 $articulos->getDatos();
 
+$indice = $_GET['id'];
+$articulo = $articulos->buscar($indice);
+
 // Recogemos los datos del formulario
-$id = $_POST['id'];
+
 $descripcion = $_POST['descripcion'];
 $modelo = $_POST['modelo'];
-$marca = $_POST['marcas'];
+$marca = $_POST['marca'];
 $categoriasArt = $_POST['categorias'];
 $unidades = $_POST['unidades'];
 $precio = $_POST['precio'];
 
 # Editamos los valores del articulo con los valores
+
 $articulo->setDescripcion($descripcion);
 $articulo->setModelo($modelo);
 $articulo->setMarca($marca);
@@ -47,7 +51,7 @@ $articulo->setUnidades($unidades);
 $articulo->setPrecio($precio);
 
 // Añadimos el artículo usando la funcion create de ArrayArticulos
-$articulos->update($id, $articulo);
+$articulos->update($indice, $articulo);
 
 # Generamos una notificación
 $notificacion = 'Articulo modificado con éxito';

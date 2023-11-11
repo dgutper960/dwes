@@ -208,10 +208,9 @@ class ArrayArticulos
 
     }
 
-    public function buscar($columna, $valor){
-        $columnaValores = array_column($this->tabla, $columna);
-        return array_search($valor, $columnaValores, false);
-        
+    public function buscar($indice){
+        // retornamos los valores de ese indice en la tabla de la clase
+        return $this->tabla[$indice]; 
     }
 
 
