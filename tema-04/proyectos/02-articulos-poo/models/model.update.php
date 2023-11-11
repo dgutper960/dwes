@@ -14,35 +14,41 @@
         Método GET
             - id
     */
-    // Cargamos las tablas
-    $articulos = generar_tabla();
-    $categorias = generar_tabla_categorías();
-    $marcas = generar_tabla_marcas();
+// Carga de datos
+setlocale(LC_MONETARY, "es_ES"); // Indicamos
 
-    // Con el metodo post recogeremos los datos de los campos
-    $descripcion = $_POST['descripcion'];
-    $modelo = $_POST['modelo'];
-    $marca = $_POST['marca'];
-    $categoria = $_POST['categorias'];
-    $unidades = $_POST['unidades'];
-    $precio = $_POST['precio'];
+# Cargamos los datos a partir de los métodos estáticos de la clase
+$categorias = ArrayArticulos::getCategorias(); // getCategorias -> Método estático
+$marcas = ArrayArticulos::getMarcas(); // getMarcas -> Método estático
 
-    // Obtendremos el id del artículo a actualizar a través de una url dinámica (método GET)
-    $idArticulo = $_GET['id'];
+# Creamos un objeto de la clase ArrayArticulos
+$articulos = new ArrayArticulos();
+# Creamos un objeto de articulo
+$articulo = new Articulo();
 
-    // Buscaremos dicho artículo
-    $indiceActualizar = buscar($articulos,'id',$idArticulo);
+# Cargo los datos
+$articulos->getDatos();
 
-    // Con los datos obtenidos del metodo POST, crearemos un array que contendrá los valores actualizados
-    $articulo =  [
-        'id' => $idArticulo,
-        'descripcion' => $descripcion,
-        'modelo' => $modelo,
-        'marca'=> $marca,
-        'categorias' => $categoria,
-        'unidades' => $unidades,
-        'precio' => $precio
-    ];
-    // Añadimos el articulo actualizado a la tabla
-    $articulos=actualizar($articulos,$indiceActualizar,$articulo);
+// Recogemos los datos del formulario
+$id = $_POST['id'];
+$descripcion = $_POST['descripcion'];
+$modelo = $_POST['modelo'];
+$marca = $_POST['marcas'];
+$categoriasArt = $_POST['categorias'];
+$unidades = $_POST['unidades'];
+$precio = $_POST['precio'];
+
+# Editamos los valores del articulo con los valores
+$articulo->setDescripcion($descripcion);
+$articulo->setModelo($modelo);
+$articulo->setMarca($marca);
+$articulo->setCategorias($categoriasArt);
+$articulo->setUnidades($unidades);
+$articulo->setPrecio($precio);
+
+// Añadimos el artículo usando la funcion create de ArrayArticulos
+$articulos->update($id, $articulo);
+
+# Generamos una notificación
+$notificacion = 'Articulo modificado con éxito';
 ?>

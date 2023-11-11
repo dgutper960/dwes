@@ -17,4 +17,10 @@
 
     $articulos->getDatos();
 
+    # Debemos buscar en la tabla el id del artículo a editar
+    $idEditar = $_GET['id'];
+
+    # Usamos la funcion buscar de ArrayArticulos
+    $articulo = $articulos->buscar('id', $idEditar);
+
 ?>

@@ -176,10 +176,15 @@ class ArrayArticulos
 
        /** Metodo create() */
 
-    public function create(Articulo $data){
-        // añadismo el nuevo elemento en la tabla
+    public function create(Articulo $data){ /** toma como entrada un array del tipo Articulos */
+        // añadimos el nuevo elemento en la tabla
         $this->tabla[] = $data;
     } 
+
+    public function update($indice, $articulo) {
+        // toma un indice y modifica los valores en la tabla de ese indice
+        $this->tabla[$indice] = $articulo;
+    }
 
     /** Metodo delete() */
     public function delete($indice){
@@ -201,6 +206,12 @@ class ArrayArticulos
         asort($arrayCategorias);
         return $arrayCategorias;
 
+    }
+
+    public function buscar($columna, $valor){
+        $columnaValores = array_column($this->tabla, $columna);
+        return array_search($valor, $columnaValores, false);
+        
     }
 
 
