@@ -213,6 +213,21 @@ class ArrayArticulos
         return $this->tabla[$indice]; 
     }
 
+    
+    public function ordenar($criterio) {
+        if (!array_key_exists($criterio, $this->tabla)) {
+            echo 'ERROR: Criterio de ordenación no existe';
+            return $this->tabla; // Devuelve la tabla original sin ordenar
+        } 
+    
+        $aux = array_column($this->tabla, $criterio);
+    
+        array_multisort($aux, SORT_ASC, $this->tabla);
+    
+        return $this->tabla;
+    }
+    
+
 
 
 }
