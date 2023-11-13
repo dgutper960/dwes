@@ -30,9 +30,13 @@ $articulo = new Articulo();
 $articulos->getDatos();
 
 $indice = $_GET['id'];
-$articulo = $articulos->buscar($indice);
+$articulo = $articulos->read($indice);
 
 // Recogemos los datos del formulario
+
+/**
+ * FALTA EL ID
+ */
 
 $descripcion = $_POST['descripcion'];
 $modelo = $_POST['modelo'];
@@ -41,7 +45,10 @@ $categoriasArt = $_POST['categorias'];
 $unidades = $_POST['unidades'];
 $precio = $_POST['precio'];
 
-# Editamos los valores del articulo con los valores
+# Editamos los valores del articulo con los valores 
+
+
+/*** SE DEBE MODIFICAR CON LOS PARAMETROS POR CONSTRUCTOR */
 
 $articulo->setDescripcion($descripcion);
 $articulo->setModelo($modelo);

@@ -181,9 +181,9 @@ class ArrayArticulos
         $this->tabla[] = $data;
     } 
 
-    public function update($indice, $articulo) {
+    public function update(Articulo $data, $indice) { /** ES IMPORTANTE QUE SE RECIBA UN OBJETO ARTICULO */
         // toma un indice y modifica los valores en la tabla de ese indice
-        $this->tabla[$indice] = $articulo;
+        $this->tabla[$indice] = $data; /** MACHACAMOS EL ARTICULO ENTERO */
     }
 
     /** Metodo delete() */
@@ -208,23 +208,18 @@ class ArrayArticulos
 
     }
 
-    public function buscar($indice){
+    public function read($indice){
         // retornamos los valores de ese indice en la tabla de la clase
         return $this->tabla[$indice]; 
     }
 
     
-    public function ordenar($criterio) {
-        if (!array_key_exists($criterio, $this->tabla)) {
-            echo 'ERROR: Criterio de ordenación no existe';
-            return $this->tabla; // Devuelve la tabla original sin ordenar
-        } 
-    
-        $aux = array_column($this->tabla, $criterio);
-    
-        array_multisort($aux, SORT_ASC, $this->tabla);
-    
-        return $this->tabla;
+    /**
+     * La idea es convertir el objeto en un array indexado
+     */
+    public function order(){
+
+
     }
     
 

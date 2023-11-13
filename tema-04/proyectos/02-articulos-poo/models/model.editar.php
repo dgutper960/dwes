@@ -21,6 +21,6 @@
     $idEditar = $_GET['id'];
 
     # Usamos la funcion buscar de ArrayArticulos
-    $articulo = $articulos->buscar($idEditar);
+    $articulo = $articulos->read($idEditar);
 
 ?>
