@@ -24,11 +24,11 @@
             <thead>
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Categorias</th>
-                    <th scope="col" class="text-end">Unidades</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Fecha Nacimiento</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col" class="text-end">Asignaturas</th>
                     <th scope="col" class="text-end">Precio</th>
                     <th scope="col">Acciones</th>
                 </tr>

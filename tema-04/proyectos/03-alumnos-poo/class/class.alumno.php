@@ -3,7 +3,7 @@
 /**
  * Clase Articulo
  */
-class Articulo
+class Alumno
 {
     // atributos
     public $id;
@@ -38,6 +38,24 @@ class Articulo
         $this->asignaturas = $asignaturas;
     }
 
+    /**
+     * Metodo para extraer la edad
+     */
+    public function getEdad(){
+
+        // creamos un objeto con la fecha de nacimiento
+        $fecha_nac = new DateTime($this->fecha_nacimiento);
+
+        // creamos un objeto con la fecha actual
+        $fecha_actual = new DateTime();
+
+        $edad = $fecha_actual->diff($fecha_nac)->y;
+
+        return $edad;
+
+
+
+    }
     
 
 }

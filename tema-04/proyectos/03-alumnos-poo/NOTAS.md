@@ -4,3 +4,10 @@
 
 ##  No respetamos la propiedad de encapsulamiento
 
+## Funcion de alumno getEdad()
+
+# Unica propiedad de ArrayAlumnos 
+- private tabla = Array Alumnos
+
+
+
