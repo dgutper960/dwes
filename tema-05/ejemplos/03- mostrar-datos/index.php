@@ -6,6 +6,8 @@
  * -> ususario root
  * -> base de datos fp
  * 
+ * -> Obtenemos un array asociativo
+ * 
  */
 
  $servidor = 'localhost'; /** en su defecto podemos poner la ip del servidor */
@@ -13,7 +15,7 @@
  $pass = '';
  $bbdd = 'fp';
 
- # Para establecer la conexión
+ # Para establecer la conexión usamos un objeto mysqli
  $conexion = new mysqli($servidor, $user, $pass, $bbdd);
 
  /**
@@ -37,14 +39,21 @@
 
   $sql = 'select * from alumnos order by id';
 
-  # guardamos el resultado usando el método query de la clase
-  $result = $conexion->query($sql);
+  # guardamos el resultado usando el método query de la clase mysqli
+  $result = $conexion->query($sql); /** esto retorna un objeto de la clase mysqli_result (con sus propiedades) */
 
-  /**
-   * EN LA DOCUMENTACIÓN DEBEMOS TENER EN CUENTA LAS PROPIEDADES Y LOS MÉTODOS
-   */
+  # vemos unas de las propiedades de objeto
+  echo '<br>';
+  echo 'Numero de registros: '.$result->num_rows;
+  echo '<br>';
+  echo 'Numero de registros: '.$result->field_count;
+  echo '<br>';
 
+  # Creamos una variable para almacenar alumnos
+  // retorna un array de tipo asuciativo
+  $alumnos = $result->fetch_all(MYSQLI_ASSOC); // constante que indica la forma en la que extrae los datos
 
+  print_r($alumnos);
 
 
 ?>
