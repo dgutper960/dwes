@@ -26,38 +26,35 @@
                     <th scope="col">id</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellidos</th>
-                    <th scope="col">Fecha Nacimiento</th>
+                    <th scope="col">Edad</th>
                     <th scope="col">Curso</th>
                     <th scope="col" class="text-end">Asignaturas</th>
-                    <th scope="col" class="text-end">Precio</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <!-- Mostraremos el contenido de cada artículo -->
             <tbody>
-                <?php foreach ($articulos->getTabla() as $indice => $articulo): ?>
+                <?php foreach ($alumnos->getTabla() as $indice => $alumno): ?>
                     <tr>
                         <th>
-                            <?= $articulo->getId() ?>
+                            <?= $alumno->$id ?>
                         </th>
                         <td>
-                            <?= $articulo->getDescripcion() ?>
+                            <?= $alumno->$nombre ?>
                         </td>
                         <td>
-                            <?= $articulo->getModelo() ?>
+                            <?= $alumno->$apellidos ?>
                         </td>
                         <td>
-                            <?= $marcas[$articulo->getMarca()] ?>
+                            <?= $alumno->getEdad()?>
+                        </td>
+                        <td>
+                            <?= $cursos[$alumno->$curso] ?>
                         </td>
                         <td> <!-- metodo estatico mostrar categoría -->
-                            <?= implode(', ', ArrayArticulos::mostrarCategorias($categorias, $articulo->getCategorias())) ?>
+                            <?= implode(', ', ArrayAlumnos::mostrarAsignaturas($asignaturas, $alumno->$asignaturas)) ?>
                         </td>
-                        <td class="text-end">
-                            <?= $articulo->getUnidades(); ?>
-                        </td>
-                        <td class="text-end">
-                            <?= number_format($articulo->getPrecio(), 2, ',', '.') ?> €
-                        </td>
+
                         <td>
                             <!-- Botón eliminar GET id -> eliminar.php  -->
                             <a href="eliminar.php?id=<?= $indice?>" title="Eliminar">
@@ -81,8 +78,8 @@
             <tfoot>
                 <tr>
                     <!-- muestra el n articulos (colspan=ocupa n columnas) -->
-                    <td colspan="7"><b>Nº de Articulos=
-                            <?= count($articulos->getTabla()) ?>
+                    <td colspan="7"><b>Nº de Alumnos =
+                            <?= count($alumnos->getTabla()) ?>
                         </b></td>
                 </tr>
             </tfoot>

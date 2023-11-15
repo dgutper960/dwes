@@ -29,13 +29,13 @@ class Alumno
         $asignaturas = []
 
     ) {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->apellidos = $apellidos;
+        $this->$id = $id;
+        $this->$nombre = $nombre;
+        $this->$apellidos = $apellidos;
         $this->$email = $email;
-        $this->fecha_nacimiento = $fecha_nacimiento;
-        $this->curso = $curso;
-        $this->asignaturas = $asignaturas;
+        $this->$fecha_nacimiento = $fecha_nacimiento;
+        $this->$curso = $curso;
+        $this->$asignaturas = $asignaturas;
     }
 
     /**
@@ -52,9 +52,7 @@ class Alumno
         $edad = $fecha_actual->diff($fecha_nac)->y;
 
         return $edad;
-
-
-
+        
     }
     
 
