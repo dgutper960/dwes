@@ -1,19 +1,15 @@
 <?php
     /*
-        Modelo: modelIndex
-        Descripcion: genera un array de objetos de artículos
+        Modelo: model.index.php
+        Descripcion: genera un array de objetos de alumnos
     */
     setlocale(LC_MONETARY,"es_ES"); // Indicamos
 
-    # Cargamos los datos a partir de los métodos estáticos de la clase
-    $asignaturas = ArrayAlumnos::getAsignaturas();
-    $cursos = ArrayAlumnos::getCursos();
+    # creamos objeto de a clase fp
+    $db = new Fp(); // hereda de conexion -> ejecuta el constructor que conecta con la base de datos
 
-    # Creamos un objeto de la clase ArrayArticulos
-    $alumnos = new ArrayAlumnos();
-   
-    # Cargo los datos
-    $alumnos->getDatos();
+    $alumnos = $db->getAlumnos();
+
     
 
 
