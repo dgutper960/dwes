@@ -37,22 +37,22 @@
                 <?php foreach ($alumnos->getTabla() as $indice => $alumno): ?>
                     <tr>
                         <th>
-                            <?= $alumno->$id ?>
+                            <?= $alumno->id ?>
                         </th>
                         <td>
-                            <?= $alumno->$nombre ?>
+                            <?= $alumno->nombre ?>
                         </td>
                         <td>
-                            <?= $alumno->$apellidos ?>
+                            <?= $alumno->apellidos ?>
                         </td>
                         <td>
                             <?= $alumno->getEdad()?>
                         </td>
                         <td>
-                            <?= $cursos[$alumno->$curso] ?>
+                            <?= $cursos[$alumno->curso] ?>
                         </td>
                         <td> <!-- metodo estatico mostrar categoría -->
-                            <?= implode(', ', ArrayAlumnos::mostrarAsignaturas($asignaturas, $alumno->$asignaturas)) ?>
+                            <?= implode(', ', ArrayAlumnos::mostrarAsignaturas($asignaturas, $alumno->asignaturas)) ?>
                         </td>
 
                         <td>
