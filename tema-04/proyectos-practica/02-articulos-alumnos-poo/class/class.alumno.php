@@ -43,18 +43,22 @@ class Alumno
 	/**
 	 * Metodo para calcular edad
 	 */
-	public function getEdad(){
-
+    public function getEdad(){
         // usamos el método estático de DateTime y le damos formato
         $fecha_nac = DateTime::createFromFormat('d/m/Y', $this->fecha_nac);
-        // creamos un objeto con la fecha actual
-        $fecha_actual = new DateTime();
-		// calculamos la diferencia entre fechas y lo retornamos en años
-        $edad = $fecha_actual->diff($fecha_nac)->y;
-
-        return $edad;
-        
+    
+        if ($fecha_nac instanceof DateTime) {
+            // creamos un objeto con la fecha actual
+            $fecha_actual = new DateTime();
+            // calculamos la diferencia entre fechas y lo retornamos en años
+            $edad = $fecha_actual->diff($fecha_nac)->y;
+    
+            return $edad;
+        } else {
+            return 0; // o maneja el error de alguna manera adecuada
+        }
     }
+    
 
 }
 

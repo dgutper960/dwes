@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Cabecera -->
         <?php include 'partials/header.html' ?>
-        <legend>Tabla con Artículos Informáticos</legend>
+        <legend>Tabla de alumnos</legend>
 
         <!-- Añadimos el menú -->
         <?php include 'partials/menu.php' ?>

@@ -3,12 +3,12 @@
     /*
 
         Controlador: nuevo.php
-        Descripción: mostrar un formulario que permita añadir nuevo articulo
+        Descripción: mostrar un formulario que permita añadir nuevo alumno
     */
 
-    # Librería -> Cargamos las clases
-    include 'class/class.articulo.php';
-    include 'class/class.arrayArticulos.php';
+    # Clases -> Cargamos las clases
+    include 'class/class.alumno.php';
+    include 'class/class.arrayAlumnos.php';
 
     # Model
     include 'models/model.nuevo.php';
