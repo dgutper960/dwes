@@ -47,7 +47,7 @@
             <!-- fecha_nac -->
             <div class="mb-3">
                 <label for="fecha" class="form-label">Fecha Nacimiento</label>
-                <input type="date" class="form-control" name="fecha" value="<?= $alumno->fecha_nac ?>" disabled>
+                <input type="text" class="form-control" name="fecha" value="<?= $alumno->fecha_nac ?>" disabled>
                 <!-- <div class="form-text">Introduzca título libro existente</div> -->
             </div>
 
