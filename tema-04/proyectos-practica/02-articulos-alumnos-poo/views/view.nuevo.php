@@ -16,7 +16,7 @@
         <?php include 'partials/menu.php' ?>
 
 
-        <!-- Formulario Nuevo Artículo -->
+        <!-- Formulario Nuevo Alumno -->
         <form action="create.php" method="POST">
             <!-- id -->
             <div class="mb-3">
