@@ -1,7 +1,7 @@
 <?php
 
 /*
-    class.arrayAlumnos.php
+    class.array.alumnos.php
     -> Simula la tabla alumnos
     -> Cada elemento es un objeto de alumno
 */
@@ -9,8 +9,10 @@
 class ArrayAlumnos
 {
 
+    // unico atributo con visibilidad privada
     private $tabla;
 
+    // debemos inicializar el array en el constructor
     public function __construct(
         $tabla = []
     ) {
@@ -19,7 +21,7 @@ class ArrayAlumnos
     }
 
     /**
-     * GETTERS Y SETTERS
+     * GETTERS Y SETTERS de tabla
      */
     /**
      * @return mixed
@@ -39,7 +41,9 @@ class ArrayAlumnos
         return $this;
     }
 
-    # Cogemos el 
+    /**
+     * METODOS ESTÁTICOS PARA CARGAR LOS DATOS EN LOS MODELOS
+     */
     static public function getAsignaturas()
     {
         $asignaturas = [
@@ -78,11 +82,12 @@ class ArrayAlumnos
     }
 
     /**
+     * Método para cargar el array de alumnos
      * Simula un acceso a una BBDD -> retorna un array de objetos
      */
     public function getDatos()
     {
-
+        # creamos la tabla
         $tabla = [];
         # creamos un nuevo objeto
         $alumno = new Alumno(
@@ -158,7 +163,6 @@ class ArrayAlumnos
             [6, 7, 8],
 
         );
-        #Añadir articulo a la tabla
         $this->tabla[] = $alumno;
 
         $alumno = new Alumno(
@@ -208,16 +212,19 @@ class ArrayAlumnos
         return $tabla;
     }
 
-    /** Metodo create() */
+    /* 
+        Metodo create() 
+        -> permite al usuario añadir un nuevo alumno a la tabla
+    */
 
     public function create(Alumno $data)
-    { /** toma como entrada un array del tipo Alumnos */
+    { /** toma como entrada un array del tipo Alumno */
         // añadimos el nuevo elemento en la tabla
         $this->tabla[] = $data;
     }
 
     public function update(Alumno $data, $indice)
-    { /** ES IMPORTANTE QUE SE RECIBA UN OBJETO ARTICULO */
+    { /** ES IMPORTANTE QUE SE RECIBA UN OBJETO ALUMNO */
         // toma un indice y modifica los valores en la tabla de ese indice
         $this->tabla[$indice] = $data; /** MACHACAMOS EL ARTICULO ENTERO */
     }
@@ -234,18 +241,27 @@ class ArrayAlumnos
     /** 
      * podemos declararlo como estatico porque no modifica ningun atributo de la clase  
      * */
-    static public function mostrarAsignaturas($asignaturas, $asignaturasAlumno)
-    {
-
+    static public function mostrarAsignaturas($asignaturas, $asignaturasAlumnos){
+        // declaramos nuevo array
         $arrayAsignaturas = [];
-        foreach ($asignaturasAlumno as $indice) {
+        // recorremos el array de asignaturas del alumno
+        foreach($asignaturasAlumnos as $indice){
+            // rellenamos el nuevo array con las asignaturas de indice coincidente
             $arrayAsignaturas[] = $asignaturas[$indice];
         }
+        // ordenamos el array y lo retornamos como string, separación por comas
         asort($arrayAsignaturas);
-        return $arrayAsignaturas;
+
+        
+        
+        return implode(', ', $arrayAsignaturas);
 
     }
 
+    /**
+     * Función read()
+     * -> retorna un alumno por valor de índice
+     */
     public function read($indice)
     {
         // retornamos los valores de ese indice en la tabla de la clase
@@ -253,14 +269,6 @@ class ArrayAlumnos
     }
 
 
-    /**
-     * La idea es convertir el objeto en un array indexado
-     */
-    public function order()
-    {
-
-
-    }
 
 }
 

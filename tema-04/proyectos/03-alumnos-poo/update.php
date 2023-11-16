@@ -8,15 +8,14 @@
 
     */
 
-    # Librería -> Cargamos las clases
-    include 'class/class.articulo.php';
-    include 'class/class.arrayArticulos.php';
+   # Clases -> Cargamos las clases
+   include 'class/class.alumno.php';
+   include 'class/class.arrayAlumnos.php';
 
-    # Model
-    include 'models/model.update.php';
+   # Model
+   include 'models/model.update.php';
 
-
-    # Vista
-    include 'views/view.index.php';
+   # Vista
+   include 'views/view.index.php';
 
 ?>

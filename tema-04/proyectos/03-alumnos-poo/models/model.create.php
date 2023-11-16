@@ -1,14 +1,16 @@
 <?php
 /*
-    Modelo: model.create.php
+    apellidos: model.create.php
     Descripción: Cargaremos los datos del formulario nuevo y los introducimos al array original de artículos
 
     Método POST 
-        - descripcion
-        - modelo
-        - categorias (valor númerico)
-        - unidades
-        - precio
+                $id,
+                $nombre,
+                $apellidos,
+                $email,
+                $fecha_nac,
+                $curso,
+                $asignaturas
     
     El id será generado de forma automatica por la función ultimoId()
 */
@@ -18,42 +20,43 @@
 setlocale(LC_MONETARY, "es_ES"); // Indicamos
 
 # Cargamos los datos a partir de los métodos estáticos de la clase
-$categorias = ArrayArticulos::getCategorias(); // getCategorias -> Método estático
-$marcas = ArrayArticulos::getMarcas(); // getMarcas -> Método estático
+$asignaturas = ArrayAlumnos::getAsignaturas(); 
+$cursos = ArrayAlumnos::getCursos();
 
-# Creamos un objeto de la clase ArrayArticulos
-$articulos = new ArrayArticulos();
+# Creamos un objeto de la clase ArrayAlumnos
+$alumnos = new ArrayAlumnos();
 
-# Creamos un objeto de articulo
-$articulo = new Articulo();
+# Creamos un objeto de Alumno
+$articulo = new Alumno();
 
 # Cargo los datos
-$articulos->getDatos();
+$alumnos->getDatos();
 
 // Recogemos los datos del formulario
 $id = $_POST['id'];
-$descripcion = $_POST['descripcion'];
-$modelo = $_POST['modelo'];
-$marca = $_POST['marcas'];
-$categoriasArt = $_POST['categorias'];
-$unidades = $_POST['unidades'];
-$precio = $_POST['precio'];
+$nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$email = $_POST['email'];
+$fecha_nac = $_POST['fecha'];
+$fecha_nac = date('d/m/Y', strtotime($fecha_nac));
+$curso = $_POST['curso'];
+$asignaturasNew = $_POST['asignaturas'];
 
 # Creamos un objeto de articulo y añadimos los valores
-$articulo = new Articulo(
+$alumno = new Alumno(
     $id,
-    $descripcion,
-    $modelo,
-    $marca,
-    $categoriasArt,
-    $unidades,
-    $precio
+    $nombre,
+    $apellidos,
+    $email,
+    $fecha_nac,
+    $curso,
+    $asignaturasNew
 );
 
-// Añadimos el artículo usando la funcion create de ArrayArticulos
-$articulos->create($articulo);
+// Añadimos el alumno usando la funcion create de ArrayAlumnos
+$alumnos->create($alumno);
 
-# Generamos una notificación
-$notificacion = 'Articulo añadido con éxito';
+# Generamos una notificación para feed-back al usuario
+$notificacion = 'Alumno añadido con éxito';
 
 ?>

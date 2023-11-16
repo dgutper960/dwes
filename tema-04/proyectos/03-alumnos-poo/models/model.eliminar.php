@@ -9,23 +9,26 @@
 setlocale(LC_MONETARY, "es_ES"); // Indicamos
 
 # Cargamos los datos a partir de los métodos estáticos de la clase
-$categorias = ArrayArticulos::getCategorias(); // getCategorias -> Método estático
-$marcas = ArrayArticulos::getMarcas(); // getMarcas -> Método estático
+$asignaturas = ArrayAlumnos::getAsignaturas();
+$cursos = ArrayAlumnos::getCursos();
 
-# Creamos un objeto de articulos
-$articulos = new ArrayArticulos;
 
-# Cargo los datos
-$articulos->getDatos();
+# Cargamos los datos
+$alumnos = new ArrayAlumnos();
 
-// Extraemos el id a través del método get
-$id = $_GET['id'];
+$alumnos->getDatos();
 
-# Accedemos al método delete de la clase
-$articulos->delete($id);
+# Debemos buscar en la tabla el id del alumno a editar
+$indiceBorrar = $_GET['indice'];
 
-# Generamos una notificación
-$notificacion = 'Articulo eliminado con éxito';
+
+# Usamos la funcion delete()
+$alumnos->delete($indiceBorrar);
+
+
+# Generamos una notificación para feed-back al usuario
+$notificacion = 'Alumno borrado con éxito';
+
 
 
 ?>

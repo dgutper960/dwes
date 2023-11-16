@@ -10,69 +10,72 @@
     <div class="container">
         <!-- Cabecera -->
         <?php include 'partials/header.html' ?>
-        <legend>Formulario Editar Artículo</legend>
+        <legend>Formulario para editar alumno</legend>
 
         <!-- Añadimos el menú -->
         <?php include 'partials/menu.php' ?>
 
 
         <!-- Formulario Nuevo Artículo -->
-        <form action="update.php?id=<?= $idEditar ?>" method="POST">
+        <form action="update.php?indice=<?= $indiceEditar ?>" method="POST">
+        
             <div class="mb-3">
                 <label class="form-label">id</label>
-                <input type="number" class="form-control" name="id" value="<?= $articulo->getId(); ?>" disabled>
+                <input type="number" class="form-control" name="id" value="<?= $alumno->id; ?>" disabled>
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
-            <!-- descripción -->
+            <!-- nombre -->
             <div class="mb-3">
-                <label class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion" value="<?= $articulo->getDescripcion(); ?>">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" value="<?= $alumno->nombre; ?>">
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
-            <!-- Modelo -->
+            <!-- apellidos -->
             <div class="mb-3">
-                <label for="titulo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo" value="<?= $articulo->getModelo(); ?>">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" name="apellidos" value="<?= $alumno->apellidos ?>">
                 <!-- <div class="form-text">Introduzca título libro existente</div> -->
             </div>
-            <!-- Marca -->
+
+            <!-- email -->
             <div class="mb-3">
-                <label class="form-label">Marca</label>
-                <select class="form-select" aria-label="Default select example" name="marca">
-                    <?php foreach ($marcas as $key => $marca): ?>
-                        <option value="<?= $key ?>" <?= ($articulo->getMarca() == $key) ? 'selected' : null ?>>
-                            <!-- operador ternario para ver el articulo preseleccionado -->
-                            <?= $marca ?>
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" value="<?= $alumno->email ?>">
+                <!-- <div class="form-text">Introduzca título libro existente</div> -->
+            </div>
+
+            <!-- fecha_nac -->
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha Nacimiento</label>
+                <input type="date" class="form-control" name="fecha" value="<?= $alumno->fecha_nac ?>">
+                <!-- <div class="form-text">Introduzca título libro existente</div> -->
+            </div>
+
+            <!-- curso -->
+            <div class="mb-3">
+                <label class="form-label">Seleccione Curso</label>
+                <select class="form-select" aria-label="Default select example" name="curso">
+                    <?php foreach ($cursos as $key => $curso): ?>
+                        <option value="<?= $key ?>" <?= ($alumno->curso == $key) ? 'selected' : null ?>>
+                            <!-- operador ternario para ver el alumno preseleccionado -->
+                            <?= $curso ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            <!-- Unidades -->
-            <div class="mb-3">
-                <label class="form-label">Unidades</label>
-                <input type="number" class="form-control" name="unidades" value="<?= $articulo->getUnidades(); ?>">
-                <!-- <div class="form-text">Género del libro</div> -->
-            </div>
-            <!-- Precio -->
-            <div class="mb-3">
-                <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01"
-                    value="<?= $articulo->getPrecio(); ?>">
-                <!-- <div class="form-text">Introduzca Precio</div> -->
-            </div>
 
-            <!-- Categorías -->
+            <!-- Asignaturas -->
             <div class="mb-3">
-                <label class="form-label">Seleccionar Categorías</label>
+                <label class="form-label">Seleccione Asignaturas</label>
                 <div class="form-control">
-                    <?php foreach ($categorias as $indice => $categoria): ?>
+                    <?php foreach ($asignaturas as $indice => $asignatura): ?>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]"
-                                <?= (in_array($indice, $articulo->getCategorias()) ? 'checked' : null) ?>>
-                            <!-- operador ternario para ver los articulos preseleccionados -->
+                            <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="asignaturas[]"
+                                <?= (in_array($indice, $alumno->asignaturas) ? 'checked' : null) ?>>
+                            <!-- operador ternario para ver los alumnos preseleccionados -->
                             <!--Al ser múltiples opciones, se deberan recoger dichos valores en un array-->
                             <label class="form-check-label" for="">
-                                <?= $categoria ?>
+                                <?= $asignatura ?>
                                 <label>
                         </div>
                     <?php endforeach; ?>

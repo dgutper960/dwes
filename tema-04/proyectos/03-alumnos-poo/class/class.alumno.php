@@ -1,58 +1,62 @@
 <?php
 
 /**
- * Clase Articulo
+ * Clase Alumno
  */
 class Alumno
 {
-    // atributos
+    // atributos visibilidad publica
     public $id;
     public $nombre;
     public $apellidos;
     public $email;
-    public $fecha_nacimiento;
-    public $curso;
-    public $asignaturas;
+    public $fecha_nac; // edad calculada
+    public $curso; // un solo curso
+    public $asignaturas; // será un array
 
     // constructor
-	/***
-	 * No es necesario pero lo ponemos para mantener la convencion
+	/**
+	 * No reaquerido, lo mantenemos por cumplir la convención
 	 */
     public function __construct(
-
         $id = null,
         $nombre = null,
         $apellidos = null,
         $email = null,
-        $fecha_nacimiento = null, // sabemos que debe ser un array
+        $fecha_nac = null, 
         $curso = null,
-        $asignaturas = []
-
+        $asignaturas = [] // sabemos que debe ser un array
     ) {
-        $this->$id = $id;
-        $this->$nombre = $nombre;
-        $this->$apellidos = $apellidos;
-        $this->$email = $email;
-        $this->$fecha_nacimiento = $fecha_nacimiento;
-        $this->$curso = $curso;
-        $this->$asignaturas = $asignaturas;
+        $this->id = $id;
+        $this->nombre = $nombre;
+        $this->apellidos = $apellidos;
+        $this->email = $email;
+        $this->fecha_nac = $fecha_nac;
+        $this->curso = $curso;
+        $this->asignaturas = $asignaturas;
     }
+    
 
     /**
-     * Metodo para extraer la edad
-     */
+	 * GETTERS Y SETTERS NO NECESARIOS -> visibilidad pública de los atributos
+	 */
+	/**
+	 * Metodo para calcular edad
+	 */
     public function getEdad(){
-
-        // creamos un objeto con la fecha de nacimiento
-        $fecha_nac = new DateTime($this->fecha_nacimiento);
-
-        // creamos un objeto con la fecha actual
-        $fecha_actual = new DateTime();
-
-        $edad = $fecha_actual->diff($fecha_nac)->y;
-
-        return $edad;
-        
+        // usamos el método estático de DateTime y le damos formato
+        $fecha_nac = DateTime::createFromFormat('d/m/Y', $this->fecha_nac);
+    
+        if ($fecha_nac instanceof DateTime) {
+            // creamos un objeto con la fecha actual
+            $fecha_actual = new DateTime();
+            // calculamos la diferencia entre fechas y lo retornamos en años
+            $edad = $fecha_actual->diff($fecha_nac)->y;
+    
+            return $edad;
+        } else {
+            return 0; // o maneja el error de alguna manera adecuada
+        }
     }
     
 

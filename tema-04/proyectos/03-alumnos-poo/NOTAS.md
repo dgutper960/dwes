@@ -1,13 +1,3 @@
-## adaptamos articulos poo a alumnos
-- Curso funciona como marca
-- Asignaturas como categorías
+## El DateTime debe tener un formato personalizado
 
-## No respetamos la propiedad de encapsulamiento
-
-## Funcion de alumno getEdad()
-
-# Unica propiedad de ArrayAlumnos 
-- private tabla = Array Alumnos
-
-
-
+## Revisar el error del tratamiento como string en asignaturas en el constructor

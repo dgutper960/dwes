@@ -6,10 +6,10 @@
         Descripción: permite eliminar un elemento de la tabla
     */
 
-    # Cargamos las clases
-    include("class/class.articulo.php"); // cuidado con el orden
-    include("class/class.arrayArticulos.php");
 
+    # Clases -> Cargamos las clases
+    include 'class/class.alumno.php';
+    include 'class/class.arrayAlumnos.php';
 
     # Model
     include 'models/model.eliminar.php';

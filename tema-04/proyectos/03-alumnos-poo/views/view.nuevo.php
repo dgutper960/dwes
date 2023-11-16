@@ -10,67 +10,69 @@
     <div class="container">
         <!-- Cabecera -->
         <?php include 'partials/header.html' ?>
-        <legend>Formulario Añadir Artículo</legend>
+        <legend>Formulario para añadir alumno</legend>
 
         <!-- Añadimos el menú -->
         <?php include 'partials/menu.php' ?>
 
 
-        <!-- Formulario Nuevo Artículo -->
+        <!-- Formulario Nuevo Alumno -->
         <form action="create.php" method="POST">
-            <!-- descripción -->
+            <!-- id -->
             <div class="mb-3">
                 <label class="form-label">id</label>
                 <input type="number" class="form-control" name="id">
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
-            <!-- descripción -->
+            <!-- nombre -->
             <div class="mb-3">
-                <label class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre">
                 <!-- <div class="form-text">Introduzca identificador del libro</div> -->
             </div>
-            <!-- Modelo -->
+            <!-- apellidos -->
             <div class="mb-3">
-                <label for="titulo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" name="apellidos">
                 <!-- <div class="form-text">Introduzca título libro existente</div> -->
             </div>
-            <!-- Marca -->
+
+            <!-- email -->
             <div class="mb-3">
-                <label class="form-label">Marcas</label>
-                <select class="form-select" aria-label="Default select example" name="marcas">
-                    <option selected disabled>Selecciona una marca:</option>
-                    <?php foreach ($marcas as $key => $marca): ?>
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email">
+                <!-- <div class="form-text">Introduzca título libro existente</div> -->
+            </div>
+
+            <!-- fecha_nac -->
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha Nacimiento</label>
+                <input type="date" class="form-control" name="fecha">
+                <!-- <div class="form-text">Introduzca título libro existente</div> -->
+            </div>
+            <!-- curso -->
+            <div class="mb-3">
+                <label class="form-label">Curso</label>
+                <select class="form-select" aria-label="Default select example" name="curso">
+                    <option selected disabled>Selecciona un curso:</option>
+                    <?php foreach ($cursos as $key => $marca): ?>
                         <option value="<?= $key ?>">
                             <?= $marca ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            <!-- Unidades -->
-            <div class="mb-3">
-                <label class="form-label">Unidades</label>
-                <input type="number" class="form-control" name="unidades">
-                <!-- <div class="form-text">Género del libro</div> -->
-            </div>
-            <!-- Precio -->
-            <div class="mb-3">
-                <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01">
-                <!-- <div class="form-text">Introduzca Precio</div> -->
-            </div>
 
-            <!-- Categorías -->
+            <!-- Asignaturas -->
             <div class="mb-3">
-                <label class="form-label">Seleccionar Categorías</label>
+                <label class="form-label">Seleccionar Asignaturas</label>
                 <div class="form-control">
-                    <?php foreach ($categorias as $indice => $categoria): ?>
+                    <?php foreach ($asignaturas as $indice => $asignatura): ?>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]">
+                            <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="asignaturas[]">
                             <!--Al ser múltiples opciones, se deberan recoger dichos valores en un array-->
                             <label class="form-check-label" for="">
-                                <?= $categoria ?>
+                                <?= $asignatura ?>
                                 <label>
                         </div>
                     <?php endforeach; ?>

@@ -18,48 +18,44 @@
 setlocale(LC_MONETARY, "es_ES"); // Indicamos
 
 # Cargamos los datos a partir de los métodos estáticos de la clase
-$categorias = ArrayArticulos::getCategorias(); // getCategorias -> Método estático
-$marcas = ArrayArticulos::getMarcas(); // getMarcas -> Método estático
+$asignaturas = ArrayAlumnos::getAsignaturas(); 
+$cursos = ArrayAlumnos::getCursos();
 
-# Creamos un objeto de la clase ArrayArticulos
-$articulos = new ArrayArticulos();
-# Creamos un objeto de articulo
-$articulo = new Articulo();
+# Creamos un objeto de la clase ArrayAlumnos
+$alumnos = new ArrayAlumnos();
+
+# Creamos un objeto de Alumno
+$articulo = new Alumno();
 
 # Cargo los datos
-$articulos->getDatos();
+$alumnos->getDatos();
 
-$indice = $_GET['id'];
-$articulo = $articulos->read($indice);
+$indice = $_GET['indice'];
 
 // Recogemos los datos del formulario
+$id = $indice+1;
+$nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$email = $_POST['email'];
+$fecha_nac = $_POST['fecha'];
+$fecha_nac = date('d/m/Y', strtotime($fecha_nac));
+$curso = $_POST['curso'];
+$asignaturasNew = $_POST['asignaturas'];
 
-/**
- * FALTA EL ID
- */
+# Creamos un objeto de articulo y añadimos los valores
+$alumno = new Alumno(
+    $id,
+    $nombre,
+    $apellidos,
+    $email,
+    $fecha_nac,
+    $curso,
+    $asignaturasNew
+);
 
-$descripcion = $_POST['descripcion'];
-$modelo = $_POST['modelo'];
-$marca = $_POST['marca'];
-$categoriasArt = $_POST['categorias'];
-$unidades = $_POST['unidades'];
-$precio = $_POST['precio'];
+// Añadimos el alumno usando la funcion create de ArrayAlumnos
+$alumnos->update($alumno, $indice);
 
-# Editamos los valores del articulo con los valores 
-
-
-/*** SE DEBE MODIFICAR CON LOS PARAMETROS POR CONSTRUCTOR */
-
-$articulo->setDescripcion($descripcion);
-$articulo->setModelo($modelo);
-$articulo->setMarca($marca);
-$articulo->setCategorias($categoriasArt);
-$articulo->setUnidades($unidades);
-$articulo->setPrecio($precio);
-
-// Añadimos el artículo usando la funcion create de ArrayArticulos
-$articulos->update($indice, $articulo);
-
-# Generamos una notificación
-$notificacion = 'Articulo modificado con éxito';
+# Generamos una notificación para feed-back al usuario
+$notificacion = 'Alumno editado con éxito';
 ?>
