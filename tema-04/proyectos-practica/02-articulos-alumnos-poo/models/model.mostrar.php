@@ -1,25 +1,25 @@
 <?php
-    /* 
-        Modelo: modelMostrar.php
-        Descripción: muestra los detalles de un artículo
+/* 
+    Modelo: modelMostrar.php
+    Descripción: muestra los detalles de un artículo
 
-        Método GET:
-            - id del artículo que quiero mostrar
-    */
-    setlocale(LC_MONETARY,"es_ES"); // Indicamos
+    Método GET:
+        - id del artículo que quiero mostrar
+*/
+setlocale(LC_MONETARY, "es_ES"); // Indicamos
+# Cargamos los datos a partir de los métodos estáticos de la clase
+$asignaturas = ArrayAlumnos::getAsignaturas();
+$cursos = ArrayAlumnos::getCursos();
 
-    # Cargamos los datos a partir de los métodos estáticos de la clase
-    $categorias = ArrayArticulos::getCategorias(); // getCategorias -> Método estático
-    $marcas = ArrayArticulos::getMarcas(); // getMarcas -> Método estático
 
-    # Cargamos los datos
-    $articulos = new ArrayArticulos();
+# Cargamos los datos
+$alumnos = new ArrayAlumnos();
 
-    $articulos->getDatos();
+$alumnos->getDatos();
 
-    # Debemos buscar en la tabla el id del artículo a editar
-    $idEditar = $_GET['id'];
+# Debemos buscar en la tabla el id del alumno a editar
+$indiceEditar = $_GET['indice'];
 
-    # Usamos la funcion buscar de ArrayArticulos
-    $articulo = $articulos->read($idEditar);
+# Usamos la funcion buscar de ArrayAlumnos
+$alumno = $alumnos->read($indiceEditar);
 ?>
