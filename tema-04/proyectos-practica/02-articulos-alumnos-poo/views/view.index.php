@@ -20,56 +20,57 @@
 
         <!-- Añadimos una tabla con los artículos -->
         <table class="table">
-            <!-- Mostremos el nombre de las columnas, para nuestra comodidad y personalizción introduciremos lo datos manualmente -->
+            <!-- Mostramos el nombre de las columnas, para nuestra comodidad y personalizción introduciremos lo datos manualmente -->
             <thead>
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Categorias</th>
-                    <th scope="col" class="text-end">Unidades</th>
-                    <th scope="col" class="text-end">Precio</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Asignaturtas</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <!-- Mostraremos el contenido de cada artículo -->
             <tbody>
-                <?php foreach ($articulos->getTabla() as $indice => $articulo): ?>
+                <!-- Recorremos el array alumnos y accedemos a las propiedades de cada uno -->
+                <?php foreach ($alumnos->getTabla() as $indice => $alumno): ?>
                     <tr>
                         <th>
-                            <?= $articulo->getId() ?>
+                            <?= $alumno->id ?>
                         </th>
                         <td>
-                            <?= $articulo->getDescripcion() ?>
+                            <?= $alumno->nombre ?>
                         </td>
                         <td>
-                            <?= $articulo->getModelo() ?>
+                            <?= $alumno->apellidos ?>
                         </td>
                         <td>
-                            <?= $marcas[$articulo->getMarca()] ?>
-                        </td>
-                        <td> <!-- metodo estatico mostrar categoría -->
-                            <?= implode(', ', ArrayArticulos::mostrarCategorias($categorias, $articulo->getCategorias())) ?>
-                        </td>
-                        <td class="text-end">
-                            <?= $articulo->getUnidades(); ?>
-                        </td>
-                        <td class="text-end">
-                            <?= number_format($articulo->getPrecio(), 2, ',', '.') ?> €
+                            <?= $alumno->email ?>
                         </td>
                         <td>
-                            <!-- Botón eliminar GET id -> eliminar.php  -->
-                            <a href="eliminar.php?id=<?= $indice?>" title="Eliminar">
+                            <?= $alumno->getEdad(); ?>
+                        </td>
+                        <td>
+                            <?= $cursos[$alumno->curso] ?>
+                        </td>
+                        <td>
+                            <?= ArrayAlumnos::mostrarAsignaturas($asignaturas, $alumno->asignaturas) ?>
+                        </td>
+                        <td>
+                            <!-- Botón eliminar GET indice -> eliminar.php  -->
+                            <a href="eliminar.php?indice=<?= $indice?>" title="Eliminar">
                                 <i class="bi bi-trash-fill"></i>
                             </a>
 
-                            <!-- Botón editar GET id -> editar.php -->
-                            <a href="editar.php?id=<?= $indice ?>" title="Editar">
+                            <!-- Botón editar GET indice -> editar.php -->
+                            <a href="editar.php?indice=<?= $indice ?>" title="Editar">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
-                            <!-- Botón mostrar GET id -> mostrar.php -->
-                            <a href="mostrar.php?id=<?= $indice ?>" title="Mostrar">
+                            <!-- Botón mostrar GET indice -> mostrar.php -->
+                            <a href="mostrar.php?indice=<?= $indice ?>" title="Mostrar">
                                 <i class="bi bi-tv"></i>
                             </a>
                         </td>
@@ -80,9 +81,9 @@
             <!-- En el pie de la tabla, mostraremos el número de artículos mostrados -->
             <tfoot>
                 <tr>
-                    <!-- muestra el n articulos (colspan=ocupa n columnas) -->
-                    <td colspan="7"><b>Nº de Articulos=
-                            <?= count($articulos->getTabla()) ?>
+                    <!-- muestra el n$alumnos (colspan=ocupa n columnas) -->
+                    <td colspan="7"><b>Nº de alumnos =
+                            <?= count($alumnos->getTabla()) ?>
                         </b></td>
                 </tr>
             </tfoot>

@@ -8,8 +8,8 @@
     */
 
     # Librería
-    include 'class/class.articulo.php';
-    include 'class/class.arrayArticulos.php';
+    include 'class/class.alumno.php';
+    include 'class/class.arrayAlumnos.php';
 
     # Model
     include 'models/model.index.php';
