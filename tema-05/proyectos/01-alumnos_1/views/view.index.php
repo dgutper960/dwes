@@ -24,66 +24,83 @@
             <thead>
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
+                    <th scope="col">Alumno</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Población</th>
+                    <th scope="col">DNI</th>
                     <th scope="col">Edad</th>
                     <th scope="col">Curso</th>
-                    <th scope="col" class="text-end">Asignaturas</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <!-- Mostraremos el contenido de cada artículo -->
             <tbody>
-                <?php foreach ($alumnos->getTabla() as $indice => $alumno): ?>
+                <!-- ACCEDEMOS A LOS ALUMNOS E ITERAMOS -->
+                <?php while ($alumno = mysqli_fetch_assoc($alumnos)): ?>
                     <tr>
-                        <th>
-                            <?= $alumno->id ?>
-                        </th>
                         <td>
-                            <?= $alumno->nombre ?>
+                            <?= $alumno['id'] ?>
                         </td>
                         <td>
-                            <?= $alumno->apellidos ?>
+                            <?= $alumno['alumno'] ?>
                         </td>
                         <td>
-                            <?= $alumno->getEdad()?>
+                            <?= $alumno['email'] ?>
                         </td>
                         <td>
-                            <?= $cursos[$alumno->curso] ?>
+                            <?= $alumno['telefono'] ?>
                         </td>
-                        <td> <!-- metodo estatico mostrar categoría -->
-                            <?= implode(', ', ArrayAlumnos::mostrarAsignaturas($asignaturas, $alumno->asignaturas)) ?>
+                        <td>
+                            <?= $alumno['poblacion'] ?>
                         </td>
+                        <td>
+                            <?= $alumno['dni'] ?>
+                        </td>
+                        <td>
+                            <?= $alumno['edad'] ?>
+                        </td>
+                        <td>
+                            <?= $alumno['curso'] ?>
+                        </td>
+
 
                         <td>
                             <!-- Botón eliminar GET id -> eliminar.php  -->
-                            <a href="eliminar.php?id=<?= $indice?>" title="Eliminar">
+                            <a href="eliminar.php?indice=<?= $alumno['id'] ?>" title="Eliminar">
                                 <i class="bi bi-trash-fill"></i>
                             </a>
 
                             <!-- Botón editar GET id -> editar.php -->
-                            <a href="editar.php?id=<?= $indice ?>" title="Editar">
+                            <a href="editar.php?indice=<?= $alumno['id'] ?>" title="Editar">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
                             <!-- Botón mostrar GET id -> mostrar.php -->
-                            <a href="mostrar.php?id=<?= $indice ?>" title="Mostrar">
+                            <a href="mostrar.php?indice=<?= $alumno['id'] ?>" title="Mostrar">
                                 <i class="bi bi-tv"></i>
                             </a>
                         </td>
 
                     </tr>
-                <?php endforeach; ?>
+                <?php endwhile; ?>
             </tbody>
             <!-- En el pie de la tabla, mostraremos el número de artículos mostrados -->
             <tfoot>
                 <tr>
                     <!-- muestra el n articulos (colspan=ocupa n columnas) -->
                     <td colspan="7"><b>Nº de Alumnos =
-                            <?= count($alumnos->getTabla()) ?>
+                            <?= mysqli_num_rows($alumnos) ?>
                         </b></td>
                 </tr>
             </tfoot>
         </table>
+
+        <!-- DEBEMOS LIBERAR RECURSOS POR SEGURIDAD -->
+        <?= mysqli_free_result($alumnos) ?>
+
+        <br>
+        <br>
+        <br>
 
     </div>
 

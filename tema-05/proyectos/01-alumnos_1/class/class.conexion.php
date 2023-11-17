@@ -14,7 +14,7 @@ class Conexion
     {
 
         try {
-            $this->db = new mysqli('localhost', 'root', ' ', 'fp');
+            $this->db = new mysqli('localhost', 'root', '', 'fp');
             if ($this->db->connect_error) {
                 throw new Exception('ERROR');
             }
