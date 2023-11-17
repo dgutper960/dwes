@@ -33,7 +33,7 @@ $alumnos->getDatos();
 $indice = $_GET['indice'];
 
 // Recogemos los datos del formulario
-$id = $indice+1;
+$id = $_POST['id'];
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
 $email = $_POST['email'];
