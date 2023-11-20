@@ -19,7 +19,7 @@ $peliculas->getDatos(); // llamamos al metodo que carga el array de peliculas
 /**
  * Tomamos los datos de nuevo.php
  */
-$id = $_POST['id'];
+$id = count($peliculas->getTabla())+1;
 $titulo = $_POST['titulo'];
 $director = $_POST['director'];
 $generosPel = $_POST['generos'];
