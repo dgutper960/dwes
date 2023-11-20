@@ -221,6 +221,10 @@ class ArrayPeliculas
         return $elemento;
     }
 
+    public function update($indice, Pelicula $data){
+        $this->tabla[$indice] = $data;
+    }
+
 
 }
 
