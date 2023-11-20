@@ -213,6 +213,14 @@ class ArrayPeliculas
         $this->tabla[] = $data;
     }
 
+    /**
+     * Necesitamos un método que obtenga una pelicula por su indice
+     */
+    public function read($indice){
+        $elemento = $this->tabla[$indice];
+        return $elemento;
+    }
+
 
 }
 
