@@ -8,6 +8,7 @@
     # creamos objeto de a clase fp
     $db = new Fp(); // hereda de conexion -> ejecuta el constructor que conecta con la base de datos
 
+    // objeto de la clase mysqli_results
     $alumnos = $db->getAlumnos();
 
     

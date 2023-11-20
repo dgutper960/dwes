@@ -27,17 +27,30 @@ class Fp extends Conexion
         alumnos.dni,
         TIMESTAMPDIFF(YEAR,
             alumnos.fechaNac,
-            NOW()) AS edad,
+            NOW()) AS edad, /** en este caso edad sería la propiedad del objeto */
         cursos.nombreCorto AS curso
     FROM
         alumnos
             INNER JOIN
         cursos ON alumnos.id_curso = cursos.id
     ORDER BY id";
+/**
+ * Esta opcion no recomendable por motivos de seguridad
+ * -> Solo válida cuando no prima la seguridad
+ */
+    // $result = $this->db->query($sql);
+    // return $result;
+    // }
 
-    $result = $this->db->query($sql);
-    return $result;
-    }
+// objeto de la clase mysqli_stmt
+$stmt = $this->db->prepare($sql);
+// ejecuto
+$stmt->execute();
+
+// objeto de la clase mysql_result
+$result = $stmt->get_result();
+
+return $result;
 
 
 

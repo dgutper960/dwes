@@ -28,8 +28,8 @@
                     <th scope="col">Email</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Población</th>
-                    <th scope="col">DNI</th>
-                    <th scope="col">Edad</th>
+                    <th scope="col">DNI</th> 
+                    <th scope="col">Edad</th> 
                     <th scope="col">Curso</th>
                     <th scope="col">Acciones</th>
                 </tr>
@@ -37,13 +37,13 @@
             <!-- Mostraremos el contenido de cada artículo -->
             <tbody>
                 <!-- ACCEDEMOS A LOS ALUMNOS E ITERAMOS -->
-                <?php while ($alumno = mysqli_fetch_assoc($alumnos)): ?>
+                <?php while ($alumno = mysqli_fetch_assoc($alumnos)): ?> <!-- podemos poner directamente el objeto results ($alumnos) en un foreach -->
                     <tr>
                         <td>
                             <?= $alumno['id'] ?>
                         </td>
                         <td>
-                            <?= $alumno['alumno'] ?>
+                            <?= $alumno['alumno'] ?> <!-- al haber echo un concat, el atributo alumno contiene el nombre y apellido -->
                         </td>
                         <td>
                             <?= $alumno['email'] ?>
@@ -57,8 +57,8 @@
                         <td>
                             <?= $alumno['dni'] ?>
                         </td>
-                        <td>
-                            <?= $alumno['edad'] ?>
+                        <td class="text-end">
+                            <?= $alumno['edad'] ?> 
                         </td>
                         <td>
                             <?= $alumno['curso'] ?>
@@ -67,16 +67,16 @@
 
                         <td>
                             <!-- Botón eliminar GET id -> eliminar.php  -->
-                            <a href="eliminar.php?indice=<?= $alumno['id'] ?>" title="Eliminar">
+                            <a href="eliminar.php?id=<?= $alumno['id'] ?>" title="Eliminar">
                                 <i class="bi bi-trash-fill"></i>
                             </a>
 
                             <!-- Botón editar GET id -> editar.php -->
-                            <a href="editar.php?indice=<?= $alumno['id'] ?>" title="Editar">
+                            <a href="editar.php?id=<?= $alumno['id'] ?>" title="Editar">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
                             <!-- Botón mostrar GET id -> mostrar.php -->
-                            <a href="mostrar.php?indice=<?= $alumno['id'] ?>" title="Mostrar">
+                            <a href="mostrar.php?id=<?= $alumno['id'] ?>" title="Mostrar">
                                 <i class="bi bi-tv"></i>
                             </a>
                         </td>
@@ -89,7 +89,7 @@
                 <tr>
                     <!-- muestra el n articulos (colspan=ocupa n columnas) -->
                     <td colspan="7"><b>Nº de Alumnos =
-                            <?= mysqli_num_rows($alumnos) ?>
+                            <?= $alumnos->num_rows ?> <!-- num_rows es una propiedad de la clase mysqli_results -->
                         </b></td>
                 </tr>
             </tfoot>
