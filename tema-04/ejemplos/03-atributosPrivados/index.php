@@ -11,7 +11,7 @@ var_dump($coche_1);
 
 echo '<br>';
 // asignamos valores
-$coche_1->setNombre("Er cohe der Paco");
+$coche_1->setNombre("Er cohe del Paco");
 $coche_1->setModelo('Cupra_R3');
 $coche_1->setMatricula('MA-356483');
 $coche_1->setVelocidad(250);
