@@ -206,6 +206,13 @@ class ArrayPeliculas
         return $listaGeneros;
     }
 
+    /**
+     * Necesitamos un método que nos añada un elemento a la tabla
+     */
+    public function create(Pelicula $data){ // debe tomar un objeto del tipo Pelicula
+        $this->tabla[] = $data;
+    }
+
 
 }
 
