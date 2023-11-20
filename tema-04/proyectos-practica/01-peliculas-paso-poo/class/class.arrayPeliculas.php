@@ -225,6 +225,10 @@ class ArrayPeliculas
         $this->tabla[$indice] = $data;
     }
 
+    public function delete($indice){
+        unset($this->tabla[$indice]);
+    }
+
 
 }
 
