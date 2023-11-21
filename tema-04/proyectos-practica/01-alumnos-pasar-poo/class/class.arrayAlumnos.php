@@ -141,8 +141,21 @@ static public function mostrarAsignaturas($asignaturas, $asignaturasAlumno){
         $listaAsignaturas [] = $asignaturas[$indice]; // igualamos a los valores de indices coincidentes
     }
     asort($listaAsignaturas); // ordenamos y retornamos el array transformado a string
-    return implode(',', $listaAsignaturas);
+    return implode(', ', $listaAsignaturas);
 }
+
+public function create(Alumno $date){
+
+    $this->table [] = $date;
+
+}
+
+public function read($indice){
+    
+    return $this->table[$indice];
+}
+
+
 
 }
 ?>
