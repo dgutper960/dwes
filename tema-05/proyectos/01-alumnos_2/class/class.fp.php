@@ -34,25 +34,27 @@ class Fp extends Conexion
             INNER JOIN
         cursos ON alumnos.id_curso = cursos.id
     ORDER BY id";
-/**
- * Esta opcion no recomendable por motivos de seguridad
- * -> Solo válida cuando no prima la seguridad
- */
-    // $result = $this->db->query($sql);
-    // return $result;
-    // }
+        /**
+         * Esta opcion no recomendable por motivos de seguridad
+         * -> Solo válida cuando no prima la seguridad
+         */
+        // $result = $this->db->query($sql);
+        // return $result;
+        // }
 
-// objeto de la clase mysqli_stmt
-$stmt = $this->db->prepare($sql);
-// ejecuto
-$stmt->execute();
+        // objeto de la clase mysqli_stmt
+        $stmt = $this->db->prepare($sql);
+        // ejecuto
+        $stmt->execute();
 
-// objeto de la clase mysql_result
-$result = $stmt->get_result();
+        // objeto de la clase mysql_result
+        $result = $stmt->get_result();
 
-return $result;
+        return $result;
 
 
+
+    }
 
 }
 

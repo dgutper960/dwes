@@ -36,7 +36,8 @@
             </thead>
             <!-- Mostraremos el contenido de cada artículo -->
             <tbody>
-                <!-- ACCEDEMOS A LOS ALUMNOS E ITERAMOS -->
+                <!-- ACCEDEMOS A LOS ALUMNOS E ITERAMOS 
+                        El foreach hace el fetch de manera automática -->
                 <?php while ($alumno = mysqli_fetch_assoc($alumnos)): ?> <!-- podemos poner directamente el objeto results ($alumnos) en un foreach -->
                     <tr>
                         <td>
@@ -57,7 +58,7 @@
                         <td>
                             <?= $alumno['dni'] ?>
                         </td>
-                        <td class="text-end">
+                        <td class="text-end"> <!--por convencion se alinea al final-->
                             <?= $alumno['edad'] ?> 
                         </td>
                         <td>
