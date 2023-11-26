@@ -33,7 +33,7 @@
 
          # Vinculamos los parametros con los valores
          // el id no será introducido por lo que su valor es null y el SGBD lo autoincrementa
-         $pdostmt->bindParam(':nombre', $curso->nombre, PDO::PARAM_STR, 50);
+         $pdostmt->bindParam(':nombre', $curso->nombre, PDO::PARAM_STR, 50); // ultimo atributo -> máx caracteres permitidos
          $pdostmt->bindParam(':ciclo', $curso->ciclo, PDO::PARAM_STR, 50);
          $pdostmt->bindParam(':nombreCorto', $curso->nombreCorto, PDO::PARAM_STR, 4);
          $pdostmt->bindParam(':nivel', $curso->nivel, PDO::PARAM_STR, 1);

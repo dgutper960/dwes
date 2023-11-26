@@ -4,7 +4,7 @@
  * Clase Conexion
  */
     class Conexion{
-        protected $pdo;
+        protected $pdo; // atributo visibilidad protected
 
         public function __construct(){
             try{

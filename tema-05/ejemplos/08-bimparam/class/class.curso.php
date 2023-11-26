@@ -12,5 +12,6 @@ public $ciclo;
 public $nombreCorto;
 public $nivel;
 }
+// no constructor //
 
 ?>
