@@ -11,7 +11,7 @@
 
  ## Cargamos las clases en orden
  include("class/class.conexion.php");
- include("class/class.conexion.php");
+ include("class/class.fp.php");
  include("class/class.curso.php");
 
  ## Cargamos el modelo
