@@ -1,14 +1,51 @@
 <?php
 
     /*
-        Clase Fp
+        Clase Alumnos
 
-        Métodos específicos para BBDD  fp con las tablas
+        Métodos específicos para BBDD  Alumnos con las tablas
         - Alumnos
-        - Cursos
     */
 
-    Class Fp extends Conexion {
+    Class Alumnos extends Conexion {
+
+        /**
+         * Devuelve un objeto 
+         */   
+        public function getAlumnos()
+    {
+        /** vamos a sql workbench y probamos el comando para verificar que funciona */
+        $sql = "SELECT 
+        alumnos.id,
+        CONCAT_WS(', ', alumnos.apellidos, alumnos.nombre) AS alumno,
+        alumnos.email,
+        alumnos.telefono,
+        alumnos.poblacion,
+        alumnos.dni,
+        TIMESTAMPDIFF(YEAR,
+            alumnos.fechaNac,
+            NOW()) AS edad, /** en este caso edad sería la propiedad del objeto */
+        cursos.nombreCorto AS curso
+    FROM
+        alumnos
+            INNER JOIN
+        cursos ON alumnos.id_curso = cursos.id
+    ORDER BY id";
+
+    # ejecutamos el prepare -> objeto de la clase pdostatament
+    $pdostsmt = $this->pdo->prepare($sql);
+    // no requerimos bingparam porque es solo consulta
+
+    # Establezco tipo de fetch
+    $pdostsmt->setFetchMode(PDO::FETCH_OBJ);
+
+    # Ejecuto
+    $pdostsmt->execute(); //-> en este momento es de la clase pdoresult
+
+    # Devuelvo objeto clase pdoresult
+    return $pdostsmt; 
+
+    }
 
         public function insert_curso(Curso $curso){
 
