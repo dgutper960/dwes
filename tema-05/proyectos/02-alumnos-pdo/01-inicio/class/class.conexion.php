@@ -31,8 +31,13 @@
                 exit();
             }
 
-            echo 'Conexión realizada con éxito';
+            // echo 'Conexión realizada con éxito';
 
+        }
+
+        /** Creamos un método para cerrar la  conexión */
+        public function cerrar_conexion(){
+            $this->pdo = null;
         }
 
     }

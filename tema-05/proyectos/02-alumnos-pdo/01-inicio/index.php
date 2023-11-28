@@ -5,7 +5,7 @@
     */
 
     # Cargamos configuración
-    include('config/db.php');
+    include('config/bd.php');
 
     # Cargamos librería de funciones
 
@@ -18,5 +18,6 @@
     include('models/model.index.php');
 
     # Cargo vista
+    include('views/view.index.php');
 
 ?>
