@@ -37,7 +37,7 @@
     // no requerimos bingparam porque es solo consulta
 
     # Establezco tipo de fetch
-    $pdostsmt->setFetchMode(PDO::FETCH_OBJ);
+    $pdostsmt->setFetchMode(PDO::FETCH_OBJ); // extrae cada elemento como un objeto
 
     # Ejecuto
     $pdostsmt->execute(); //-> en este momento es de la clase pdoresult
