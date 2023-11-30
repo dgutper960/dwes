@@ -65,7 +65,7 @@ $alumno->id_curso = $id_curso;
 $alumnos = new Alumnos();
 $alumnos->update_alumno($alumno, $id_editar);
 
-// No debo cargar la vista view.index.php
+// No debo cargar la vista view.index.php (DA ERROR)
 // Tengo que cargar el controlador index.php
 header('location: index.php');
 

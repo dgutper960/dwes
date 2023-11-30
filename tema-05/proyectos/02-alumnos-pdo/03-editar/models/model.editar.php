@@ -18,7 +18,7 @@
     $cursos = $conexion->getCursos();
 
     # Buscamos el alumno a editar
-    $alumno = $alumnos->read_alumno($id_editar);
+    $alumno = $conexion->read_alumno($id_editar);
     
 
 ?>
