@@ -17,9 +17,9 @@
     include 'class/class.alumno.php';
 
     # Model
-    include 'models/model.editar.php';
+    include 'models/model.create.php';
 
     # Vista
-    include 'views/view.editar.php';
+    include 'views/view.index.php';
 
 ?>

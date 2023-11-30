@@ -67,16 +67,16 @@
 
                         <td>
                             <!-- Botón eliminar GET id -> eliminar.php  -->
-                            <a href="eliminar.php?indice=<?= $alumno->id ?>" title="Eliminar">
+                            <a href="eliminar.php?id=<?= $alumno->id ?>" title="Eliminar">
                                 <i class="bi bi-trash-fill"></i>
                             </a>
 
                             <!-- Botón editar GET id -> editar.php -->
-                            <a href="editar.php?indice=<?= $alumno->id ?>" title="Editar">
+                            <a href="editar.php?id=<?= $alumno->id ?>" title="Editar">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
                             <!-- Botón mostrar GET id -> mostrar.php -->
-                            <a href="mostrar.php?indice=<?= $alumno->id ?>" title="Mostrar">
+                            <a href="mostrar.php?id=<?= $alumno->id ?>" title="Mostrar">
                                 <i class="bi bi-tv"></i>
                             </a>
                         </td>

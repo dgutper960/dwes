@@ -2,9 +2,11 @@
 
     /*
 
-        Modelo nuevo.php
+        Modelo editar.php
 
     */
+    # tomamos por GET el id del alumno a editar
+    $id_editar = $_GET['id'];
 
     # creamos objeto de la clase conexion (Alumnos hereda de conexión)
     // conexion con la BBDD
@@ -14,6 +16,9 @@
     // objeto de la clase pdo stmt
     $alumnos = $conexion->getAlumnos(); 
     $cursos = $conexion->getCursos();
+
+    # Buscamos el alumno a editar
+    $alumno = $alumnos->read_alumno($id_editar);
     
 
 ?>
