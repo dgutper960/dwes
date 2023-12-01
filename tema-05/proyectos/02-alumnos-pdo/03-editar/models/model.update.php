@@ -29,6 +29,7 @@
 $id_editar = $_GET['id'];
 
 # Cargamos en varibales detalles del  formulario
+$id             = $_GET['id'];
 $nombre         = $_POST['nombre'];
 $apellidos      = $_POST['apellidos'];
 $email          = $_POST['email'];
@@ -45,7 +46,7 @@ $id_curso       = $_POST['id_curso'];
 $alumno = new Alumno();
 
 # Asignamos valores a las propiedades
-$alumno->id = null;
+$alumno->id = $id;
 $alumno->nombre = $nombre;
 $alumno->apellidos = $apellidos;
 $alumno->email = $email;
@@ -65,8 +66,6 @@ $alumno->id_curso = $id_curso;
 $alumnos = new Alumnos();
 $alumnos->update_alumno($alumno, $id_editar);
 
-// No debo cargar la vista view.index.php (DA ERROR)
-// Tengo que cargar el controlador index.php
-header('location: index.php');
+// Quitamos la redirección. Se encuentra en el controlador
 
 ?>

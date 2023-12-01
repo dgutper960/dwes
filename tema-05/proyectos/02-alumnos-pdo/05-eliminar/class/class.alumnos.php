@@ -263,13 +263,13 @@ class Alumnos extends Conexion
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
 
-            $data = $stmt->fetch(PDO::FETCH_OBJ);
+            // $data = $stmt->fetch(PDO::FETCH_OBJ); no es necesario
 
-            if (!$data) {
-                throw new Exception('Alumno No Encontrado');
-            }
+            // if (!$data) {
+            //     throw new Exception('Alumno No Encontrado');
+            // }
 
-            return $data;
+            // return $data;
         } catch (Exception $e) {
             include('views/partials/errorDB.php');
             exit();

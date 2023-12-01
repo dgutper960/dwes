@@ -14,12 +14,12 @@
     # Librería
     include 'class/class.conexion.php';
     include 'class/class.alumnos.php';
-    include 'class/class.alumno.php';
+    
 
     # Model
     include 'models/model.eliminar.php';
 
-    # Vista
-    include 'views/view.index.php';
+    # 
+    header('location: index.php');
 
 ?>

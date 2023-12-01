@@ -14,8 +14,8 @@ $conexion = new Alumnos();
 
 # extraigo los valores de los alumnos y de los cursos
 // objeto de la clase pdo stmt
-$alumnos = $conexion->getAlumnos();
-$cursos = $conexion->getCursos();
+// $alumnos = $conexion->getAlumnos();
+// $cursos = $conexion->getCursos();
 
 # Eliminamos el alumno
 $conexion->delete_alumno($id_eliminar);
