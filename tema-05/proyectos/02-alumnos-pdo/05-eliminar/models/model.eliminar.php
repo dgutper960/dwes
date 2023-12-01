@@ -20,10 +20,10 @@ $cursos = $conexion->getCursos();
 # Eliminamos el alumno
 $conexion->delete_alumno($id_eliminar);
 
-$alumnos = $conexion->getAlumnos();
+// $alumnos = $conexion->getAlumnos();
 
-// No debo cargar la vista view.index.php
-// Tengo que cargar el controlador index.php
-header('location: index.php');
+// // No debo cargar la vista view.index.php
+// // Tengo que cargar el controlador index.php
+// header('location: index.php');
 
 ?>
