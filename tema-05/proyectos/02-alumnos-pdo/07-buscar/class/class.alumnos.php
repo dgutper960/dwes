@@ -251,7 +251,7 @@ class Alumnos extends Conexion
         }
     }
 
-        /**
+    /**
      * Funcion para buscar un alumno
      */
     public function delete_alumno($id)
@@ -280,9 +280,10 @@ class Alumnos extends Conexion
      * Método que extrae los alumnos ordenados
      * - Necesita como entrada un criterio de búsqueda
      */
-    function oreder($criterio){
+    function oreder($criterio)
+    {
 
-             /** vamos a sql workbench y probamos el comando para verificar que funciona */
+        /** vamos a sql workbench y probamos el comando para verificar que funciona */
         $sql = "SELECT 
         alumnos.id,
         CONCAT_WS(', ', alumnos.apellidos, alumnos.nombre) AS alumno,
@@ -304,12 +305,66 @@ class Alumnos extends Conexion
         $pdostsmt = $this->pdo->prepare($sql);
 
         # Al ser solo consulta no necesitamos el bimparam
-        
+
         # Establezco tipo de fetch
         $pdostsmt->setFetchMode(PDO::FETCH_OBJ); // extrae cada elemento como un objeto
 
         # Ejecuto
         $pdostsmt->execute(); //-> en este momento es de la clase pdoresult
+
+        # Devuelvo objeto clase pdoresult
+        return $pdostsmt;
+
+    }
+
+    /**
+     * Implementamos el mñetodo filtar
+     */
+    function filter($expresion)
+    {
+
+        /** vamos a sql workbench y probamos el comando para verificar que funciona */
+        $sql = "SELECT 
+   alumnos.id,
+   CONCAT_WS(', ', alumnos.apellidos, alumnos.nombre) AS alumno,
+   alumnos.email,
+   alumnos.telefono,
+   alumnos.poblacion,
+   alumnos.dni,
+   TIMESTAMPDIFF(YEAR,
+       alumnos.fechaNac,
+       NOW()) AS edad,
+   cursos.nombreCorto AS curso
+FROM
+   alumnos
+   INNER JOIN cursos ON alumnos.id_curso = cursos.id
+   WHERE CONCAT_WS(' ',
+   alumnos.id, 
+   alumnos.nombre,
+   alumnos.apellidos, 
+   alumnos.email, 
+   alumnos.telefono,
+   alumnos.poblacion, 
+   alumnos.dni, 
+   alumnos.fechaNac, 
+   cursos.nombreCorto
+   ) LIKE :expresion";
+
+        # ejecutamos el prepare -> objeto de la clase pdostatament
+        $pdostsmt = $this->pdo->prepare($sql);
+
+        # Debemos añadir a la expresión del usuario las % para que no sea una búsqueda extricta
+        $exp = "%$expresion%";
+
+        # Vinculamos la expreesión con bimParam
+        $pdostsmt->bindParam(':expresion', $exp, PDO::PARAM_STR);
+
+        # Establezco tipo de fetch
+        $pdostsmt->setFetchMode(PDO::FETCH_OBJ); // extrae cada elemento como un objeto
+
+        # Ejecuto
+        $pdostsmt->execute();
+        //-> en este momento es de la clase pdoresult
 
         # Devuelvo objeto clase pdoresult
         return $pdostsmt;
