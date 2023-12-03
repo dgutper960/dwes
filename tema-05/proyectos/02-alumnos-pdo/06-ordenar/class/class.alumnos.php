@@ -276,6 +276,45 @@ class Alumnos extends Conexion
         }
     }
 
+    /**
+     * Método que extrae los alumnos ordenados
+     * - Necesita como entrada un criterio de búsqueda
+     */
+    function oreder($criterio){
+
+             /** vamos a sql workbench y probamos el comando para verificar que funciona */
+        $sql = "SELECT 
+        alumnos.id,
+        CONCAT_WS(', ', alumnos.apellidos, alumnos.nombre) AS alumno,
+        alumnos.email,
+        alumnos.telefono,
+        alumnos.poblacion,
+        alumnos.dni,
+        TIMESTAMPDIFF(YEAR,
+            alumnos.fechaNac,
+            NOW()) AS edad, /** en este caso edad sería la propiedad del objeto */
+        cursos.nombreCorto AS curso
+    FROM
+        alumnos
+            INNER JOIN
+        cursos ON alumnos.id_curso = cursos.id
+    ORDER BY $criterio";
+
+        # ejecutamos el prepare -> objeto de la clase pdostatament
+        $pdostsmt = $this->pdo->prepare($sql);
+
+        # Al ser solo consulta no necesitamos el bimparam
+        
+        # Establezco tipo de fetch
+        $pdostsmt->setFetchMode(PDO::FETCH_OBJ); // extrae cada elemento como un objeto
+
+        # Ejecuto
+        $pdostsmt->execute(); //-> en este momento es de la clase pdoresult
+
+        # Devuelvo objeto clase pdoresult
+        return $pdostsmt;
+
+    }
 }
 
 ?>

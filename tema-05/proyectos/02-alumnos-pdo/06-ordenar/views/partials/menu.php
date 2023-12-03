@@ -20,12 +20,17 @@
                     </a>
                     <!-- Deberemos enviar el criterior de ordenacion de forma dinamica -->
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=descripcion">Descripción</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=modelo">Modelo</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=marca">Marca</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=categorias">Categorías</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=unidades">Unidades</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=precio">Precio</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.nombre">Nombre</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.apellidos">Apellidos</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.email">Email</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.telefono">Telefono</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.direccion">Dirección</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.poblacion">Población</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.provincia">Provincia</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.nacionalidad">Nacionalidad</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.dni">DNI</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.fechaNac">Edad</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.id_curso">id_curso</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
