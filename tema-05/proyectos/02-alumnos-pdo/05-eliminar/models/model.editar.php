@@ -14,7 +14,7 @@
 
     # extraigo los valores de los alumnos y de los cursos
     // objeto de la clase pdo stmt
-    $alumnos = $conexion->getAlumnos(); 
+    // $alumnos = $conexion->getAlumnos(); 
     $cursos = $conexion->getCursos();
 
     # Buscamos el alumno a editar
