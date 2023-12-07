@@ -163,6 +163,38 @@ FROM
         }
     }
 
+    /**
+     * Function read()
+     *  - Obtiene un Corredor
+     *  - Entrada -> id del corredor a extraer de la BBDD
+     */
+    public function read($id){
+
+        try {
+
+        // creamos la cunsulta para buscar el corredor
+            $sql = "SELECT * FROM corredores WHERE id = :id LIMIT 1";
+            // Ejecutamos el prepare
+            $stmt = $this->pdo->prepare($sql);
+            // vinculamos los parámetros
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            // ejecutamos
+            $stmt->execute();
+            // establecemos el fetch como objeto
+            $data = $stmt->fetch(PDO::FETCH_OBJ);
+
+            if (!$data) {
+                throw new Exception('Corredor No Encontrado');
+            }
+
+            return $data;
+        } catch (Exception $e) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+    }
+
+
 }
 
 
