@@ -7,13 +7,13 @@
 include('config/db.php');
 
 include('class/class.conexion.php');
-//include('class/class.corredor.php'); en inigun momento se instancia esta clase
+//include('class/class.corredor.php'); // NO deberemos instanciar un objeto de corredor
 include('class/class.corredores.php');
 
-include('models/model.index.php');
+include('models/model.nuevo.php');
 
 
-include('views/view.index.php');
+include('views/view.nuevo.php');
 
 
 ?>
