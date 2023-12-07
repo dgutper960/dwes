@@ -32,10 +32,21 @@
                 <label for="ciudad" class="form-label">Ciudad</label>
                 <input type="text" class="form-control" name="ciudad">
             </div>
-            <!-- Sexo -->
-            <div class="mb-3">
-                <label for="sexo" class="form-label">Sexo</label>
-                <input type="text" class="form-control" name="sexo">
+            <!-- Sexo DEBE MOSTRAR UN CHECKBOX ESTÁTIOCO-->
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio1"
+                    value="M">
+                <label class="form-check-label" for="sexo">Mujer</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio2"
+                    value="H">
+                <label class="form-check-label" for="sexo">Hombre</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio3"
+                    value="">
+                <label class="form-check-label" for="sexo">No especificar</label>
             </div>
             <!-- Fecha Nacimiento -->
             <div class="mb-3">

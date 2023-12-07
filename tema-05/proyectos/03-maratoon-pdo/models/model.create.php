@@ -50,7 +50,6 @@ $corredores = new Corredores();
 $corredores->insert_corredor($corredor);
 // el corredor se ha insertado en la BBDD
 
-// # El controlador nos redirecciona a index.php
 // # REDIRECCIONAMOS AL CONTROLADOR PRINCIPAL
 // Ya hemos añadido a la base de datos, cargamos el index en el controlador
 
