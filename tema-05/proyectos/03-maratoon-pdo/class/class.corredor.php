@@ -17,7 +17,7 @@
     public $sexo;
     public $email;
     public $dni;
-    public $edad;
+
     public $id_categoria;
     public $id_club;
 
@@ -30,7 +30,7 @@
         $sexo = null,
         $email = null,
         $dni = null,
-        $edad = null,
+
         $id_categoria = null,
         $id_club = null,
     ){
@@ -42,7 +42,7 @@
         $this->sexo = $sexo;
         $this->email = $email;
         $this->dni = $dni;
-        $this->edad = $edad;
+
         $this->id_categoria = $id_categoria;
         $this->id_club = $id_club;
     }

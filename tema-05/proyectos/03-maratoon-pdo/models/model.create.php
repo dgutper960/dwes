@@ -29,7 +29,6 @@ $corredor = new Corredor(
     $fechaNacimiento,
     $email,
     $dni,
-    null,
     $id_categoria,
     $id_club
 );

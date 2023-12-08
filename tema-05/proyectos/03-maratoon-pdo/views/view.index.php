@@ -37,7 +37,7 @@
             <!-- Mostraremos el contenido de cada artículo -->
             <tbody>
                 <!-- ACCEDEMOS A LOS ALUMNOS E ITERAMOS -->
-                <?php foreach($corredores as $corredor): ?>
+                <?php foreach ($corredores as $corredor): ?>
                     <tr>
                         <td>
                             <?= $corredor->id ?>
@@ -67,7 +67,8 @@
 
                         <td>
                             <!-- Botón eliminar GET id -> eliminar.php  -->
-                            <a href="eliminar.php?id=<?= $corredor->id ?>" title="Eliminar">
+                            <a onclick="confirmacion(event, '<?= $corredor->id ?>')"
+                                href="eliminar.php?id=<?= $corredor->id ?>" title="Eliminar">
                                 <i class="bi bi-trash-fill"></i>
                             </a>
 
@@ -94,9 +95,10 @@
                 </tr>
             </tfoot>
         </table>
-                    
+
         <!-- CERRAMOS LA CONEXIÓN Y RESULTADO -->
-        <?php $corredores = null; $conexion->cerrar_conexion(); ?>
+        <?php $corredores = null;
+        $conexion->cerrar_conexion(); ?>
 
         <br>
         <br>
@@ -110,6 +112,18 @@
 
     <!-- js bootstrap 532-->
     <?php include 'layouts/javascript.html' ?>
+
+
+    <script>
+        function confirmacion(event, id) {
+            event.preventDefault();
+            if (confirm("¿Estás seguro de que quieres borrar este corredor\nEsta acción no se puede deshacer?")) {
+                window.location.href = 'eliminar.php?id=' + id;
+            } else {
+                window.location.href = 'index.php';
+            }
+        }
+    </script>
 </body>
 
 </html>
