@@ -13,10 +13,10 @@ $id_editar = $_GET['id'];
 # Instanciamos objeto de Corredores para establecer la conexión
 $conexion = new Corredores;
 
-# Cargamos las categorías para la lista desplegable
+# Cargamos las categorías para la lista desplegable dinámica
 $caregorias = $conexion->getCategorias();
 
-# Cargamos los clubs para la lista desplegable
+# Cargamos los clubs para la lista desplegable dinámica
 $clubs = $conexion->getClubs();
 
 # Conectamos

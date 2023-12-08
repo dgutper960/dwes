@@ -60,7 +60,7 @@ FROM
     public function getCategorias()
     {
         $sql = "SELECT 
-        id, nombrecorto
+        id, nombreCorto
     FROM
         categorias
     ORDER BY id";
@@ -90,7 +90,7 @@ FROM
     public function getClubs()
     {
         $sql = "SELECT 
-        id, nombrecorto
+        id, nombreCorto
     FROM
         clubs
     ORDER BY id";
@@ -117,10 +117,19 @@ FROM
     public function insert_corredor(Corredor $corredor)
     {
         // abrimos bloque try-catch
-        try{
+        try {
             // preparamos nuestro comando SQL
-            $sql = "INSERT INTO corredores VALUES(
-                null,
+            $sql = "INSERT INTO maratoon.corredores (
+                nombre,
+                apellidos,
+                ciudad,
+                fechaNacimiento,
+                sexo,
+                email,
+                dni,
+                id_categoria,
+                id_club
+            ) VALUES(
                 :nombre,
                 :apellidos,
                 :ciudad,
@@ -128,10 +137,8 @@ FROM
                 :sexo,
                 :email,
                 :dni,
-                null,
                 :id_categoria,
-                :id_club
-            )";
+                :id_club)";
 
             # Ejecutamos el prepare de la clase PDOstsmt
             $pdostsmt = $this->pdo->prepare($sql);
@@ -168,11 +175,12 @@ FROM
      *  - Obtiene un Corredor
      *  - Entrada -> id del corredor a extraer de la BBDD
      */
-    public function read($id){
+    public function read($id)
+    {
 
         try {
 
-        // creamos la cunsulta para buscar el corredor
+            // creamos la cunsulta para buscar el corredor
             $sql = "SELECT * FROM corredores WHERE id = :id LIMIT 1";
             // Ejecutamos el prepare
             $stmt = $this->pdo->prepare($sql);
@@ -192,6 +200,47 @@ FROM
             include('views/partials/errorDB.php');
             exit();
         }
+    }
+
+    public function update($id, Corredor $corredor)
+    {
+        $sql = "UPDATE corredores SET
+        nombre = :nombre,
+        apellidos = :apellidos,
+        ciudad = :ciudad,
+        fechaNacimiento = :fechaNacimiento,
+        sexo = :sexo,
+        email = :email,
+        dni = :dni,
+        id_categoria = :id_categoria,
+        id_club = :id_club
+        WHERE id = :id
+    ;";
+
+        # Ejecutamos el prepare:
+        $pdostsmt = $this->pdo->prepare($sql);
+
+        # Vinculamos los parámetros con bindParam
+        $pdostsmt->bindParam(':nombre', $corredor->nombre, PDO::PARAM_STR, 20);
+        $pdostsmt->bindParam(':apellidos', $corredor->apellidos, PDO::PARAM_STR, 45);
+        $pdostsmt->bindParam(':ciudad', $corredor->ciudad, PDO::PARAM_STR, 30);
+        $pdostsmt->bindParam(':fechaNacimiento', $corredor->fechaNacimiento);
+        $pdostsmt->bindParam(':sexo', $corredor->sexo);
+        $pdostsmt->bindParam(':email', $corredor->email, PDO::PARAM_STR, 45);
+        $pdostsmt->bindParam(':dni', $corredor->dni, PDO::PARAM_STR, 9);
+        $pdostsmt->bindParam(':id_categoria', $corredor->id_categoria, PDO::PARAM_INT, 10);
+        $pdostsmt->bindParam(':id_club', $corredor->id_club, PDO::PARAM_INT, 10);
+        $pdostsmt->bindParam(':id', $id, PDO::PARAM_INT, 10);
+
+        # Ejecutamos el sql
+        $pdostsmt->execute();
+
+        # Liberamos espacio
+        $pdostsmt = null;
+
+        # Cerramos la conexion
+        $this->pdo = null;
+
     }
 
 
