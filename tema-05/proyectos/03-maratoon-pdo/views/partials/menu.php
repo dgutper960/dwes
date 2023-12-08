@@ -18,14 +18,15 @@
                         aria-expanded="false">
                         Ordenar
                     </a>
-                    <!-- Deberemos enviar el criterior de ordenacion de forma dinamica -->
+                    <!-- Deberemos enviar el criterio de ordenacion de forma dinamica -->
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=descripcion">Descripción</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=modelo">Modelo</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=marca">Marca</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=categorias">Categorías</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=unidades">Unidades</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=precio">Precio</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=nombre">Nombre</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=apellidos">Apellidos</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=ciudad">Ciudad</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=email">Email</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=edad">Edad</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=id_categoria">Categoría</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=id_club">Club</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
