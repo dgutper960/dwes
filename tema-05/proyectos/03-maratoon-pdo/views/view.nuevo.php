@@ -34,18 +34,15 @@
             </div>
             <!-- Sexo DEBE MOSTRAR UN CHECKBOX ESTÁTIOCO-->
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio1"
-                    value="M">
+                <input class="form-check-input" type="radio" name="sexo" value="M">
                 <label class="form-check-label" for="sexo">Mujer</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio2"
-                    value="H">
+                <input class="form-check-input" type="radio" name="sexo" value="H">
                 <label class="form-check-label" for="sexo">Hombre</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio3"
-                    value="">
+                <input class="form-check-input" type="radio" name="sexo" value="">
                 <label class="form-check-label" for="sexo">No especificar</label>
             </div>
             <!-- Fecha Nacimiento -->
@@ -71,7 +68,7 @@
                     <!-- Generamos la lista dinámica de Categorías -->
                     <?php foreach ($caregorias as $categoria): ?>
                         <option value="<?= $categoria['id'] ?>">
-                            <?= $categoria['nombrecorto'] ?>
+                            <?= $categoria['nombreCorto'] ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -84,7 +81,7 @@
                     <!-- Generamos la lista dinámica de Categorías -->
                     <?php foreach ($clubs as $club): ?>
                         <option value="<?= $club['id'] ?>">
-                            <?= $club['nombrecorto'] ?>
+                            <?= $club['nombreCorto'] ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
