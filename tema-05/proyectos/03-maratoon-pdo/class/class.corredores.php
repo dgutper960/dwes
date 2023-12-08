@@ -243,6 +243,52 @@ FROM
 
     }
 
+       /**
+     * Function delete()
+     *  - Obtiene un Corredor
+     *  - Entrada -> id del corredor a extraer de la BBDD
+     */
+    public function delete($id)
+    {
+
+        try {
+        
+            # Debemos borrar los registros del corredor (las tablas vinculadas)
+            $sql_reg = "DELETE FROM registros WHERE id_corredor = :id";
+
+            // Ejecutamos el prepare
+            $pdostsmt_reg = $this->pdo->prepare($sql_reg);
+
+            // Vinculamos el parametro
+            $pdostsmt_reg->bindParam(':id', $id, PDO::PARAM_INT, 10);
+
+            // Ejecutamos
+            $pdostsmt_reg->execute();
+
+            # Ahora podemos borrar el corredor
+            $sql_corr = "DELETE FROM corredores WHERE id = :id";
+
+            // Ejecutamos el prepare
+            $pdostsmt_corr = $this->pdo->prepare($sql_corr);
+
+            // Vinculamos el parámetro
+            $pdostsmt_corr->bindParam(':id', $id, PDO::PARAM_INT, 10);
+
+            // ejecutamos
+            $pdostsmt_corr->execute();
+
+            # Liberamos espacio de ambos objetos y cerramos conexion
+            $sql_reg = null;
+            $sql_corr = null;
+
+            $this->pdo = null;
+            
+        } catch (Exception $e) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+    }
+
 
 }
 
