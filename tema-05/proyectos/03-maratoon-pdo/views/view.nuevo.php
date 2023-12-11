@@ -42,7 +42,7 @@
                 <label class="form-check-label" for="sexo">Hombre</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="sexo" value="">
+                <input class="form-check-input" type="radio" name="sexo" value=" ">
                 <label class="form-check-label" for="sexo">No especificar</label>
             </div>
             <!-- Fecha Nacimiento -->
