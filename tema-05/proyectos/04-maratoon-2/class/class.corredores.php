@@ -45,7 +45,7 @@ class Corredores extends Conexion
         # En este caso no tenemos que vincular parametros
 
         # Debemos seleccionar el fetchmode
-        $pdostmt->setFetchMode(PDO::FETCH_OBJ); 
+        $pdostmt->setFetchMode(PDO::FETCH_OBJ);
         // los atributos de este objeto van a coincidir con los nombres de las columnas en la consulta 
 
         # Hacemos el execute
@@ -59,7 +59,8 @@ class Corredores extends Conexion
      * Método getCategorias()
      * -  Carga las categorías en un array indexado
      */
-    function getCategorias(){
+    function getCategorias()
+    {
         # consulta sql
         $sql = "SELECT 
         id, nombrecorto
@@ -83,11 +84,12 @@ class Corredores extends Conexion
 
     }
 
-        /**
+    /**
      * Método getClubs()
      * -  Carga las categorías en un array indexado
      */
-    function getClubs(){
+    function getClubs()
+    {
         # consulta sql
         $sql = "SELECT 
         id, nombrecorto
@@ -110,6 +112,77 @@ class Corredores extends Conexion
         return $pdostmt;
 
     }
+
+    /**
+     * Function create()
+     * - Agrega un Corredor a la BBDD
+     * - Sentencia Insert
+     * - Parametro de entrada obligatorio de la clase Corredor
+     */
+
+    function create(Corredor $corredor)
+    {
+
+        try {
+            // sentencia sql Insert
+            $sql = "INSERT INTO corredores (
+            nombre,
+            apellidos,
+            ciudad,
+            fechaNacimiento,
+            sexo,
+            email,
+            dni,
+            edad,
+            id_categoria,
+            id_club
+            )VALUES(
+            :nombre,
+            :apellidos,
+            :ciudad,
+            :fechaNacimiento,
+            :sexo,
+            :email,
+            :dni,
+            timestampdiff(year, fechaNacimiento, now()),
+            :id_categoria,
+            :id_club
+            )";
+
+            # Ejecutamos el prepare
+            $pdostmt = $this->pdo->prepare($sql);
+
+            # Vinculamos los parámetros
+            $pdostmt->bindParam(':nombre', $corredor->nombre, PDO::PARAM_STR, 30);
+            $pdostmt->bindParam(':apellidos', $corredor->apellidos, PDO::PARAM_STR, 50);
+            $pdostmt->bindParam(':ciudad', $corredor->ciudad, PDO::PARAM_STR, 50);
+            $pdostmt->bindParam(':fechaNacimiento', $corredor->fechaNacimiento);
+            $pdostmt->bindParam(':sexo', $corredor->sexo);
+            $pdostmt->bindParam(':email', $corredor->email, PDO::PARAM_STR, 100);
+            $pdostmt->bindParam(':dni', $corredor->dni, PDO::PARAM_STR, 9);
+            $pdostmt->bindParam(':id_categoria', $corredor->id_categoria, PDO::PARAM_INT);
+            $pdostmt->bindParam(':id_club', $corredor->id_club, PDO::PARAM_INT);
+
+            # Ejecutamos
+            $pdostmt->execute();
+
+            # Una vez insertado el registro podemos liberar espacio
+            $pdostmt = null;
+
+            # Cerramos la conexión
+            $this->pdo = null;
+        } catch (PDOException $e) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+
+
+
+
+
+
+    }
+
 
 
 

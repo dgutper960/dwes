@@ -23,17 +23,17 @@
     public $id_club;
 
     public function __construct(
-        $id, 
-        $nombre,
-        $apellidos,
-        $ciudad,
-        $fechaNacimiento,
-        $sexo,
-        $email,
-        $dni,
-        $edad,
-        $id_categoria,
-        $id_club
+        $id = null, 
+        $nombre = null,
+        $apellidos = null,
+        $ciudad = null,
+        $fechaNacimiento = null,
+        $sexo = null,
+        $email = null,
+        $dni = null,
+        $edad = null,
+        $id_categoria = null,
+        $id_club = null
     ) {
         $this->id = $id;
         $this->nombre = $nombre;
