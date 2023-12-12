@@ -127,6 +127,7 @@ FROM
                 sexo,
                 email,
                 dni,
+                edad,
                 id_categoria,
                 id_club
             ) VALUES(
@@ -137,6 +138,7 @@ FROM
                 :sexo,
                 :email,
                 :dni,
+                timestampdiff(YEAR, fechaNacimiento, now()),
                 :id_categoria,
                 :id_club)";
 
