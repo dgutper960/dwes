@@ -53,9 +53,65 @@ class Corredores extends Conexion
 
         # Retornamos
         return $pdostmt;
+    }
 
+    /**
+     * Método getCategorias()
+     * -  Carga las categorías en un array indexado
+     */
+    function getCategorias(){
+        # consulta sql
+        $sql = "SELECT 
+        id, nombrecorto
+    FROM
+        categorias
+    ORDER BY id ASC";
+
+        # No necesitamos bindParam
+
+        # Ejecutamos el prepare
+        $pdostmt = $this->pdo->prepare($sql);
+
+        # Seleccionamos del tipo de fetch como assoc
+        $pdostmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        # Ejecutamos
+        $pdostmt->execute();
+
+        # Retornamos
+        return $pdostmt;
 
     }
+
+        /**
+     * Método getClubs()
+     * -  Carga las categorías en un array indexado
+     */
+    function getClubs(){
+        # consulta sql
+        $sql = "SELECT 
+        id, nombrecorto
+    FROM
+        clubs
+    ORDER BY id ASC";
+
+        # No necesitamos bindParam
+
+        # Ejecutamos el prepare
+        $pdostmt = $this->pdo->prepare($sql);
+
+        # Seleccionamos del tipo de fetch como assoc
+        $pdostmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        # Ejecutamos
+        $pdostmt->execute();
+
+        # Retornamos
+        return $pdostmt;
+
+    }
+
+
 
 
 
