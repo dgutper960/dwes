@@ -175,15 +175,97 @@ class Corredores extends Conexion
             include('views/partials/errorDB.php');
             exit();
         }
+    }
 
+    /**
+     * Function read()
+     * - Retorna un objeto de la Clase Corredor
+     * - Sentencia SELECT por id del corredor
+     */
+    function read($id_editar)
+    {
 
+        try {
+            # Definimos la sentencia
+            $sql = "SELECT * FROM corredores WHERE id = :id LIMIT 1";
+
+            # Ejecutamos el prepare
+            $stmt = $this->pdo->prepare($sql);
+
+            # Vinculamos el parametro
+            $stmt->bindParam(':id', $id_editar, PDO::PARAM_INT);
+
+            # Obtenemos el objeto de la clase pdostmt
+            $stmt->execute();
+
+            # Seleccionamos el tipo de fetch
+            $data = $stmt->fetch(PDO::FETCH_OBJ);
+
+            if (!$data) {
+                throw new Exception('Corredor no encontrado');
+            }
+
+            # retornamos el objeto
+            return $data;
+
+        } catch (PDOException $e) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+
+    }
+
+    /***
+     * Function update()
+     * - Entrada
+     *      - $id_editar
+     *      - Objeto Corredor
+     * 
+     */
+    function update($id_editar, Corredor $corredor)
+    {
+
+        // sentencia SQL
+        $sql = "UPDATE corredores SET
+        nombre = :nombre,
+        apellidos = :apellidos,
+        ciudad = :ciudad,
+        fechaNacimiento =:fechaNacimiento,
+        sexo = :sexo,
+        email = :email,
+        dni = :dni,
+        id_categoria = :id_categoria,
+        id_club = :id_club
+        WHERE
+        id = :id";
+
+        # Ejecutamos el prepare
+        $pdostmt = $this->pdo->prepare($sql);
+
+        # BindParam
+        $pdostmt->bindParam(':nombre', $corredor->nombre);
+        $pdostmt->bindParam(':apellidos', $corredor->apellidos);
+        $pdostmt->bindParam(':ciudad', $corredor->ciudad);
+        $pdostmt->bindParam(':fechaNacimiento', $corredor->fechaNacimiento);
+        $pdostmt->bindParam(':sexo', $corredor->sexo);
+        $pdostmt->bindParam(':email', $corredor->email);
+        $pdostmt->bindParam(':dni', $corredor->dni);
+        $pdostmt->bindParam(':id_categoria', $corredor->id_categoria);
+        $pdostmt->bindParam(':id_club', $corredor->id_club);
+        $pdostmt->bindParam(':id', $id_editar);
+
+        # Ejecutamos
+        $pdostmt->execute();
+
+        #liberamos espacio
+        $pdostmt = null;
+        # cerramos 
+        $this->pdo = null;
 
 
 
 
     }
-
-
 
 
 
