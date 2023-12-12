@@ -8,7 +8,7 @@
  *  - No atenderemos al principio de encapsulamiento
  */
 
- class Corredor{
+ Class Corredor{
     
     public $id;
     public $nombre;
