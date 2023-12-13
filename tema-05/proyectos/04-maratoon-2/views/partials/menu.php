@@ -20,13 +20,13 @@
                     </a>
                     <!-- Deberemos enviar el criterio de ordenacion de forma dinamica -->
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=nombre">Nombre</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=apellidos">Apellidos</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=ciudad">Ciudad</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=email">Email</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=edad">Edad</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=id_categoria">Categoría</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=id_club">Club</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=2">Nombre</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=3">Apellidos</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=4">Ciudad</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=5">Email</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=6">Edad</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=7">Categoría</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=8">Club</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

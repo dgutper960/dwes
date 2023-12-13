@@ -16,7 +16,7 @@ class Corredores extends Conexion
      * Implementamos el método para cargar los corredores
      * - Estrae un array de objetos Corredor de la basse de datos
      */
-    function getCorredores()
+    public function getCorredores()
     {
 
         // creamos la consulta SQL y la igualamos a una variable
@@ -62,7 +62,7 @@ class Corredores extends Conexion
      * Método getCategorias()
      * -  Carga las categorías en un array indexado
      */
-    function getCategorias()
+    public function getCategorias()
     {
         # consulta sql
         $sql = "SELECT 
@@ -91,7 +91,7 @@ class Corredores extends Conexion
      * Método getClubs()
      * -  Carga las categorías en un array indexado
      */
-    function getClubs()
+    public function getClubs()
     {
         # consulta sql
         $sql = "SELECT 
@@ -123,7 +123,7 @@ class Corredores extends Conexion
      * - Parametro de entrada obligatorio de la clase Corredor
      */
 
-    function create(Corredor $corredor)
+    public function create(Corredor $corredor)
     {
 
         try {
@@ -185,7 +185,7 @@ class Corredores extends Conexion
      * - Retorna un objeto de la Clase Corredor
      * - Sentencia SELECT por id del corredor
      */
-    function read($id_editar)
+    public function read($id_editar)
     {
 
         try {
@@ -225,7 +225,7 @@ class Corredores extends Conexion
      *      - Objeto Corredor
      * 
      */
-    function update($id_editar, Corredor $corredor)
+    public function update($id_editar, Corredor $corredor)
     {
 
         // sentencia SQL
@@ -264,6 +264,115 @@ class Corredores extends Conexion
         $pdostmt = null;
         # cerramos 
         $this->pdo = null;
+
+
+    }
+
+    /**
+     * Function delete
+     * - Debemos tener en cuenta de que debemos borrar los registros del corredor
+     * - Entrada $id_eliminar
+     */
+    public function delete($id_eliminar)
+    {
+
+        try {
+
+            // comando sql borrar registros
+            $sql_reg = "DELETE FROM registros WHERE id_corredor = :id";
+
+            # prepare
+            $pdostmt = $this->pdo->prepare($sql_reg);
+
+            # vinculamos parametro
+            $pdostmt->bindParam(':id', $id_eliminar, PDO::PARAM_INT);
+
+            # Ejecutamos 
+            $pdostmt->execute();
+
+            // # Liberamos espacio
+            // $pdostmt = null;
+
+            // # Cerramos
+            // $this->pdo = null;
+
+            // comando borrar corredor
+            $sql_corr = "DELETE FROM corredores WHERE id = :id";
+
+            # Prepare
+            $pdostmt = $this->pdo->prepare($sql_corr);
+
+            # vinculamos
+            $pdostmt->bindParam(':id', $id_eliminar, PDO::PARAM_INT);
+
+            #Ejecutamos
+            $pdostmt->execute();
+
+
+            # Liberamos espacio
+            $pdostmt = null;
+
+            # Cerramos
+            $this->pdo = null;
+
+        } catch (PDOException $e) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+    }
+
+    /**
+     * Function order()
+     * - Muestra un SELECT como el de getCorredores
+     * - Añade ordenacion mediante un criterio dado
+     */
+    public function order($criterio)
+    {
+
+        try {
+            // implementamos consulta
+            $sql = "SELECT
+        corredores.id,
+        corredores.nombre,
+        corredores.apellidos,
+        corredores.ciudad,
+        corredores.email,
+        TIMESTAMPDIFF(YEAR, corredores.fechaNacimiento, NOW()) AS edad,
+        categorias.nombrecorto AS categoria,
+        clubs.nombreCorto AS club
+        FROM
+        corredores
+        INNER JOIN
+        categorias
+        ON
+        corredores.id_categoria = categorias.id
+        INNER JOIN
+        clubs ON
+        corredores.id_club = clubs.id
+        ORDER BY
+        :criterio";
+
+            # Ejecutamos prepare
+            $pdostmt = $this->pdo->prepare($sql);
+
+            # vinculamos el criterio
+            $pdostmt->bindParam(':criterio', $criterio);
+
+            # Seleccionamos el fetchMode a objetos
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            # ejecutamos
+            $pdostmt->execute();
+
+            # retornamos
+            return $pdostmt;
+
+
+
+        } catch (PDOException $e) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
 
 
     }
