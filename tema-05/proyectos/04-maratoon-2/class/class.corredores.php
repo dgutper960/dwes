@@ -326,7 +326,7 @@ class Corredores extends Conexion
      * - Muestra un SELECT como el de getCorredores
      * - Añade ordenacion mediante un criterio dado
      */
-    public function order($criterio)
+    public function order(int $criterio)
     {
 
         try {
@@ -356,7 +356,7 @@ class Corredores extends Conexion
             $pdostmt = $this->pdo->prepare($sql);
 
             # vinculamos el criterio
-            $pdostmt->bindParam(':criterio', $criterio);
+            $pdostmt->bindParam(':criterio', $criterio, PDO::PARAM_INT);
 
             # Seleccionamos el fetchMode a objetos
             $pdostmt->setFetchMode(PDO::FETCH_OBJ);

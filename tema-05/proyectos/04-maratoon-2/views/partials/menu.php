@@ -20,6 +20,7 @@
                     </a>
                     <!-- Deberemos enviar el criterio de ordenacion de forma dinamica -->
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=1">ID</a></li>
                         <li><a class="dropdown-item" href="ordenar.php?criterio=2">Nombre</a></li>
                         <li><a class="dropdown-item" href="ordenar.php?criterio=3">Apellidos</a></li>
                         <li><a class="dropdown-item" href="ordenar.php?criterio=4">Ciudad</a></li>
