@@ -377,9 +377,71 @@ class Corredores extends Conexion
 
     }
 
+        /**
+     * Function order()
+     * - Muestra un SELECT como el de getCorredores
+     * - Añade ordenacion mediante un criterio dado
+     */
+    public function buscar($expresion)
+    {
+        $expresion = '%'.$expresion.'%';
+
+        try {
+            // implementamos consulta
+            $sql = "SELECT
+            corredores.id,
+            corredores.nombre,
+            corredores.apellidos,
+            corredores.ciudad,
+            corredores.email,
+            TIMESTAMPDIFF(YEAR, corredores.fechaNacimiento, NOW()) AS edad,
+            categorias.nombrecorto AS categoria,
+            clubs.nombreCorto AS club
+            FROM
+            corredores
+            INNER JOIN
+            categorias
+            ON
+            corredores.id_categoria = categorias.id
+            INNER JOIN
+            clubs ON
+            corredores.id_club = clubs.id
+            WHERE 
+            concat_ws(' ',
+            corredores.id,
+            corredores.nombre,
+            corredores.apellidos,
+            corredores.ciudad,
+            corredores.email,
+            TIMESTAMPDIFF(YEAR, corredores.fechaNacimiento, NOW()),
+            categorias.nombrecorto,
+            clubs.nombreCorto)
+            LIKE :expresion";
+
+            # Ejecutamos prepare
+            $pdostmt = $this->pdo->prepare($sql);
+
+            # vinculamos el criterio
+            $pdostmt->bindParam(':expresion', $expresion, PDO::PARAM_INT);
+
+            # Seleccionamos el fetchMode a objetos
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            # ejecutamos
+            $pdostmt->execute();
+
+            # retornamos
+            return $pdostmt;
 
 
 
+        } catch (PDOException $e) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+
+
+    }
 
 
 
