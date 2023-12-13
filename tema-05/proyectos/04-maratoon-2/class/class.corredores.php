@@ -28,13 +28,16 @@ class Corredores extends Conexion
         corredores.email,
         TIMESTAMPDIFF(YEAR, corredores.fechaNacimiento, NOW()) AS edad,
         categorias.nombrecorto AS categoria,
-        categorias.nombrecorto AS club
+        clubs.nombreCorto AS club
         FROM
         corredores
         INNER JOIN
         categorias
         ON
-        corredores.id_categoria = categorias.id";
+        corredores.id_categoria = categorias.id
+        INNER JOIN
+        clubs ON
+        corredores.id_club = clubs.id";
 
 
         /**
@@ -261,8 +264,6 @@ class Corredores extends Conexion
         $pdostmt = null;
         # cerramos 
         $this->pdo = null;
-
-
 
 
     }
