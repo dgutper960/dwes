@@ -14,12 +14,12 @@
                         Ordenar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="ordenar.php?columna=1"></a>ID</li>
-                        <li><a class="dropdown-item" href="ordenar.php?columna=2"></a>Título</li>
-                        <li><a class="dropdown-item" href="ordenar.php?columna=3"></a>Autor</li>
-                        <li><a class="dropdown-item" href="ordenar.php?columna=4"></a>Editorial</li>
-                        <li><a class="dropdown-item" href="ordenar.php?columna=4"></a>Unidades</li>
-                        <li><a class="dropdown-item" href="ordenar.php?columna=5"></a>PVP</li>
+                        <li><a class="dropdown-item" href="ordenar.php?columna=1">ID</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?columna=2">Título</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?columna=3">Autor</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?columna=4">Editorial</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?columna=4">Unidades</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?columna=5">PVP</a></li>
                        
                     </ul>
                     </li>

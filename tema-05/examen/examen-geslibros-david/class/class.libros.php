@@ -194,7 +194,10 @@ class Libros extends Conexion
 
             $pdostmt->execute();
 
-            return $pdostmt;
+            $pdostmt = null;
+
+            $this->pdo = null;
+
 
 
         } catch (PDOException $e) {
