@@ -1,16 +1,17 @@
 <?php
 
-    class Alumnos Extends Controller {
+    class Alumno Extends Controller {
 
-        function __construct() {
+        function __construct() { /**Descriptivo */
 
             parent ::__construct();
             
             
         } // no es necesario pero lo dejamos por convención
 
-        function render() {
+        /*** Este método se carga de forma automática si no se especifica segundo parámetro en la url */
+        function render() { /** Vista acociada a este controlador */
 
-            $this->view->render('main/index');
+            $this->view->render('alumno/main/index');
         }
     }
