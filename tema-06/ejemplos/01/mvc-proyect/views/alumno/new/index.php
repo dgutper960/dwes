@@ -8,10 +8,7 @@
 <body>
 
 
-    <h1>Vista Main alumnos.php</h1>
-
-   <p>nombre: <?= $this->nombre; ?> </p>
-   <p>apellidos: <?= $this->apellidos; ?> </p>
+    <h1>Vista New alumnos.php</h1>
     
 </body>
 </html>
