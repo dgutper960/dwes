@@ -78,4 +78,20 @@
             # Redirigimos al main de alumnos
             header('location:'.URL.'alumno');
          }
+
+         /**
+          * Añadimos método editar
+          */
+          function edit($param = []) {{
+            # Obtendo el id del alumno a editar
+            // alumno/edit/4 -> editamos el alumno 4
+            $id_alumno = $param[0]; // el indice 0 corresponde al id
+
+            # title
+            $this->view->title = "Editar - Panel de control Alumnos";
+
+            # Obtener los detalles del alumno
+            $this->view->alumno = $this->model->read($id_alumno);
+
+          }
     }

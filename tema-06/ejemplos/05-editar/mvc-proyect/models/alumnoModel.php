@@ -113,5 +113,29 @@ class alumnoModel extends Model
         }
     }
 
+    /**
+     * Metodo editar
+     * - Edita alumno mediante id como entrada
+     */
+    public function edit(int $id){
+
+        try {
+
+            $sql = 'SELECT * FROM alumnos';
+
+            $conexion = $this->db->connect();
+
+            $pdoSt = $conexion->prepare($sql);
+
+            $pdoSt->execute();
+
+            $pdoSt->setFetchMode(PDO::FETCH_OBJ);
+
+        }catch (PDOException $e) {
+            include('template/partials/errorDB.php');
+            exit();
+        }
+    }
+
 }
 ?>
