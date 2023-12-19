@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="alumno/new">Nuevo</a> <!-- ejecuta el metodo new de alumno -->
+                    <a class="nav-link" href="<?= URL ?>alumno/new">Nuevo</a> <!-- ejecuta el metodo new de alumno -->
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -17,19 +17,19 @@
                     </a>
                     <!-- Deberemos enviar el criterior de ordenacion de forma dinamica -->
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.id">id</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.nombre">Nombre</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.apellidos">Apellidos</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.email">Email</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.telefono">Telefono</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.direccion">Dirección</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.poblacion">Población</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.provincia">Provincia</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.nacionalidad">Nacionalidad</a>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.id">id</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.nombre">Nombre</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.apellidos">Apellidos</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.email">Email</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.telefono">Telefono</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.direccion">Dirección</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.poblacion">Población</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.provincia">Provincia</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.nacionalidad">Nacionalidad</a>
                         </li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.dni">DNI</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.fechaNac">Edad</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=alumnos.id_curso">id_curso</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.dni">DNI</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.fechaNac">Edad</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>ordenar.php?criterio=alumnos.id_curso">id_curso</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

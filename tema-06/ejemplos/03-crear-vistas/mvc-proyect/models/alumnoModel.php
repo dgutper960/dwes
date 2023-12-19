@@ -16,16 +16,18 @@
 
 /** Uso de camelCase obligatorio */
 /** Extends de Model que está en libs */
- class alumnoModel extends Model {
+class alumnoModel extends Model
+{
 
 
     /*No necesitamos constructor*/
 
-    public function get(){
+    public function get()
+    {
 
-      try{
+        try {
 
-         $sql = "SELECT 
+            $sql = "SELECT 
          alumnos.id,
          CONCAT_WS(', ', alumnos.apellidos, alumnos.nombre) AS alumno,
          alumnos.email,
@@ -42,29 +44,74 @@
          cursos ON alumnos.id_curso = cursos.id
      ORDER BY id";
 
-         # Conectamos con la BBDD
-         // bd = objeto de la clase DataBase (tiene la conexion)
-         $conexion = $this->db->connect();
+            # Conectamos con la BBDD
+            // bd = objeto de la clase DataBase (tiene la conexion)
+            $conexion = $this->db->connect();
 
-         # ejecutamos mediante prepare
-         $pdostmt = $conexion->prepare($sql);
+            # ejecutamos mediante prepare
+            $pdostmt = $conexion->prepare($sql);
 
-         # Establecemos el fetch como objeto
-         $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+            # Establecemos el fetch como objeto
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
 
-         # Ejecutamos
-         $pdostmt->execute();
+            # Ejecutamos
+            $pdostmt->execute();
 
-         # Retornamos
-         return $pdostmt;
+            # Retornamos
+            return $pdostmt;
 
-      }catch(PDOException $e){
-         include('template/partials/errorDB.php');
-      }
+        } catch (PDOException $e) {
+            include('template/partials/errorDB.php');
+            exit();
+        }
 
-        
+
     }
- }
 
+    public function create(classAlumno $alumno)
+    {
 
+        try {
+            $sql = 'INSERT INTO alumnos (
+                nombre,
+                apellidos,
+                email,
+                telefono,
+                poblacion,
+                dni,
+                fechaNac,
+                id_curso
+            )VALUES(
+                :nombre,
+                :apellidos,
+                :email,
+                :telefono,
+                :poblacion,
+                :dni,
+                :fechaNac,
+                :id_curso
+            )';
+
+            $conexion = $this->db->connect();
+
+            $pdoSt = $conexion->prepare($sql);
+
+            $pdoSt->bindParam('nombre', $alumno->nombre, PDO::PARAM_STR);
+            $pdoSt->bindParam('apellidos', $alumno->apellidos, PDO::PARAM_STR);
+            $pdoSt->bindParam('email', $alumno->email, PDO::PARAM_STR);
+            $pdoSt->bindParam('telefono', $alumno->telefono, PDO::PARAM_STR);
+            $pdoSt->bindParam('poblacion', $alumno->poblacion, PDO::PARAM_STR);
+            $pdoSt->bindParam('dni', $alumno->dni, PDO::PARAM_STR);
+            $pdoSt->bindParam('fechaNac', $alumno->fechaNac, PDO::PARAM_STR);
+            $pdoSt->bindParam('id_curso', $alumno->id_curso, PDO::PARAM_STR);
+
+            $pdoSt->execute();
+
+        } catch (PDOException $e) {
+            include('template/partials/errorDB.php');
+            exit();
+        }
+    }
+
+}
 ?>

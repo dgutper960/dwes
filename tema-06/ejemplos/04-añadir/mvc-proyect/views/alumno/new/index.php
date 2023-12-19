@@ -12,12 +12,12 @@
     <div class="container">
 
         <!-- cabecera documento -->
-        <?php include 'views/alumno/partials/header.html' ?>
+        <?php include 'views/alumno/partials/header.php' ?>
 
         <legend>Formulario Nuevo Alumnos</legend>
 
         <!-- Formulario Nuevo Libro -->
-        <form action="alumno/create" method="POST">
+        <form action="<?= URL ?>alumno/create" method="POST">
 
             <!-- Nombre -->
             <div class="mb-3">
@@ -84,7 +84,7 @@
             </div>
 
             <!-- botones de acción -->
-            <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
+            <a class="btn btn-secondary" href="<?= URL ?>index.php" role="button">Cancelar</a>
             <button type="reset" class="btn btn-danger">Borrar</button>
             <button type="submit" class="btn btn-primary">Enviar</button>
 
@@ -98,12 +98,12 @@
 
 
         <!-- Pié del documento -->
-        <?php include 'template/partials/footer.html' ?>
+        <?php include 'template/partials/footer.php' ?>
 
     </div>
 
     <!-- javascript bootstrap 532 -->
-    <?php include 'template/partials/javascript.html' ?>
-</body>
+    <?php include 'template/partials/javascript.php' ?>
+</body>/
 
 </html>

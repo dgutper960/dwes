@@ -14,7 +14,7 @@
 	<div class="container">
 
 		<!-- menu de la cabecera -->
-		<?php require_once("views/alumno/partials/header.html") ?>
+		<?php require_once("views/alumno/partials/header.php") ?>
 
 		<!-- mensajes -->
 		<?php require_once("template/partials/mensaje.php") ?>

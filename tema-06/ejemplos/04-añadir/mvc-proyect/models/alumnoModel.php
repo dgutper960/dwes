@@ -61,53 +61,57 @@ class alumnoModel extends Model
             return $pdostmt;
 
         } catch (PDOException $e) {
-            include_once('template/partials/errorDB.php');
+            include('template/partials/errorDB.php');
             exit();
         }
 
 
     }
 
-    /**
-     * Function getCursos()
-     */
-    public function getCursos()
+    public function create(classAlumno $alumno)
     {
 
         try {
-            $sql = 'SELECT 
-            id,
-            nombreCorto
-            FROM 
-            cursos
-            ORDER BY
-            nombreCorto';
+            $sql = 'INSERT INTO alumnos (
+                nombre,
+                apellidos,
+                email,
+                telefono,
+                poblacion,
+                dni,
+                fechaNac,
+                id_curso
+            )VALUES(
+                :nombre,
+                :apellidos,
+                :email,
+                :telefono,
+                :poblacion,
+                :dni,
+                :fechaNac,
+                :id_curso
+            )';
 
-            # Conectamos con la BBDD
-            // bd = objeto de la clase DataBase (tiene la conexion)
             $conexion = $this->db->connect();
 
-            # ejecutamos mediante prepare
-            $pdostmt = $conexion->prepare($sql);
+            $pdoSt = $conexion->prepare($sql);
 
-            # Establecemos el fetch como objeto
-            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+            $pdoSt->bindParam('nombre', $alumno->nombre, PDO::PARAM_STR);
+            $pdoSt->bindParam('apellidos', $alumno->apellidos, PDO::PARAM_STR);
+            $pdoSt->bindParam('email', $alumno->email, PDO::PARAM_STR);
+            $pdoSt->bindParam('telefono', $alumno->telefono, PDO::PARAM_STR);
+            $pdoSt->bindParam('poblacion', $alumno->poblacion, PDO::PARAM_STR);
+            $pdoSt->bindParam('dni', $alumno->dni, PDO::PARAM_STR);
+            $pdoSt->bindParam('fechaNac', $alumno->fechaNac, PDO::PARAM_STR);
+            $pdoSt->bindParam('id_curso', $alumno->id_curso, PDO::PARAM_STR);
 
-            # Ejecutamos
-            $pdostmt->execute();
-
-            # Retornamos
-            return $pdostmt;
-
+            $pdoSt->execute();
 
         } catch (PDOException $e) {
-            include_once('template/partials/errorDB.php');
+            include('template/partials/errorDB.php');
             exit();
         }
     }
 
-
 }
-
-
 ?>
