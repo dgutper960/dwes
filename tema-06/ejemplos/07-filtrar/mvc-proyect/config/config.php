@@ -7,6 +7,6 @@ define('PASSWORD', '');
 define('CHARSET', 'utf8mb4');
 
 // Ruta absoluta
-define('URL','http://localhost/dwes/tema-06/ejemplos/06-ordenar/mvc-proyect/');
+define('URL','http://localhost/dwes/tema-06/ejemplos/07-filtrar/mvc-proyect/');
 
 ?>

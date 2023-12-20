@@ -35,7 +35,7 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search" method="GET" action="filtrar.php">
+            <form class="d-flex" role="search" method="GET" action="<?= URL ?>alumno/filter">
                 <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" name="expresion">
                 <button class="btn btn-outline-secondary" type="submit">Buscar</button>
             </form>

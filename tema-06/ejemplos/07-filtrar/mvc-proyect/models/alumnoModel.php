@@ -133,18 +133,18 @@ ORDER BY id";
             $pdostmt = $conexion->prepare($sql);
 
             // Vinculamos las variables
-            $pdostmt->bindParam(':nombre', $alumno->nombre,PDO::PARAM_STR,30);
-            $pdostmt->bindParam(':apellidos', $alumno->apellidos,PDO::PARAM_STR,50);
-            $pdostmt->bindParam(':email', $alumno->email,PDO::PARAM_STR,50);
-            $pdostmt->bindParam(':telefono', $alumno->telefono,PDO::PARAM_INT);
-            $pdostmt->bindParam(':direccion', $alumno->direccion,PDO::PARAM_STR,60);
-            $pdostmt->bindParam(':poblacion', $alumno->poblacion,PDO::PARAM_STR,30);
-            $pdostmt->bindParam(':provincia', $alumno->provincia,PDO::PARAM_STR,20);
+            $pdostmt->bindParam(':nombre', $alumno->nombre, PDO::PARAM_STR, 30);
+            $pdostmt->bindParam(':apellidos', $alumno->apellidos, PDO::PARAM_STR, 50);
+            $pdostmt->bindParam(':email', $alumno->email, PDO::PARAM_STR, 50);
+            $pdostmt->bindParam(':telefono', $alumno->telefono, PDO::PARAM_INT);
+            $pdostmt->bindParam(':direccion', $alumno->direccion, PDO::PARAM_STR, 60);
+            $pdostmt->bindParam(':poblacion', $alumno->poblacion, PDO::PARAM_STR, 30);
+            $pdostmt->bindParam(':provincia', $alumno->provincia, PDO::PARAM_STR, 20);
             $pdostmt->bindParam(':nacionalidad', $alumno->nacionalidad);
             $pdostmt->bindParam(':dni', $alumno->dni);
             $pdostmt->bindParam(':fechaNac', $alumno->fechaNac);
-            $pdostmt->bindParam(':id_curso', $alumno->id_curso,PDO::PARAM_INT);
-            
+            $pdostmt->bindParam(':id_curso', $alumno->id_curso, PDO::PARAM_INT);
+
             // Ejecutamos la sentencia
             $pdostmt->execute();
         } catch (PDOException $e) {
@@ -183,6 +183,68 @@ ORDER BY :criterio";
             $pdostmt = $conexion->prepare($sql);
 
             $pdostmt->bindParam(':criterio', $criterio, PDO::PARAM_INT);
+
+            // Establecemos el tipo de fetch
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            // Ejecutamos la consulta
+            $pdostmt->execute();
+
+            // Devolvemos el objeto de tipo PDOStatement
+            return $pdostmt;
+        } catch (PDOException $e) {
+            include 'template/partials/errorDB.php';
+            exit();
+        }
+    }
+
+    public function filter($expresion)
+    {
+        $expresion = '%' . $expresion . '%';
+        try {
+
+            // Creamos la consulta
+            $sql = "SELECT 
+    alumnos.id,
+    CONCAT_WS(', ', alumnos.apellidos, alumnos.nombre) AS nombre,
+    alumnos.email,
+    alumnos.telefono,
+    alumnos.poblacion,
+    alumnos.dni,
+    TIMESTAMPDIFF(YEAR,
+        alumnos.fechaNac,
+        NOW()) AS edad,
+    cursos.nombreCorto AS curso
+FROM
+    fp.alumnos
+        INNER JOIN
+    cursos ON alumnos.id_curso = cursos.id
+    WHERE
+        CONCAT_WS(
+    alumnos.id,
+    alumnos.apellidos, 
+    alumnos.nombre,
+    alumnos.email,
+    alumnos.telefono,
+    alumnos.poblacion,
+    alumnos.dni,
+    TIMESTAMPDIFF(YEAR, alumnos.fechaNac, NOW()),
+    alumnos.fechaNac,
+    cursos.nombreCorto,
+    cursos.nombre
+        )
+        LIKE :expresion
+ORDER BY id";
+
+            // Conectamos con la base de datos
+            // $this->db es un objeto de la clase database
+            // Ejecutamos el  método connecto de esa clase
+            $conexion = $this->db->connect();
+
+            // Preparamos la consulta
+            $pdostmt = $conexion->prepare($sql);
+
+            $pdostmt->bindParam(':expresion', $expresion, PDO::PARAM_STR);
 
             // Establecemos el tipo de fetch
             $pdostmt->setFetchMode(PDO::FETCH_OBJ);

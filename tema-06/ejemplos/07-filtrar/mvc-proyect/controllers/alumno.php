@@ -75,6 +75,18 @@
             $this->view->render('alumno/main/index');
         }
 
+        function filter($param = []) {
+            $expresion = $_GET['expresion'];
+            //
+            $this->view->title = "Filtrar - Panel de control Alumnos";
+
+            // 
+            $this->view->alumnos = $this->model->filter($expresion);
+            
+            // Cargara la vista alumno
+            $this->view->render('alumno/main/index');
+        }
+
         /**
          * Método show
          * Muestra los detalles de un registro
