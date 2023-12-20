@@ -2,96 +2,112 @@
 
     class Alumno Extends Controller {
 
-        function __construct() { /**Descriptivo (no necesario, usa constructor de Controller) */
+        function __construct() {
 
             parent ::__construct();
             
             
-        } // no es necesario pero lo dejamos por convención
+        }
 
-        /*** Este método se carga de forma automática si no se especifica segundo parámetro en la url */
-        function render() { /** Vista acociada a este controlador */
+        function render() {
 
-            /** Panel decontrol */
-            $this->view->title = "Home - Panel de control";
-
-            /** Cargamos los alumnos de la tabla */
-            $this->view->alumnos = $this->model->get(); // propiedad objeto de la clase statment
+            # Creo la propiedad title de la vista
+            $this->view->title = "Home - Panel Control Alumnos";
+            
+            # Creo la propiedad alumnos dentro de la vista
+            # Del modelo asignado al controlador ejecuto el método get();
+            $this->view->alumnos = $this->model->get();
 
             $this->view->render('alumno/main/index');
         }
 
-        /**
-         * Método new
-         * - Crea un nuevo alumno
-         */
-        function new(){
+        function new() {
 
-            # Etiqueta title 
-            # Cargar lista de cursos
-            $this->view->cursos = $this->model->getCursos();'Añadir - Gestión Alumnos';
+            # etiqueta title de la vista
+            $this->view->title = "Añadir - Gestión Alumnos";
 
-            
+            #  obtener los cursos  para generar dinámicamente lista cursos
+            $this->view->cursos = $this->model->getCursos();
 
-            # Cargamos la vista del formulario
+            # cargo la vista con el formulario nuevo alumno
             $this->view->render('alumno/new/index');
-
         }
 
-
-        /**
-         * Metodo Show
-         * - Muestra los valores de un  registro
-         */
-        function show($param = []) {
-            $this->view->render('alumno/show/index');	
-
-        }
-
-        /**
-         * Metodo create
-         * - como entrada
-         */
-        function create($param = []) {
+        function create ($param = []) {
+            
             # Cargamos los datos del formulario
             $alumno = new classAlumno(
                 null,
                 $_POST['nombre'],
                 $_POST['apellidos'],
                 $_POST['email'],
-                null,
+                $_POST['telefono'],
                 null,
                 $_POST['poblacion'],
                 null,
-                null,
-                $_POST['dni'],
-                $_POST['fecaNac'],
+                null, 
+                $_POST['dni'],      
+                $_POST['fechaNac'],
                 $_POST['id_curso']
-
             );
 
-            # Validacion
+            # Validación
 
             # Añadir registro a la tabla
             $this->model->create($alumno);
 
             # Redirigimos al main de alumnos
             header('location:'.URL.'alumno');
-         }
+        }
 
-         /**
-          * Añadimos método editar
-          */
-          function edit($param = []) {{
-            # Obtendo el id del alumno a editar
-            // alumno/edit/4 -> editamos el alumno 4
-            $id_alumno = $param[0]; // el indice 0 corresponde al id
+        function edit($param = []) {
+
+            # obtengo el id del alumno que voy a editar
+            // alumno/edit/4
+
+            $id = $param[0];
+
+            # asigno id a una propiedad de la vista
+            $this->view->id = $id;
 
             # title
             $this->view->title = "Editar - Panel de control Alumnos";
 
-            # Obtener los detalles del alumno
-            $this->view->alumno = $this->model->read($id_alumno);
+            # obtener objeto de la clase alumno
+            $this->view->alumno = $this->model->read($id);
 
-          }
+            # obtener los cursos
+            $this->view->cursos = $this->model->getCursos();
+
+            # cargo la vista
+            $this->view->render('alumno/edit/index');
+
+
+
+        }
+
+        function update($param = []){
+            # Obtenemos el id del data a editar
+            $id = $param[0];
+
+            # Con los parametros del formulario creo el objeto classAlumno
+            $alumno = new classAlumno(
+                null,
+                $_POST['nombre'],
+                $_POST['apellidos'],
+                $_POST['email'],
+                $_POST['telefono'],
+                null,
+                null,
+                $_POST['poblacion'],
+                $_POST['dni'],
+                $_POST['nombre'],
+            );
+        }
+
+        function show($param = []) {
+
+        }
     }
+
+?>
