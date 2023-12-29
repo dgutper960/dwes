@@ -65,6 +65,53 @@
         header('location:'.URL.'cliente');
     }
 
+    /**
+     * Function edit()
+     *      -> Obtenemos los datos del cliente a editar
+     *      -> La entrada es un array por el que se obtiene el id del cliente a editar
+     */
+    public function edit($param = []){
+        // igualamos el id_editar a 1er íncice del array de entrada
+        $id_editar = $param[0];
+
+        # Asignamos el id a la propiedad de la vista
+        $this->view->id = $id_editar;
+
+        # Asignamos el valor a title
+        $this->view->title = "Editar Cliente - Panel de control Clientes";
+
+        # Obtenemos el objeto classCliente
+        $this->view->cliente = $this->model->read($id_editar);
+
+        # Cargamos la vista
+        $this->view->render('cliente/edit/index');
+
+    }
+
+    public function update($param = []){
+
+        // cargamos el id_editar con el dato recibido por GET
+        $id_editar = $param[0];
+
+        // instanciamos objeto con los datos recibidos por POST
+        $data = new classCliente(
+            null,
+            $_POST['apellidos'],
+            $_POST['nombre'],
+            $_POST['telefono'],
+            $_POST['ciudad'],
+            $_POST['dni'],
+            $_POST['email'],
+        );
+
+        // actualizamos el cliente
+        $this->model->update($data, $id_editar);
+
+        // Cargamos el controlador principal de cliente
+        header('location:'.URL.'cliente');
+
+    }
+
 
  }
 

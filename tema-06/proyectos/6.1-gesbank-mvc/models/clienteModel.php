@@ -92,6 +92,88 @@ class clienteModel extends Model
             include_once('template/partials/errorDB.php');
             exit();
         }
+    }
+
+    // Método read() -> Obtiene un objeto de classCliente mediante id
+    public function read($id_editar){
+        try{
+
+            $sql = "SELECT 
+            id, apellidos, nombre, telefono, ciudad, dni, email
+        FROM
+            clientes
+        WHERE
+            id = :id_editar";
+
+            // conectamos 
+            $conexion = $this->db->connect();
+
+            // prepare
+            $pdostmt = $conexion->prepare($sql);
+
+            // vinculamos el parametro neceserio
+            $pdostmt->bindParam(':id_editar', $id_editar, PDO::PARAM_INT);
+
+            // establecemos el tipo de fetch
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            // ejecutamos
+            $pdostmt->execute();
+
+            // retornamos 
+            return $pdostmt->fetch();
+
+        }catch(PDOException $e){
+            include_once('template/partials/errorDB.php');
+            exit();
+        }
+
+    }
+
+    // Método edit() -> Permite la edición de un cliente
+    // - Entrada -> Objeto del tipo classCliente
+    public function update(classCliente $data, int $id_editar)
+    {
+
+        try {
+
+            $sql = "UPDATE clientes 
+            SET 
+                apellidos = :apellidos,
+                nombre    = :nombre,
+                telefono  = :telefono,
+                ciudad    = :ciudad,
+                dni       = :dni,
+                email     = :email
+            WHERE
+                id = :id_editar";
+
+            // creamos la conexión
+            $conexion = $this->db->connect();
+
+            // ejecutamos el prepare
+            $pdostmt = $conexion->prepare($sql);
+
+            // vinculamos los parámetos
+            $pdostmt->bindParam(':apellidos', $data->apellidos, PDO::PARAM_STR);
+            $pdostmt->bindParam(':nombre', $data->nombre, PDO::PARAM_STR);
+            $pdostmt->bindParam(':telefono', $data->telefono, PDO::PARAM_INT);
+            $pdostmt->bindParam(':ciudad', $data->ciudad, PDO::PARAM_STR);
+            $pdostmt->bindParam(':dni', $data->dni, PDO::PARAM_STR);
+            $pdostmt->bindParam(':email', $data->email, PDO::PARAM_STR);
+            $pdostmt->bindParam(':id_editar', $id_editar, PDO::PARAM_INT); // id de la entrada
+
+            // ejecutamos -> Los datos son insertados en la BBDD
+            $pdostmt->execute();
+
+
+            // podemos cerrar la conexion pero no es necesario
+
+        // en caso de error SQL entraremos en este bloque
+        } catch (PDOException $e) {
+            include_once('template/partials/errorDB.php');
+            exit();
+        }
 
     }
 }

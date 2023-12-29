@@ -20,49 +20,52 @@
         <!-- header -->
         <?php include 'template/partials/header.php' ?>
 
-        <legend>Formulario Nuevo Cliente</legend>
+        <legend>Formulario Editar Cliente</legend>
 
         <!-- Formulario Nuevo Libro -->
-        <form action="<?= URL ?>cliente/create" method="POST">
+        <form action="<?= URL ?>cliente/update/<?= $this->cliente->id ?>" method="POST">
+
+            <!-- id oculto -->
+            <input type="number" class="form-control" name="id" value="<?= $this->cliente->id ?>" hidden>
 
             <!-- Nombre -->
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre">
+                <input type="text" class="form-control" name="nombre" value="<?=$this->cliente->nombre?>">
             </div>
 
             <!-- Apellidos -->
             <div class="mb-3">
                 <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos">
+                <input type="text" class="form-control" name="apellidos" value="<?=$this->cliente->apellidos?>">
             </div>
 
             <!-- Ciudad -->
             <div class="mb-3">
                 <label for="ciudad" class="form-label">Ciudad</label>
-                <input type="text" class="form-control" name="ciudad">
+                <input type="text" class="form-control" name="ciudad" value="<?=$this->cliente->ciudad?>">
             </div>
 
             <!-- Dni -->
             <div class="mb-3">
                 <label for="dni" class="form-label">Dni</label>
-                <input type="text" class="form-control" name="dni">
+                <input type="text" class="form-control" name="dni" value="<?=$this->cliente->dni?>">
             </div>
 
             <!-- Email -->
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email">
+                <input type="email" class="form-control" name="email" value="<?=$this->cliente->email?>">
             </div>
             <!-- Telefono -->
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" name="telefono">
+                <input type="tel" class="form-control" name="telefono" value="<?=$this->cliente->telefono?>">
             </div>
 
 
             <!-- botones de acción -->
-            <a class="btn btn-secondary" href="<?= URL ?>alumno" role="button">Cancelar</a>
+            <a class="btn btn-secondary" href="<?= URL ?>cliente" role="button">Cancelar</a>
             <button type="reset" class="btn btn-danger">Borrar</button>
             <button type="submit" class="btn btn-primary">Enviar</button>
 
