@@ -174,8 +174,37 @@ class clienteModel extends Model
             include_once('template/partials/errorDB.php');
             exit();
         }
-
     }
+
+        // Método read() -> Obtiene un objeto de classCliente mediante id
+        public function delete($id_eliminar){
+            try{
+    
+                $sql = "DELETE
+            FROM
+                clientes
+            WHERE
+                id = :id_eliminar";
+    
+                // conectamos 
+                $conexion = $this->db->connect();
+    
+                // prepare
+                $pdostmt = $conexion->prepare($sql);
+    
+                // vinculamos el parametro neceserio
+                $pdostmt->bindParam(':id_eliminar', $id_eliminar, PDO::PARAM_INT);
+    
+                // ejecutamos
+                $pdostmt->execute();
+    
+    
+            }catch(PDOException $e){
+                include_once('template/partials/errorDB.php');
+                exit();
+            }
+    
+        }
 }
 
 ?>

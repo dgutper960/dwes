@@ -112,6 +112,19 @@
 
     }
 
+    public function delete($param = []){
+        // cargamos el id a eliminar
+        $id_eliminar = $param[0];
+
+        // eliminamos de la tabla
+        $this->model->delete($id_eliminar);
+
+        // Cargamos el conrtrolador principal de cliente
+        header('location:'.URL.'cliente');
+
+
+    }
+
 
  }
 
