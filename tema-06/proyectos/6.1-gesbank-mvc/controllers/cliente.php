@@ -32,6 +32,39 @@
 
     }
 
+    // Function new()
+    public function new(){
+        # Generamos la etiqueta de la vista
+        $this->view->title = "Nuevo - Gestión Clientes";
+
+        # Cargamos la vista con el formulario de nuevo
+        $this->view->render('cliente/new/index');
+    }
+
+    // Function create() -> Instancia un objeto de classCliente para con los datos del usuario
+        // -> Como argumento un array
+    public function create(){
+        // Cargamos los datos directamente en el constructor
+        $data = new classCliente(
+            null,
+            $_POST['apellidos'],
+            $_POST['nombre'],
+            $_POST['telefono'],
+            $_POST['ciudad'],
+            $_POST['dni'],
+            $_POST['email'],
+
+        );
+
+        # Validación no requerida
+
+        # Añadimos el registro a la tabla
+        $this->model->create($data);
+
+        # Redirigimos al main de cliente
+        header('location:'.URL.'cliente');
+    }
+
 
  }
 

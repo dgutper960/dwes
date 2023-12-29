@@ -33,7 +33,7 @@
 			</div>
 			<div class="card-header">
 				<!-- menu clientes -->
-				<?php require_once("template/partials/menu.php") ?>
+				<?php require_once("views/cliente/partials/menu.php") ?>
 			</div>
 			<div class="card-body">
 
