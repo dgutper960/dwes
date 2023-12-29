@@ -95,8 +95,9 @@ class clienteModel extends Model
     }
 
     // Método read() -> Obtiene un objeto de classCliente mediante id
-    public function read($id_editar){
-        try{
+    public function read($id_editar)
+    {
+        try {
 
             $sql = "SELECT 
             id, apellidos, nombre, telefono, ciudad, dni, email
@@ -123,7 +124,7 @@ class clienteModel extends Model
             // retornamos 
             return $pdostmt->fetch();
 
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             include_once('template/partials/errorDB.php');
             exit();
         }
@@ -169,42 +170,84 @@ class clienteModel extends Model
 
             // podemos cerrar la conexion pero no es necesario
 
-        // en caso de error SQL entraremos en este bloque
+            // en caso de error SQL entraremos en este bloque
         } catch (PDOException $e) {
             include_once('template/partials/errorDB.php');
             exit();
         }
     }
 
-        // Método read() -> Obtiene un objeto de classCliente mediante id
-        public function delete($id_eliminar){
-            try{
-    
-                $sql = "DELETE
+    // Método delete() -> Borra un cliente mediante id
+    public function delete($id_eliminar)
+    {
+        try {
+
+            $sql = "DELETE
             FROM
                 clientes
             WHERE
                 id = :id_eliminar";
-    
-                // conectamos 
-                $conexion = $this->db->connect();
-    
-                // prepare
-                $pdostmt = $conexion->prepare($sql);
-    
-                // vinculamos el parametro neceserio
-                $pdostmt->bindParam(':id_eliminar', $id_eliminar, PDO::PARAM_INT);
-    
-                // ejecutamos
-                $pdostmt->execute();
-    
-    
-            }catch(PDOException $e){
-                include_once('template/partials/errorDB.php');
-                exit();
-            }
-    
+
+            // conectamos 
+            $conexion = $this->db->connect();
+
+            // prepare
+            $pdostmt = $conexion->prepare($sql);
+
+            // vinculamos el parametro neceserio
+            $pdostmt->bindParam(':id_eliminar', $id_eliminar, PDO::PARAM_INT);
+
+            // ejecutamos
+            $pdostmt->execute();
+
+
+        } catch (PDOException $e) {
+            include_once('template/partials/errorDB.php');
+            exit();
         }
+
+    }
+
+    // Método delete() -> Borra un cliente mediante id
+    public function order(int $criterio)
+    {
+        try {
+
+            # Comando sql
+            $sql = "SELECT 
+            id, apellidos, nombre, telefono, ciudad, dni, email
+        FROM
+            clientes
+        ORDER BY :criterio";
+
+            # Conectamos -> ejecuta el método connect() de db
+            $conexion = $this->db->connect();
+
+            # Ejecutamos el prepare
+            $pdostmt = $conexion->prepare($sql); // resultado de la consulta = objeto pdostmt
+
+            # bindParam para el criterio
+            $pdostmt->bindParam(':criterio', $criterio, PDO::PARAM_INT);
+
+
+            # Establecemos el tipo de fetch como objeto
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            # Ejecutamos
+            $pdostmt->execute();
+
+            # Retornamos
+            return $pdostmt;
+
+
+        } catch (PDOException $e) {
+            include_once('template/partials/errorDB.php');
+            exit();
+        }
+
+    }
+
+
 }
 
 ?>

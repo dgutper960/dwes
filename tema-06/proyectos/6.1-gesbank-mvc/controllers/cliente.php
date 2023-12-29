@@ -125,12 +125,24 @@
 
     }
 
+    public function order($param = []){
 
- }
+            # Obtengo criterio de ordenación
+            $criterio = $param[0];
+
+            # Creo la propiedad title de la vista
+            $this->view->title = "Ordenar - Panel Control Clientes";
+            
+            # Creo la propiedad clientes dentro de la vista
+            # Del modelo asignado al controlador ejecuto el método get();
+            $this->view->clientes = $this->model->order($criterio);
+
+            # Cargo la vista principal de cliente
+            $this->view->render('cliente/main/index');
+        }
 
 
-
-
+    }
 
 
 ?>
