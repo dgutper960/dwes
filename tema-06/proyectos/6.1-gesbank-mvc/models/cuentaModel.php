@@ -53,27 +53,58 @@ class cuentaModel extends Model
         }
     }
 
+    // Métodfo get() -> Obtiene los resultados de la tabla cuentas
+    public function getCustomerName()
+    {
+        try {
+            # Comando sql
+            $sql = "SELECT 
+            id,
+            CONCAT_WS(' ',
+            clientes.nombre,
+            clientes.apellidos) AS cliente
+        FROM
+            clientes";
+
+            # Conectamos -> ejecuta el método connect() de db
+            $conexion = $this->db->connect();
+
+            # Ejecutamos el prepare
+            $pdostmt = $conexion->prepare($sql); // resultado de la consulta = objeto pdostmt
+
+            # bindParam no neceseario (solo se obtienen datos)
+
+            # Establecemos el tipo de fetch como objeto
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            # Ejecutamos
+            $pdostmt->execute();
+
+            # Retornamos
+            return $pdostmt;
+
+        } catch (PDOException $e) {
+            include_once('template/partials/errorDB.php');
+            exit();
+            // Incluimos en el catch er fichero correspondiente
+        }
+    }
+
     // Método create() -> Permite la insersión de un nuevo cliente
     // - Entrada -> Objeto del tipo classCliente
-    public function create(classCliente $data)
+    public function create(classCuenta $data)
     {
 
         try {
 
             $sql = "INSERT INTO cuentas (
-                apellidos,
-                nombre,
-                telefono,
-                ciudad,
-                dni,
-                email
+                num_cuenta,
+                id_cliente,
+                saldo
                 )VALUES(
-                :apellidos,
-                :nombre,
-                :telefono,
-                :ciudad,
-                :dni,
-                :email
+                :num_cuenta,
+                :id_cliente,
+                :saldo,
                 )";
 
             // creamos la conexión
@@ -83,12 +114,10 @@ class cuentaModel extends Model
             $pdostmt = $conexion->prepare($sql);
 
             // vinculamos los parámetos
-            $pdostmt->bindParam(':apellidos', $data->apellidos, PDO::PARAM_STR);
-            $pdostmt->bindParam(':nombre', $data->nombre, PDO::PARAM_STR);
-            $pdostmt->bindParam(':telefono', $data->telefono, PDO::PARAM_INT);
-            $pdostmt->bindParam(':ciudad', $data->ciudad, PDO::PARAM_STR);
-            $pdostmt->bindParam(':dni', $data->dni, PDO::PARAM_STR);
-            $pdostmt->bindParam(':email', $data->email, PDO::PARAM_STR);
+            $pdostmt->bindParam(':num_cuenta', $data->num_cuenta);
+            $pdostmt->bindParam(':id_cliente', $data->id_cliente);
+            $pdostmt->bindParam(':saldo', $data->saldo);
+
 
             // ejecutamos -> Los datos son insertados en la BBDD
             $pdostmt->execute();

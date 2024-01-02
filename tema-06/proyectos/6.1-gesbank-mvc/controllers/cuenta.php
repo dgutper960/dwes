@@ -41,6 +41,9 @@ class Cuenta extends Controller
         # Generamos la etiqueta de la vista
         $this->view->title = "Nuevo - Gestión Cuentas";
 
+        # Cargamos array asociativo con los nombres de los clientes para la lista desplegable
+        $this->view->customers = $this->model->getCustomerName();
+
         # Cargamos la vista con el formulario de nuevo
         $this->view->render('cuenta/new/index');
     }
@@ -52,12 +55,12 @@ class Cuenta extends Controller
         // Cargamos los datos directamente en el constructor
         $data = new classCuenta(
             null,
-            $_POST['apellidos'],
-            $_POST['nombre'],
-            $_POST['telefono'],
-            $_POST['ciudad'],
-            $_POST['dni'],
-            $_POST['email'],
+            $_POST['num_cuenta'],
+            $_POST['id_cliente'],
+            null,
+            null,
+            null,
+            $_POST['saldo'],
 
         );
 
@@ -87,7 +90,7 @@ class Cuenta extends Controller
         $this->view->title = "Editar Cuenta - Panel de control Cuentas";
 
         # Obtenemos el objeto classCuenta
-        $this->view->Cuenta = $this->model->read($id_editar);
+        $this->view->cuenta = $this->model->read($id_editar);
 
         # Cargamos la vista
         $this->view->render('cuenta/edit/index');

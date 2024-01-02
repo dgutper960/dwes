@@ -20,49 +20,39 @@
         <!-- header -->
         <?php include 'template/partials/header.php' ?>
 
-        <legend>Formulario Nuevo Cliente</legend>
+        <legend>Formulario Nuevo cuenta</legend>
 
         <!-- Formulario Nuevo Libro -->
-        <form action="<?= URL ?>cliente/create" method="POST">
+        <form action="<?= URL ?>cuenta/create" method="POST">
 
-            <!-- Nombre -->
+            <!-- Número Cuenta -->
             <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre">
+                <label for="nombre" class="form-label">Número Cuenta</label>
+                <input type="text" class="form-control" name="num_cuenta">
             </div>
 
-            <!-- Apellidos -->
+            <!-- Cliente (mostramos lista desplegable)  -->
             <div class="mb-3">
-                <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos">
+                <label for="id_cliente" class="form-label">Asociar la cuenta a un cliente</label>
+                <select class="form-select" aria-label="Default select example" type="number" name="id_cliente">
+                    <option selected>Seleccione Cliente</option>
+                    <?php foreach ($this->customers as $customer): ?>
+                        <option value="<?= $customer->id ?>">
+                            <?= $customer->cliente ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
 
-            <!-- Ciudad -->
+            <!-- Saldo -->
             <div class="mb-3">
-                <label for="ciudad" class="form-label">Ciudad</label>
-                <input type="text" class="form-control" name="ciudad">
-            </div>
-
-            <!-- Dni -->
-            <div class="mb-3">
-                <label for="dni" class="form-label">Dni</label>
-                <input type="text" class="form-control" name="dni">
-            </div>
-
-            <!-- Email -->
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email">
-            </div>
-            <!-- Telefono -->
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" name="telefono">
+                <label for="saldo" class="form-label">Saldo</label>
+                <input type="number" class="form-control" name="saldo">
             </div>
 
 
             <!-- botones de acción -->
-            <a class="btn btn-secondary" href="<?= URL ?>alumno" role="button">Cancelar</a>
+            <a class="btn btn-secondary" href="<?= URL ?>cuenta" role="button">Cancelar</a>
             <button type="reset" class="btn btn-danger">Borrar</button>
             <button type="submit" class="btn btn-primary">Enviar</button>
 
