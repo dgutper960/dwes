@@ -18,10 +18,11 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<?= URL ?>cliente/order/1">Id</a></li>
                         <li><a class="dropdown-item" href="<?= URL ?>cliente/order/2">Apellidos</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cliente/order/3">Telefono</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cliente/order/4">Ciudad</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cliente/order/5">DNI</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cliente/order/6">Email</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cliente/order/3">Nombre</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cliente/order/4">Telefono</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cliente/order/5">Ciudad</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cliente/order/6">DNI</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cliente/order/7">Email</a></li>
                     </ul>
                 </li>
             </ul>
