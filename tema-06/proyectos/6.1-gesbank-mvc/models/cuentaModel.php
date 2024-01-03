@@ -101,13 +101,15 @@ class cuentaModel extends Model
                 num_cuenta,
                 id_cliente,
                 fecha_alta,
+                fecha_ul_mov,
                 num_movtos,
                 saldo
                 )VALUES(
                 :num_cuenta,
                 :id_cliente,
                 NOW(),
-                0,
+                NOW(),
+                1,
                 :saldo
                 )";
 
