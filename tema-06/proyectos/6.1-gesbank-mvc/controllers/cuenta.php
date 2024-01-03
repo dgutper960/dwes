@@ -192,10 +192,6 @@ class Cuenta extends Controller
         $this->view->render('cuenta/main/index');
     }
 
-
-
-
-
 }
 
 
