@@ -28,7 +28,7 @@
             <!-- Número Cuenta -->
             <div class="mb-3">
                 <label for="nombre" class="form-label">Número Cuenta</label>
-                <input type="text" class="form-control" name="num_cuenta">
+                <input type="number" class="form-control" name="num_cuenta">
             </div>
 
             <!-- Cliente (mostramos lista desplegable)  -->
@@ -47,7 +47,7 @@
             <!-- Saldo -->
             <div class="mb-3">
                 <label for="saldo" class="form-label">Saldo</label>
-                <input type="number" class="form-control" name="saldo">
+                <input type="number" class="form-control" name="saldo" min="0" step="0.01">
             </div>
 
 

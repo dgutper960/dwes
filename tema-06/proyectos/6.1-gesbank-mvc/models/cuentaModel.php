@@ -135,17 +135,25 @@ class cuentaModel extends Model
         }
     }
 
-    // Método read() -> Obtiene un objeto de classCliente mediante id
+    // Método read() -> Obtiene un objeto de classCuenta mediante id
     public function read($id_editar)
     {
         try {
 
             $sql = "SELECT 
-            id, apellidos, nombre, telefono, ciudad, dni, email
+            cuentas.id,
+            cuentas.num_cuenta,
+            CONCAT_WS(' ', clientes.apellidos, clientes.nombre) AS cliente,
+            cuentas.fecha_alta,
+            cuentas.fecha_ul_mov,
+            cuentas.num_movtos,
+            cuentas.saldo
         FROM
             cuentas
+                INNER JOIN
+            clientes ON cuentas.id_cliente = clientes.id
         WHERE
-            id = :id_editar";
+            clientes.id = :id_editar";
 
             // conectamos 
             $conexion = $this->db->connect();
@@ -166,7 +174,7 @@ class cuentaModel extends Model
             return $pdostmt->fetch();
 
         } catch (PDOException $e) {
-            include_once('template/partials/errorDB.php');
+            include_once('template/partials/error.php');
             exit();
         }
 
@@ -174,19 +182,19 @@ class cuentaModel extends Model
 
     // Método edit() -> Permite la edición de un cliente
     // - Entrada -> Objeto del tipo classCliente
-    public function update(classCliente $data, int $id_editar)
+    public function update(classCuenta $data, int $id_editar)
     {
 
         try {
 
             $sql = "UPDATE cuentas 
             SET 
-                apellidos = :apellidos,
-                nombre    = :nombre,
-                telefono  = :telefono,
-                ciudad    = :ciudad,
-                dni       = :dni,
-                email     = :email
+                num_cuenta = :num_cuenta,
+                fecha_alta    = :fecha_alta,
+                fecha_ul_mov  = :fecha_ul_mov,
+                num_movtos    = :num_movtos,
+                saldo       = :saldo
+
             WHERE
                 id = :id_editar";
 
@@ -197,12 +205,11 @@ class cuentaModel extends Model
             $pdostmt = $conexion->prepare($sql);
 
             // vinculamos los parámetos
-            $pdostmt->bindParam(':apellidos', $data->apellidos, PDO::PARAM_STR);
-            $pdostmt->bindParam(':nombre', $data->nombre, PDO::PARAM_STR);
-            $pdostmt->bindParam(':telefono', $data->telefono, PDO::PARAM_INT);
-            $pdostmt->bindParam(':ciudad', $data->ciudad, PDO::PARAM_STR);
-            $pdostmt->bindParam(':dni', $data->dni, PDO::PARAM_STR);
-            $pdostmt->bindParam(':email', $data->email, PDO::PARAM_STR);
+            $pdostmt->bindParam(':num_cuenta', $data->num_cuenta);
+            $pdostmt->bindParam(':fecha_alta', $data->fecha_alta);
+            $pdostmt->bindParam(':fecha_ul_mov', $data->fecha_ul_mov);
+            $pdostmt->bindParam(':num_movtos', $data->num_movtos);
+            $pdostmt->bindParam(':saldo', $data->saldo);
             $pdostmt->bindParam(':id_editar', $id_editar, PDO::PARAM_INT); // id de la entrada
 
             // ejecutamos -> Los datos son insertados en la BBDD
@@ -213,7 +220,7 @@ class cuentaModel extends Model
 
             // en caso de error SQL entraremos en este bloque
         } catch (PDOException $e) {
-            include_once('template/partials/errorDB.php');
+            include_once('template/partials/error.php');
             exit();
         }
     }

@@ -106,12 +106,12 @@ class Cuenta extends Controller
         // instanciamos objeto con los datos recibidos por POST
         $data = new classCuenta(
             null,
-            $_POST['apellidos'],
-            $_POST['nombre'],
-            $_POST['telefono'],
-            $_POST['ciudad'],
-            $_POST['dni'],
-            $_POST['email'],
+            $_POST['num_cuenta'],
+            $id_editar,
+            $_POST['fecha_alta'],
+            $_POST['fecha_ul_mov'],
+            $_POST['num_movtos'],
+            $_POST['saldo'],
         );
 
         // actualizamos el Cuenta
