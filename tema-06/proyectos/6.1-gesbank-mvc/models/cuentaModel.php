@@ -100,11 +100,15 @@ class cuentaModel extends Model
             $sql = "INSERT INTO cuentas (
                 num_cuenta,
                 id_cliente,
+                fecha_alta,
+                num_movtos,
                 saldo
                 )VALUES(
                 :num_cuenta,
                 :id_cliente,
-                :saldo,
+                NOW(),
+                0,
+                :saldo
                 )";
 
             // creamos la conexión
@@ -126,7 +130,7 @@ class cuentaModel extends Model
 
 
         } catch (PDOException $e) {
-            include_once('template/partials/errorDB.php');
+            include_once('template/partials/error.php');
             exit();
         }
     }
