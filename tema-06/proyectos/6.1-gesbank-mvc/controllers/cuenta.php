@@ -186,7 +186,7 @@ class Cuenta extends Controller
 
         # Creo la propiedad Cuentas dentro de la vista
         # Del modelo asignado al controlador ejecuto el método get();
-        $this->view->Cuentas = $this->model->filter($expresion);
+        $this->view->cuentas = $this->model->filter($expresion);
 
         # Cargo la vista principal de Cuenta
         $this->view->render('cuenta/main/index');

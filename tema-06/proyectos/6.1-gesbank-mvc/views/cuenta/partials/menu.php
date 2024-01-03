@@ -17,12 +17,13 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/1">Id</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/2">Apellidos</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/3">Nombre</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/4">Telefono</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/5">Ciudad</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/6">DNI</a></li>
-                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/7">Email</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/2">Núm Cuenta</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/3">Nombre Cliente</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/4">Apellidos Cliente</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/5">Fecha Alta</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/6">Último Movimiento</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/7">Núm Movimientos</a></li>
+                        <li><a class="dropdown-item" href="<?= URL ?>cuenta/order/8">Saldo</a></li>
                     </ul>
                 </li>
             </ul>

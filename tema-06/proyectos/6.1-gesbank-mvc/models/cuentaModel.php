@@ -263,10 +263,19 @@ class cuentaModel extends Model
 
             # Comando sql
             $sql = "SELECT 
-            id, apellidos, nombre, telefono, ciudad, dni, email
+            cuentas.id,
+            cuentas.num_cuenta,
+            clientes.nombre,
+            clientes.apellidos,
+            cuentas.fecha_alta,
+            cuentas.fecha_ul_mov,
+            cuentas.num_movtos,
+            cuentas.saldo
         FROM
             cuentas
-        ORDER BY :criterio";
+                INNER JOIN
+            clientes ON id_cliente = clientes.id
+            ORDER BY :criterio";
 
             # Conectamos -> ejecuta el método connect() de db
             $conexion = $this->db->connect();
@@ -303,18 +312,29 @@ class cuentaModel extends Model
     
                 # Comando sql
                 $sql = "SELECT 
-                id, apellidos, nombre, telefono, ciudad, dni, email
+                cuentas.id,
+                cuentas.num_cuenta,
+                clientes.nombre,
+                clientes.apellidos,
+                cuentas.fecha_alta,
+                cuentas.fecha_ul_mov,
+                cuentas.num_movtos,
+                cuentas.saldo
             FROM
                 cuentas
-            WHERE
+                    INNER JOIN
+                clientes ON id_cliente = clientes.id
+                WHERE
                 CONCAT_WS(' ',
-                        cuentas.id,
-                        cuentas.apellidos,
-                        cuentas.nombre,
-                        cuentas.telefono,
-                        cuentas.ciudad,
-                        cuentas.dni,
-                        cuentas.email) LIKE :expresion";
+                cuentas.id,
+                cuentas.num_cuenta,
+                clientes.nombre,
+                clientes.apellidos,
+                cuentas.fecha_alta,
+                cuentas.fecha_ul_mov,
+                cuentas.num_movtos,
+                cuentas.saldo)
+                LIKE :expresion";
     
                 # Conectamos -> ejecuta el método connect() de db
                 $conexion = $this->db->connect();
