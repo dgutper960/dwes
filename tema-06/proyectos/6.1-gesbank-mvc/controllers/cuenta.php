@@ -151,7 +151,7 @@ class Cuenta extends Controller
         $this->view->title = "Mostrar Cuenta - Panel de control Cuentas";
 
         # Obtenemos el objeto classCuenta
-        $this->view->Cuenta = $this->model->read($id_mostrar);
+        $this->view->cuenta = $this->model->read($id_mostrar);
 
         # Cargamos la vista
         $this->view->render('cuenta/show/index');
@@ -169,7 +169,7 @@ class Cuenta extends Controller
 
         # Creo la propiedad Cuentas dentro de la vista
         # Del modelo asignado al controlador ejecuto el método get();
-        $this->view->Cuentas = $this->model->order($criterio);
+        $this->view->cuentas = $this->model->order($criterio);
 
         # Cargo la vista principal de Cuenta
         $this->view->render('cuenta/main/index');

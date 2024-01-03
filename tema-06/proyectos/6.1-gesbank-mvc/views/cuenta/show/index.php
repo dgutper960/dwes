@@ -20,52 +20,52 @@
         <!-- header -->
         <?php include 'template/partials/header.php' ?>
 
-        <legend>Formulario Mostrar Cliente</legend>
+        <legend>Formulario Mostrar Cuenta</legend>
 
-        <!-- Formulario Mostrar Cliente -->
+        <!-- Formulario Mostrar Cuenta -->
         <form>
 
+
             <!-- id oculto -->
-            <input type="number" class="form-control" name="id" value="<?= $this->cliente->id ?>" disabled>
+            <input type="number" class="form-control" name="id" value="<?= $this->cuenta->id ?>" hidden>
 
-            <!-- Nombre -->
+            <!-- Núm Cuenta -->
             <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?=$this->cliente->nombre?>" disabled>
+                <label for="num_cuenta" class="form-label">Número cuenta</label>
+                <input type="text" class="form-control" name="num_cuenta" value="<?=$this->cuenta->num_cuenta?>" disabled>
             </div>
 
-            <!-- Apellidos -->
+            <!-- Cliente -->
             <div class="mb-3">
-                <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos" value="<?=$this->cliente->apellidos?>" disabled>
+                <label for="cliente" class="form-label">Cliente</label>
+                <input type="text" class="form-control" name="cliente" value="<?=$this->cuenta->cliente?>" disabled>
             </div>
 
-            <!-- Ciudad -->
+            <!-- Fecha Alta -->
             <div class="mb-3">
-                <label for="ciudad" class="form-label">Ciudad</label>
-                <input type="text" class="form-control" name="ciudad" value="<?=$this->cliente->ciudad?>" disabled>
+                <label for="fecha_alta" class="form-label">Fecha Alta</label>
+                <input type="date" class="form-control" name="fecha_alta" value="<?=$this->cuenta->fecha_alta?>" disabled>
             </div>
 
-            <!-- Dni -->
+            <!-- fecha_ul_mov -->
             <div class="mb-3">
-                <label for="dni" class="form-label">Dni</label>
-                <input type="text" class="form-control" name="dni" value="<?=$this->cliente->dni?>" disabled>
+                <label for="fecha_ul_mov" class="form-label">Fecha Últ.Movimiento</label>
+                <input type="date" class="form-control" name="fecha_ul_mov" value="<?=$this->cuenta->fecha_ul_mov?>" disabled>
             </div>
 
-            <!-- Email -->
+            <!-- Núm Movtos -->
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" value="<?=$this->cliente->email?>" disabled>
+                <label for="num_movtos" class="form-label">Núm Movimientos</label>
+                <input type="number" class="form-control" name="num_movtos" value="<?=$this->cuenta->num_movtos?>" disabled>
             </div>
-            <!-- Telefono -->
+            <!-- Saldo -->
             <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" name="telefono" value="<?=$this->cliente->telefono?>" disabled>
+                <label for="saldo" class="form-label">Saldo</label>
+                <input type="number" class="form-control" name="saldo" value="<?=$this->cuenta->saldo?>" disabled>
             </div>
-
 
             <!-- botones de acción -->
-            <a class="btn btn-secondary" href="<?= URL ?>cliente" role="button">Volver</a>
+            <a class="btn btn-secondary" href="<?= URL ?>cuenta" role="button">Volver</a>
 
         </form>
 
