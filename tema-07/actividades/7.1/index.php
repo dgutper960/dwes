@@ -45,9 +45,9 @@ if(isset($_SESSION['fecha_hora_visita'])){
 <ul>
     <li>Página: Home</li>
     <li>SID: <?=session_id()?></li>
-    <li></li>
-    <li></li>
-    <li>Visitas Home. <?=$_SESSION['fecha_hora_visita']?></li>
+    <li>Nombre Sesón: <?=session_name();?> </li>
+    <li>Fecha/Hora Sesion: <?=$_SESSION['fecha_hora_visita']?> </li>
+    <li>Visitas Home. <?=$_SESSION['num_visitas_home']?></li>
 </ul>
     
 </body>
