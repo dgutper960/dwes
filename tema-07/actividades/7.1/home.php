@@ -11,9 +11,6 @@ if (isset($_SESSION['num_visitas_home'])) {
     $_SESSION['num_visitas_home'] = 1; // en caso contrario nos contabiliza la primera visita
 }
 
-// inicializamos la variable de sesión con la fecha y hora actual
-$_SESSION['fecha_hora_visita'] = date("d-m-Y H:i:s");
-
 
 ?>
 
@@ -23,7 +20,7 @@ $_SESSION['fecha_hora_visita'] = date("d-m-Y H:i:s");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividad 7.1 - pág Index</title>
+    <title>Actividad 7.1 - pág Home</title>
 </head>
 
 <body>
@@ -47,7 +44,7 @@ $_SESSION['fecha_hora_visita'] = date("d-m-Y H:i:s");
     </ul>
 
     <ul>
-        <li>Página: Index</li>
+        <li>Página: Home</li>
         <li>SID:
             <?= session_id(); ?>
         </li>

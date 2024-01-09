@@ -5,15 +5,11 @@
  */
 session_start(); // si hay sesión la mantiene
 // evaluamos si existe la variable y en caso negativo la creamos
-if (isset($_SESSION['num_visitas_home'])) {
-    $_SESSION['num_visitas_home']++; // si existe incrementa el núm de visitas
+if (isset($_SESSION['num_visitas_services'])) {
+    $_SESSION['num_visitas_services']++; // si existe incrementa el núm de visitas
 } else {
-    $_SESSION['num_visitas_home'] = 1; // en caso contrario nos contabiliza la primera visita
+    $_SESSION['num_visitas_services'] = 1; // en caso contrario nos contabiliza la primera visita
 }
-
-// inicializamos la variable de sesión con la fecha y hora actual
-$_SESSION['fecha_hora_visita'] = date("d-m-Y H:i:s");
-
 
 ?>
 
@@ -23,7 +19,7 @@ $_SESSION['fecha_hora_visita'] = date("d-m-Y H:i:s");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividad 7.1 - pág Index</title>
+    <title>Actividad 7.1 - pág Services</title>
 </head>
 
 <body>
@@ -47,7 +43,7 @@ $_SESSION['fecha_hora_visita'] = date("d-m-Y H:i:s");
     </ul>
 
     <ul>
-        <li>Página: Index</li>
+        <li>Página: Services</li>
         <li>SID:
             <?= session_id(); ?>
         </li>
@@ -57,8 +53,8 @@ $_SESSION['fecha_hora_visita'] = date("d-m-Y H:i:s");
         <li>Fecha/Hora Inicio Sesion:
             <?= $_SESSION['fecha_hora_visita']; ?>
         </li>
-        <li>Visitas Home.
-            <?= $_SESSION['num_visitas_home']; ?>
+        <li>Visitas Services:
+            <?= $_SESSION['num_visitas_services']; ?>
         </li>
     </ul>
 
