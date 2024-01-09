@@ -59,6 +59,9 @@ $_SESSION['total_visitas'] =
         <li>Nombre Sesión:
             <?= session_name(); ?>
         </li>
+        <li>Total Visitas Sitio Web.
+            <?= $_SESSION['total_visitas']; ?>
+        </li>
         <li>Fecha/Hora Inicio Sesion:
             <?= $_SESSION['fecha_hora_visita']; ?>
         </li>
@@ -67,9 +70,6 @@ $_SESSION['total_visitas'] =
         </li>
         <li>Duración de la Sesion:
             <?= $_SESSION['duracion_sesion']; ?>
-        </li>
-        <li>Total Visitas Sitio Web.
-            <?= $_SESSION['total_visitas']; ?>
         </li>
     </ul>
 
