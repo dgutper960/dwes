@@ -361,7 +361,102 @@
 
     } 
 
+    /**
+     * Funciones de validacion en la BBDD
+     */
+    public function validateUniqueEmail($email){
+        try{
+
+            $sql = "SELECT * FROM alumnos WHERE email = :email";
+
+            $conexion = $this->db->connect();
+
+            # ejecutamos mediante prepare
+            $pdost = $conexion->prepare($sql);
+
+            $pdost->bindParam(':email', $email, PDO::PARAM_STR);
+
+            #  ejecutamos 
+            $pdost->execute();
+
+            
+            if($pdost->rowCount() != 0){
+                return FALSE;
+            }
+            return TRUE;
+
+        } catch (PDOException $e){
+
+            include_once('template/partials/errorDB.php');
+            exit();
+            
+        }
+
 
     }  
+
+    public function validateUniqueDni($dni){
+        try{
+
+            $sql = "SELECT * FROM alumnos WHERE dni = :dni";
+
+            $conexion = $this->db->connect();
+
+            # ejecutamos mediante prepare
+            $pdost = $conexion->prepare($sql);
+
+            $pdost->bindParam(':dni', $dni, PDO::PARAM_STR);
+
+            #  ejecutamos 
+            $pdost->execute();
+
+            
+            if($pdost->rowCount() != 0){
+                return FALSE;
+            }
+            return TRUE;
+
+        } catch (PDOException $e){
+
+            include_once('template/partials/errorDB.php');
+            exit();
+            
+        }
+
+
+    }  
+
+    public function validateCurso($id_curso){
+        try{
+
+            $sql = "SELECT * FROM cursos WHERE id = :id_curso";
+
+            $conexion = $this->db->connect();
+
+            # ejecutamos mediante prepare
+            $pdost = $conexion->prepare($sql);
+
+            $pdost->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
+
+            #  ejecutamos 
+            $pdost->execute();
+
+            
+            if($pdost->rowCount() != 1){
+                return FALSE;
+            }
+            return TRUE;
+
+        } catch (PDOException $e){
+
+            include_once('template/partials/errorDB.php');
+            exit();
+            
+        }
+
+
+    }  
+
+}
 
 ?>
