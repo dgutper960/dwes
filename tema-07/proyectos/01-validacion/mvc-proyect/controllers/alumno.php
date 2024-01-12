@@ -13,6 +13,14 @@ class Alumno extends Controller
 
     function render()
     {
+        # Inicio o contiúo la sesión
+        session_start();
+
+        # Si existe un mensaje lo muestro
+        if(isset($_SESSION['mensaje'])){
+            $this->view->mensaje = $_SESSION['mensaje'];
+            unset($_SESSION['mensaje']);
+        }
 
         # Creo la propiedad title de la vista
         $this->view->title = "Home - Panel Control Alumnos";
@@ -26,6 +34,31 @@ class Alumno extends Controller
 
     function new()
     {
+
+        # Continuamos la sesion
+        session_start();
+
+        # Creamos un objeto vacio
+        $this->view->alumno = new classAlumno();
+
+        # Comprobamos si hay errores -> esta variable se crea al lanzar un error de validacion
+        if(isset($_SESSION['error'])){
+            // rescatemos el mensaje
+            $this->view->error = $_SESSION['error'];
+
+            // Autorellenamos el formulario
+            $this->view->alumno = unserialize($_SESSION['alumno']);
+
+            // Recupero array de errores específicos
+            $this->view->errores = $_SESSION['errores'];
+
+            // debemos liberar las variables de sesión ya que su cometido ha sido resuelto
+            unset($_SESSION['error']);
+            unset($_SESSION['errores']);
+            unset($_SESSION['alumnos']);
+            // Si estas variables existen cuando no hay errores, entraremos en los bloques de error en las condicionales
+        }
+
 
         # etiqueta title de la vista
         $this->view->title = "Añadir - Gestión Alumnos";
@@ -83,13 +116,13 @@ class Alumno extends Controller
             $errores['apellidos'] = 'El campo es obligatorio';
         }
 
-        // Fecha Nacimiento:
-        $valores_fecha = explode('/', $fechaNac); // descomponemos la fecha en mes, día y año
-        if (empty($fechaNac)) {
-            $errores['fechaNac'] = 'El campo es obligatorio';
-        } elseif (!checkdate($valores_fecha[1], $valores_fecha[0], $valores_fecha[2])) {
-            $errores['fechaNac'] = 'La fecha introducida no es válida';
-        }
+        // // Fecha Nacimiento:
+        // $valores_fecha = explode('/', $fechaNac); // descomponemos la fecha en mes, día y año
+        // if (empty($fechaNac)) {
+        //     $errores['fechaNac'] = 'El campo es obligatorio';
+        // } elseif (!checkdate($valores_fecha[1], $valores_fecha[0], $valores_fecha[2])) {
+        //     $errores['fechaNac'] = 'La fecha introducida no es válida';
+        // }
 
         // Email: obligatorio, formato válido y clave secundario
         if (empty($email)) {
@@ -102,7 +135,7 @@ class Alumno extends Controller
 
         // DNI: obligatorio, formato válido y único
         $options = [
-            'opcions' => [
+            'options' => [ // ESTOS PARÁMETROS DEBEN LLAMARSE ASÍ
                 'regexp' => '/^(\d{8})([a-zA-Z])$/'
             ]
         ];
@@ -127,7 +160,12 @@ class Alumno extends Controller
         # Comprobamos validacion
         if (!empty($errores)) {
             // errores de validacion
-            $_SESSION['alumno'] = serialize($alumno);
+            $_SESSION['alumno'] = serialize($alumno); // serializamos para tornar el objeto a string
+            $_SESSION['error'] = 'Formulario no validado';
+            $_SESSION['errores'] = $errores;
+
+            # Redireccionamos a 
+            header('location:'.URL.'alumno/new');
         } else {
             # Añadir registro a la tabla
             $this->model->create($alumno);
@@ -138,8 +176,6 @@ class Alumno extends Controller
             # Redirigimos al main de alumnos
             header('location:' . URL . 'alumno');
         }
-
-
 
     }
 

@@ -69,4 +69,14 @@ Una vez que el formulario quede validado, se añadirá un nuevo registro en la t
 ## Comprobamos validacion
 - metemos el array errores en la funcion empty()
 
+**Si no hay errores hay que serializar -> de objeto a string (las variables de sesion no admiten objetos)**
+
+## Debemos crear un menstaje de feedback para el usuario
+
+
+### Si create da campos no validadoss debemos reenviar al formulario 
+
+
+
+
 
