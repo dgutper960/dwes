@@ -69,6 +69,9 @@ Una vez que el formulario quede validado, se añadirá un nuevo registro en la t
 ## Comprobamos validacion
 - metemos el array errores en la funcion empty()
 
+### Verificar errores desde el código:
+- Val metodo en el controlador y añadimos una variable con el mismo nombre que ese campo con un valor incorrecto, ahora aunque en el formulario esté correcto, esa variable se va a machacar por la que acabamos de poner. Una vez verificado que el error se lanza correctamente lo dejamos todo como estaba.
+
 **Si no hay errores hay que serializar -> de objeto a string (las variables de sesion no admiten objetos)**
 
 ## Debemos crear un menstaje de feedback para el usuario

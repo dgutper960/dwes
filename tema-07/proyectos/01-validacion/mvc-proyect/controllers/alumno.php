@@ -17,7 +17,7 @@ class Alumno extends Controller
         session_start();
 
         # Si existe un mensaje lo muestro
-        if(isset($_SESSION['mensaje'])){
+        if (isset($_SESSION['mensaje'])) {
             $this->view->mensaje = $_SESSION['mensaje'];
             unset($_SESSION['mensaje']);
         }
@@ -42,7 +42,7 @@ class Alumno extends Controller
         $this->view->alumno = new classAlumno();
 
         # Comprobamos si hay errores -> esta variable se crea al lanzar un error de validacion
-        if(isset($_SESSION['error'])){
+        if (isset($_SESSION['error'])) {
             // rescatemos el mensaje
             $this->view->error = $_SESSION['error'];
 
@@ -107,6 +107,7 @@ class Alumno extends Controller
         $errores = [];
 
         // Nombre valor obligatorio
+        // $nombre = ''; -> EJEMPLO PARA VERIFICAR QUE EL ERROR SE LANZA CORRECTAMENTE
         if (empty($nombre)) {
             $errores['nombre'] = 'El campo es obligatorio';
         }
@@ -165,7 +166,7 @@ class Alumno extends Controller
             $_SESSION['errores'] = $errores;
 
             # Redireccionamos a 
-            header('location:'.URL.'alumno/new');
+            header('location:' . URL . 'alumno/new');
         } else {
             # Añadir registro a la tabla
             $this->model->create($alumno);
@@ -181,6 +182,8 @@ class Alumno extends Controller
 
     function edit($param = [])
     {
+        # Mantenemos la sesion
+        session_start();
 
         # obtengo el id del alumno que voy a editar
         // alumno/edit/4
@@ -199,6 +202,25 @@ class Alumno extends Controller
         # obtener los cursos
         $this->view->cursos = $this->model->getCursos();
 
+        # Para saber si el formulario viene de una no vaidacion
+        # Comprobamos si hay errores -> esta variable se crea al lanzar un error de validacion
+        if (isset($_SESSION['error'])) {
+            // rescatemos el mensaje
+            $this->view->error = $_SESSION['error'];
+
+            // Autorellenamos el formulario
+            $this->view->alumno = unserialize($_SESSION['alumno']);
+
+            // Recupero array de errores específicos
+            $this->view->errores = $_SESSION['errores'];
+
+            // debemos liberar las variables de sesión ya que su cometido ha sido resuelto
+            unset($_SESSION['error']);
+            unset($_SESSION['errores']);
+            unset($_SESSION['alumnos']);
+            // Si estas variables existen cuando no hay errores, entraremos en los bloques de error en las condicionales
+        }
+
         # cargo la vista
         $this->view->render('alumno/edit/index');
 
@@ -209,32 +231,141 @@ class Alumno extends Controller
     public function update($param = [])
     {
 
+        # Iniciamos sesion
+        session_start();
+
+        # 1. Saneamos los datos del formulario
+        # Saneamos los datos del formulario
+        // $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_SPECIAL_CHARS); sin operador de saignación de fusión de null
+        $nombre = filter_var($_POST['nombre'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS); // con operador de saignación de fusión de null
+        $apellidos = filter_var($_POST['apellidos'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $email = filter_var($_POST['email'] ??= '', FILTER_SANITIZE_EMAIL);
+        $telefono = filter_var($_POST['telefono'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $poblacion = filter_var($_POST['poblacion'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $dni = filter_var($_POST['dni'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $fechaNac = filter_var($_POST['fechaNac'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $id_curso = filter_var($_POST['id_curso'] ??= '', FILTER_SANITIZE_NUMBER_INT);
+
+
         # Cargo id del alumno
         $id = $param[0];
 
-        # Con los detalles formulario creo objeto alumno
+        # Con los detalles formulario creo objeto alumno a partir de los datos saneados
         $alumno = new classAlumno(
 
             null,
-            $_POST['nombre'],
-            $_POST['apellidos'],
-            $_POST['email'],
-            $_POST['telefono'],
+            $nombre,
+            $apellidos,
+            $email,
+            $telefono,
             null,
-            $_POST['poblacion'],
+            $poblacion,
             null,
             null,
-            $_POST['dni'],
-            $_POST['fechaNac'],
-            $_POST['id_curso']
+            $dni,
+            $fechaNac,
+            $id_curso
 
         );
 
-        # Actualizo base  de datos
-        $this->model->update($alumno, $id);
+        # Cargo id del alumno a original
+        $id = $param[0]; /// lo tenemos más arriva solo como ejemplo
 
-        # Cargo el controlador principal de alumno
-        header('location:' . URL . 'alumno');
+        $alumno_original = $this->model->read($id);
+
+        # VALIDACION
+        // Sólo si es necesario
+        // Sólo en caso de modificación el campo
+
+        $errores = [];
+
+        // validar nombre
+        if (strcmp($alumno->nombre, $alumno_original->nombre) !== 0) { // EN PHP NO PODEMOS COMPARAR DOS STRING CON ==
+            // nombre oblogatiorio
+            if (empty($nombre)) {
+                $errores['nombre'] = 'El campo es obligatorio';
+            }
+        }
+
+        // validar nombre
+        if (strcmp($nombre, $alumno_original->nombre) !== 0) { // EN PHP NO PODEMOS COMPARAR DOS STRING CON ==
+            // nombre oblogatiorio
+            if (empty($nombre)) {
+                $errores['nombre'] = 'El campo es obligatorio';
+            }
+        }
+
+        // validar apellidos
+        if (strcmp($apellidos, $alumno_original->apellidos) !== 0) { // EN PHP NO PODEMOS COMPARAR DOS STRING CON ==
+            // nombre oblogatiorio
+            if (empty($apellidos)) {
+                $errores['apellidos'] = 'El campo es obligatorio';
+            }
+        }
+
+        // validar email
+        if (strcmp($email, $alumno_original->email) !== 0) { // EN PHP NO PODEMOS COMPARAR DOS STRING CON ==
+            // Email: obligatorio, formato válido y clave secundario
+            if (empty($email)) {
+                $errores['email'] = 'El campo es obligatorio';
+            } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { // VALIDAMOS EL EMAIL -> retorna booleano
+                $errores['email'] = 'El formato del email no es válido';
+            } else if (!$this->model->validateUniqueEmail($email)) {
+                $errores['email'] = 'El email ya ha sido registrado';
+            }
+        }
+
+
+
+        // DNI: obligatorio, formato válido y único
+        $options = [
+            'options' => [ // ESTOS PARÁMETROS DEBEN LLAMARSE ASÍ
+                'regexp' => '/^(\d{8})([a-zA-Z])$/'
+            ]
+        ];
+        // validar dni
+        if (strcmp($dni, $alumno_original->dni) !== 0) {
+            if (empty($dni)) {
+                $errores['dni'] = 'El campo es obligatorio';
+            } else if (!filter_var($dni, FILTER_VALIDATE_REGEXP, $options)) { // VALIDAMOS EL EMAIL -> retorna booleano
+                $errores['dni'] = 'El formato del dni no es válido';
+            } else if (!$this->model->validateUniqueDni($dni)) {
+                $errores['dni'] = 'El dni ya ha sido registrado';
+            }
+        }
+
+
+        if (strcmp($id_curso, $alumno_original->id_curso) !== 0) {
+            // Validamos id_curso: obligatorio, número entero y existente
+            if (empty($id_curso)) {
+                $errores['id_curso'] = 'Debe seleccionar un curso';
+            } else if (!filter_var($id_curso, FILTER_VALIDATE_INT)) { // VALIDAMOS EL EMAIL -> retorna booleano
+                $errores['id_curso'] = 'El curso no es válido';
+            } else if (!$this->model->validateCurso($id_curso)) {
+                $errores['id_curso'] = 'El Curso no existe';
+            }
+        }
+
+        
+        # Comprobamos validacion
+        if (!empty($errores)) {
+            // errores de validacion
+            $_SESSION['alumno'] = serialize($alumno); // serializamos para tornar el objeto a string
+            $_SESSION['error'] = 'Formulario no validado';
+            $_SESSION['errores'] = $errores;
+
+            # Redireccionamos a 
+            header('location:' . URL . 'alumno/edit/'.$id);
+        } else {
+            # Añadir registro a la tabla
+            $this->model->update($alumno, $id);
+
+            # Mensaje
+            $_SESSION['mensaje'] = "Alumno editado correctamente";
+
+            # Redirigimos al main de alumnos
+            header('location:' . URL . 'alumno');
+        }
 
     }
 
