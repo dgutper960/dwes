@@ -457,6 +457,26 @@
 
     }  
 
+    public function delete($id_eliminar){
+
+        try{
+
+            $sql = "DELETE FROM alumnos WHERE id = :id";
+
+            /**
+             * FALTA COMPLETAR CODIGO
+             */
+
+        }catch (PDOException $e){
+
+            include_once('template/partials/errorDB.php');
+            exit();
+            
+        }
+
+        
+    }
+
 }
 
 ?>

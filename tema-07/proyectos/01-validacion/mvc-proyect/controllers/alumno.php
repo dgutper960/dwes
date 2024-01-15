@@ -346,7 +346,7 @@ class Alumno extends Controller
             }
         }
 
-        
+
         # Comprobamos validacion
         if (!empty($errores)) {
             // errores de validacion
@@ -355,7 +355,7 @@ class Alumno extends Controller
             $_SESSION['errores'] = $errores;
 
             # Redireccionamos a 
-            header('location:' . URL . 'alumno/edit/'.$id);
+            header('location:' . URL . 'alumno/edit/' . $id);
         } else {
             # Añadir registro a la tabla
             $this->model->update($alumno, $id);
@@ -400,6 +400,22 @@ class Alumno extends Controller
 
         # Cargo la vista principal de alumno
         $this->view->render('alumno/main/index');
+    }
+
+    public function delete($param = [])
+    {
+        session_start();
+
+        $id = $param[0];
+
+        # eliminar alumno 
+        $this->model->delete($id);
+
+        # generar mensaje
+        $_SESSION['notify'] = 'Alumno eliminado correctamente';
+
+        # redirecciono
+        header('location:' . URL . 'alumno');
     }
 }
 
