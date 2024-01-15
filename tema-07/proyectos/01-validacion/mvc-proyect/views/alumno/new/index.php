@@ -49,12 +49,12 @@
             <div class="mb-3">
                 <label for="apellidos" class="form-label">Apellidos</label>
                 <input type="text" class="form-control" name="apellidos" value="<?= $this->alumno->apellidos ?>">
-                                <!-- Mostrar posible error -->
-                                <?php if (isset($this->errores['apellidos'])): ?>
+                <!-- Mostrar posible error -->
+                <?php if (isset($this->errores['apellidos'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['apellidos'] ?>
                     </span>
-                    <?php endif; ?>
+                <?php endif; ?>
             </div>
             <!-- Fecha Nacimiento -->
             <div class="mb-3">
@@ -65,7 +65,7 @@
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['fechaNac'] ?>
                     </span>
-                    <?php endif; ?>
+                <?php endif; ?>
             </div>
             <!-- Dni -->
             <div class="mb-3">
@@ -88,7 +88,7 @@
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['email'] ?>
                     </span>
-                    <?php endif; ?>
+                <?php endif; ?>
             </div>
             <!-- Telefono -->
             <div class="mb-3">
@@ -103,7 +103,7 @@
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['direccion'] ?>
                     </span>
-                    <?php endif; ?>
+                <?php endif; ?>
             </div>
             <!-- Población -->
             <div class="mb-3">
@@ -113,7 +113,7 @@
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['poblacion'] ?>
                     </span>
-                    <?php endif; ?>
+                <?php endif; ?>
             </div>
             <!-- Provincia -->
             <div class="mb-3">
@@ -123,17 +123,17 @@
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['provincia'] ?>
                     </span>
-                    <?php endif; ?>
+                <?php endif; ?>
             </div>
             <!-- Nacionalidad -->
             <div class="mb-3">
                 <label for="nacionalidad" class="form-label">Nacionalidad</label>
                 <input type="text" class="form-control" name="nacionalidad" value="<?= $this->alumno->nacionalidad ?>">
                 <span class="form-text text-danger" role="alert">
-                <?php if (isset($this->errores['nacionalidad'])): ?>
-                    <span class="form-text text-danger" role="alert">
-                        <?= $this->errores['nacionalidad'] ?>
-                    </span>
+                    <?php if (isset($this->errores['nacionalidad'])): ?>
+                        <span class="form-text text-danger" role="alert">
+                            <?= $this->errores['nacionalidad'] ?>
+                        </span>
                     <?php endif; ?>
             </div>
             <!-- Curso Select -->
