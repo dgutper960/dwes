@@ -13,7 +13,7 @@
 
 Se creará un array asociativo llamado:
 
-  $errores  = []
+$errores  = []
 En el caso de no ser validado uno de los campos, por ejemplo el dni, se procede de la siguiente manera
 
   $errores['dni'] = "DNI ha sido registrado en la base de datos
@@ -22,8 +22,8 @@ En el caso de no ser validado uno de los campos, por ejemplo el dni, se procede 
 
 Una vez detectados errores de validación la aplicación volverá al formulario y tendrá que cumplir con los siguientes requisitos:
 
-Autocompletado de los campos. Mostrará en cada uno de los campos los valores que ya introduzco el usuario en su primer intento
-Error. Mostrará en cabecera un mensaje de Error, Formulario no validado
+- Autocompletado de los campos. Mostrará en cada uno de los campos los valores que ya introduzco el usuario en su primer intento
+- Error. Mostrará en cabecera un mensaje de Erro: Formulario no validado
 Mensajes de error de validación. Además justo debajo de cada campo no validado mostrará el correspondiente mensaje de error de validación.
 
 ## 4. Mensaje Formulario Validado
@@ -39,7 +39,7 @@ Una vez que el formulario quede validado, se añadirá un nuevo registro en la t
 - Saneamos los datos
 - Con la expresión abreviada ( ??='') evitamos errores en campos vacíos
     - Esta expresion es como un isset pero que inicializa como campo vacío
-    - Observamos que el operador va en el mismo parámetro que el $POS['dato']
+    - Observamos que el operador va en el mismo parámetro que el $POST['dato']
 - Tenemos una constante para tipo de dato email
 
     **Esto filtra los datos introducidos y elimina lo que no que no sirve**

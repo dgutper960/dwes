@@ -49,19 +49,44 @@ class Cliente extends Controller
     // -> Como argumento un array
     public function create()
     {
-        // Cargamos los datos directamente en el constructor
+
+        # Iniciamos sesión para almacenar información en variables de sesión
+        session_start();
+
+        # Saneamos los datos para evitar inyecciones de código
+        // Añadimos el operador ( ??='') para manejar errores en caso se tener campos vacíos en $_POST
+
+        $apellidos = filter_var($_POST['apellidos'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS); // Usamos special chars para los string
+        $nombre = filter_var($_POST['nombre'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $telefono = filter_var($_POST['telefono'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $ciudad = filter_var($_POST['ciudad'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $dni = filter_var($_POST['dni'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $email = filter_var($_POST['email'] ??= '', FILTER_VALIDATE_EMAIL);
+
+        // Cargamos los datos saneados
         $data = new classCliente(
             null,
-            $_POST['apellidos'],
-            $_POST['nombre'],
-            $_POST['telefono'],
-            $_POST['ciudad'],
-            $_POST['dni'],
-            $_POST['email'],
+            $apellidos,
+            $nombre,
+            $telefono,
+            $ciudad,
+            $dni,
+            $email,
 
         );
 
-        # Validación no requerida
+        # Validación
+        // declaramos array vacío para almacenar los posibles errores
+        // en caso de error lo almacenaremos en formato de array asociativo -> donde el indice es el nombre del campo
+        $errores = [];
+
+        # Implementamos las validaciones según los requerimientos
+        // Apelldos -> Campo obligatorio max 20 char
+        if(empty($apellidos)){
+            $errores['apellidos'] = 'El campo es obligatorio';
+        }else if(strlen($apellidos) > 20){
+            $errores['apellidos'] = 'El campo es admite como máximo 20 caracteres';
+        }
 
         # Añadimos el registro a la tabla
         $this->model->create($data);
