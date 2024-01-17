@@ -5,7 +5,7 @@
 <?php require_once("template/partials/head.php") ?>
 
 <body>
-    <?php require_once("template/partials/menu.php") ?>
+    <?php require_once("template/partials/menuBar.php") ?>
 	<br><br><br><br>
     
     <!-- Page Content -->
