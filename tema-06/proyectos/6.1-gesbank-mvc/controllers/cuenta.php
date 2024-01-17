@@ -92,6 +92,9 @@ class Cuenta extends Controller
         # Obtenemos el objeto classCuenta
         $this->view->cuenta = $this->model->read($id_editar);
 
+        # Obtenemos los nombres para la vista desplegable
+        $this->view->customers = $this->model->getCustomerName();
+
         # Cargamos la vista
         $this->view->render('cuenta/edit/index');
 

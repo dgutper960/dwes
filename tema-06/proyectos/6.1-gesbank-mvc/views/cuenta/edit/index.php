@@ -34,10 +34,17 @@
                 <input type="text" class="form-control" name="num_cuenta" value="<?=$this->cuenta->num_cuenta?>">
             </div>
 
-            <!-- Cliente -->
+            <!-- Cliente (mostramos lista desplegable)  -->
             <div class="mb-3">
-                <label for="cliente" class="form-label">Cliente</label>
-                <input type="text" class="form-control" name="cliente" value="<?=$this->cuenta->cliente?>" disabled>
+                <label for="id_cliente" class="form-label">Seleccione cliente</label>
+                <select class="form-select" aria-label="Default select example" type="number" name="id_cliente">
+                    <option selected>Seleccione Cliente</option>
+                    <?php foreach ($this->customers as $customer): ?>
+                        <option value="<?= $customer->id ?>">
+                            <?= $customer->cliente ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
 
             <!-- Fecha Alta -->
