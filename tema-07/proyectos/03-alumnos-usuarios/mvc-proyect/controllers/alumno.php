@@ -18,7 +18,7 @@ class Alumno extends Controller
 
         # Comprobamos si existe la variable de entorno $_SESSION['id']
         if (!isset($_SESSION['id'])) {
-            $_SESSION['notify'] = "El usuario debe autentificarse";
+            $_SESSION['mensaje'] = "El usuario debe autentificarse";
 
             header('location:' . URL . 'login');
         } else {
@@ -51,7 +51,7 @@ class Alumno extends Controller
 
         # Comprobamos si existe la variable de entorno $_SESSION['id']
         if (!isset($_SESSION['id'])) {
-            $_SESSION['notify'] = "El usuario debe autentificarse";
+            $_SESSION['mensaje'] = "El usuario debe autentificarse";
 
             header('location:' . URL . 'login');
         } else {
