@@ -108,7 +108,7 @@
 
                 $_SESSION['mensaje'] = "Usuario ". $user->name. " ha iniciado sesión" ;
                 
-                header("location:". URL. "alumnos");
+                header("location:". URL. "alumno");
             }
 
 
