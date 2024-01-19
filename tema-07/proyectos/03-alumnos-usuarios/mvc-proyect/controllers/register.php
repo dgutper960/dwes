@@ -53,10 +53,10 @@ class Register extends Controller
         session_start();
 
         # Saneamos el formulario
-        $name = filter_var($_POST['name'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $password = filter_var($_POST['password'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $password_confirm = filter_var($_POST['password-confirm'], FILTER_SANITIZE_SPECIAL_CHARS);
+        $name = filter_var($_POST['name'] ??='', FILTER_SANITIZE_SPECIAL_CHARS);
+        $email = filter_var($_POST['email'] ??='', FILTER_SANITIZE_EMAIL);
+        $password = filter_var($_POST['password'] ??='', FILTER_SANITIZE_SPECIAL_CHARS);
+        $password_confirm = filter_var($_POST['password-confirm'] ??='', FILTER_SANITIZE_SPECIAL_CHARS);
 
         # Validaciones
 

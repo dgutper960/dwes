@@ -15,3 +15,4 @@
 - Necesario para no introducir los campos de la contraseña en la BBDD sin hashear
 - Comprobamos los bloques if que nos muestran las opciones en caso de que el formulario venga de vuelta
 - Se recuperan los valores del formulario y se almacan en variables de sesion que se borran despues de ser usadas
+

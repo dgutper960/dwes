@@ -3,6 +3,7 @@
 <html lang="es"> 
 
 <?php require_once("template/partials/head.php") ?>
+<title>Gestion Alumnos - FP. MVC</title>
 
 <body>
     <?php require_once("template/partials/menuBar.php") ?>

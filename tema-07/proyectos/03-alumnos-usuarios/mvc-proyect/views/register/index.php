@@ -33,7 +33,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" <?= (isset($this->errores['email'])) ? 'is-invalid' : null ?> name="name" 
+                                    <input id="name" type="text" class="form-control" <?= (isset($this->errores['name'])) ? 'is-invalid' : null ?> name="name" 
                                         value="<?= $this->name; ?>" required autocomplete="name" autofocus>
 
                                     <?php if (isset($this->errores['name'])): ?>
