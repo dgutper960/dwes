@@ -246,10 +246,10 @@ class Clientes extends Controller
     public function update($param = [])
     {
 
-        # 1. Inicio/continuación de sesión
+        # Iniciamos o contiuamos sesión
         session_start();
 
-        # 2. Saneamiento de los datos del formulario
+        # Saneamos los datos del formulario
         $nombre = filter_var($_POST["nombre"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $apellidos = filter_var($_POST["apellidos"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $telefono = filter_var($_POST["telefono"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -257,7 +257,7 @@ class Clientes extends Controller
         $dni = filter_var($_POST['dni'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $email = filter_var($_POST['email'] ??= '', FILTER_SANITIZE_EMAIL);
 
-        # 3. Creamos el cliente, con los datos saneados
+        # Creamos objeto con los datos saneados
         $cliente = new classCliente(
             null,
             $apellidos,
@@ -270,13 +270,13 @@ class Clientes extends Controller
             null
         );
 
-        # Cargamos el id del cliente que quiero actualizar
+        # Cargamos el id del cliente a actualizar
         $id = $param[0];
 
-        # Obtenemos el objeto cliente original
-        $clienteOriginal = $this->model->getCliente($id);
+        # Obtenemos el objeto original
+        $ObjetOriginal = $this->model->getCliente($id);
 
-        # 4.Validación. Solo si es necesario o en caso de modificación de campo
+        # Validación. Solo en caso de modificación de campo
         $errores = [];
 
         // Validación apellidos

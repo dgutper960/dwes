@@ -255,9 +255,9 @@ class Cuentas extends Controller
             if(empty($id_cliente)){
                 $errores['id_cliente'] = 'Campo obligatorio, seleccione un cliente';
             } else if(!filter_var($id_cliente,FILTER_VALIDATE_INT)){
-                $errores['id_cliente'] = 'Deberá introducir un valor númerico en este campo';
+                $errores['id_cliente'] = 'Algo ha salido mal en la selección del cliente';
             } else if(!$this->model->validateCliente($id_cliente)){
-                $errores['id_cliente']= 'No existe el cliente indicado';
+                $errores['id_cliente']= 'No existe el cliente indicado, deje de piratear la web. Gracias!';
             }
         }
 
@@ -291,7 +291,7 @@ class Cuentas extends Controller
             $this->model->update($cuenta, $id);
 
             // Creamos el mensaje personalizado
-            $_SESSION['mensaje'] = 'Se ha actualizado la cuenta con éxito';
+            $_SESSION['mensaje'] = 'Cuenta actualizada con éxito';
             
             // Redireccionamos a la vista principal de cuentas
             header("Location:" . URL . "cuentas");
