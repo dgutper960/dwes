@@ -202,7 +202,7 @@ class Cuentas extends Controller
         # Iniciamos o continuamos la sesión
         session_start();
 
-        # 1. Saneamos los datos del formulario
+        # Saneamos los datos del formulario
         $num_cuenta = filter_var($_POST['num_cuenta']??='',FILTER_SANITIZE_SPECIAL_CHARS);
         $id_cliente = filter_var($_POST['id_cliente']??='',FILTER_SANITIZE_NUMBER_INT);
         $num_movimientos = filter_var($_POST['num_movtos']??='',FILTER_SANITIZE_SPECIAL_CHARS);
@@ -210,7 +210,7 @@ class Cuentas extends Controller
         $fecha_alta = filter_var($_POST['fecha_alta']??='',FILTER_SANITIZE_SPECIAL_CHARS);
         $saldo = filter_var($_POST['saldo']??='',FILTER_SANITIZE_SPECIAL_CHARS);
         
-        # 2. Creamos el objeto cuenta, a partir de los datos saneados del formulario
+        # Creamos el objeto a partir de los datos saneados
         $cuenta = new classCuenta(
             null,
             $num_cuenta,
@@ -230,7 +230,7 @@ class Cuentas extends Controller
         $original = $this->model->getCuenta($id);
        
 
-        # 3. Validación
+        # Validación
         // Solo si es necesario y en caso de modificación del campo
         $errores = [];
 
@@ -277,7 +277,7 @@ class Cuentas extends Controller
             }
         }
 
-        # 4. Comprobar validación
+        # Comprobamos validación
         if(!empty($errores)){
             // Errores de validación
             $_SESSION['cuenta'] = serialize($cuenta);
@@ -311,13 +311,6 @@ class Cuentas extends Controller
         $this->view->cuenta = $this->model->getCuenta($id);
         $this->view->cliente = $this->model->getCliente($this->view->cuenta->id_cliente);
        
-        // // formateamos la fecha
-        // $fechaf=(str_split($this->view->cuenta->fecha_alta));
-        // for ($i=0; $i <9 ; $i++) { 
-        //     array_pop($fechaf);
-        // }
-        // $fechafort=implode($fechaf);
-        // $this->view->cuenta->fecha_alta=$fechafort;
 
         $this->view->render("cuentas/mostrar/index");
     }
