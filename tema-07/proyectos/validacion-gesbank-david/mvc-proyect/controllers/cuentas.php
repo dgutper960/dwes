@@ -104,7 +104,7 @@ class Cuentas extends Controller
             $errores['num_cuenta'] = 'Campo obligatorio';
         } else if (!filter_var($num_cuenta, FILTER_VALIDATE_REGEXP, $optionsNumCuenta)) {
             $errores['num_cuenta'] = 'Se requieren 20 caracteres númericos';
-        } else if (!$this->model->validateUniqueNumCuenta($num_cuenta)) { // si el valor no existe, retorna true
+        } else if (!$this->model->validateUniqueCuenta($num_cuenta)) { // si el valor no existe, retorna true
             $errores['num_cuenta'] = "Número de cuenta existente, fue registrado previamente";
         }
 
@@ -116,7 +116,7 @@ class Cuentas extends Controller
             $errores['id_cliente'] = 'Campo obligatorio, debe seleccionar un cliente';
         } else if (!filter_var($id_cliente, FILTER_VALIDATE_INT)) {
             $errores['id_cliente'] = 'Requerido valor númerico para este campo';
-        } else if (!$this->model->validateCliente($id_cliente)) { // si el valor no existe, retorna true
+        } else if (!$this->model->validateClient($id_cliente)) { // si el valor no existe, retorna true
             $errores['id_cliente'] = 'El cliente indicado no existe, deje de piratear la web por favor';
         }
 
@@ -248,7 +248,7 @@ class Cuentas extends Controller
                 $errores['num_cuenta'] = 'Campo obligatorio';
             } else if (!filter_var($num_cuenta, FILTER_VALIDATE_REGEXP, $optionsNumCuenta)) {
                 $errores['num_cuenta'] = 'Se requieren 20 caracteres númericos';
-            } else if (!$this->model->validateUniqueNumCuenta($num_cuenta)) {
+            } else if (!$this->model->validateUniqueCuenta($num_cuenta)) {
                 $errores['num_cuenta'] = "Número de cuenta registrado previamente";
             }
         }
@@ -262,7 +262,7 @@ class Cuentas extends Controller
                 $errores['id_cliente'] = 'Campo obligatorio, seleccione un cliente';
             } else if (!filter_var($id_cliente, FILTER_VALIDATE_INT)) {
                 $errores['id_cliente'] = 'Algo ha salido mal en la selección del cliente';
-            } else if (!$this->model->validateCliente($id_cliente)) {
+            } else if (!$this->model->validateClient($id_cliente)) {
                 $errores['id_cliente'] = 'No existe el cliente indicado, deje de piratear la web. Gracias!';
             }
         }

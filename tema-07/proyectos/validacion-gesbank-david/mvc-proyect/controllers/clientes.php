@@ -9,7 +9,7 @@ class Clientes extends Controller
         # Se debe iniciar o continuar la sesión para mantener los posibles datos almacenados
         session_start();
 
-        # En caso de existir variable de sesion 'mensaje' se muestra
+        # Si exsiste la variable de sesión, la mostramos
         if (isset($_SESSION['mensaje'])) {
             $this->view->mensaje = $_SESSION['mensaje'];
             unset($_SESSION['mensaje']);
@@ -53,7 +53,7 @@ class Clientes extends Controller
             unset($_SESSION['errores']);
 
 
-        } // fin del bloque if en caso de existei alguna variable de sesion 'error'
+        } // fin del bloque if en caso de existe alguna variable de sesion 'error'
 
         # Añadimos a la vista la propiedad title
         $this->view->title = "Formulario cliente nuevo";
@@ -75,7 +75,7 @@ class Clientes extends Controller
 
         # Saneamos los datos del formulario para evitar la inyección de código
         // (??= '')-> operador de asignación de fusión de null
-        $nombre = filter_var($_POST["nombre"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nombre = filter_var($_POST["nombre"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS); // special_chars para los string
         $apellidos = filter_var($_POST["apellidos"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $telefono = filter_var($_POST["telefono"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $ciudad = filter_var($_POST['ciudad'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -100,11 +100,11 @@ class Clientes extends Controller
         $errores = [];
 
         // apellidos. 
-        //->Campo obligatorio
+        //-> Campo obligatorio
         //-> Tamaño maximo de 45
         if (empty($apellidos)) {
             $errores['apellidos'] = "Campo obligatorio";
-        } else if (strlen($apellidos) > 45) {
+        } else if (strlen($apellidos) > 45) { // strlen() evalua el número de caracteres
             $errores['apellidos'] = "El campo admite un máximo de 45 caracteres";
         }
 
@@ -165,9 +165,9 @@ class Clientes extends Controller
         if (empty($email)) {
             $errores['email'] = "Campo obligatorio";
         } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errores['email'] = "Formato Email no válido";
+            $errores['email'] = "Formato email no válido";
         } else if (!$this->model->validateUniqueEmail($email)) { // método que retorna false si el DNI existe
-            $errores['email'] = "El email ha sido registrado con anterioridad";
+            $errores['email'] = "El email ya ha sido registrado con anterioridad";
         }
 
         # Comprobamos la validación
@@ -219,14 +219,15 @@ class Clientes extends Controller
         # Asignamos a la propiedad de la vista cliente el resultado del método getCliente
         $this->view->cliente = $this->model->getCliente($id);
 
-        # Comprobamos si el formulario viene de una no validación
+ 
         # Comprobamos si existen errores
+        // en caso de errores el formulario viene de una no validación
         if (isset($_SESSION["error"])) {
             // Añadimos a la vista el mensaje de error
             $this->view->error = $_SESSION["error"];
 
             // Autorellenamos el formulario
-            $this->view->cliente = unserialize($_SESSION['cliente']);
+            $this->view->cliente = unserialize($_SESSION['cliente']);  // deserializamos e igulamos a cliente
 
             // Recuperamos el array con los errores
             $this->view->errores = $_SESSION['errores'];

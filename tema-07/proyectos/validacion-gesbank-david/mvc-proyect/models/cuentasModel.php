@@ -317,11 +317,9 @@ class cuentasModel extends Model
         }
     }
 
-    /** 
-     * método validateUniqueNumCuenta($num_cuenta)
-     * Comprueba si ya existe un numero de cuenta en la base de datos
-    */
-    public function validateUniqueNumCuenta($num_cuenta){
+    # Método validateNumCuente
+    # Compreba si el numero de cuenta existe en la BBDD
+    public function validateUniqueCuenta($num_cuenta){
         try {
             //Creamos la consulta personalizada a ejecutar
             $sql ="SELECT * FROM gesbank.cuentas WHERE num_cuenta = :cuenta";
@@ -345,11 +343,8 @@ class cuentasModel extends Model
         }
     }
 
-    /**
-     * método validateCliente($id_cliente)
-     * Comprueba si existe el cliente en la base de datos
-     */
-    public function validateCliente($id_cliente){
+    #Mñetodo validateClient
+    public function validateClient($id_cliente){
         try {
             // Creamos la sentencia personalizada a ejecutar
             $sql = "SELECT * FROM gesbank.clientes WHERE id = :idCliente LIMIT 1";
