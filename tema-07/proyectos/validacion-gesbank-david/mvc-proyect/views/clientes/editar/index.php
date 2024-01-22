@@ -3,7 +3,7 @@
 
 <head>
     <!-- bootstrap  -->
-    <?php require_once("template/partials/head.php");  ?>
+    <?php require_once("template/partials/head.php"); ?>
 
     <title>Editar Cliente · Gesbank</title>
 </head>
@@ -17,11 +17,12 @@
         <?php include "views/clientes/partials/header.php" ?>
         <!-- Formulario -->
         <form action="<?= URL ?>clientes/update/<?= $this->id ?>" method="POST">
-              <!-- nombre -->
-              <div class="mb-3">
+            <!-- nombre -->
+            <div class="mb-3">
                 <label for="" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?=$this->cliente->nombre?>">
+                <input type="text" class="form-control" name="nombre" value="<?= $this->cliente->nombre ?>">
                 <!-- En caso de error, entra en este bloque -->
+                <!-- Si en el array de errores existe un índice con este cámpo cambiamos el estilo y mostramos el mensaje -->
                 <?php if (isset($this->errores['nombre'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['nombre'] ?>
@@ -31,7 +32,7 @@
             <!-- apellidos -->
             <div class="mb-3">
                 <label for="" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos" value="<?=$this->cliente->apellidos?>">
+                <input type="text" class="form-control" name="apellidos" value="<?= $this->cliente->apellidos ?>">
                 <!-- En caso de error, entra en este bloque -->
                 <?php if (isset($this->errores['apellidos'])): ?>
                     <span class="form-text text-danger" role="alert">
@@ -42,7 +43,7 @@
             <!-- ciudad -->
             <div class="mb-3">
                 <label for="" class="form-label">Ciudad</label>
-                <input type="text" class="form-control" name="ciudad" value="<?=$this->cliente->ciudad?>">
+                <input type="text" class="form-control" name="ciudad" value="<?= $this->cliente->ciudad ?>">
                 <!-- En caso de error, entra en este bloque -->
                 <?php if (isset($this->errores['ciudad'])): ?>
                     <span class="form-text text-danger" role="alert">
@@ -53,7 +54,7 @@
             <!-- email -->
             <div class="mb-3">
                 <label for="" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" value="<?=$this->cliente->email?>">
+                <input type="email" class="form-control" name="email" value="<?= $this->cliente->email ?>">
                 <!-- En caso de error, entra en este bloque -->
                 <?php if (isset($this->errores['email'])): ?>
                     <span class="form-text text-danger" role="alert">
@@ -64,7 +65,7 @@
             <!-- telefono -->
             <div class="mb-3">
                 <label for="" class="form-label">Telefono</label>
-                <input type="text" class="form-control" name="telefono" value="<?=$this->cliente->telefono?>">
+                <input type="text" class="form-control" name="telefono" value="<?= $this->cliente->telefono ?>">
                 <!-- En caso de error, entra en este bloque -->
                 <?php if (isset($this->errores['telefono'])): ?>
                     <span class="form-text text-danger" role="alert">
@@ -75,7 +76,7 @@
             <!-- dni -->
             <div class="mb-3">
                 <label for="" class="form-label">DNI</label>
-                <input type="text" class="form-control" name="dni" value="<?=$this->cliente->dni?>">
+                <input type="text" class="form-control" name="dni" value="<?= $this->cliente->dni ?>">
                 <!-- En caso de error, entra en este bloque -->
                 <?php if (isset($this->errores['dni'])): ?>
                     <span class="form-text text-danger" role="alert">
@@ -100,4 +101,5 @@
     <!-- Bootstrap JS y popper -->
     <?php require_once "template/partials/javascript.php" ?>
 </body>
+
 </html>

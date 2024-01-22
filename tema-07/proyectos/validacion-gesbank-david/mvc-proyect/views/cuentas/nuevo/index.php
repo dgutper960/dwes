@@ -3,7 +3,7 @@
 
 <head>
     <!-- bootstrap  -->
-    <?php require_once("template/partials/head.php");  ?>
+    <?php require_once("template/partials/head.php"); ?>
     <title>Nueva Cuenta - GESBANK</title>
 </head>
 
@@ -21,7 +21,11 @@
             <!-- Cuenta -->
             <div class="mb-3">
                 <label for="num_cuenta" class="form-label">Numero de cuenta</label>
-                <input type="text" class="form-control <?= (isset($this->errores['num_cuenta']))? 'is-invalid': null ?>" name="num_cuenta" minlength="20" maxlength="20" value="<?=$this->cuenta->num_cuenta?>">
+                <input type="text"
+                    class="form-control <?= (isset($this->errores['num_cuenta'])) ? 'is-invalid' : null ?>"
+                    name="num_cuenta" minlength="20" maxlength="20" value="<?= $this->cuenta->num_cuenta ?>">
+                <!-- En caso de error, entra en este bloque -->
+                <!-- Si en el array de errores existe un índice con este cámpo cambiamos el estilo y mostramos el mensaje -->
                 <?php if (isset($this->errores['num_cuenta'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['num_cuenta'] ?>
@@ -31,12 +35,12 @@
             <!-- Cliente -->
             <div class="mb-3">
                 <label for="id_cliente" class="form-label">Cliente</label>
-                <select class="form-select <?= (isset($this->errores['id_cliente']))? 'is-invalid': null ?>" name="id_cliente" id="">
+                <select class="form-select <?= (isset($this->errores['id_cliente'])) ? 'is-invalid' : null ?>"
+                    name="id_cliente" id="">
                     <option selected disabled>Seleccione un cliente </option>
-                    <?php foreach ($this->clientes as  $cliente) : ?>
+                    <?php foreach ($this->clientes as $cliente): ?>
                         <div class="form-check">
-                            <option value="<?= $cliente->id ?>"
-                            <?=($cliente->id == $this->cuenta->id_cliente)? 'selected':null?>>
+                            <option value="<?= $cliente->id ?>" <?= ($cliente->id == $this->cuenta->id_cliente) ? 'selected' : null ?>>
                                 <?= $cliente->cliente ?>
                             </option>
                         </div>
@@ -51,17 +55,20 @@
             <!-- Fecha -->
             <div class="mb-3">
                 <label for="fecha_alta" class="form-label">Fecha alta</label>
-                <input type="datetime-local" class="form-control <?= (isset($this->errores['fecha_alta']))? 'is-invalid': null ?>" name="fecha_alta" value="<?=$this->cuenta->fecha_alta?>">
+                <input type="datetime-local"
+                    class="form-control <?= (isset($this->errores['fecha_alta'])) ? 'is-invalid' : null ?>"
+                    name="fecha_alta" value="<?= $this->cuenta->fecha_alta ?>">
                 <?php if (isset($this->errores['fecha_alta'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['fecha_alta'] ?>
                     </span>
                 <?php endif; ?>
             </div>
-            <!-- Saldo. Si existe algun error, se mantiene el valor introducido, si no el valor por defecto -->
+            <!-- Saldo -->
             <div class="mb-3">
                 <label for="saldo" class="form-label">Saldo</label>
-                <input type="number" class="form-control" name="saldo" id="" value="<?=(isset($this->errores['num_cuenta']) || isset($this->errores['id_cliente']) || isset($this->errores['fecha_alta'])) ? $this->cuenta->saldo : '0.00'?>" step="0.01">
+                <input type="number" class="form-control" name="saldo" id="" value="<?= $this->cuenta->saldo ?>"
+                    step="0.01">
             </div>
             <!-- botones de acción -->
             <div class="mb-3">

@@ -26,6 +26,7 @@
                 <label for="" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre" value="<?=$this->cliente->nombre?>">
                 <!-- En caso de error, entra en este bloque -->
+                <!-- Si en el array de errores existe un índice con este cámpo cambiamos el estilo y mostramos el mensaje -->
                 <?php if (isset($this->errores['nombre'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['nombre'] ?>

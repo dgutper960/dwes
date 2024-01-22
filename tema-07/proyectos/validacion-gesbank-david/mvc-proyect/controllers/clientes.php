@@ -274,7 +274,7 @@ class Clientes extends Controller
         $id = $param[0];
 
         # Obtenemos el objeto original
-        $ObjetOriginal = $this->model->getCliente($id);
+        $objetOriginal = $this->model->getCliente($id);
 
         // Creamos array para errores
         $errores = [];
@@ -286,7 +286,7 @@ class Clientes extends Controller
         // apellidos. 
         //->Campo obligatorio
         //-> Tamaño maximo de 45
-        if (strcmp($apellidos, $ObjetOriginal->apellidos) !== 0) {
+        if (strcmp($apellidos, $objetOriginal->apellidos) !== 0) {
             if (empty($apellidos)) {
                 $errores['apellidos'] = "Campo obligatorio";
             } else if (strlen($apellidos) > 45) {
@@ -297,7 +297,7 @@ class Clientes extends Controller
         // nombre. 
         //-> Campo obligatorio
         //-> Tamaño maximo de 20
-        if (strcmp($nombre, $ObjetOriginal->nombre) !== 0) {
+        if (strcmp($nombre, $objetOriginal->nombre) !== 0) {
             if (empty($nombre)) {
                 $errores['nombre'] = "Campo obligatorio";
             } else if (strlen($nombre) > 20) {
@@ -308,7 +308,7 @@ class Clientes extends Controller
         // Teléfono. 
         //-> 9 dígitos numéricos
         // Inicializamos variable para almacenra la expresión regular
-        if (strcmp($telefono, $ObjetOriginal->telefono)) {
+        if (strcmp($telefono, $objetOriginal->telefono)) {
             $optionsTel = [
                 'options' => [
                     'regexp' => '/^[0-9]{9}$/'
@@ -323,7 +323,7 @@ class Clientes extends Controller
         // Ciudad. 
         //-> Obligatorio
         //-> Tamaño máximo de 20
-        if (strcmp($ciudad, $ObjetOriginal->ciudad) !== 0) {
+        if (strcmp($ciudad, $objetOriginal->ciudad) !== 0) {
             // Ciudad. Obligatorio, tamaño máximo de 20
             if (empty($ciudad)) {
                 $errores['ciudad'] = "Campo obligatorio";
@@ -337,7 +337,7 @@ class Clientes extends Controller
         //-> Formato de 8 digitos y 1 mayúscula
         //-> Valor único en la BBDD
         // Creamos un regexp, que permita 8 digitos y 1 letra mayuscula
-        if (strcmp($dni, $ObjetOriginal->dni) !== 0) {
+        if (strcmp($dni, $objetOriginal->dni) !== 0) {
             $dniRegexp = [
                 'options' => [
                     'regexp' => '/^[0-9]{8}[A-Z]$/'
@@ -357,7 +357,7 @@ class Clientes extends Controller
         //-> Campo obligatorio
         //-> Formato valido para email
         //-> Valor único en la BBDD 
-        if (strcmp($email, $ObjetOriginal->email) !== 0) {
+        if (strcmp($email, $objetOriginal->email) !== 0) {
             if (empty($email)) {
                 $errores['email'] = "Campo obligatorio";
             } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

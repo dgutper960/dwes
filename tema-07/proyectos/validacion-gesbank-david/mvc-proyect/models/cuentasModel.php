@@ -377,19 +377,7 @@ class cuentasModel extends Model
         }
     }
 
-    /**
-     * método validateFecha($fecha_alta)
-     * Comprueba si la fecha enviada como parametro tiene un formato correcto
-     */
-    public function validateFecha($fecha_alta){
-        $formatoFecha = DateTime::createFromFormat('Y-m-d\TH:i',$fecha_alta);
-        if($formatoFecha !== false){
-            return true;
-        } else {
-            return false;
-        }
 
-    }
 }
 
 ?>

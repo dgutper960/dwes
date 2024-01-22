@@ -20,12 +20,18 @@
             <!-- Número de cuenta -->
             <div class="mb-3">
                 <label for="" class="form-label">Numero de cuenta</label>
-                <input type="text" class="form-control" name="num_cuenta" value="<?= $this->cuenta->num_cuenta ?>" readonly>
+                <input type="text" class="form-control" name="num_cuenta" value="<?= $this->cuenta->num_cuenta ?>">
+                <!-- Si en el array de errores existe un índice con este cámpo cambiamos el estilo y mostramos el mensaje -->
+                <?php if (isset($this->errores['num_cuenta'])): ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['num_cuenta'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- Cliente -->
             <div class="mb-3">
                 <label for="" class="form-label">Cliente</label>
-                <select class="form-select" name="id_cliente" id="">
+                <select class="form-select <?= (isset($this->errores['id_cliente']))? 'is-invalid': null ?>" name="id_cliente" id="">
                     <option selected disabled>Seleccione un cliente </option>
                     <?php foreach ($this->clientes as  $cliente) : ?>
                         <div class="form-check">
@@ -35,17 +41,18 @@
                         </div>
                     <?php endforeach; ?>
                 </select>
+                <?php if (isset($this->errores['id_cliente'])): ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['id_cliente'] ?>
+                    </span>
+                <?php endif; ?> 
             </div>
             <!-- Fecha -->
             <div class="mb-3">
                 <label for="" class="form-label">Fecha alta</label>
-                <input type="datetime-local" class="form-control" name="fecha_alta" value="<?= $this->cuenta->fecha_alta ?>" >
+                <input type="datetime-local" class="form-control <?= (isset($this->errores['fecha_alta']))? 'is-invalid': null ?>" name="fecha_alta" value="<?= $this->cuenta->fecha_alta ?>" >
             </div>
-             <!-- Fecha ultimo movimiento -->
-             <div class="mb-3">
-                <label for="" class="form-label">Fecha último movimiento</label>
-                <input type="datetime-local" class="form-control" name="fecha_ul_mov" value="<?= $this->cuenta->fecha_ul_mov ?>">
-            </div>
+
             <!-- Número de movimientos -->
             <div class="mb-3">
                 <label for="" class="form-label">Número de Movimientos</label>
