@@ -15,9 +15,7 @@
         <li class="nav-item">
           <a class="nav-link active" href="<?= URL ?>cuentas">Cuentas</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Cursos</a>
-        </li>
+
       </ul>
       <div class="d-flex">
         <ul class="nav navbar-nav flex-row  ml-auto">
