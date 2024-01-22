@@ -74,7 +74,7 @@ class cuentasModel extends Model
             $pdoSt->bindParam(":fecha_alta", $cuenta->fecha_alta);
             $pdoSt->bindParam(":fecha_ul_mov", $cuenta->fecha_ul_mov);
             $pdoSt->bindParam(":num_movtos", $cuenta->num_movtos, PDO::PARAM_INT);
-            $pdoSt->bindParam(":saldo", $cuenta->saldo, PDO::PARAM_INT);
+            $pdoSt->bindParam(":saldo", $cuenta->saldo, PDO::PARAM_STR);
 
             // ejecuto
             $pdoSt->execute();
@@ -189,7 +189,7 @@ class cuentasModel extends Model
             $pdoSt->bindParam(":fecha_alta", $cuenta->fecha_alta, PDO::PARAM_STR);
             $pdoSt->bindParam(":fecha_ul_mov", $cuenta->fecha_ul_mov, PDO::PARAM_STR);
             $pdoSt->bindParam(":num_movtos", $cuenta->num_movtos, PDO::PARAM_INT);
-            $pdoSt->bindParam(":saldo", $cuenta->saldo, PDO::PARAM_INT);
+            $pdoSt->bindParam(":saldo", $cuenta->saldo, PDO::PARAM_STR);
             $pdoSt->bindParam(":id", $id, PDO::PARAM_INT);
 
             $pdoSt->execute();
@@ -315,6 +315,80 @@ class cuentasModel extends Model
             require_once("template/partials/errorDB.php");
             exit();
         }
+    }
+
+    /** 
+     * método validateUniqueNumCuenta($num_cuenta)
+     * Comprueba si ya existe un numero de cuenta en la base de datos
+    */
+    public function validateUniqueNumCuenta($num_cuenta){
+        try {
+            //Creamos la consulta personalizada a ejecutar
+            $sql ="SELECT * FROM gesbank.cuentas WHERE num_cuenta = :cuenta";
+
+            // Realizamos la conexión a la base de datos
+            $conexion = $this->db->connect();
+            $pdostmt = $conexion->prepare($sql);
+            $pdostmt->bindParam('cuenta',$num_cuenta,PDO::PARAM_STR);
+
+            // Ejecutamos la sentencia
+            $pdostmt->execute();
+
+            // Realizamos la comprobación
+            if($pdostmt->rowCount() != 0){
+                return false;
+            }
+            return true;
+        } catch (PDOException $e) {
+            require_once("template/partials/errorDB.php");
+            exit();
+        }
+    }
+
+    /**
+     * método validateCliente($id_cliente)
+     * Comprueba si existe el cliente en la base de datos
+     */
+    public function validateCliente($id_cliente){
+        try {
+            // Creamos la sentencia personalizada a ejecutar
+            $sql = "SELECT * FROM gesbank.clientes WHERE id = :idCliente LIMIT 1";
+
+            // Realizamos la conexión a la base de datos
+            $conexion = $this->db->connect();
+
+            // Preparamos la consulta
+            $pdostmt = $conexion->prepare($sql);
+
+            // Vinculamos la variable
+            $pdostmt->bindParam(':idCliente',$id_cliente,PDO::PARAM_INT);
+
+            // Ejecutamos la sentencia
+            $pdostmt->execute();
+
+            // Realizamos la comprobación
+            if($pdostmt->rowCount() == 1){
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            require_once("template/partials/errorDB.php");
+            exit();
+        }
+    }
+
+    /**
+     * método validateFecha($fecha_alta)
+     * Comprueba si la fecha enviada como parametro tiene un formato correcto
+     */
+    public function validateFecha($fecha_alta){
+        $formatoFecha = DateTime::createFromFormat('Y-m-d\TH:i',$fecha_alta);
+        if($formatoFecha !== false){
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
 
