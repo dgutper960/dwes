@@ -17,35 +17,71 @@
         <?php include "views/clientes/partials/header.php" ?>
         <!-- Formulario -->
         <form action="<?= URL ?>clientes/update/<?= $this->id ?>" method="POST">
-            <!-- nombre -->
-            <div class="mb-3">
+              <!-- nombre -->
+              <div class="mb-3">
                 <label for="" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?= $this->cliente->nombre ?>">
+                <input type="text" class="form-control" name="nombre" value="<?=$this->cliente->nombre?>">
+                <!-- En caso de error, entra en este bloque -->
+                <?php if (isset($this->errores['nombre'])): ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['nombre'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- apellidos -->
             <div class="mb-3">
                 <label for="" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos" value="<?= $this->cliente->apellidos ?>">
+                <input type="text" class="form-control" name="apellidos" value="<?=$this->cliente->apellidos?>">
+                <!-- En caso de error, entra en este bloque -->
+                <?php if (isset($this->errores['apellidos'])): ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['apellidos'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- ciudad -->
             <div class="mb-3">
                 <label for="" class="form-label">Ciudad</label>
-                <input type="text" class="form-control" name="ciudad" value="<?= $this->cliente->ciudad ?>">
+                <input type="text" class="form-control" name="ciudad" value="<?=$this->cliente->ciudad?>">
+                <!-- En caso de error, entra en este bloque -->
+                <?php if (isset($this->errores['ciudad'])): ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['ciudad'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- email -->
             <div class="mb-3">
                 <label for="" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" id="" value="<?= $this->cliente->email ?>">
+                <input type="email" class="form-control" name="email" value="<?=$this->cliente->email?>">
+                <!-- En caso de error, entra en este bloque -->
+                <?php if (isset($this->errores['email'])): ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['email'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- telefono -->
             <div class="mb-3">
                 <label for="" class="form-label">Telefono</label>
-                <input type="text" class="form-control" name="telefono" id="" value="<?= $this->cliente->telefono ?>">
+                <input type="text" class="form-control" name="telefono" value="<?=$this->cliente->telefono?>">
+                <!-- En caso de error, entra en este bloque -->
+                <?php if (isset($this->errores['telefono'])): ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['telefono'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- dni -->
             <div class="mb-3">
                 <label for="" class="form-label">DNI</label>
-                <input type="text" class="form-control" name="dni" id="" value="<?= $this->cliente->dni ?>">
+                <input type="text" class="form-control" name="dni" value="<?=$this->cliente->dni?>">
+                <!-- En caso de error, entra en este bloque -->
+                <?php if (isset($this->errores['dni'])): ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['dni'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- botones de acción -->
             <div class="mb-3">

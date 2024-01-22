@@ -74,7 +74,7 @@ class Clientes extends Controller
         session_start();
 
         # Saneamos los datos del formulario para evitar la inyección de código
-            // (??= '')-> operador de asignación de fusión de null
+        // (??= '')-> operador de asignación de fusión de null
         $nombre = filter_var($_POST["nombre"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $apellidos = filter_var($_POST["apellidos"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
         $telefono = filter_var($_POST["telefono"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -166,7 +166,7 @@ class Clientes extends Controller
             $errores['email'] = "Campo obligatorio";
         } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errores['email'] = "Formato Email no válido";
-        } else if (!$this->model->validateUniqueEmail($email)) {// método que retorna false si el DNI existe
+        } else if (!$this->model->validateUniqueEmail($email)) { // método que retorna false si el DNI existe
             $errores['email'] = "El email ha sido registrado con anterioridad";
         }
 
@@ -214,7 +214,7 @@ class Clientes extends Controller
         $this->view->id = $id;
 
         # Asignamos un valor a la propiedad de la vista title
-        $this->view->title = "Formulario  editar cliente";
+        $this->view->title = "Formulario editar cliente";
 
         # Asignamos a la propiedad de la vista cliente el resultado del método getCliente
         $this->view->cliente = $this->model->getCliente($id);
@@ -276,25 +276,117 @@ class Clientes extends Controller
         # Obtenemos el objeto original
         $ObjetOriginal = $this->model->getCliente($id);
 
-        # Validación. Solo en caso de modificación de campo
+        // Creamos array para errores
         $errores = [];
 
-        // Validación apellidos
+        # Validación. Solo en caso de modificación de campo
+        // En cada validación se va a comprar el dato del formulario con el original
+        // En caso de ser diferentes se va a proceder a la validación correspomdiente
 
-        $cliente = new classCliente(
-            null,
-            $_POST["apellidos"],
-            $_POST["nombre"],
-            $_POST["telefono"],
-            $_POST["ciudad"],
-            $_POST["dni"],
-            $_POST["email"],
-            null,
-            null
-        );
+        // apellidos. 
+        //->Campo obligatorio
+        //-> Tamaño maximo de 45
+        if (strcmp($apellidos, $ObjetOriginal->apellidos) !== 0) {
+            if (empty($apellidos)) {
+                $errores['apellidos'] = "Campo obligatorio";
+            } else if (strlen($apellidos) > 45) {
+                $errores['apellidos'] = "El campo admite un máximo de 45 caracteres";
+            }
+        }
 
-        $this->model->update($cliente, $id);
-        header("Location:" . URL . "clientes");
+        // nombre. 
+        //-> Campo obligatorio
+        //-> Tamaño maximo de 20
+        if (strcmp($nombre, $ObjetOriginal->nombre) !== 0) {
+            if (empty($nombre)) {
+                $errores['nombre'] = "Campo obligatorio";
+            } else if (strlen($nombre) > 20) {
+                $errores['nombre'] = "El campo admite un máximo de 20 caracteres";
+            }
+        }
+
+        // Teléfono. 
+        //-> 9 dígitos numéricos
+        // Inicializamos variable para almacenra la expresión regular
+        if (strcmp($telefono, $ObjetOriginal->telefono)) {
+            $optionsTel = [
+                'options' => [
+                    'regexp' => '/^[0-9]{9}$/'
+                ]
+            ];
+
+            if (!empty($telefono) && !filter_var($telefono, FILTER_VALIDATE_REGEXP, $optionsTel)) {
+                $errores['telefono'] = "Debe ser númerico de 9 dígitos";
+            }
+        }
+
+        // Ciudad. 
+        //-> Obligatorio
+        //-> Tamaño máximo de 20
+        if (strcmp($ciudad, $ObjetOriginal->ciudad) !== 0) {
+            // Ciudad. Obligatorio, tamaño máximo de 20
+            if (empty($ciudad)) {
+                $errores['ciudad'] = "Campo obligatorio";
+            } else if (strlen($ciudad) > 20) {
+                $errores['ciudad'] = "Superaste el limite de caracteres";
+            }
+        }
+
+        // dni. 
+        //-> Campo obligatorio
+        //-> Formato de 8 digitos y 1 mayúscula
+        //-> Valor único en la BBDD
+        // Creamos un regexp, que permita 8 digitos y 1 letra mayuscula
+        if (strcmp($dni, $ObjetOriginal->dni) !== 0) {
+            $dniRegexp = [
+                'options' => [
+                    'regexp' => '/^[0-9]{8}[A-Z]$/'
+                ]
+            ];
+
+            if (empty($dni)) {
+                $errores['dni'] = "Campo obligatorio";
+            } else if (!filter_var($dni, FILTER_VALIDATE_REGEXP, $dniRegexp)) {
+                $errores['dni'] = "Formato DNI incorrecto";
+            } else if (!$this->model->validateUniqueDni($dni)) {
+                $errores['dni'] = "El DNI introducido ya ha sido registrado";
+            }
+        }
+
+        // email. 
+        //-> Campo obligatorio
+        //-> Formato valido para email
+        //-> Valor único en la BBDD 
+        if (strcmp($email, $ObjetOriginal->email) !== 0) {
+            if (empty($email)) {
+                $errores['email'] = "Campo obligatorio";
+            } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errores['email'] = "Formato Email no válido";
+            } else if (!$this->model->validateUniqueEmail($email)) {
+                $errores['email'] = "El correo electrónico introducido ya está registrado";
+            }
+        }
+
+        # Comprobamos la validación
+        // Si el array de errores no está vacío, es que hemos tenido algún error de validación
+        if (!empty($errores)) {
+            // Almacenamos los errores en variables de sesión
+            $_SESSION['cliente'] = serialize($cliente);
+            $_SESSION['error'] = 'Formulario no validado';
+            $_SESSION['errores'] = $errores;
+
+            // Redireccionamos
+            header('location:' . URL . 'clientes/editar/' . $id);
+        } else {
+            // Actualizamos el registro
+            $this->model->update($cliente, $id);
+
+            // Añadimos a la variable de sesión un mensaje
+            $_SESSION['mensaje'] = 'Cliente actualizado correctamente';
+
+            // Redireccionamos al main de clientes
+            header("Location:" . URL . "clientes");
+        }
     }
 
 
