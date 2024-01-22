@@ -317,3 +317,5 @@ class cuentasModel extends Model
         }
     }
 }
+
+?>

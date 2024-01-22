@@ -64,7 +64,7 @@ class clientesModel extends Model
             $conexion = $this->db->connect();
             $pdoSt = $conexion->prepare($sql);
 
-            //Vinculamos los parámetros
+            // Vinculamos los parámetros
             $pdoSt->bindParam(":nombre", $cliente->nombre, PDO::PARAM_STR, 30);
             $pdoSt->bindParam(":apellidos", $cliente->apellidos, PDO::PARAM_STR, 50);
             $pdoSt->bindParam(":email", $cliente->email, PDO::PARAM_STR, 50);
@@ -251,6 +251,70 @@ class clientesModel extends Model
             $pdoSt->execute();
             return $pdoSt;
 
+        } catch (PDOException $e) {
+            require_once("template/partials/errorDB.php");
+            exit();
+        }
+    }
+
+    /**
+     * Function validateUniqueDni()
+     * Retorna false si el elemento ya existe en la BBDD
+     * Si el elemento no existe retorna true
+     */
+    public function validateUniqueDni($dni){
+        try {
+            // Creamos la sentencia
+            $sql = "SELECT * FROM gesbank.clientes WHERE dni = :dni";
+
+            // Nos conectamos a la base de datos
+            $conexion = $this->db->connect();
+
+            // Preparamos la consulta
+            $pdostmt = $conexion->prepare($sql);
+
+            // Vinculamos la variable
+            $pdostmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+
+            // Ejecutamos la sentencia
+            $pdostmt->execute();
+
+            if($pdostmt->rowCount() != 0){
+                return false;
+            }
+            return true;
+        } catch (PDOException $e) {
+            require_once("template/partials/errorDB.php");
+            exit();
+        }
+    }
+
+    /**
+     * Function validateUniqueEmail()
+     * Retorna false si el elemento ya existe en la BBDD
+     * Si el elemento no existe retorna true
+     */
+    public function validateUniqueEmail($email){
+        try {
+            // Creamos la sentencia
+            $sql = "SELECT * FROM gesbank.clientes WHERE email = :email";
+
+            // Nos conectamos a la base de datos
+            $conexion = $this->db->connect();
+
+            // Preparamos la consulta
+            $pdostmt = $conexion->prepare($sql);
+
+            // Vinculamos la variable
+            $pdostmt->bindParam(':email', $email, PDO::PARAM_STR);
+
+            // Ejecutamos la sentencia
+            $pdostmt->execute();
+
+            if($pdostmt->rowCount() != 0){
+                return false;
+            }
+            return true;
         } catch (PDOException $e) {
             require_once("template/partials/errorDB.php");
             exit();
