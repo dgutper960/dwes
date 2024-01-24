@@ -14,7 +14,7 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE SER AUTENTICADO";
+            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
         } else {
 
@@ -46,7 +46,7 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE SER AUTENTICADO";
+            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
         } else {
 
@@ -93,7 +93,7 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE SER AUTENTICADO";
+            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
         } else {
             /**
@@ -230,7 +230,7 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE SER AUTENTICADO";
+            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
         } else {
 
@@ -251,7 +251,7 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE SER AUTENTICADO";
+            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
         } else {
 
@@ -300,7 +300,7 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE SER AUTENTICADO";
+            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
         } else {
 
@@ -456,7 +456,7 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE SER AUTENTICADO";
+            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
         } else {
 
@@ -479,7 +479,7 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE SER AUTENTICADO";
+            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
         } else {
 
@@ -505,7 +505,7 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE SER AUTENTICADO";
+            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
         } else {
 
