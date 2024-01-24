@@ -2,16 +2,20 @@
 <!doctype html>
 <html lang="es"> 
 
-<?php require_once("template/partials/head.php") ?>
+<head>
+	<?php require_once("template/partials/head.php") ?>	
+</head>
+
+
 
 <body>
-    <?php require_once("template/partials/menu.php") ?>
+    <?php require_once("template/partials/menuBar.php") ?>
     
     <!-- Page Content -->
     <div class="container">
 	<br><br><br><br>
 
-		<?php require_once("template/partials/mensaje.php") ?>
+		<?php require_once("template/partials/notify.php") ?>
 		
 
 		<!-- Estilo card de bootstrap -->
