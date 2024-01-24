@@ -48,7 +48,7 @@ class Cuentas extends Controller
             # Creamos un objeto vacío
             $this->view->cuenta = new classCuenta();
 
-            # Comprobamos si la variable de sesion 'mensajees' no esta vacia
+            # Comprobamos si la variable de sesion 'errores' no esta vacia
             if (isset($_SESSION['mensaje'])) {
                 // Se añade la propiedad mensaje a la vista con el valor de la variable de sesión
                 $this->view->mensaje = $_SESSION['mensaje'];
@@ -56,12 +56,12 @@ class Cuentas extends Controller
                 // Para el autorrelleno del formulario se requiere deserializar (string -> objeto)
                 $this->view->cuenta = unserialize($_SESSION['cuenta']);
 
-                // Creamos en la vista la propiedad mensajees y cargamos los valores de l variable de sesion
-                $this->view->mensajees = $_SESSION['mensajees'];
+                // Creamos en la vista la propiedad errores y cargamos los valores de l variable de sesion
+                $this->view->errores = $_SESSION['errores'];
 
                 // Liberamos las variables de sesión para evitar bucles
                 unset($_SESSION['mensaje']);
-                unset($_SESSION['mensajees']);
+                unset($_SESSION['errores']);
                 unset($_SESSION['cuenta']);
             }
 
@@ -108,7 +108,7 @@ class Cuentas extends Controller
             );
 
             # Validación
-            $mensajees = [];
+            $errores = [];
 
             // Número Cuenta. 
             //->Campo obligatorio
@@ -122,11 +122,11 @@ class Cuentas extends Controller
                 ]
             ];
             if (empty($num_cuenta)) {
-                $mensajees['num_cuenta'] = 'Campo obligatorio';
+                $errores['num_cuenta'] = 'Campo obligatorio';
             } else if (!filter_var($num_cuenta, FILTER_VALIDATE_REGEXP, $optionsNumCuenta)) {
-                $mensajees['num_cuenta'] = 'Se requieren 20 caracteres númericos';
+                $errores['num_cuenta'] = 'Se requieren 20 caracteres númericos';
             } else if (!$this->model->validateUniqueCuenta($num_cuenta)) { // si el valor no existe, retorna true
-                $mensajees['num_cuenta'] = "Número de cuenta existente, fue registrado previamente";
+                $errores['num_cuenta'] = "Número de cuenta existente, fue registrado previamente";
             }
 
             // Cliente. 
@@ -134,20 +134,20 @@ class Cuentas extends Controller
             //-> Valor numérico
             //-> El registro debe existir en la tabla de clientes
             if (empty($id_cliente)) {
-                $mensajees['id_cliente'] = 'Campo obligatorio, debe seleccionar un cliente';
+                $errores['id_cliente'] = 'Campo obligatorio, debe seleccionar un cliente';
             } else if (!filter_var($id_cliente, FILTER_VALIDATE_INT)) {
-                $mensajees['id_cliente'] = 'Requerido valor númerico para este campo';
+                $errores['id_cliente'] = 'Requerido valor númerico para este campo';
             } else if (!$this->model->validateClient($id_cliente)) { // si el valor no existe, retorna true
-                $mensajees['id_cliente'] = 'El cliente indicado no existe, deje de piratear la web por favor';
+                $errores['id_cliente'] = 'El cliente indicado no existe, deje de piratear la web por favor';
             }
 
 
             # Comprobamos la validación
-            if (!empty($mensajees)) {
-                // Si existen mensajees de validación, entramos en este bloque
+            if (!empty($errores)) {
+                // Si existen errores de validación, entramos en este bloque
                 $_SESSION['cuenta'] = serialize($cuenta);
                 $_SESSION['mensaje'] = 'El formulario no fue validado, revise los campos marcados en rojo';
-                $_SESSION['mensajees'] = $mensajees;
+                $_SESSION['errores'] = $errores;
 
                 // Redireccionamos de nuevo al formulario
                 header('location:' . URL . 'cuentas/nuevo/index');
@@ -212,12 +212,12 @@ class Cuentas extends Controller
                 // Autorellenamos el formulario
                 $this->view->cuenta = unserialize($_SESSION['cuenta']);
 
-                // Recuperamos el array con los mensajees
-                $this->view->mensajees = $_SESSION['mensajees'];
+                // Recuperamos el array con los errores
+                $this->view->errores = $_SESSION['errores'];
 
                 // Una vez usadas las variables de sesión, las liberamos
                 unset($_SESSION['mensaje']);
-                unset($_SESSION['mensajees']);
+                unset($_SESSION['errores']);
                 unset($_SESSION['cuenta']);
 
             }
@@ -278,48 +278,46 @@ class Cuentas extends Controller
 
             # Validación
             // Solo si es necesario y en caso de modificación del campo
-            $mensajees = [];
+            $errores = [];
 
             // Número Cuenta. 
             //->Campo obligatorio
             //-> Tamaño de 20 dígitos númericos
             //-> Valor único en la BBDD
-            if (strcmp($num_cuenta, $objetOriginal->num_cuenta) !== 0) {
-                $optionsNumCuenta = [
-                    'options' => [
-                        'regexp' => '/^[0-9]{20}$/'
-                    ]
-                ];
-                if (empty($num_cuenta)) {
-                    $mensajees['num_cuenta'] = 'Campo obligatorio';
-                } else if (!filter_var($num_cuenta, FILTER_VALIDATE_REGEXP, $optionsNumCuenta)) {
-                    $mensajees['num_cuenta'] = 'Se requieren 20 caracteres númericos';
-                } else if (!$this->model->validateUniqueCuenta($num_cuenta)) {
-                    $mensajees['num_cuenta'] = "Número de cuenta registrado previamente";
-                }
+
+            // Definimos la expresión regular para el núm de cuenta
+            $optionsNumCuenta = [
+                'options' => [
+                    'regexp' => '/^[0-9]{20}$/'
+                ]
+            ];
+            if (empty($num_cuenta)) {
+                $errores['num_cuenta'] = 'Campo obligatorio';
+            } else if (!filter_var($num_cuenta, FILTER_VALIDATE_REGEXP, $optionsNumCuenta)) {
+                $errores['num_cuenta'] = 'Se requieren 20 caracteres númericos';
+            } else if (!$this->model->validateUniqueCuenta($num_cuenta)) { // si el valor no existe, retorna true
+                $errores['num_cuenta'] = "Número de cuenta existente, fue registrado previamente";
             }
 
             // Cliente. 
             //-> Campo obligatorio
             //-> Valor numérico
             //-> El registro debe existir en la tabla de clientes
-            if (strcmp($id_cliente, $objetOriginal->id_cliente) !== 0) {
-                if (empty($id_cliente)) {
-                    $mensajees['id_cliente'] = 'Campo obligatorio, seleccione un cliente';
-                } else if (!filter_var($id_cliente, FILTER_VALIDATE_INT)) {
-                    $mensajees['id_cliente'] = 'Algo ha salido mal en la selección del cliente';
-                } else if (!$this->model->validateClient($id_cliente)) {
-                    $mensajees['id_cliente'] = 'No existe el cliente indicado, deje de piratear la web. Gracias!';
-                }
+            if (empty($id_cliente)) {
+                $errores['id_cliente'] = 'Campo obligatorio, debe seleccionar un cliente';
+            } else if (!filter_var($id_cliente, FILTER_VALIDATE_INT)) {
+                $errores['id_cliente'] = 'Requerido valor númerico para este campo';
+            } else if (!$this->model->validateClient($id_cliente)) { // si el valor no existe, retorna true
+                $errores['id_cliente'] = 'El cliente indicado no existe, deje de piratear la web por favor';
             }
 
 
             # Comprobamos validación
-            if (!empty($mensajees)) {
-                // mensajees de validación
+            if (!empty($errores)) {
+                // errores de validación
                 $_SESSION['cuenta'] = serialize($cuenta);
                 $_SESSION['mensaje'] = 'Formulario no validado';
-                $_SESSION['mensajees'] = $mensajees;
+                $_SESSION['errores'] = $errores;
 
                 // Redireccionamos
                 header('location:' . URL . 'cuentas/editar/' . $id);

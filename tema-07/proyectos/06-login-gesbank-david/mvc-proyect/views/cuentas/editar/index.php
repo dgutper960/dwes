@@ -2,18 +2,20 @@
 <html lang="es">
 
 <head>
-    <?php require_once("template/partials/head.php");  ?>
+    <?php require_once("template/partials/head.php"); ?>
     <title>Editar Cuenta - GESBANK</title>
 
 </head>
 
 <body>
     <!-- menu principal fijo superior -->
-    <?php require_once "template/partials/x.php"; ?>
+    <?php require_once "template/partials/menuAut.php"; ?>
     <!-- capa principal -->
     <div class="container">
         <!-- cabecera o título -->
         <?php include "views/clientes/partials/header.php" ?>
+        <!-- Mostramos el Mensaje en caso de error -->
+        <?php include("template/partials/error.php") ?>
 
         <form action="<?= URL ?>cuentas/update/<?= $this->id ?>" method="POST">
 
@@ -31,9 +33,10 @@
             <!-- Cliente -->
             <div class="mb-3">
                 <label for="" class="form-label">Cliente</label>
-                <select class="form-select <?= (isset($this->errores['id_cliente']))? 'is-invalid': null ?>" name="id_cliente" id="">
+                <select class="form-select <?= (isset($this->errores['id_cliente'])) ? 'is-invalid' : null ?>"
+                    name="id_cliente" id="">
                     <option selected disabled>Seleccione un cliente </option>
-                    <?php foreach ($this->clientes as  $cliente) : ?>
+                    <?php foreach ($this->clientes as $cliente): ?>
                         <div class="form-check">
                             <option value="<?= $cliente->id ?>" <?= ($this->cuenta->id_cliente == $cliente->id) ? "selected" : null; ?>>
                                 <?= $cliente->cliente ?>
@@ -45,23 +48,27 @@
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['id_cliente'] ?>
                     </span>
-                <?php endif; ?> 
+                <?php endif; ?>
             </div>
             <!-- Fecha -->
             <div class="mb-3">
                 <label for="" class="form-label">Fecha alta</label>
-                <input type="datetime-local" class="form-control <?= (isset($this->errores['fecha_alta']))? 'is-invalid': null ?>" name="fecha_alta" value="<?= $this->cuenta->fecha_alta ?>" >
+                <input type="datetime-local"
+                    class="form-control <?= (isset($this->errores['fecha_alta'])) ? 'is-invalid' : null ?>"
+                    name="fecha_alta" value="<?= $this->cuenta->fecha_alta ?>">
             </div>
 
             <!-- Número de movimientos -->
             <div class="mb-3">
                 <label for="" class="form-label">Número de Movimientos</label>
-                <input type="number" class="form-control" name="num_movtos" id="" value="<?= $this->cuenta->num_movtos ?>" >
+                <input type="number" class="form-control" name="num_movtos" id=""
+                    value="<?= $this->cuenta->num_movtos ?>">
             </div>
             <!-- saldo  -->
             <div class="mb-3">
                 <label for="" class="form-label">Saldo</label>
-                <input type="number" class="form-control" name="saldo" id="" step="0.01" value="<?= $this->cuenta->saldo ?>">
+                <input type="number" class="form-control" name="saldo" id="" step="0.01"
+                    value="<?= $this->cuenta->saldo ?>">
             </div>
             <!-- botones de acción -->
             <div class="mb-3">
@@ -82,4 +89,5 @@
     <!-- Bootstrap JS y popper -->
     <?php require_once "template/partials/javascript.php" ?>
 </body>
+
 </html>

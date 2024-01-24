@@ -15,6 +15,8 @@
     <div class="container">
         <!-- cabecera  -->
         <?php include "views/clientes/partials/header.php" ?>
+        <!-- Mostramos el mensaje en caso de error -->
+        <?php include("template/partials/error.php") ?>
         <!-- Formulario -->
         <form action="<?= URL ?>clientes/update/<?= $this->id ?>" method="POST">
             <!-- nombre -->

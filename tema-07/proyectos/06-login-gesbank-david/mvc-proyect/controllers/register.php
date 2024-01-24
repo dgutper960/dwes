@@ -103,7 +103,7 @@ class Register extends Controller
 
             $this->model->create($name, $email, $password);
 
-            $_SESSION['notify'] = "Usuario registrado correctamente";
+            $_SESSION['mensaje'] = "Usuario registrado correctamente";
             $_SESSION['email'] = $email;
             $_SESSION['password'] = $password;
 
