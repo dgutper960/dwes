@@ -180,6 +180,7 @@ class Cuentas extends Controller
         } else {
             $id = $param[0];
             $this->model->delete($id);
+            $_SESSION['mensaje'] = "Cuenta eliminada con éxito";
             header("Location:" . URL . "cuentas");
         }
     }
@@ -286,29 +287,34 @@ class Cuentas extends Controller
             //-> Valor único en la BBDD
 
             // Definimos la expresión regular para el núm de cuenta
-            $optionsNumCuenta = [
-                'options' => [
-                    'regexp' => '/^[0-9]{20}$/'
-                ]
-            ];
-            if (empty($num_cuenta)) {
-                $errores['num_cuenta'] = 'Campo obligatorio';
-            } else if (!filter_var($num_cuenta, FILTER_VALIDATE_REGEXP, $optionsNumCuenta)) {
-                $errores['num_cuenta'] = 'Se requieren 20 caracteres númericos';
-            } else if (!$this->model->validateUniqueCuenta($num_cuenta)) { // si el valor no existe, retorna true
-                $errores['num_cuenta'] = "Número de cuenta existente, fue registrado previamente";
+            // Validar el numero de cuenta
+            if (strcmp($num_cuenta, $objetOriginal->num_cuenta) !== 0) {
+                $cuenta_regexp = [
+                    'options' => [
+                        'regexp' => '/^[0-9]{20}$/'
+                    ]
+                ];
+                if (empty($num_cuenta)) {
+                    $errores['num_cuenta'] = 'Campo Obligatorio, añada un número de cuenta';
+                } else if (!filter_var($num_cuenta, FILTER_VALIDATE_REGEXP, $cuenta_regexp)) {
+                    $errores['num_cuenta'] = 'Formato no valido, deben ser 20 caracteres númericos';
+                } else if (!$this->model->validateUniqueCuenta($num_cuenta)) {
+                    $errores['num_cuenta'] = "El número de cuenta ya está registrado";
+                }
             }
 
             // Cliente. 
             //-> Campo obligatorio
             //-> Valor numérico
             //-> El registro debe existir en la tabla de clientes
-            if (empty($id_cliente)) {
-                $errores['id_cliente'] = 'Campo obligatorio, debe seleccionar un cliente';
-            } else if (!filter_var($id_cliente, FILTER_VALIDATE_INT)) {
-                $errores['id_cliente'] = 'Requerido valor númerico para este campo';
-            } else if (!$this->model->validateClient($id_cliente)) { // si el valor no existe, retorna true
-                $errores['id_cliente'] = 'El cliente indicado no existe, deje de piratear la web por favor';
+            if(strcmp($id_cliente,$objetOriginal->id_cliente) !== 0){
+                if(empty($id_cliente)){
+                    $errores['id_cliente'] = 'Campo Obligatorio, seleccione un cliente';
+                } else if(!filter_var($id_cliente,FILTER_VALIDATE_INT)){
+                    $errores['id_cliente'] = 'Deberá introducir un valor númerico en este campo';
+                } else if(!$this->model->validateClient($id_cliente)){
+                    $errores['id_cliente']= 'No existe el cliente indicado';
+                }
             }
 
 

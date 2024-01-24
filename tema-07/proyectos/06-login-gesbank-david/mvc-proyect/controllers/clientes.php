@@ -236,6 +236,7 @@ class Clientes extends Controller
 
             $id = $param[0];
             $this->model->delete($id);
+            $_SESSION['mensaje'] = "Cliente eliminado con éxito";
             header("Location:" . URL . "clientes");
         }
     }
