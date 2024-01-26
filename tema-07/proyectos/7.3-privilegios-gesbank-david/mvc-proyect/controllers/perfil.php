@@ -69,7 +69,7 @@
 
             }
 
-            $this->view->title = 'Modificar Perfil Usuario - Gestión Alumnos - FP';
+            $this->view->title = 'Modificar Perfil Usuario - Gestión Gesbank';
             $this->view->render('perfil/edit/index');
 
 
