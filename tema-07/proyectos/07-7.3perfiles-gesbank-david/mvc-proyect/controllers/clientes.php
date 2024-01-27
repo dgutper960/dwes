@@ -9,21 +9,24 @@ class Clientes extends Controller
         # Se debe continuar la sesión para mantener los posibles datos almacenados
         session_start();
 
-
         # Comprobamos si el usuario está autenticado
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
 
-            # Si exsiste la variable de sesión, la mostramos
+            # Si exsiste la variable de sesión mesage, lo mostramos
             if (isset($_SESSION['mensaje'])) {
                 $this->view->mensaje = $_SESSION['mensaje'];
                 unset($_SESSION['mensaje']);
             }
-
             # Creamos la propiedad title de la vista
             $this->view->title = "Tabla Clientes";
 
@@ -48,8 +51,12 @@ class Clientes extends Controller
             // mostramos el mensaje y redirigimos
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
-        } else {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
 
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
+        } else {
             # Creamos un objeto vacio
             $this->view->cliente = new classCliente();
 
@@ -95,6 +102,11 @@ class Clientes extends Controller
             // mostramos el mensaje y redirigimos
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
             /**
              * Proceso de validación
@@ -232,6 +244,11 @@ class Clientes extends Controller
             // mostramos el mensaje y redirigimos
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
 
             $id = $param[0];
@@ -254,6 +271,11 @@ class Clientes extends Controller
             // mostramos el mensaje y redirigimos
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
 
             # Obtenemos el id del cliente a editar
@@ -303,8 +325,12 @@ class Clientes extends Controller
             // mostramos el mensaje y redirigimos
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
-        } else {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
 
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
+        } else {
             # Saneamos los datos del formulario
             $nombre = filter_var($_POST["nombre"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $apellidos = filter_var($_POST["apellidos"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -459,6 +485,11 @@ class Clientes extends Controller
             // mostramos el mensaje y redirigimos
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
 
             $id = $param[0];
@@ -482,6 +513,11 @@ class Clientes extends Controller
             // mostramos el mensaje y redirigimos
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
 
 
@@ -508,6 +544,11 @@ class Clientes extends Controller
             // mostramos el mensaje y redirigimos
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
 
             $expresion = $_GET["expresion"];
@@ -518,4 +559,3 @@ class Clientes extends Controller
     }
 }
 
-?>
