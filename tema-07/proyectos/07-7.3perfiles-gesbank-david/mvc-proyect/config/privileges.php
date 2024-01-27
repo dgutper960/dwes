@@ -14,3 +14,11 @@ $GLOBALS['clientes']['delete'] = [1];
 $GLOBALS['clientes']['show'] = [1, 2, 3];
 $GLOBALS['clientes']['filter'] = [1, 2, 3];
 $GLOBALS['clientes']['order'] = [1, 2, 3];
+
+$GLOBALS['cuentas']['main'] = [1, 2, 3];
+$GLOBALS['cuentas']['new'] = [1, 2];
+$GLOBALS['cuentas']['edit'] = [1, 2];
+$GLOBALS['cuentas']['delete'] = [1];
+$GLOBALS['cuentas']['show'] = [1,2,3];
+$GLOBALS['cuentas']['filter'] = [1,2,3];
+$GLOBALS['cuentas']['order'] = [1,2,3];

@@ -49,9 +49,9 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new']))) {
 
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location:" . URL . "index");
@@ -100,9 +100,9 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new']))) {
 
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location:" . URL . "index");
@@ -242,9 +242,9 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete']))) {
 
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location:" . URL . "index");
@@ -269,9 +269,9 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit']))) {
 
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location:" . URL . "index");
@@ -323,9 +323,9 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit']))) {
 
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location:" . URL . "index");
@@ -483,9 +483,9 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show']))) {
 
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location:" . URL . "index");
@@ -511,9 +511,9 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['order']))) {
 
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location:" . URL . "index");
@@ -542,9 +542,9 @@ class Clientes extends Controller
         // si no existe la variable de sesión id, no lo está
         if (!isset($_SESSION['id'])) {
             // mostramos el mensaje y redirigimos
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['filter']))) {
 
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location:" . URL . "index");

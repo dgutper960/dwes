@@ -16,7 +16,7 @@
         <!-- Menu principal -->
         <?php require_once "views/clientes/partials/menu.php" ?>
         <!-- Mensaje -->
-        <?php require_once "template/partials/mensaje.php" ?>
+        <?php require_once "template/partials/notify.php" ?>
         <!-- tabla clientes -->
         <table class="table">
             <thead>

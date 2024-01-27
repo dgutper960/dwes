@@ -13,12 +13,12 @@ class Cuentas extends Controller
 
         # Compruebo ususario autentificado
         if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
 
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['main']))) {
 
-            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
             header("location:" . URL . "index");
 
         } else {
@@ -45,12 +45,12 @@ class Cuentas extends Controller
 
         # Compruebo ususario autentificado
         if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
 
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['new']))) {
 
-            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
             header("location:" . URL . "index");
 
         } else {
@@ -94,12 +94,12 @@ class Cuentas extends Controller
 
         # Compruebo ususario autentificado
         if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
 
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['new']))) {
 
-            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
             header("location:" . URL . "index");
 
         } else {
@@ -189,12 +189,12 @@ class Cuentas extends Controller
 
         # Compruebo ususario autentificado
         if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
 
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['delete']))) {
 
-            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
             header("location:" . URL . "index");
 
         } else {
@@ -215,12 +215,12 @@ class Cuentas extends Controller
 
         # Compruebo ususario autentificado
         if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
 
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['edit']))) {
 
-            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
             header("location:" . URL . "index");
 
         } else {
@@ -269,12 +269,12 @@ class Cuentas extends Controller
 
         # Compruebo ususario autentificado
         if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
 
             header("location: " . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['edit']))) {
 
-            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
             header("location:" . URL . "index");
 
         } else {
@@ -382,9 +382,12 @@ class Cuentas extends Controller
 
         # Compruebo ususario autentificado
         if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
 
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['show']))) {
+            $_SESSION['mensaje'] = "Operación sin privilegios";
+            header('location:' . URL . 'cuentas');
         } else {
             # id de la cuenta
             $id = $param[0];
@@ -407,9 +410,12 @@ class Cuentas extends Controller
 
         # Compruebo ususario autentificado
         if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
 
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['order']))) {
+            $_SESSION['mensaje'] = "Operación sin privilegios";
+            header('location:' . URL . 'cuentas');
         } else {
             $criterio = $param[0];
             $this->view->title = "Tabla Cuentas";
@@ -428,9 +434,12 @@ class Cuentas extends Controller
 
         # Compruebo ususario autentificado
         if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
+            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
 
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['filter']))) {
+            $_SESSION['mensaje'] = "Operación sin privilegios";
+            header('location:' . URL . 'cuentas');
         } else {
             $expresion = $_GET["expresion"];
             $this->view->title = "Tabla Cuentas";

@@ -17,7 +17,7 @@
         <!-- Menu principal -->
         <?php require_once "views/cuentas/partials/menu.php" ?>
         <!-- Mensaje -->
-        <?php require_once "template/partials/mensaje.php" ?>
+        <?php require_once "template/partials/notify.php" ?>
         <table class="table">
             <thead>
                 <tr>
