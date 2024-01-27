@@ -16,6 +16,11 @@ class Cuentas extends Controller
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
 
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
 
             # Si existe un mensaje, lo mostramos
@@ -43,6 +48,11 @@ class Cuentas extends Controller
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
 
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
 
             # Creamos un objeto vacío
@@ -87,6 +97,11 @@ class Cuentas extends Controller
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
 
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
             # Saneamos los datos del formulario para evitar inyecciones de código
             $num_cuenta = filter_var($_POST['num_cuenta'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -177,6 +192,11 @@ class Cuentas extends Controller
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
 
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
             $id = $param[0];
             $this->model->delete($id);
@@ -198,6 +218,11 @@ class Cuentas extends Controller
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
 
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
             # Obtengo el id de la cuenta a editar
             $id = $param[0];
@@ -247,6 +272,11 @@ class Cuentas extends Controller
             $_SESSION['mensaje'] = "EL USUARIO DEBE AUTENTICARSE";
 
             header("location: " . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main']))) {
+
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            header("location:" . URL . "index");
+
         } else {
 
             # Saneamos los datos del formulario
@@ -307,13 +337,13 @@ class Cuentas extends Controller
             //-> Campo obligatorio
             //-> Valor numérico
             //-> El registro debe existir en la tabla de clientes
-            if(strcmp($id_cliente,$objetOriginal->id_cliente) !== 0){
-                if(empty($id_cliente)){
+            if (strcmp($id_cliente, $objetOriginal->id_cliente) !== 0) {
+                if (empty($id_cliente)) {
                     $errores['id_cliente'] = 'Campo Obligatorio, seleccione un cliente';
-                } else if(!filter_var($id_cliente,FILTER_VALIDATE_INT)){
+                } else if (!filter_var($id_cliente, FILTER_VALIDATE_INT)) {
                     $errores['id_cliente'] = 'Deberá introducir un valor númerico en este campo';
-                } else if(!$this->model->validateClient($id_cliente)){
-                    $errores['id_cliente']= 'No existe el cliente indicado';
+                } else if (!$this->model->validateClient($id_cliente)) {
+                    $errores['id_cliente'] = 'No existe el cliente indicado';
                 }
             }
 
