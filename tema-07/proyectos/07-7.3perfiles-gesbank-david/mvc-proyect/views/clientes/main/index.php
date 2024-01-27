@@ -13,12 +13,10 @@
         <?php require_once "template/partials/menuAut.php"; ?>
         <!-- cabecera  -->
         <?php include "views/clientes/partials/header.php" ?>
-        <!-- Mensajes -->
-        <?php include "template/partials/notify.php" ?>
-        <!-- Errores -->
-        <?php include "template/partials/error.php" ?>
         <!-- Menu principal -->
         <?php require_once "views/clientes/partials/menu.php" ?>
+        <!-- Mensaje -->
+        <?php require_once "template/partials/mensaje.php" ?>
         <!-- tabla clientes -->
         <table class="table">
             <thead>
@@ -56,11 +54,17 @@
                         <td>
                             <!-- botones de acción -->
                             <a href="<?= URL ?>clientes/delete/<?= $cliente->id ?>" title="Eliminar"
-                                onclick="return confirm('¿Quieres Borrar?')"> <i class="bi bi-trash"></i> </a>
-                            <a href="<?= URL ?>clientes/editar/<?= $cliente->id ?>" title="Editar"> <i
-                                    class="bi bi-pencil"></i> </a>
-                            <a href="<?= URL ?>clientes/mostrar/<?= $cliente->id ?>" title="Mostrar"> <i
-                                    class="bi bi-eye"></i> </a>
+                                onclick="return confirm('¿Quieres Borrar?')" class="btn btn-danger" <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ?
+                                    'disabled' : null ?>> 
+                                    <i class="bi bi-trash"></i> </a>
+                            <a href="<?= URL ?>clientes/editar/<?= $cliente->id ?>" title="Editar" class="btn btn-primary
+                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ?
+									'disabled' : null ?>"
+                            > <i class="bi bi-pencil"></i> </a>
+                            <a href="<?= URL ?>clientes/mostrar/<?= $cliente->id ?>" title="Mostrar" class="btn btn-warning
+                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ?
+                                    'disabled' : null ?>"
+                            > <i class="bi bi-eye"></i> </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -10,6 +10,8 @@ require_once 'class/class.movimiento.php';
 require_once "libs/lib.php";
 require_once 'libs/app.php';
 require_once 'config/config.php';
+require_once 'config/privileges.php';
+
 $app = new App();
 
 

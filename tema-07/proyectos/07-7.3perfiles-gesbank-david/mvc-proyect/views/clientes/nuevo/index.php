@@ -10,23 +10,18 @@
 
 <body>
     <!-- menu fijo superior -->
-    <?php require_once "template/partials/menuAut.php"; ?>
+    <?php require_once "template/partials/menu.php"; ?>
     <!-- capa principal -->
     <div class="container">
         <!-- cabecera -->
         <?php include "views/clientes/partials/header.php" ?>
-
-         <!-- Mostramos el Mensaje en caso de error -->
-         <?php include("template/partials/error.php") ?>
-
         <!-- formulario  -->
         <form action="<?= URL ?>clientes/create" method="POST">
             <!-- nombre -->
             <div class="mb-3">
                 <label for="" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre" value="<?=$this->cliente->nombre?>">
-                <!-- En caso de error, entra en este bloque -->
-                <!-- Si en el array de errores existe un índice con este cámpo cambiamos el estilo y mostramos el mensaje -->
+                <!-- Mostrar posible error -->
                 <?php if (isset($this->errores['nombre'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['nombre'] ?>
@@ -37,7 +32,7 @@
             <div class="mb-3">
                 <label for="" class="form-label">Apellidos</label>
                 <input type="text" class="form-control" name="apellidos" value="<?=$this->cliente->apellidos?>">
-                <!-- En caso de error, entra en este bloque -->
+                <!-- Mostrar posible error -->
                 <?php if (isset($this->errores['apellidos'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['apellidos'] ?>
@@ -48,7 +43,7 @@
             <div class="mb-3">
                 <label for="" class="form-label">Ciudad</label>
                 <input type="text" class="form-control" name="ciudad" value="<?=$this->cliente->ciudad?>">
-                <!-- En caso de error, entra en este bloque -->
+                <!-- Mostrar posible error -->
                 <?php if (isset($this->errores['ciudad'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['ciudad'] ?>
@@ -59,7 +54,7 @@
             <div class="mb-3">
                 <label for="" class="form-label">Email</label>
                 <input type="email" class="form-control" name="email" value="<?=$this->cliente->email?>">
-                <!-- En caso de error, entra en este bloque -->
+                <!-- Mostrar posible error -->
                 <?php if (isset($this->errores['email'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['email'] ?>
@@ -70,7 +65,7 @@
             <div class="mb-3">
                 <label for="" class="form-label">Telefono</label>
                 <input type="text" class="form-control" name="telefono" value="<?=$this->cliente->telefono?>">
-                <!-- En caso de error, entra en este bloque -->
+                <!-- Mostrar posible error -->
                 <?php if (isset($this->errores['telefono'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['telefono'] ?>
@@ -81,7 +76,7 @@
             <div class="mb-3">
                 <label for="" class="form-label">DNI</label>
                 <input type="text" class="form-control" name="dni" value="<?=$this->cliente->dni?>">
-                <!-- En caso de error, entra en este bloque -->
+                <!-- Mostrar posible error -->
                 <?php if (isset($this->errores['dni'])): ?>
                     <span class="form-text text-danger" role="alert">
                         <?= $this->errores['dni'] ?>
