@@ -23,5 +23,3 @@
   chdir('files');
   echo '<br>';
   echo 'Directorio Actual'.getcwd();
-
-  
