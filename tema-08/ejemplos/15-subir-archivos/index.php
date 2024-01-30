@@ -13,13 +13,18 @@
 
     <div class="container">
 
-        <h1>Formulario subida archivos</h1>
+    <br><br>
+
+        <h1>Formulario Subida de Archivos</h1>
         <!-- Formulario subida -->
         <form action="validar.php" method="POST" enctype="multipart/form-data">
+            <!-- Campo oculto validar tamaño -->
+            <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
+
             <!-- nombre -->
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                <input type="email" name="nombre" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                <input type="email" name="nombre" class="form-control" id="exampleFormControlInput1" placeholder="Antonio Molina">
             </div>
             <!-- observaciones -->
             <div class="mb-3">
@@ -30,11 +35,12 @@
             <!-- fichero -->
             <div class="mb-3">
                 <label for="formFile" class="form-label">Seleccionar Archivo</label>
-                <input class="form-control" name="fichero" type="file" id="formFile">
+                <input class="form-control" name="fichero" type="file" id="formFile" accept="image/*">
             </div>
 
             <!-- Botones de accion -->
             <button class="btn btn-primary" type="submiit">Enviar</button>
+            <button class="btn btn-secondary" type="reset">Borrar</button>
 
         </form>
 
