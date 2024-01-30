@@ -24,12 +24,12 @@
             <!-- nombre -->
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                <input type="email" name="nombre" class="form-control" id="exampleFormControlInput1" placeholder="Antonio Molina">
+                <input type="text" name="nombre" class="form-control" id="exampleFormControlInput1" placeholder="Antonio Molina">
             </div>
             <!-- observaciones -->
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Observaciones</label>
-                <textarea class="form-control" name="observaciones" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" type="text" name="observaciones" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
 
             <!-- fichero -->
