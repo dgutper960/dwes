@@ -33,6 +33,14 @@ $errores = [];
 
 if (($fichero['error']) !== UPLOAD_ERR_OK) {
 
+    # Comprobamos que error se ha producido
+    if(is_null($fichero)){
+        $errores['fichero'] = $FileUploadErrors[1];
+    }else{
+        $errores['fichero'] = $FileUploadErrors[$fichero['error']];
+    }
+
+
 } else if (is_uploaded_file($fichero['tmp_name'])) {
     # Si el archivo se ha subido, validamos
     // tamaño
@@ -53,7 +61,18 @@ if (($fichero['error']) !== UPLOAD_ERR_OK) {
     // comprobamos si esxisten errores
     if(!empty($errores)){
         # Formulario no validado
-        header('location: index.php');
+
+        # Creamos la variaable de sesion 
+        $_SESSION['error'] = 'Formulario no validado';
+        $_SESSION['errores'] = $errores;
+
+        # Variables para el autocompletado
+        $_SESSION['nombre'] = $nombre;
+        $_SESSION['ovservaciones'] = $observaciones;
+        $_SESSION['fichero'] = $fichero;
+
+        // # Lo mandamos pa su casa
+        // header('location: index.php');
     } else{
         # Mover fichero desde temporal
         move_uploaded_file($fichero['tmp_name'], 'files/'.$fichero['name']);
@@ -61,10 +80,11 @@ if (($fichero['error']) !== UPLOAD_ERR_OK) {
         # Generamos mensaje de feedback
         $_SESSION['mensaje'] = 'Archivo subido correctamente';
 
-        # regreso al formulario
-        header('location:index.php');
+        // # regreso al formulario
+        // header('location: index.php');
 
     }
+    header('location: index.php');
 }
 
 
