@@ -41,7 +41,7 @@ if (($fichero['error']) !== UPLOAD_ERR_OK) {
     }
 
 
-} else if (is_uploaded_file($fichero['tmp_name'])) {
+} else if (is_uploaded_file($fichero['tmp_name'])) 
     # Si el archivo se ha subido, validamos
     // tamaño
     $max_tamanyo = 2 * 1024 * 1024; //-> para max 2 megas
@@ -85,6 +85,6 @@ if (($fichero['error']) !== UPLOAD_ERR_OK) {
 
     }
     header('location: index.php');
-}
+
 
 
