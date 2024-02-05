@@ -22,37 +22,40 @@
 			$this->dirActual=getcwd();
 		} 
 			
-
-	
-
+		// Retorna directorio raiz
 		public function getDirRaiz(){
 			return $this->dirRaiz;
 		}
 
+		// Retorna directorio actual
 		public function getDirActual() {
 			return $this->dirActual;
 		}
 
+		// establece directorio raiz
 		public function setDirRaiz($pRaiz) {
 			$this->dirRaiz=$pRaiz;
 		}
 
+		// establece directorio actual
 		public function setDirActual($pActual) {
 			$this->dirActual=$pActual;
 		}
 
+		// devuelve todo el contenido de esa carpeta
 		public function leerDirectorioActual(){
 			return glob('*');
 		}
 
+		// elimina archivo
 		public function eliminarArchivo($archivo){
-			unlink($archivo);
+			unlink($archivo); // elimina el archivo
 		}
 
 		//Establece directorio actual
 		public function establecerDirectorio(){
-			if (is_dir($this->dirActual)){
-					chdir($this->dirActual); 
+			if (is_dir($this->dirActual)){ // pregunta si es un dierctorio
+					chdir($this->dirActual); // cambiamos al directorio
 				}
 		}
 
@@ -87,7 +90,7 @@
     	rmdir($carpeta);
 		}
 		
-		// Subir Archivo al directorio actual
+		// Subir Archivo al directorio actual DEBERÍA AÑADIRSE VALIDACIÓN
 		public function subirArchivo($archivo){
 			if (is_uploaded_file($archivo['tmp_name'])){
 				move_uploaded_file($archivo['tmp_name'],$archivo['name']);
@@ -95,7 +98,7 @@
 		}
 		//Descarga sólo el primer archivo seleccionado
 		public function descargarArchivos($archivos){
-			foreach ($archivos as $a) {
+			foreach ($archivos as $a) { // FALTAN EL RESTO DE DIRECTIVAS
 				header("Content-type: application/octet-stream");
 				header("Content-disposition: attachment; filename=".$a);
 				readfile($a); 		
@@ -120,6 +123,7 @@
 			}
 		}
 
+		// Funcion para abrir carpetas USA RECURSIVIDAD
 		function agregarCarpeta($carpeta, $zip) {
 			$archivos = glob($carpeta . "/*");
 			if (count($archivos)>0) {

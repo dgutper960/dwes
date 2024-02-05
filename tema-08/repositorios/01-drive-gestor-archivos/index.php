@@ -119,7 +119,7 @@
 				    <button type="submit" class="btn btn-link" name="eliminarLote" title="Eliminar"><i class="material-icons">delete_outline</i></button>	
 				</li>
 				<li class="nav-item">
-					<button type="button" class="btn btn-link" data-toggle="modal" data-target="#renombrar" title="Cambiar Nombre"><i class="material-icons">spellcheck</i></button		
+					<button type="button" class="btn btn-link" data-toggle="modal" data-target="#renombrar" title="Cambiar Nombre"><i class="material-icons">spellcheck</i></button>		
 				</li>
 				
 				<li class="nav-item">
