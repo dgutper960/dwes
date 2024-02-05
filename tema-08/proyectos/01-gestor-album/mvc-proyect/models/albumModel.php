@@ -1,7 +1,7 @@
 <?php
 
     /*
-        alumnoModel.php
+        albumModel.php
 
         Modelo del  controlador alumnos
 
@@ -14,7 +14,7 @@
         - etc..
     */
 
-    class alumnoModel extends Model {
+    class albumModel extends Model {
 
         /*
             Extrae los detalles  de los alumnos

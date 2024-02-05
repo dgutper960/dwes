@@ -1,6 +1,6 @@
 <?php
 
-class Alumno extends Controller
+class Album extends Controller
 {
 
     function __construct()
@@ -21,7 +21,7 @@ class Alumno extends Controller
         if (!isset($_SESSION['id'])) {
             $_SESSION['notify'] = "Usuario sin autentificar";
             header("location:" . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['alumno']['main']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['main']))) {
             $_SESSION['mensaje'] = "Ha intentado realizar operación sin privilegios";
             header('location:' . URL . 'index');
         } else {
@@ -33,13 +33,13 @@ class Alumno extends Controller
 
 
             # Creo la propiedad title de la vista
-            $this->view->title = "Home - Panel Control Alumnos";
+            $this->view->title = "Home - Panel Control albumes";
 
-            # Creo la propiedad alumnos dentro de la vista
+            # Creo la propiedad albumes dentro de la vista
             # Del modelo asignado al controlador ejecuto el método get();
-            $this->view->alumnos = $this->model->get();
+            $this->view->albumes = $this->model->get();
 
-            $this->view->render('alumno/main/index');
+            $this->view->render('album/main/index');
         }
 
     }
@@ -56,13 +56,13 @@ class Alumno extends Controller
 
             header("location:" . URL . "login");
 
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['alumno']['new']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['new']))) {
             $_SESSION['mensaje'] = "Operación sin privilegios";
-            header('location:' . URL . 'alumno');
+            header('location:' . URL . 'album');
         } else {
 
-            # Crear un objeto alumno vacio
-            $this->view->alumno = new classAlumno();
+            # Crear un objeto album vacio
+            $this->view->album = new classAlbum();
 
             # Comprobar si vuelvo de  un registro no validado
             if (isset($_SESSION['error'])) {
@@ -70,26 +70,26 @@ class Alumno extends Controller
                 # Mensaje de error
                 $this->view->error = $_SESSION['error'];
 
-                # Autorrellenar formulario con los detalles del  alumno
-                $this->view->alumno = unserialize($_SESSION['alumno']);
+                # Autorrellenar formulario con los detalles del  album
+                $this->view->album = unserialize($_SESSION['album']);
 
                 # Recupero array errores  específicos
                 $this->view->errores = $_SESSION['errores'];
 
                 # Elimino las variables de sesión
                 unset($_SESSION['error']);
-                unset($_SESSION['alumno']);
+                unset($_SESSION['album']);
                 unset($_SESSION['errores']);
             }
 
             # etiqueta title de la vista
-            $this->view->title = "Añadir - Gestión Alumnos";
+            $this->view->title = "Añadir - Gestión Albumes";
 
             #  obtener los cursos  para generar dinámicamente lista cursos
             $this->view->cursos = $this->model->getCursos();
 
-            # cargo la vista con el formulario nuevo alumno
-            $this->view->render('alumno/new/index');
+            # cargo la vista con el formulario nuevo album
+            $this->view->render('album/new/index');
         }
     }
 
@@ -104,9 +104,9 @@ class Alumno extends Controller
 
             header("location:" . URL . "login");
 
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['alumno']['new']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['new']))) {
             $_SESSION['mensaje'] = "Operación sin privilegios";
-            header('location:' . URL . 'alumno');
+            header('location:' . URL . 'album');
         } else {
 
             # 1. Seguridad. Saneamos los  datos del formulario
@@ -119,8 +119,8 @@ class Alumno extends Controller
             $fechaNac = filter_var($_POST['fechaNac'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $id_curso = filter_var($_POST['id_curso'] ??= '', FILTER_SANITIZE_NUMBER_INT);
 
-            # 2. Creamos alumno con los datos saneados
-            $alumno = new classAlumno(
+            # 2. Creamos album con los datos saneados
+            $album = new classalbum(
                 null,
                 $nombre,
                 $apellidos,
@@ -195,24 +195,24 @@ class Alumno extends Controller
             if (!empty($errores)) {
                 # errores de validación
                 // variables sesión no admiten objetos
-                $_SESSION['alumno'] = serialize($alumno);
+                $_SESSION['album'] = serialize($album);
                 $_SESSION['error'] = 'Formulario no ha sido validado';
                 $_SESSION['errores'] = $errores;
 
                 # redireccionamos a new
-                header('location:' . URL . 'alumno/new');
+                header('location:' . URL . 'album/new');
 
 
             } else {
 
                 # Añadir registro a la tabla
-                $this->model->create($alumno);
+                $this->model->create($album);
 
                 # Mensaje
-                $_SESSION['mensaje'] = "Alumno creado correctamente";
+                $_SESSION['mensaje'] = "album creado correctamente";
 
-                # Redirigimos al main de alumnos
-                header('location:' . URL . 'alumno');
+                # Redirigimos al main de albumes
+                header('location:' . URL . 'album');
 
             }
 
@@ -230,13 +230,13 @@ class Alumno extends Controller
 
             header("location:" . URL . "login");
 
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['alumno']['edit']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['edit']))) {
             $_SESSION['mensaje'] = "Operación sin privilegios";
-            header('location:' . URL . 'alumno');
+            header('location:' . URL . 'album');
         } else {
 
-            # obtengo el id del alumno que voy a editar
-            // alumno/edit/4
+            # obtengo el id del album que voy a editar
+            // album/edit/4
 
             $id = $param[0];
 
@@ -244,10 +244,10 @@ class Alumno extends Controller
             $this->view->id = $id;
 
             # title
-            $this->view->title = "Editar - Panel de control Alumnos";
+            $this->view->title = "Editar - Panel de control albumes";
 
-            # obtener objeto de la clase alumno
-            $this->view->alumno = $this->model->read($id);
+            # obtener objeto de la clase album
+            $this->view->album = $this->model->read($id);
 
             # obtener los cursos
             $this->view->cursos = $this->model->getCursos();
@@ -258,20 +258,20 @@ class Alumno extends Controller
                 # Mensaje de error
                 $this->view->error = $_SESSION['error'];
 
-                # Autorrellenar formulario con los detalles del  alumno
-                $this->view->alumno = unserialize($_SESSION['alumno']);
+                # Autorrellenar formulario con los detalles del  album
+                $this->view->album = unserialize($_SESSION['album']);
 
                 # Recupero array errores  específicos
                 $this->view->errores = $_SESSION['errores'];
 
                 # Elimino las variables de sesión
                 unset($_SESSION['error']);
-                unset($_SESSION['alumno']);
+                unset($_SESSION['album']);
                 unset($_SESSION['errores']);
             }
 
             # cargo la vista
-            $this->view->render('alumno/edit/index');
+            $this->view->render('album/edit/index');
 
         }
     }
@@ -287,9 +287,9 @@ class Alumno extends Controller
 
             header("location:" . URL . "login");
 
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['alumno']['edit']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['edit']))) {
             $_SESSION['mensaje'] = "Operación sin privilegios";
-            header('location:' . URL . 'alumno');
+            header('location:' . URL . 'album');
         } else {
 
             # 1. Saneamos datos del formulario FILTER_SANITIZE
@@ -302,8 +302,8 @@ class Alumno extends Controller
             $fechaNac = filter_var($_POST['fechaNac'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $id_curso = filter_var($_POST['id_curso'] ??= '', FILTER_SANITIZE_NUMBER_INT);
 
-            # 2. Creamos el objeto alumno a partir de  los datos saneados del  formuario
-            $alumno = new classAlumno(
+            # 2. Creamos el objeto album a partir de  los datos saneados del  formuario
+            $album = new classalbum(
                 null,
                 $nombre,
                 $apellidos,
@@ -318,11 +318,11 @@ class Alumno extends Controller
                 $id_curso
             );
 
-            # Cargo id del alumno que voya a actualizar
+            # Cargo id del album que voya a actualizar
             $id = $param[0];
 
-            # Obtengo el  objeto alumno original
-            $alumno_orig = $this->model->read($id);
+            # Obtengo el  objeto album original
+            $album_orig = $this->model->read($id);
 
             # 3. Validación
             // Sólo si es necesario
@@ -331,21 +331,21 @@ class Alumno extends Controller
             $errores = [];
 
             //Validar nombre
-            if (strcmp($nombre, $alumno_orig->nombre) !== 0) {
+            if (strcmp($nombre, $album_orig->nombre) !== 0) {
                 if (empty($nombre)) {
                     $errores['nombre'] = 'El campo nombre es  obligatorio';
                 }
             }
 
             //Validar apellidos
-            if (strcmp($apellidos, $alumno_orig->apellidos) !== 0) {
+            if (strcmp($apellidos, $album_orig->apellidos) !== 0) {
                 if (empty($apellidos)) {
                     $errores['apellidos'] = 'El campo nombre es  obligatorio';
                 }
             }
 
             // Email: obligatorio, formáto válido y clave secundaria
-            if (strcmp($email, $alumno_orig->email) !== 0) {
+            if (strcmp($email, $album_orig->email) !== 0) {
                 if (empty($email)) {
                     $errores['email'] = 'El campo email es  obligatorio';
                 } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -357,7 +357,7 @@ class Alumno extends Controller
 
             // Dni: obligatorio, formáto válido y clave secundaria
             // Expresión regular
-            if (strcmp($dni, $alumno_orig->dni) !== 0) {
+            if (strcmp($dni, $album_orig->dni) !== 0) {
                 $options = [
                     'options' => [
                         'regexp' => '/^(\d{8})([A-Za-z])$/'
@@ -374,7 +374,7 @@ class Alumno extends Controller
             }
 
             // id_curso: obligatorio, entero, existente
-            if (strcmp($id_curso, $alumno_orig->id_curso) !== 0) {
+            if (strcmp($id_curso, $album_orig->id_curso) !== 0) {
                 if (empty($id_curso)) {
                     $errores['id_curso'] = 'Debe seleccionar un curso';
                 } else if (!filter_var($id_curso, FILTER_VALIDATE_INT)) {
@@ -389,24 +389,24 @@ class Alumno extends Controller
             if (!empty($errores)) {
                 # errores de validación
                 // variables sesión no admiten objetos
-                $_SESSION['alumno'] = serialize($alumno);
+                $_SESSION['album'] = serialize($album);
                 $_SESSION['error'] = 'Formulario no ha sido validado';
                 $_SESSION['errores'] = $errores;
 
                 # redireccionamos a new
-                header('location:' . URL . 'alumno/edit/' . $id);
+                header('location:' . URL . 'album/edit/' . $id);
 
 
             } else {
 
                 # Actualizo registro
-                $this->model->update($alumno, $id);
+                $this->model->update($album, $id);
 
                 # Mensaje
-                $_SESSION['mensaje'] = "Alumno actualizado correctamente";
+                $_SESSION['mensaje'] = "album actualizado correctamente";
 
-                # Redirigimos al main de alumnos
-                header('location:' . URL . 'alumno');
+                # Redirigimos al main de albumes
+                header('location:' . URL . 'album');
 
             }
 
@@ -424,23 +424,23 @@ class Alumno extends Controller
 
             header("location:" . URL . "login");
 
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['alumno']['order']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['order']))) {
             $_SESSION['mensaje'] = "Operación sin privilegios";
-            header('location:' . URL . 'alumno');
+            header('location:' . URL . 'album');
         } else {
 
             # Obtengo criterio de ordenación
             $criterio = $param[0];
 
             # Creo la propiedad title de la vista
-            $this->view->title = "Ordenar - Panel Control Alumnos";
+            $this->view->title = "Ordenar - Panel Control albumes";
 
-            # Creo la propiedad alumnos dentro de la vista
+            # Creo la propiedad albumes dentro de la vista
             # Del modelo asignado al controlador ejecuto el método get();
-            $this->view->alumnos = $this->model->order($criterio);
+            $this->view->albumes = $this->model->order($criterio);
 
-            # Cargo la vista principal de alumno
-            $this->view->render('alumno/main/index');
+            # Cargo la vista principal de album
+            $this->view->render('album/main/index');
         }
     }
 
@@ -453,22 +453,22 @@ class Alumno extends Controller
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
             header("location:" . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['alumno']['filter']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['filter']))) {
             $_SESSION['mensaje'] = "Operación sin privilegios";
-            header('location:' . URL . 'alumno');
+            header('location:' . URL . 'album');
         } else {
 
             # Obtengo expresión de búsqueda
             $expresion = $_GET['expresion'];
 
             # Creo la propiedad title de la vista
-            $this->view->title = "Buscar - Panel Control Alumnos";
+            $this->view->title = "Buscar - Panel Control albumes";
 
             # Filtro a partir de la  expresión
-            $this->view->alumnos = $this->model->filter($expresion);
+            $this->view->albumes = $this->model->filter($expresion);
 
-            # Cargo la vista principal de alumno
-            $this->view->render('alumno/main/index');
+            # Cargo la vista principal de album
+            $this->view->render('album/main/index');
         }
     }
 
@@ -483,22 +483,22 @@ class Alumno extends Controller
 
             header("location:" . URL . "login");
 
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['alumno']['delete']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['delete']))) {
             $_SESSION['mensaje'] = "Operación sin privilegios";
-            header('location:' . URL . 'alumno');
+            header('location:' . URL . 'album');
         } else {
 
-            # obtenemos id del  alumno
+            # obtenemos id del  album
             $id = $param[0];
 
-            # eliminar alumno
+            # eliminar album
             $this->model->delete($id);
 
             # generar mensaje
-            $_SESSION['mensaje'] = 'Alumno eliminado correctamente';
+            $_SESSION['mensaje'] = 'album eliminado correctamente';
 
-            # redirecciono al main de alumnos
-            header('location:' . URL . 'alumno');
+            # redirecciono al main de albumes
+            header('location:' . URL . 'album');
         }
     }
 }

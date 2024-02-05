@@ -7,7 +7,7 @@
         No respetará la propiedad de encapsulamiento.
     */
 
-    class classAlumno {
+    class classAlbum {
 
         public $id;
         public $titulo;

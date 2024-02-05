@@ -2,7 +2,7 @@
 <html lang="es"> 
 <head>
     <?php require_once("template/partials/head.php") ?>
-    <title>Register - FP Alumnos</title>
+    <title>Register - Usuario Album</title>
 </head>
 
 
