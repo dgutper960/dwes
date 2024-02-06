@@ -19,9 +19,9 @@ $pdf->Cell(40,10, iconv('UTF-8', 'ISO-8859-1','¡Esta página es horizopntal!'))
 // añadimos página
 $pdf->AddPage('P');
 // seleccionamos tipo de letra
-$pdf->SetFont('Arial','B',16); //-> Arial, negrita, 16px
+$pdf->SetFont('Courier','B',16); //-> Courier, negrita, 16px (por defecto 12px)
 // insertamos celda con UTF-8
-$pdf->Cell(40,10, iconv('UTF-8', 'ISO-8859-1','Esta página es vertical!')); // iconv() -> Establece carácteres en español, MÁS USADO
+$pdf->Cell(40,10, iconv('UTF-8', 'ISO-8859-1','¡Esta página es vertical!')); // iconv() -> Establece carácteres en español, MÁS USADO
 
 $pdf->Output();
 
