@@ -13,7 +13,7 @@ $pdf->SetFont('Arial','B',16);
 // Márgenes por defecto de 10mm, 10mm, 10mm, 10mm
 //-> Si el texto sobrepasa las dimensiones de la celda, la información se trunca
 //-> 40mm ancho, 10mm alto, texto para esa celda
-$pdf->Cell(40,10, mb_convert_encoding('¡Mi primera página pdf con FPDF!', 'ISO-8859-1', 'UTF-8')); // mb_convert_encoding() -> Establece carácteres en español
+$pdf->Cell(40,10, iconv('UTF-8', 'ISO-8859-1','¡Mi segunda página pdf con iconv()!')); // iconv() -> Establece carácteres en español, MÁS USADO
 
 $pdf->Output();
 
