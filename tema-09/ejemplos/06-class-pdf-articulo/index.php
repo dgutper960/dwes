@@ -21,11 +21,11 @@ $pdf->Cabecera();
 // Muestro el resultado de la consulta
 foreach($articulos as $articulo){
     $pdf->Cell(10, 7, iconv('UTF-8', 'ISO-8859-1', $articulo['id']), 0, 0,'R');
-    $pdf->Cell(40, 7, iconv('UTF-8', 'ISO-8859-1', $articulo['Descripción']), 0, 0,'L');
-    $pdf->Cell(20, 7, iconv('UTF-8', 'ISO-8859-1', $articulo['Fabricante']), 0, 0,'L');
-    $pdf->Cell(20, 7, iconv('UTF-8', 'ISO-8859-1', $articulo['Categoría']), 0, 0,'L');
-    $pdf->Cell(40, 7, iconv('UTF-8', 'ISO-8859-1', implode(', ', $articulo['Etiquetas'])), 0, 0,'L'); // Etiquetas es un array
-    $pdf->Cell(20, 7, iconv('UTF-8', 'ISO-8859-1', $articulo['Precio']),'B', 1, 'R');
+    $pdf->Cell(50, 7, iconv('UTF-8', 'ISO-8859-1', $articulo['Descripción']), 0, 0,'L');
+    $pdf->Cell(30, 7, iconv('UTF-8', 'ISO-8859-1', $articulo['Fabricante']), 0, 0,'L');
+    $pdf->Cell(40, 7, iconv('UTF-8', 'ISO-8859-1', $articulo['Categoría']), 0, 0,'L');
+    // $pdf->Cell(20, 7, iconv('UTF-8', 'ISO-8859-1', implode(', ', $articulo['Etiquetas'])), 0, 0,'L'); // Etiquetas es un array
+    $pdf->Cell(30, 7, iconv('UTF-8', 'ISO-8859-1', $articulo['Precio']),0 , 1, 'R');
 }
 
 // $pdf->Cell(0, 10, iconv('UTF-8', 'ISO-8859-1', 'articulo de prueba'), 0,0,'R');
