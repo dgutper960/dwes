@@ -7,58 +7,52 @@
         No respetará la propiedad de encapsulamiento.
     */
 
-    class classAlumno {
+    class classAlbum {
 
         public $id;
-        public $nombre;
-        public $apellidos;
-        public $email;
-        public $telefono;
-        public $direccion;
-        public $poblacion;
-        public $provincia;
-        public $nacionalidad;
-        public $dni;
-        public $fechaNac;
-        public $id_curso;
+        public $titulo;
+        public $descripcion;
+        public $autor;
+        public $fecha;
+        public $lugar;
+        public $categoria;
+        public $etiquetas;
+        public $num_fotos;
+        public $num_visitas;
+        public $carpeta;
+        public $created_at;
+        public $update_at;
 
         public function __construct(
             $id     = null,
-            $nombre = null,
-            $apellidos= null,
-            $email= null,
-            $telefono= null,
-            $direccion= null,
-            $poblacion= null,
-            $provincia= null,
-            $nacionalidad= null,
-            $dni= null,
-            $fechaNac= null,
-            $id_curso= null
+            $titulo = null,
+            $descripcion= null,
+            $autor= null,
+            $fecha= null,
+            $lugar= null,
+            $categoria= null,
+            $etiquetas= null,
+            $num_fotos= null,
+            $num_visitas= null,
+            $carpeta= null,
+            $created_at= null,
+            $update_at = null
         ) {
             $this->id = $id;
-            $this->nombre = $nombre;
-            $this->apellidos = $apellidos;
-            $this->email = $email;
-            $this->telefono = $telefono;
-            $this->direccion = $direccion;
-            $this->poblacion = $poblacion;
-            $this->provincia = $provincia;
-            $this->nacionalidad = $nacionalidad;
-            $this->dni = $dni;
-            $this->fechaNac = $fechaNac;
-            $this->id_curso = $id_curso;
+            $this->titulo = $titulo;
+            $this->descripcion = $descripcion;
+            $this->autor = $autor;
+            $this->fecha = $fecha;
+            $this->lugar = $lugar;
+            $this->categoria = $categoria;
+            $this->etiquetas = $etiquetas;
+            $this->num_fotos = $num_fotos;
+            $this->num_visitas = $num_visitas;
+            $this->carpeta = $carpeta;
+            $this->created_at = $created_at;
+            $this->update_at = $update_at;
 
-        }
-
-        public function edad(){
-            $fechaNacimiento = new DateTime($this->fechaNac);
-            $hoy = new DateTime();
-            $edad = $hoy->diff($fechaNacimiento)->y;
-            return $edad;
         }
 
         
     }
-
-?>
