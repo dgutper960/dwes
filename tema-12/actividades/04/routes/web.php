@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Añadimos ruta para la vista hola
+Route::get('/vista', function(){
+    return view('hola.ejemplo'); // la ruta es -> hola.ejemplo.blade.php
+});
+
+
+// Ruta Home controller
+Route::get('/home', HomeController::class);
 
 Route::get('/', function () {
     return view('welcome');
