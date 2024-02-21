@@ -1,0 +1,12 @@
+/**
+
+SALIDA DE CONSOLA PARA LAS RUTAS DE ACOUNTS
+
+**/ 
+
+
+GET|HEAD        accounts .................................................... inicio_david › AccountController@index
+  POST            accounts .................................................. accounts.store › AccountController@store
+  GET|HEAD        accounts/create ............................................. crear_david › AccountController@create
+  GET|HEAD        accounts/{account} .......................................... mostrar_david › AccountController@show
+  PUT|PATCH       accounts/{account} ..................................... actualizar_david › AccountController@update
