@@ -11,6 +11,11 @@
 
     <h1>Soy la vista de Laravel Hola</h1>
 
+    <!-- 
+        Si por cualquier motivo tengo una variable que no quiero que sea escapeada lo ponemos así:
+        {!!$myVar!!}
+     -->
+
 
 </body>
 
