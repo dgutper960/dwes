@@ -18,7 +18,7 @@ class HomeController extends Controller
         $clientes =[
             [
                 'id' => 1,
-                'nombre' => 'David'
+                'nombre' => 'David Gutierrez'
             ],
             [
                 'id' => 2,
