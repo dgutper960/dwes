@@ -18,4 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Accedemos al 
+
 Route::get('/articulos', ArticuloController::class);

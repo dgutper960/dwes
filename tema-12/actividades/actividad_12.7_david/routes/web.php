@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+// Accedemos al método index del controlador mediante la ruta (http://localhost:8000/articulos)
 Route::get('/articulos', [ArticuloController::class, 'index']);
