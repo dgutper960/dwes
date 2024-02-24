@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ArticuloController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/articulos', ArticuloController::class);
+Route::get('/articulos', [ArticuloController::class, 'index']);
