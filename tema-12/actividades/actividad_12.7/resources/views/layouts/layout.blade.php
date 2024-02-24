@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <title>@yield('titulo') - ONLINE Marroquinería</title>
+    <title>@yield('titulo') - Tienda Informática </title>
   </head>
   <body>
     <header>
@@ -32,8 +32,8 @@
     <!-- Pié de página -->
     <footer class="footer mt-auto py-3 fixed-bottom bg-light">
       <div class="container">
-      <span class="text-muted">© 2022
-        Juan Carlos Moreno - DWES - 2º DAW - Curso 22/23</span>
+      <span class="text-muted">© 2024
+        David Gutiérrez Pérez - DWES - 2º DAW - Curso 23/24</span>
       </div>
     </footer>
     
