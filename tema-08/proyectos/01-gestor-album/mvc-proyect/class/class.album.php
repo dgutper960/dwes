@@ -54,14 +54,5 @@
 
         }
 
-        public function edad(){
-            $fechaNacimiento = new DateTime($this->fechaNac);
-            $hoy = new DateTime();
-            $edad = $hoy->diff($fechaNacimiento)->y;
-            return $edad;
-        }
-
-        
     }
 
-?>
