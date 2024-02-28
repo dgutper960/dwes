@@ -15,6 +15,8 @@
         <?php include "views/clientes/partials/header.php" ?>
         <!-- Menu principal -->
         <?php require_once "views/clientes/partials/menu.php" ?>
+        <!-- Modal -->
+        <?php require_once "views/clientes/partials/modal.php" ?>
         <!-- Mensaje -->
         <?php require_once "template/partials/notify.php" ?>
         <!-- tabla clientes -->
