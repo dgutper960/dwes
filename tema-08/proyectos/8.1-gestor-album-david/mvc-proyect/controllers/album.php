@@ -389,7 +389,7 @@ class Album extends Controller
             }
 
 
-            # 4. Comprobar  validación
+            # 4. Comprobar validación
 
             if (!empty($errores)) {
                 # errores de validación
