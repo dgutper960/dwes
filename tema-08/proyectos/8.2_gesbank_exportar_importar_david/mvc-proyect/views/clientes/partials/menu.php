@@ -11,14 +11,15 @@
                     <a class="nav-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new']) ) ? 'active' : 'disabled' ?>"
                         aria-current="page" href="<?= URL ?>clientes/nuevo">Nuevo</a>
                 </li>
-                <!-- Seccion para la opción de Exportar-->
+                <!-- Exportar-->
                 <li class="nav-item">
                     <a class="nav-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['clientes']['exportar']) ) ? 'active' : 'disabled' ?>" 
                     href="<?= URL ?>clientes/exportar">Exportar CSV</a>
                 </li>
-                <!-- Agregar opción para importar CSV -->
+                <!-- Importar-->
                 <li class="nav-item">
-                    <button type="button" class="nav-link btn btn-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['clientes']['importar']) || in_array($_SESSION['id_rol'], $GLOBALS['clientes']['importar'])) ? 'active' : 'disabled' ?>" data-bs-toggle="modal" data-bs-target="#importarModal">Importar CSV</button>
+                    <button type="button" class="nav-link btn btn-link <?= (in_array($_SESSION['id_rol'], $GLOBALS['clientes']['importar'])) ? 'active' : 'disabled' ?>"
+                     data-bs-toggle="modal" data-bs-target="#importar">Importar CSV</button>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link <?= in_array($_SESSION['id_rol'], $GLOBALS['clientes']['order']) ? 'active' : 'disabled' ?> dropdown-toggle"
@@ -44,12 +45,15 @@
         </div>
     </div>
 </nav>
-<!-- <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var importarBtn = document.querySelector('[data-bs-target="#importarModal"]');
-    importarBtn.addEventListener('click', function () {
-        var importarModal = new bootstrap.Modal(document.getElementById('importarModal'));
-        importarModal.show();
-    });
-});
-</script> -->
+
+<!-- 
+
+Pureba con versiones de bootstrap
+ -->
+<!-- Para Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Para Bootstrap 4 o versiones anteriores -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script> -->
+
