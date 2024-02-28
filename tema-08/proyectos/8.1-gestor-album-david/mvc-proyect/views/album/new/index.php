@@ -41,7 +41,7 @@
             <!-- Descripción -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <textarea class="form-control <?= (isset($this->errores['descripcion'])) ? 'is-invalid' : null ?>" name="descripcion"><?= isset($this->album->descripcion) ? $this->album->descripcion : '' ?></textarea>
+                <input class="form-control <?= (isset($this->errores['descripcion'])) ? 'is-invalid' : null ?>" name="descripcion"><?= isset($this->album->descripcion) ? $this->album->descripcion : '' ?></input>
                 <!-- Mostrar posible error -->
                 <?php if (isset($this->errores['descripcion'])) : ?>
                     <span class="form-text text-danger" role="alert">
