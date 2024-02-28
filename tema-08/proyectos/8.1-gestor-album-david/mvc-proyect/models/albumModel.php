@@ -109,6 +109,9 @@ class AlbumModel extends Model
 
             $pdoSt->execute();
 
+            // Creamos la carpeta nueva carpeta que parte de images
+            mkdir('images/' . $album->carpeta);
+
         } catch (PDOException $e) {
             include_once('template/partials/errorDB.php');
             exit();
@@ -373,10 +376,10 @@ class AlbumModel extends Model
             7 => 'Error al escribir el archivo en el disco.',
             8 => 'Una extensión de PHP detuvo la carga del archivo.',
         ];
-    
+
         // creamos un array de errores (validación)
         $errores = [];
-    
+
         // La entrada files, es un array asociativo,  
         // lo recorremos y mostramos el nombre de los ficheros
         foreach ($files['name'] as $index => $fileName) {
@@ -385,7 +388,7 @@ class AlbumModel extends Model
                 $errores[] = $errorFilesArray[$files['error'][$index]];
             } else {
                 // si no hay errores, validamos el tamaño (5MB)
-                $maxSize =  5 *  1024 *  1024;
+                $maxSize = 5 * 1024 * 1024;
                 if ($files['size'][$index] > $maxSize) {
                     $errores[] = 'El archivo subido excede el tamaño límite (5MB)';
                 }
@@ -399,7 +402,7 @@ class AlbumModel extends Model
                 }
             }
         }
-    
+
         // En caso de errores, se cancela la subida por completo
         if (empty($errores)) {
             // Si todo va bien, se mueven los ficheros a la carpeta de destino
@@ -420,7 +423,7 @@ class AlbumModel extends Model
             $_SESSION['error'] = $errores;
         }
     }
-    
+
 
     // Método viewIncrement()
     // Increamenta columna núm_vistitas en la BBDD del album asociado
