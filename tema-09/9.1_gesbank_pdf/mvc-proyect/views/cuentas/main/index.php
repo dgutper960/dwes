@@ -16,6 +16,8 @@
         <?php include "views/cuentas/partials/header.php" ?>
         <!-- Menu principal -->
         <?php require_once "views/cuentas/partials/menu.php" ?>
+        <!-- Modal -->
+        <?php require_once "views/cuentas/partials/modal.php" ?>
         <!-- Mensaje -->
         <?php require_once "template/partials/notify.php" ?>
         <table class="table">
@@ -58,14 +60,14 @@
                             <?= number_format($cuenta->saldo, 2, ',', '.') ?> €
                         </td>
                         <td style="display:flex; justify-content:space-between;">
-                            <a href="<?= URL ?>cuentas/delete/<?= $cliente->id ?>" title="Eliminar"
+                            <a href="<?= URL ?>cuentas/delete/<?= $cuenta->id ?>" title="Eliminar"
                                 onclick="return confirm('¿Quieres Borrar?')" class="btn btn-danger
                             <?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['delete'])) ?
                                 'disabled' : null ?>">
                                 <i class="bi bi-trash"></i> </a>
-                            <a href="<?= URL ?>cuentas/editar/<?= $cuenta->id ?>" title="Editar" class="btn btn-primary <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ?
+                            <a href="<?= URL ?>cuentas/editar/<?= $cuenta->id ?>" title="Editar" class="btn btn-primary <?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['edit'])) ?
                                     'disabled' : null ?>"> <i class="bi bi-pencil"></i> </a>
-                            <a href="<?= URL ?>cuentas/mostrar/<?= $cuenta->id ?>" title="Mostrar" class="btn btn-warning<?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ?
+                            <a href="<?= URL ?>cuentas/mostrar/<?= $cuenta->id ?>" title="Mostrar" class="btn btn-warning<?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['show'])) ?
                                     'disabled' : null ?>"> <i class="bi bi-eye"></i> </a>
                         </td>
                     </tr>

@@ -566,7 +566,7 @@ class Clientes extends Controller
         }
     }
 
-    
+
     /**
      * Funciones para exportar e importar cvs
      */
@@ -693,7 +693,18 @@ class Clientes extends Controller
                         $cliente->email = $email;
                         $cliente->telefono = $telefono;
                         $cliente->ciudad = $ciudad;
-                        $cliente->dni = $dni;
+                        $dniRegexp = [
+                            'options' => [
+                                'regexp' => '/^[0-9]{8}[A-Z]$/'
+                            ]
+                        ];
+                        if (!filter_var($dni, FILTER_VALIDATE_REGEXP, $dniRegexp)) {
+                            $_SESSION['mensaje'] = "Detectado DNI con formato no valido";
+                            header('location:' . URL . 'clientes');
+                            exit();
+                        }else{
+                            $cliente->dni = $dni;
+                        }
                         $cliente->create_at = $create_at;
                         $cliente->update_at = $update_at;
 
