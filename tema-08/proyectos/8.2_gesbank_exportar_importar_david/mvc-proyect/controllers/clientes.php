@@ -673,9 +673,17 @@ class Clientes extends Controller
                     $telefono = filter_var($data[3], FILTER_SANITIZE_SPECIAL_CHARS);
                     $ciudad = filter_var($data[4], FILTER_SANITIZE_SPECIAL_CHARS);
                     $dni = filter_var($data[5], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $create_at = filter_var($data[6], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $update_at = filter_var($data[7], FILTER_SANITIZE_SPECIAL_CHARS);
 
                     // Verificamos que el email y dni no existan previamente en la tabla.
-                    if ($this->model->validateUniqueEmail($email) && $this->model->validateUniqueDni($dni)) {
+                    if (!$this->model->validateUniqueEmail($email) || !$this->model->validateUniqueDni($dni)) {
+                        // En caso de que uno de los métodos de validación retorne FALSE.
+                        $_SESSION['mensaje'] = "Operación cancelada. El cliente ya existe";
+                        // Redirige al usuario a la página de cuentas.
+                        header('location:' . URL . 'clientes');
+                        exit();
+                    } else {
                         // Instanciamos objeto classCliente
                         $cliente = new classCliente();
                         // Asignamos los valores extraidos del CSV al nuevo objeto
@@ -685,18 +693,18 @@ class Clientes extends Controller
                         $cliente->telefono = $telefono;
                         $cliente->ciudad = $ciudad;
                         $cliente->dni = $dni;
+                        $cliente->create_at = $create_at;
+                        $cliente->update_at = $update_at;
 
                         // Insertamos el nuevo cliente a la tabla.
                         $this->model->create($cliente);
-                    } else {
-                        // En caso de que uno de los métodos de validación retorne FALSE.
-                        $_SESSION['mensaje'] = "Operación cancelada. El cliente ya existe";
+
                     }
                 }
 
                 // Cerramos el archivo.
                 fclose($handle);
-    
+
                 // Feedback de éxito.
                 $_SESSION['mensaje'] = "Importación realizada correctamente";
                 header('location:' . URL . 'clientes');

@@ -194,7 +194,7 @@ class Cuentas extends Controller
             header("location: " . URL . "login");
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['delete']))) {
 
-            $_SESSION['mensaje'] = "EL usuario debe autenticarse";
+            $_SESSION['mensaje'] = "Acción Restringida. El usuario no tiene privilegios";
             header("location:" . URL . "cuentas");
 
         } else {
@@ -486,7 +486,6 @@ class Cuentas extends Controller
                 'id_cliente' => $cuenta['id_cliente'],
                 'fecha_alta' => $cuenta['fecha_alta'],
                 'fecha_ul_mov' => $cuenta['fecha_ul_mov'],
-                'num_movtos' => $cuenta['num_movtos'],
                 'saldo' => $cuenta['saldo'],
                 'create_at' => $cuenta['create_at'],
                 'update_at' => $cuenta['update_at']
@@ -502,108 +501,111 @@ class Cuentas extends Controller
 
     }
 
-        // Importar
-        public function importar()
-        {
-            // continuamos sesión
-            session_start();
-    
-            // comprobamos autenticación
-            if (!isset($_SESSION['id'])) {
-                $_SESSION['mensaje'] = "El usuario debe autenticarse";
-                // te vas pa tu casa chaval
-                header("location:" . URL . "login");
-                // comprobamos si existen trivilegios para la accion
-            } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['importar']))) {
-                $_SESSION['mensaje'] = "El usuario no dispone de privilegios para esta acción";
-                header("location:" . URL . "cuentas");
-            }
-    
-            // Verificamos la solicitud tipo POST, Si el archivo se ha subido sin errores.
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["archivo_csv"]) && $_FILES["archivo_csv"]["error"] == UPLOAD_ERR_OK) {
-                // Obtenemos la ruta temporal del archivo subido.
-                $file = $_FILES["archivo_csv"]["tmp_name"];
-    
-                // Verificamos la extensión del archivo
-                $fileExtension = pathinfo($_FILES["archivo_csv"]["name"], PATHINFO_EXTENSION);
-                if ($fileExtension != 'csv') {
-                    $_SESSION['error'] = "El archivo debe ser un CSV";
-                    header('location:' . URL . 'cuentas');
-                    exit();
-                }
-    
-                // Verificamos el formato del archivo CSV
-                $handle = fopen($file, "r");
-                if ($handle === FALSE) {
-                    $_SESSION['error'] = "Error al abrir el archivo CSV";
-                    header('location:' . URL . 'cuentas');
-                    exit();
-                }
-    
-                // Abrimos el archivo en modo lectura.
-                $handle = fopen($file, "r");
-    
-                // Verificamos que no hay errores.
-                if ($handle !== FALSE) {
-                    // Recorremos el archivo mientras haya líneas y las asignamos a $data = array donde cada indice es un campo del CSV.
-                    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-                        // Asignamos cada indice a una variable.
-                        // sanitizamos los datos antes igualar
-                        $num_cuenta = filter_var($data[0], FILTER_SANITIZE_SPECIAL_CHARS);
-                        $id_cliente = filter_var($data[1], FILTER_SANITIZE_SPECIAL_CHARS);
-                        $fecha_alta = filter_var($data[2], FILTER_SANITIZE_SPECIAL_CHARS);
-                        $fecha_ul_mov = filter_var($data[3], FILTER_SANITIZE_SPECIAL_CHARS);
-                        $num_movtos = filter_var($data[4], FILTER_SANITIZE_SPECIAL_CHARS);
-                        $saldo = filter_var($data[5], FILTER_SANITIZE_SPECIAL_CHARS);
-                        $create_at = filter_var($data[5], FILTER_SANITIZE_SPECIAL_CHARS);
-                        $update_at = filter_var($data[5], FILTER_SANITIZE_SPECIAL_CHARS);
-    
-                        // Verificamos que el num de cuenta no existe y que el cliemte exista
-                        if ($this->model->validateUniqueCuenta($num_cuenta) && $this->model->validateClient($id_cliente)) {
-                            // Instanciamos objeto classCuenta
-                            $cuenta = new classCuenta();
-                            // Asignamos los valores extraidos del CSV al nuevo objeto
-                            $cuenta->num_cuenta =   $num_cuenta;
-                            $cuenta->id_cliente =   $id_cliente;
-                            $cuenta->fecha_alta =   $fecha_alta;
-                            $cuenta->fecha_ul_mov = $fecha_ul_mov;
-                            $cuenta->num_movtos =   $num_movtos;
-                            $cuenta->saldo =        $saldo;
-                            $cuenta->create_at =    $create_at;
-                            $cuenta->update_at =    $update_at;
-    
-                            // Insertamos la nueva cuenta a la tabla.
-                            $this->model->create($cuenta);
-                        } else {
-                            // En caso de que uno de los métodos de validación retorne FALSE.
-                            $_SESSION['mensaje'] = "Operación cancelada. El cliente ya existe";
-                        }
-                    }
-    
-                    // Cerramos el archivo.
-                    fclose($handle);
-        
-                    // Feedback de éxito.
-                    $_SESSION['mensaje'] = "Importación realizada correctamente";
-                    header('location:' . URL . 'clientes');
-                    exit();
-                } else {
-                    // Establece un mensaje de error en la sesión si el archivo no se pudo abrir.
-                    $_SESSION['error'] = "Error con el archivo CSV";
-                    // Redirige al usuario a la página de clientes.
-                    header('location:' . URL . 'clientes');
-                    exit();
-                }
-            } else {
-                // Establece un mensaje de error en la sesión si no se seleccionó un archivo CSV.
-                $_SESSION['error'] = "Seleccione un archivo CSV";
-                // Redirige al usuario a la página de clientes.
-                header('location:' . URL . 'clientes');
+    // Importar
+    public function importar()
+    {
+        // continuamos sesión
+        session_start();
+
+        // comprobamos autenticación
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+            // te vas pa tu casa chaval
+            header("location:" . URL . "login");
+            // comprobamos si existen trivilegios para la accion
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['importar']))) {
+            $_SESSION['mensaje'] = "Usuario sin privilegios para esta acción";
+            header("location:" . URL . "cuentas");
+        }
+
+        // Verificamos la solicitud tipo POST, Si el archivo se ha subido sin errores.
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["archivo_csv"]) && $_FILES["archivo_csv"]["error"] == UPLOAD_ERR_OK) {
+            // Obtenemos la ruta temporal del archivo subido.
+            $file = $_FILES["archivo_csv"]["tmp_name"];
+
+            // Verificamos la extensión del archivo
+            $fileExtension = pathinfo($_FILES["archivo_csv"]["name"], PATHINFO_EXTENSION);
+            if ($fileExtension != 'csv') {
+                $_SESSION['error'] = "El archivo debe ser un CSV";
+                header('location:' . URL . 'cuentas');
                 exit();
             }
-    
+
+            // Verificamos el formato del archivo CSV
+            $handle = fopen($file, "r");
+            if ($handle === FALSE) {
+                $_SESSION['error'] = "Error al abrir el archivo CSV";
+                header('location:' . URL . 'cuentas');
+                exit();
+            }
+
+            // Abrimos el archivo en modo lectura.
+            $handle = fopen($file, "r");
+
+            // Verificamos que no hay errores.
+            if ($handle !== FALSE) {
+                // Recorremos el archivo mientras haya líneas y las asignamos a $data = array donde cada indice es un campo del CSV.
+                while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                    // Asignamos cada indice a una variable.
+                    // sanitizamos los datos antes igualar
+                    $num_cuenta = filter_var($data[0], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $id_cliente = filter_var($data[1], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $fecha_alta = filter_var($data[2], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $fecha_ul_mov = filter_var($data[3], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $saldo = filter_var($data[4], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $create_at = filter_var($data[5], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $update_at = filter_var($data[6], FILTER_SANITIZE_SPECIAL_CHARS);
+
+
+                    // Verificamos que el num de cuenta no existe y que el cliemte exista
+                    if (!$this->model->validateUniqueCuenta($num_cuenta) || !$this->model->validateClient($id_cliente)) {
+                        // En caso de que uno de los métodos de validación retorne FALSE.
+                        $_SESSION['mensaje'] = "Operación cancelada. id Cliente o Nº de Cuenta no permitidos";
+                        // Redirige al usuario a la página de cuentas.
+                        header('location:' . URL . 'cuentas');
+                        exit();
+                    } else {
+                        //Instanciamos objeto classCuenta
+                        $cuenta = new classCuenta();
+                        // Asignamos los valores extraidos del CSV al nuevo objeto
+                        $cuenta->num_cuenta = $num_cuenta;
+                        $cuenta->id_cliente = $id_cliente;
+                        $cuenta->fecha_alta = $fecha_alta;
+                        $cuenta->fecha_ul_mov = $fecha_ul_mov;
+                        $cuenta->saldo = $saldo;
+                        $cuenta->create_at = $create_at;
+                        $cuenta->update_at = $update_at;
+
+
+                        // Insertamos la nueva cuenta a la tabla.
+                        $this->model->create($cuenta);
+
+
+                    }
+                }
+                // Una vez recorridas todas las líneas cerramos el archivo.
+                fclose($handle);
+                // Feedback de éxito.
+                $_SESSION['mensaje'] = "Importación realizada correctamente";
+                header('location:' . URL . 'cuentas');
+
+            } else {
+                // Establece un mensaje de error en la sesión si el archivo no se pudo abrir.
+                $_SESSION['error'] = "Error al abrir el fichero CSV";
+                // Redirige al usuario a la página de cuentas.
+                header('location:' . URL . 'cuentas');
+                exit();
+            }
+        } else {
+            // Establece un mensaje de error en la sesión si no se seleccionó un archivo CSV.
+            $_SESSION['error'] = "Seleccione un archivo CSV";
+            // Redirige al usuario a la página de cuentas.
+            header('location:' . URL . 'cuentas');
+            exit();
         }
-    
+
+    }
+
 }
 
 
