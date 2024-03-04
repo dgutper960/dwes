@@ -56,13 +56,16 @@
                         <td>
                             <!-- botones de acción -->
                             <a href="<?= URL ?>clientes/delete/<?= $cliente->id ?>" title="Eliminar"
-                                <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ? 'disabled' : null ?>
+                                <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ?
+                                    'disabled' : null ?>
                                 onclick="return confirm('¿Quieres Borrar?')" class="btn btn-danger">
                                 <i class="bi bi-trash"></i> </a>
                             <a href="<?= URL ?>clientes/editar/<?= $cliente->id ?>" title="Editar" class="btn btn-primary
-                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ? 'disabled' : null ?>"> <i class="bi bi-pencil"></i> </a>
+                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ?
+                                'disabled' : null ?>"> <i class="bi bi-pencil"></i> </a>
                             <a href="<?= URL ?>clientes/mostrar/<?= $cliente->id ?>" title="Mostrar" class="btn btn-warning
-                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ? 'disabled' : null ?>"> <i class="bi bi-eye"></i> </a>
+                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ?
+                                'disabled' : null ?>"> <i class="bi bi-eye"></i> </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

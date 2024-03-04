@@ -61,9 +61,8 @@
                         </td>
                         <td style="display:flex; justify-content:space-between;">
                             <a href="<?= URL ?>cuentas/delete/<?= $cuenta->id ?>" title="Eliminar"
-                                onclick="return confirm('Confirmar eliminación Cuenta') " class="btn btn-danger"
-                                <?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['delete'])) ?
-                                    'disabled' : null ?>> <i class="bi bi-trash"></i> </a>
+                                onclick="return confirm('Confirmar eliminación Cuenta')" class="btn btn-danger
+                                <?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['delete'])) ? 'disabled' : null ?>"> <i class="bi bi-trash"></i> </a>
                             <a href="<?= URL ?>cuentas/editar/<?= $cuenta->id ?>" title="Editar" class="btn btn-primary 
                             <?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['edit'])) ? 'disabled' : null ?>"> <i class="bi bi-pencil"></i> </a>
                             <a href="<?= URL ?>cuentas/mostrar/<?= $cuenta->id ?>" title="Mostrar" class="btn btn-warning
