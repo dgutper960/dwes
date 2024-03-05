@@ -15,6 +15,8 @@
         <?php include "views/clientes/partials/header.php" ?>
         <!-- Menu principal -->
         <?php require_once "views/clientes/partials/menu.php" ?>
+        <!-- Modal -->
+        <?php require_once "views/clientes/partials/modal.php" ?>
         <!-- Mensaje -->
         <?php require_once "template/partials/notify.php" ?>
         <!-- tabla clientes -->
@@ -54,10 +56,9 @@
                         <td>
                             <!-- botones de acción -->
                             <a href="<?= URL ?>clientes/delete/<?= $cliente->id ?>" title="Eliminar"
-                                <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ?
-                                    'disabled' : null ?>
-                                onclick="return confirm('¿Quieres Borrar?')" class="btn btn-danger">
-                                <i class="bi bi-trash"></i> </a>
+                                onclick="return confirm('Confirmar eliminación CLiente') " class="btn btn-danger
+                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ?
+                                'disabled' : null ?>"> <i class="bi bi-trash"></i> </a>
                             <a href="<?= URL ?>clientes/editar/<?= $cliente->id ?>" title="Editar" class="btn btn-primary
                             <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ?
                                 'disabled' : null ?>"> <i class="bi bi-pencil"></i> </a>
