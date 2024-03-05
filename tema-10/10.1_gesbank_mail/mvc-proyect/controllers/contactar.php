@@ -3,7 +3,7 @@
  * Hemos instalado en nuestro proyecto
  * la librería PHPMailer
  *  - Necesitamos importarlas para trabajar con sus funcionalidades
- *  - Lo hacemos en este controlador para evitar la sobrecarga de recursos
+ *  - Lo hacemos en este controlador para evitar la sobrecarga de recursos inecesarios
  */
 
 require_once 'PHPMailer/src/Exception.php';
@@ -27,7 +27,7 @@ class Contactar extends Controller
     }
 
     // Function render
-    // -> Para comprobar si venimos de un formulario vacío 
+    //-> Para comprobar si venimos de un formulario vacío 
     //    se ha implementado la clase classContactar
     function render()
     {
@@ -44,10 +44,10 @@ class Contactar extends Controller
             # Recupero array de errores específicos
             $this->view->errores = $_SESSION['errores'];
 
-            // deserializamos si existe la variable de sesión
-            // if (isset($_SESSION['contactar'])) {
-            //     $this->view->contactar = unserialize($_SESSION['contactar']);
-            // }
+            //deserializamos si existe la variable de sesión
+            if (isset($_SESSION['contactar'])) {
+                $this->view->contactar = unserialize($_SESSION['contactar']);
+            }
             // Autorellenamos los campos de la vista
             $this->view->contactar = unserialize($_SESSION['contactar']);
 
@@ -80,8 +80,7 @@ class Contactar extends Controller
         $this->view->contactar = new classContactar();
 
         // Si volvemos de formulario no válido
-        if (isset($_SESSION['error']))
-        {
+        if (isset($_SESSION['error'])) {
             // Cragamos el mensaje de error
             $this->view->error = $_SESSION['error'];
 
@@ -105,51 +104,48 @@ class Contactar extends Controller
 
         // Instanciamos con los datos saneados
         $contactar = new classContactar(
-            $nombre, 
-            $email, 
-            $asunto, 
+            $nombre,
+            $email,
+            $asunto,
             $mensaje
         );
 
         // Validación:
         $errores = [];
-
-        if (empty($nombre))
-        {
+        // Nombre
+        //-> obligatiorio
+        if (empty($nombre)) {
             $errores['nombre'] = 'El campo es obligatorio';
         }
-
-        if (empty($email))
-        {
+        // Email
+        //-> formato email
+        if (empty($email)) {
             $errores['email'] = 'El campo es obligatorio';
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
-        {
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errores['email'] = 'El formato del email es incorrecto.';
         }
-
-        if (empty($asunto))
-        {
+        // Asunto
+        //-> obligatiorio
+        if (empty($asunto)) {
             $errores['asunto'] = 'El campo es obligatorio';
         }
-
-        if (empty($mensaje))
-        {
+        // Mensaje
+        //-> obligatiorio
+        if (empty($mensaje)) {
             $errores['mensajeMail'] = 'El campo es obligatorio';
         }
 
         // Comprobamos validación
-        if (!empty($errores))
-        {
-            // Si hay errores, almacenarlos en la sesión y redirigir al formulario de contactar
+        if (!empty($errores)) {
+            // Si hay errores, almacenarlos en la sesión
             $_SESSION['contactar'] = serialize($contactar);
             $_SESSION['error'] = "Formulario no validado";
             $_SESSION['errores'] = $errores;
+            // Redirigimos al formulario de contactar
             header('Location:' . URL . 'contactar');
 
-        } else
-        {
-            try
-            {
+        } else {
+            try {
                 // Configurar PHPMailer
                 $mail = new PHPMailer(true);
                 $mail->CharSet = "UTF-8";
@@ -159,8 +155,9 @@ class Contactar extends Controller
                 $mail->SMTPAuth = true;
 
                 // Constantes definidas en archivo aparte (privacidad)
-                $mail->Username = USUARIO;       
-                $mail->Password = PASS;                                         
+                // config/credencialesMail.php
+                $mail->Username = USUARIO;
+                $mail->Password = PASS;
 
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
@@ -186,11 +183,10 @@ class Contactar extends Controller
                 $_SESSION['mensaje'] = 'Mensaje enviado correctamente.';
                 header('Location:' . URL . 'contactar');
 
-            } catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 $_SESSION['error'] = 'Error al enviar el mensaje: ' . $e->getMessage(); // mostramos mensaje de error
                 header('Location:' . URL . 'contactar'); // Usuario al contactar
- 
+
             }
         }
     }
