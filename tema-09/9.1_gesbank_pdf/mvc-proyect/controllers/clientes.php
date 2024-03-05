@@ -699,7 +699,7 @@ class Clientes extends Controller
                             ]
                         ];
                         if (!filter_var($dni, FILTER_VALIDATE_REGEXP, $dniRegexp)) {
-                            $_SESSION['mensaje'] = "Detectado DNI con formato no valido";
+                            $_SESSION['mensaje'] = "Operación Cancelada. Detectado DNI con formato no valido";
                             header('location:' . URL . 'clientes');
                             exit();
                         }else{

@@ -57,7 +57,7 @@ class pdfClientes extends FPDF
         $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 'T', 0, 'C');
     }
 
-    // Funcion para título
+    // Funcion para el título
     public function titulo()
     {
         // Estilo fuente
@@ -79,13 +79,13 @@ class pdfClientes extends FPDF
     public function encabezado()
     {
 
-        //Definimos el tipo de fuente y tamaño
+        // Definimos el tipo de fuente y tamaño
         $this->SetFont('Arial', 'B', 12);
 
-        //Ponemos color de fondo
+        // Ponemos un color de fondo
         $this->SetFillColor(226, 189, 254);
 
-        //Escribimos el texto
+        // Definimos cada línea
         $this->Cell(10, 7, iconv('UTF-8', 'ISO-8859-1', 'ID'), 'B', 0, 'R', true);
         $this->Cell(60, 7, iconv('UTF-8', 'ISO-8859-1', 'Cliente'), 'B', 0, 'C', true);
         $this->Cell(25, 7, iconv('UTF-8', 'ISO-8859-1', 'Teléfono'), 'B', 0, 'C', true);
@@ -122,7 +122,7 @@ class pdfClientes extends FPDF
             $this->Cell(40, 7, mb_convert_encoding($cliente->email, 'ISO-8859-1', 'UTF-8'), 0, 1, 'C');
 
             // Para controlar el fin de página:
-            // PageBreakTrigger -> Se dipara cuando el puntero llega al margen de la página
+            // PageBreakTrigger -> Se dispara cuando el puntero llega al margen de la página
             // //GetY-> Obtiene la posición del puntero
             if ($this->GetY() + 7 > $this->PageBreakTrigger) { // Cuando el puntero llega al margen:
                 $this->AddPage(); // Creamos una nueva pág

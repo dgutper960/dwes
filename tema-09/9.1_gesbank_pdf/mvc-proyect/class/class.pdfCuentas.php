@@ -2,7 +2,8 @@
 // Previamente, hemos desacrgado la librería fpdf y descomprimido en /fpdf
 // http://www.fpdf.org/
 // Cargamos la librería
-// require('fpdf/fpdf.php');
+// require('fpdf/fpdf.php'); 
+/** EN ESTE CASO YA ESTÁ CARGADA POR pdfClientes */
 
 // Creamos la clase para la sección Cuentas y extendemos de FPDF
 class pdfCuentas extends FPDF
@@ -79,10 +80,10 @@ class pdfCuentas extends FPDF
     public function encabezado()
     {
 
-        //Definimos el tipo de fuente y tamaño
+        // Definimos el tipo de fuente y tamaño
         $this->SetFont('Arial', 'B', 12);
 
-        //Ponemos color de fondo
+        // Ponemos un color de fondo
         $this->SetFillColor(226, 189, 254);
 
         //Escribimos el texto
@@ -105,9 +106,9 @@ class pdfCuentas extends FPDF
         // Encabezado -> invocamos encabezado()
         $this->encabezado();
 
-        //Definimos el tamaño y el tipo de fuente
+        // Estilo de fuente
         $this->SetFont('Arial', '', 10);
-
+        // Color de fondo
         $this->SetFillColor(220, 235, 255);
 
         // Recorremos el fetch de Cuentas y vamos insertando
