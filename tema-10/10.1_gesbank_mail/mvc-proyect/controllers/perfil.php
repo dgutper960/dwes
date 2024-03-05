@@ -186,10 +186,10 @@ class Perfil extends Controller
                 // Introducimos los parametros para el email
                 $destinatario = $email;
                 $remite = USUARIO;
-                $asunto = "Notificación ajustes perfil usuario";
+                $asunto = "Notificación sobre su perfil usuario";
                 // Implementamos el mensaje que recibirá el ususario
                 $mensaje =
-                    "<h1>Se realizaron cámbios en los valores de tu prefil</h1>"
+                    "<h1>Se realizaron algunos cámbios en su prefil</h1>"
                     . "<h2>Estos son los valores actuales:</h2>"
                     . "Nombre de usuario: " . $name
                     . "<br>"
@@ -280,6 +280,7 @@ class Perfil extends Controller
 
         # Obtenemos objeto con los detalles del usuario
         $user = $this->model->getUserId($_SESSION['id']);
+        $usuario = $this->model->getUserId($_SESSION['id']);
 
         # Validaciones
         $errores = array();
@@ -323,7 +324,7 @@ class Perfil extends Controller
 
             // Enviamos correo después de cambiar el password
             try {
-                // Segumos los mimsmos pasos para la configuración
+                // Configurar PHPMailer
                 $mail = new PHPMailer(true);
                 $mail->CharSet = "UTF-8";
                 $mail->Encoding = "quoted-printable";
@@ -337,20 +338,18 @@ class Perfil extends Controller
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
-                // Parametros envio email
-                $destinatario = $user->email;
-                $remite = USUARIO;
-                $asunto = "Nuevo cambio de contraseña en tu perfil de GesBank";
+                // Configurar destinatario, remitente, asunto y mensaje
+                $destinatario = $usuario->email;
+                $remitente = USUARIO;
+                $asunto = "Nuevo cambio de contraseña de tu Perfil";
                 $mensaje =
-                    "<h1>La contraseña de su perfil fue cambiada recientemente</h1>" .
-                    "<h2>La nueva contraseña de sesión es la siguiente:</h2>"
-                    . "<h2>" . $password . "</h2>"
-                    . "<br><br>"
-                    . "<p>Esperamos que siga disfrutando de nuestros servicios</p>";
+                    "<h1>La contraseña del perfil fue cambiada con exito</h1>"
+                    ."<h2>Su nueva contraseña es:</h2>"
+                    . "<h2>". $password ."</h2>";
 
-                $mail->setFrom($remite, $user->name);
+                $mail->setFrom($remitente, $usuario->name);
                 $mail->addAddress($destinatario);
-                $mail->addReplyTo($remite, $user->name);
+                $mail->addReplyTo($remitente, $usuario->name);
 
                 $mail->isHTML(true);
                 $mail->Subject = $asunto;
@@ -363,10 +362,12 @@ class Perfil extends Controller
                 $_SESSION['error'] = 'Error al enviar el mensaje: ' . $e->getMessage();
             }
 
+
+            $_SESSION['mensaje'] = "Password modificado correctamente";
+
             #Vuelve corredores
             header("location:" . URL . "perfil");
         }
-
     }
 
 

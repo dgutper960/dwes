@@ -1,5 +1,14 @@
 <?php
 
+require_once 'PHPMailer/src/Exception.php';
+require_once 'PHPMailer/src/PHPMailer.php';
+require_once 'PHPMailer/src/SMTP.php';
+// Archivo de configuración eliminado del repositorio
+require_once 'config/credencialesMail.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class Register extends Controller
 {
 
@@ -106,6 +115,48 @@ class Register extends Controller
             $_SESSION['mensaje'] = "Usuario registrado correctamente";
             $_SESSION['email'] = $email;
             $_SESSION['password'] = $password;
+
+                       // Enviamos un correo de bienvenida
+                       try {
+
+                        $mail = new PHPMailer(true);
+                        $mail->CharSet = "UTF-8";
+                        $mail->Encoding = "quoted-printable";
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+        
+                        $mail->Username = USUARIO;                                      // Cambiar por tu dirección de correo
+                        $mail->Password = PASS;                                         // Cambiar por tu contraseña
+        
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port = 587;
+        
+                        $destinatario = $email;
+                        $remite = USUARIO;
+                        $asunto = "Le damos la bienvenida como nuevo usuario";
+                        $mensaje =
+                            "<h3>Estas son sus credenciales:</h3>"
+                            . "<b>Nombre: " . $name . "</b><br>"
+                            . "<b>Email: " . $email . "</b><br>"
+                            . "<b>Contraseña: " . $password . "</b><br>"
+                            . "<p>Por seguridad deberá cambiar la contraseña</p>"
+                            . "<p>Esperamos que disfrute de nuestros servicios</p>";
+        
+                        $mail->setFrom($remite, $name);
+                        $mail->addAddress($destinatario);
+                        $mail->addReplyTo($remite, $name);
+        
+                        $mail->isHTML(true);
+                        $mail->Subject = $asunto;
+                        $mail->Body = $mensaje;
+        
+                        // Enviar correo electrónico
+                        $mail->send();
+                    } catch (Exception $e) {
+                        // Manejar excepciones
+                        $_SESSION['error'] = 'Error al enviar el mensaje: ' . $e->getMessage();
+                    }
 
             # Vuelve a login
             header("location:" . URL . "login");
