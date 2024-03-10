@@ -94,7 +94,7 @@ Para abrir ficheros usaremos la función de PHP fopen()
 
 - x+
 
-  - Creación y lectura y escritura
+  - Creación, lectura y escritura
   - Puntero al principio
   - Si existe dará E_WARNING
 
