@@ -117,11 +117,11 @@ Para abrir ficheros usaremos la función de PHP fopen()
 
   - Incluso con aperturas en modo de solo lectura.
 
-- w y w+
+- w / w+
 
   - Eliminan el contenido previo de cualquer archivo
 
-- a y a+
+- a / a+
 
   - Para solo añadir contenido, sin riesgo sobreescribir
 
