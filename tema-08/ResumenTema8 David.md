@@ -189,7 +189,7 @@ fwrite($fp, $texto, 4); // Escribirá sólo: Hola
 - Si hay dos procesos esperando a escribir en un archivo, cada uno se pausará después de
   escribir 8K de información para permitir que el otro escriba.
 
-- **set_flie_buffer()**
+- **set_file_buffer()**
 
   - Define el tamaño del buffer
 
@@ -215,10 +215,14 @@ fwrite($fp, $texto, 4); // Escribirá sólo: Hola
 ?>
 
 ```
+- **file_get_contents()**
+  - Retorena el contenido de un archivo:
+  - Maneja de forma automática la apertura y cierre del archivo
 
 - **file_put_contents():**
 
   - Permite insertar texto en un archivo:
+  - Maneja de forma automática la apertura y cierre del archivo
 
 ```
 <?php
@@ -292,6 +296,7 @@ En este caso hemos empleado la función **filesize()**
 - **File()**
   - Obtiene un array donde cada índice corresponde a una línea del texto
   - En caso de error retorna false
+  - No requiere de apertura previa con fopen()
 
 ```
 <?php
@@ -307,7 +312,7 @@ En este caso hemos empleado la función **filesize()**
 
 - **fgetss()**
   - Mismo comportamiento que fgets()
-  - Limpia cracteres HTML
+  - Limpia carácteres HTML
   - Retorna false en caso de error
 
 ```
@@ -325,6 +330,10 @@ En este caso hemos empleado la función **filesize()**
 
 ## Puntero de un archivo
 
+Un puntero de archivo (file pointer o handle) es una variable que apunta a un archivo en concreto y su posición dentro del mismo. 
+
+Se obtiene al abrir con fopen().
+
 ### Funciones realccionadas con el manejo del puntero
 
 - **rewind()**
@@ -340,31 +349,51 @@ En este caso hemos empleado la función **filesize()**
   - Desplaza el puntero a una posición exacta
 
 - **feof()**
-  - Informa si el puntero se encuentra al final
+  - Informa si el puntero se encuentra al final del archivo
+  
+  - Útil para recorrer archivos con un while
 
-Un puntero de archivo (file pointer o handle) es una variable que apunta a un archivo en concreto y su posición dentro del mismo. Se obtiene al abrir con fopen().
+  ````
+  <?php
+      $file = fopen("archivo.txt", "r");
 
-PHP y su recolección de basuras cierra todos los punteros de archivos al final de la ejecución
-del script. Se considera una buena práctica cerrar los archivos manualmente con fclose().
+      // Lee la primera línea del archivo
+      $line = fgets($file);
 
-- **feof()**
+      // Recorre el archivo hasta que se alcance el final
+      while (!feof($file)) {
+          // Procesa la línea
+          echo $line;
 
-  - Retorna true si el puntero se encuentra al final de un archivo
-  - Se suele suar mediante una condicional:
+          // Lee la siguiente línea
+          $line = fgets($file);
+      }
+
+      // Cierra el archivo
+      fclose($file);
+  ````
+    - Vemos un ejemplo más simplificado
 
   ```
-  $archivo = "miarchivo.txt";
-  # Abrimos el archivo
-  $fp = fopen($archivo, "r");
-  # Loop que parará al final del archivo, cuando feof sea true:
-  while(!feof($fp)){
-  echo fread($fp, 4092);
-  }
+    $archivo = "miarchivo.txt";
+    # Abrimos el archivo
+    $fp = fopen($archivo, "r");
+    # Loop que parará al final del archivo, cuando feof sea true:
+    while(!feof($fp)){
+    echo fread($fp, 4092);
+    }
   ```
+
 
 - **fseek()**
 
   - Mueve el puntero a una posición (seeking)
+  - Como 2º parámetro se indica la posición
+  - El 3er parámetro toma como referencia una posición relativa:
+    - SEEK_END = final
+    - SEEK_CUR = donde nos encontramos (ver ejemplo)
+  - Se puede mover el puntero a una posición sin contenido
+  - 
 
 - **ftell()**
   - Muestra la posición del puntero
@@ -416,6 +445,9 @@ fwrite($fp, $texto);
 echo ftell($fp); // Devuelve 5
 
 ```
+
+PHP y su recolector de basuras cierra todos los punteros de archivos al final de la ejecución
+del script. Se considera una buena práctica cerrar los archivos manualmente con fclose().
 
 ## Obtener información de un archivo:
 
