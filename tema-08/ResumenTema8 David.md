@@ -125,7 +125,7 @@ Para abrir ficheros usaremos la función de PHP fopen()
 
   - Para solo añadir contenido, sin riesgo sobreescribir
 
-- x / x+
+- x / x+ / c / c+
 
   - Para crear nuevos archivos sin riesgo a sobreescribir uno existente
 
