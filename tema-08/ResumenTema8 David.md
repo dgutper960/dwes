@@ -17,7 +17,7 @@ Para abrir ficheros usaremos la función de PHP fopen()
     - Archivo que se quiere abrir
     - Modo en el que se abre
 
-  - Si la apretura del fichero es satsifactoria:
+  - Si la apretura del fichero es satisfactoria:
 
     - La función devuelve un puntero en el archivo.
 
@@ -34,14 +34,6 @@ Para abrir ficheros usaremos la función de PHP fopen()
   ```
 
   - Se recomienda el control de fallos en la apertura:
-
-  ```
-  if($pf = fopen("miarchivo.txt", "r");){
-      // mi codigo para manejar el contenido
-  }else{
-      echo "Error en la apertura del fichero";
-  }
-  ```
 
   ```
   if (!$fp = fopen("miarchivo.txt", "r")){
@@ -216,7 +208,7 @@ fwrite($fp, $texto, 4); // Escribirá sólo: Hola
 
 ```
 - **file_get_contents()**
-  - Retorena el contenido de un archivo:
+  - Retorna el contenido de un archivo:
   - Maneja de forma automática la apertura y cierre del archivo
 
 - **file_put_contents():**
@@ -233,7 +225,7 @@ fwrite($fp, $texto, 4); // Escribirá sólo: Hola
 
 ```
 
-## Leer un aerchivo
+## Leer un archivo
 
 - **fread()**
 
@@ -254,10 +246,9 @@ fwrite($fp, $texto, 4); // Escribirá sólo: Hola
 
 La variable ***$contents*** guardará el contenido que obtengamos con la función fread(). 
 
-Esta función requiere dos parámetros, el archivo abierto y la longitud que queremos leer de dicho
-archivo (en bytes). 
+La función está definida con dos parámetros, el archivo abierto y la longitud que queremos leer de dicho archivo (en bytes). 
 
-En este caso hemos empleado la función **filesize()**
+En este caso hemos empleado la función **filesize()** (retorna tamaño total del fichero)
 
 ```
 <?php
@@ -268,23 +259,25 @@ En este caso hemos empleado la función **filesize()**
 
   # Abrir el archivo en modo de sólo lectura:
   $archivo = fopen("datos.txt","rb");
+  // Controlamos posibles errores de apertura
   if( $archivo == false ) {
     echo "Error al abrir el archivo";
   }else{
+    // leemos los primeros 18 bytes del fichero
     $cadena1 = fread($archivo, 18);
+    // devolvemos puntero al inicio
     rewind($archivo);
+    // igualamos a la totalidad del fuchero
     $cadena2 = fread($archivo, filesize("datos.txt"));
-  if(($cadena1 == false) || ($cadena2 == false)){
-   echo "Error al leer el archivo";
-  }else{
-    echo "<p>\$contenido1 es: [".$cadena1."]</p>";
-    echo "<p>\$contenido2 es: [".$cadena2."]</p>";
+    if(($cadena1 == false) || ($cadena2 == false)){
+      echo "Error al leer el archivo";
+    }else{
+      echo "<p>\$contenido1 es: [".$cadena1."]</p>";
+      echo "<p>\$contenido2 es: [".$cadena2."]</p>";
     }
   }
   # Cerrar el archivo:
   fclose($archivo);
-
-
 ```
 
 - **file_get_contents()**
@@ -292,6 +285,7 @@ En este caso hemos empleado la función **filesize()**
   - Retorna todo el contenido del archivo en una cadena de texto
   - Podemos indicar la posición inicial del puntero
   - Retorna false en caso de error
+  - No requiere de apertura previa
 
 - **File()**
   - Obtiene un array donde cada índice corresponde a una línea del texto
@@ -322,7 +316,7 @@ En este caso hemos empleado la función **filesize()**
  # Recorremos el archivo mostando el contenido de cada línea:
  while( !feof($archivo)
  {
- Echo fgets($archivo). "<br />";
+ echo fgets($archivo). "<br />";
  }
  fclose($archivo);
 
@@ -340,16 +334,8 @@ Se obtiene al abrir con fopen().
 
   - Situa el puntero al principio
 
-- **ftell()**
-
-  - Retorna la posición actual del puntero
-
-- **fseek()**
-
-  - Desplaza el puntero a una posición exacta
-
 - **feof()**
-  - Informa si el puntero se encuentra al final del archivo
+  - Retorna ture si el puntero se encuentra al final del archivo
   
   - Útil para recorrer archivos con un while
 
@@ -383,19 +369,20 @@ Se obtiene al abrir con fopen().
     echo fread($fp, 4092);
     }
   ```
+- **ftell()**
 
+  - Retorna la posición actual del puntero
 
 - **fseek()**
 
-  - Mueve el puntero a una posición (seeking)
+  - Mueve el puntero a una posición exacta (seeking)
   - Como 2º parámetro se indica la posición
   - El 3er parámetro toma como referencia una posición relativa:
     - SEEK_END = final
     - SEEK_CUR = donde nos encontramos (ver ejemplo)
   - Se puede mover el puntero a una posición sin contenido
-
-- **ftell()**
-  - Muestra la posición del puntero
+  
+- Mostramos un ejemplo extenso de ftell() y fseeck()
 
 ```
 $file = "miarchivo.txt";
@@ -406,7 +393,7 @@ fclose($fp);
 
 $fp = fopen($file, "r");
 # Si lo hemos abierto con r, siempre empieza desde el principio:
-Echo ftell($fp) . "<br>"; // Devuelve 0
+echo ftell($fp) . "<br>"; // Devuelve 0
 
 # Colocamos el apuntador en la posición 10:
 fseek($fp, 10);
@@ -432,7 +419,7 @@ $fp = fopen($file, "r");
 
 # Leemos 10 bytes
 $datos = fread($fp, 10);
-Echo ftell($fp); // Devuelve 10
+echo ftell($fp); // Devuelve 10
 
 # Cambiar el puntero escribiendo un archivo:
 $file = "miarchivo.txt";
