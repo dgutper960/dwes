@@ -381,7 +381,7 @@ Se obtiene al abrir con fopen().
     - SEEK_END = final
     - SEEK_CUR = donde nos encontramos (ver ejemplo)
   - Se puede mover el puntero a una posición sin contenido
-  
+
 - Mostramos un ejemplo extenso de ftell() y fseeck()
 
 ```
@@ -456,8 +456,9 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
   - Retorna la máscara de permisos UNIX
 
 - **stat()** 
-    - Retorna un array con infoemacion sobre un archivo abierto con fopen() 
+    - Retorna un array con informacion sobre un nombre de archivo 
     - Nombre del archivo como parametro
+    - Opera sobre el nombre del archivo
 
       ````
         $file = "miarchivo.txt";
@@ -469,8 +470,7 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
         // recorremos los datos obtenidos con stat()
         $cont = 1;
         foreach($datos as $item){
-            echo 'Informacion '.$cont.' => '.$item;
-            $cont++,
+            echo 'Informacion '.$cont++.' => '.$item;
         }
 
       ````
@@ -478,7 +478,7 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
 - **fstat()**
 
   - Mismo comportamiento que stat()
-  - Recurso obtenido con fopen() como parametro
+  - Opera sobre un puntero de archivo abierto con fopen().
 
 - **file_exist()**
 
@@ -591,6 +591,25 @@ Todas estas funciones devuelven true o false si ha ocurrido algún error.
     - Devuelve el nombre de la siguiente entrada del directorio.
 
     ````
+      <?php
+          // Abrir el directorio
+          $dir_handle = opendir("user/gfg/");
+
+          // Verificar si el directorio se abrió correctamente
+          if (is_resource($dir_handle)) {
+              // Leer las entradas del directorio
+              while (($file_name = readdir($dir_handle)) !== false) {
+                  echo "Nombre del archivo: " . $file_name . "<br>";
+              }
+              // Cerrar el directorio
+              closedir($dir_handle);
+          } else {
+              echo "No se pudo abrir el directorio.<br>";
+              echo "Directorio inválido.<br>";
+          }
+    ````
+
+    ````
     <?php
           $dir = '/ruta/al/directorio';
           if ($handle = opendir($dir)) {
@@ -639,6 +658,22 @@ Todas estas funciones devuelven true o false si ha ocurrido algún error.
             )
         */
     ````
+
+    - Ejemplo que muestra los archivos y subdirectorios
+
+    ````
+        // Especificar el directorio
+        $directorio = 'miDirectorio';
+
+        // Usar scandir() para obtener el contenido del directorio
+        $contenido = scandir($directorio);
+
+        // Mostrar el contenido del directorio
+        foreach ($contenido as $elemento) {
+            echo $elemento . "<br>";
+        }
+    ````
+
     - Ejemplo con scandir() para mostar los archivos .txt de un directorio
 
     ````
