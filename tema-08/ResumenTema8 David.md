@@ -393,7 +393,6 @@ Se obtiene al abrir con fopen().
     - SEEK_END = final
     - SEEK_CUR = donde nos encontramos (ver ejemplo)
   - Se puede mover el puntero a una posición sin contenido
-  - 
 
 - **ftell()**
   - Muestra la posición del puntero
@@ -528,11 +527,11 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
 
 * Hay que tener en cuenta que al copiar un archivo a otro directorio, si existe uno con el mismo nombre será sobrescrito.
 
-**rename()**
+- **rename()**
     - Renombra un fichero
     - Mueve un fichero
 
-- Todas estas funciones devuelven true o false si ha ocurrido algún error.
+Todas estas funciones devuelven true o false si ha ocurrido algún error.
 
 ````
     <?php
@@ -579,7 +578,7 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
 
 - **closedir()**
     -  Cierra un gestor de directorio $dirhandle
-    -  Si no se especifica se asumirá la última conexión abierta por opendir().
+        -  Si no se especifica se asumirá la última conexión abierta por opendir().
 
 - **dir()**
     -  Devuelve una instancia de la clase Directory
@@ -604,6 +603,20 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
     opendir(). 
     - Devuelve el nombre de la siguiente entrada del directorio.
 
+    ````
+    <?php
+          $dir = '/ruta/al/directorio';
+          if ($handle = opendir($dir)) {
+              while (false !== ($entry = readdir($handle))) {
+                  if ($entry != "." && $entry != "..") {
+                      echo "$entry\n";
+                  }
+              }
+              closedir($handle);
+          }
+    ````
+  En este ejemplo, se abre el directorio especificado, se lee cada entrada con readdir(), y se imprime el nombre de cada entrada que no sea el directorio actual (.) ni el directorio padre (..). Finalmente, se cierra el directorio
+
 - **rewinddir()**
     - Restablece la secuencia de directorio indicada por $dirhandle al comienzo del directorio. 
     - Si no se especifica el gestor, se asumirá la última conexión abierta por opendir().
@@ -612,17 +625,16 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
     -  Enumera los ficheros y directorios ubicados en la ruta especificada
 
     ````
-        array_scandir (string $directory [, int $sorting_order = SCANDIR_SORT_ASCENDING [, resource $context ]] )
-
+    array_scandir (string $directory [, int $sorting_order = SCANDIR_SORT_ASCENDING [, resource $context ]] )
     ````
 
     - Devuelve un array con los archivos y directorios que se encuentran en $directory
     - $sorting_order indica el orden en que se devuelve el listado
 
     ````
-        $directorio = "Slim";
-        $archivos = scandir($directorio, 1);
-        print_r($archivos);
+      $directorio = "Slim";
+      $archivos = scandir($directorio, 1);
+      print_r($archivos);
         /*
             Array
             (
@@ -640,17 +652,18 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
             )
         */
     ````
-        - Ejemplo con scandir() para mostar los archivos .txt de un directorio
-        ````
-            if ($gestor = opendir('uploads/')) {
-            while ($archivo = readdir($gestor)) {
-            if (strpos($archivo, ".txt") !== false) {
-            echo "$archivo\n";
-            }
-            }
-            closedir($gestor);
-            }
-        ````
+    - Ejemplo con scandir() para mostar los archivos .txt de un directorio
+
+    ````
+      if ($gestor = opendir('uploads/')) {
+        while ($archivo = readdir($gestor)) {
+          if (strpos($archivo, ".txt") !== false) {
+          echo "$archivo\n";
+          }
+        }
+        closedir($gestor);
+      }
+  ````
 
 - **Glob()**
     - Devuelve un array de nombres de archivos o directorios que coinciden con un patrón especificado.
@@ -661,7 +674,7 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
             $directorio = "/home/DaPa/images/";
             $archivos = glob("" . $directorio . "*.png");
             foreach($archivos as $archivo) {
-            echo "$archivo\n";
+              echo "$archivo\n";
             }
         ````
         - Veamos otro ejemplo básico del uso de glob()
@@ -671,7 +684,7 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
                 chdir("c:\\");
                 # Mostrar el contenido del directorio actual:
                 foreach( glob("*.*") as $archivo )
-                echo $archivo."<br />";
+                  echo $archivo."<br />";
 
         ````
 
@@ -679,19 +692,18 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
     #### Ejemplo de las funciones opendir, readdir y closedir:
 
     ````
-    if ($gestor = opendir('Slim')) {
- 
-    echo "Gestor de directorio: $gestor\n";
-    echo "Entradas:\n";
-    
-    # Iteramos sobre el directorio:
-    while ( $entrada = readdir($gestor)) {
-    echo "$entrada\n";
-    }
-    closedir($gestor);
-    }
-    # Devuelve todos los archivos del directorio especificado
-
+          if ($gestor = opendir('Slim')) {
+      
+          echo "Gestor de directorio: $gestor\n";
+          echo "Entradas:\n";
+          
+          # Iteramos sobre el directorio:
+          while ( $entrada = readdir($gestor)) {
+          echo "$entrada\n";
+          }
+          closedir($gestor);
+          }
+          # Devuelve todos los archivos del directorio especificado
     ````
 
 ## Crear, renombrar, eliminar y cambiar de directorio
@@ -736,11 +748,12 @@ del script. Se considera una buena práctica cerrar los archivos manualmente con
 
 ### Otras funciones útiles sobre directorios
 
-- **dirname**
+- **dirname()**
     - Retorna el directorio padre de la ruta pasada como parámetro
 
-- **pathinfo**
+- **pathinfo()**
     - Retorna información sobre una ruta de archivo
+    - Se obtiene un array asociativo
 
 ## Subir archivos al servidor
 
@@ -749,7 +762,7 @@ En primer lugar debemos crear un formulario HTML con los atributos:
     - enctype="multipart/form-data"
 y que contenga un componente de tipo: 
 ````
-    <input type="file" ... />.
+<input type="file" ... />.
 ````
 Tras seleccionar un archivo y enviarse el formulario, la información del archivo subido quedará 
 guardada en el array asociativo **$_FILES**, que tiene las siguientes claves:
@@ -812,7 +825,7 @@ Para acceder al archivo usaremos las siguientes funcionalidades PHP
 
 ````
 
-* Si no se selecciona ningún archivo, el array $_FILE contendrá un elemento con un valor en la clave error de '4': dicho código informa de que no se subió ningún archivo.
+* Si no se selecciona ningún archivo, el array $_FILES contendrá un elemento con un valor en la clave error de '4': dicho código informa de que no se subió ningún archivo.
 
 
 ## Archivos CSV
