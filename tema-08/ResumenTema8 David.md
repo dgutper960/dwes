@@ -822,28 +822,29 @@ Para acceder al archivo usaremos las siguientes funcionalidades PHP
 
 ###### PHP:
 ````
-<?php
-    if( empty($_FILES['txtFile']['name']) == false )
-    {
-    if (is_uploaded_file($_FILES['txtFile']['tmp_name']))
-    {
-    if( move_uploaded_file($_FILES['txtFile']['tmp_name'], 
-    $_FILES['txtFile']['name']) == false )
-    echo "No se ha podido el mover el archivo.";
-    else
-    echo "Archivo [".$_FILES['txtFile']['name']."] subido y movido al 
-    directorio actual.";
-    }
-    else
-    {
-    echo "Posible ataque al subir el archivo 
-    [".$_FILES['txtFile']['nombre_tmp']."]";
-    }
-    }
-    else
-    {
-    echo "No se seleccionó ningún archivo.";
-    }
+  <?php
+      // Verificar si se ha seleccionado un archivo
+      if (empty($_FILES['txtFile']['name']) == false) {
+          // Verificar si el archivo fue subido a través de un formulario POST
+          if (is_uploaded_file($_FILES['txtFile']['tmp_name'])) {
+              // Intentar mover el archivo subido al directorio actual
+              if (move_uploaded_file($_FILES['txtFile']['tmp_name'], $_FILES['txtFile']['name']) == false) {
+                  // Si la función move_uploaded_file() falla, mostrar un mensaje de error
+                  echo "No se ha podido mover el archivo.";
+              } else {
+                  // Si el archivo se mueve con éxito, mostrar un mensaje de éxito
+                  echo "Archivo [".$_FILES['txtFile']['name']."] subido y movido al directorio actual.";
+              }
+          } else {
+              // Si el archivo no fue subido a través de un formulario POST, mostrar un mensaje de advertencia
+              echo "Posible ataque al subir el archivo [".$_FILES['txtFile']['tmp_name']."]";
+          }
+      } else {
+          // Si no se seleccionó ningún archivo, mostrar un mensaje indicando que no se seleccionó ningún archivo
+          echo "No se seleccionó ningún archivo.";
+      }
+  ?>
+
 
 ````
 
