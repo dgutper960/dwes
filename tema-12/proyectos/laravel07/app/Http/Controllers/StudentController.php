@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Student;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -12,10 +12,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        // Muestra los los alumnos
+        // Muestra los alumnos
         $alumnos = Student::all()->sortBy('id');
-        // enviamos a la vista el CRUD de alumnos
-        return view('student.home', ['alumnos'=> $alumnos]);
+        return view('student.home',['alumnos'=>$alumnos]);
+
     }
 
     /**

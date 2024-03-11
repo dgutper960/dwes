@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::resource('/alumnos', StudentController::class);
+Route::get('/',HomeController::class);
+
+Route::resource('student', StudentController::class);
