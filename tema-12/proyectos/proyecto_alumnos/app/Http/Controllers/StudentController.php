@@ -84,7 +84,11 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Cargo los datos del alumno
+        $alumno = Student::find($id);
+        $cursos = Course::all()->sortBy('id');
+
+        return view('students.edit', ['alumno' => $alumno, 'cursos'=> $cursos]);
     }
 
     /**

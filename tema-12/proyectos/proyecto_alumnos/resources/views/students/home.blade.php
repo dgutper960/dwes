@@ -45,7 +45,7 @@
                             </a>
 
                             <!-- botón editar -->
-                            <a href="#" title="Editar" class="btn btn-primary"> <i class="bi bi-pencil"></i>
+                            <a href="{{route('alumnos\edit', $alumno->id)}}" title="Editar" class="btn btn-primary"> <i class="bi bi-pencil"></i>
                             </a>
 
                             <!-- botón mostrar -->
