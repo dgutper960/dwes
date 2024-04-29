@@ -1,5 +1,0 @@
-<?php
-
-$usuario = "David Guiérrez";
-
-?>
