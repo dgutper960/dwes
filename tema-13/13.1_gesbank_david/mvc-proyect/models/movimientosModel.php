@@ -99,7 +99,7 @@ class movimientosModel extends Model
 
     // Retorna el saldo de una cuenta por id
     // Argumento = id de la cuenta
-    public function getSaldoCuenta(int $id_cuenta)
+    public function getSaldoCuenta($id_cuenta)
     {
         try {
             $sql = "SELECT 
@@ -127,7 +127,7 @@ class movimientosModel extends Model
 
     // Actualiza el saldo de una cuenta 
     // Argumentos = id_cuenta, saldo_actualzado
-    public function updateSaldoCuenta(int $id_cuenta, $saldo_actualizado)
+    public function updateSaldoCuenta($id_cuenta, $saldo_actualizado)
     {
         try {
             $sql = "UPDATE 
@@ -150,7 +150,7 @@ class movimientosModel extends Model
 
     // Obtiene los detalles de un movimiento
     // Argumento = id_movimiento
-    public function getMovimiento(int $id_movimiento)
+    public function getMovimiento($id_movimiento)
     {
         try {
             $sql = "SELECT 
@@ -185,7 +185,7 @@ class movimientosModel extends Model
 
     // Obtiene los detalles de una cuenta
     // Argumento = id_cuenta
-    public function getCuenta(int $id_cuenta)
+    public function getCuenta($id_cuenta)
     {
         try {
 
@@ -216,7 +216,7 @@ class movimientosModel extends Model
     }
 
 
-    public function order(int $criterio)
+    public function order($criterio)
     {
         try {
             $sql = "SELECT 

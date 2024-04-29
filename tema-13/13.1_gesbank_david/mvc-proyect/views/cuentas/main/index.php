@@ -57,8 +57,8 @@
 
                             <!-- botón mostrar movimientos-->
                             <a href="<?= URL ?>cuentas/movimientos/<?= $cuenta->id ?>" title="Movimientos"
-                                class="btn btn-info <?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['movimientos'])) ? 'disabled' : '' ?>">
-                                <i class="bi bi-journal"></i>
+                                class="btn btn-success <?= (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['movimientos'])) ? 'disabled' : '' ?>">
+                                <i class="bi bi-clipboard-pulse"></i>
                             </a>
                         </td>
                     </tr>

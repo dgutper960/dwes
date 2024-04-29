@@ -20,7 +20,7 @@
         <?php include 'template/partials/mensaje.php' ?>
 
         <!-- Menu principal -->
-        <?php require_once "views/cuentas/partials/menu.php" ?>
+        <?php require_once "views/movimientos/partials/menu.php" ?>
 
         <!-- tabla de movimientos -->
         <table class="table">

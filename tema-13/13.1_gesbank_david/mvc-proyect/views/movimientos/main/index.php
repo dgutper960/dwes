@@ -59,7 +59,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <!-- <td colspan="8">Nº Registros: <?= $this->movimientos->rowCount() ?> </td> -->
+                    <td colspan="8">Nº Registros: <?= $this->movimientos->rowCount() ?> </td>
                 </tr>
             </tfoot>
 

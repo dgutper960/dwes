@@ -651,10 +651,10 @@ class Cuentas extends Controller
 
         } else {
 
-            $this->view->title = "Lista de Movimientos";
+            $this->view->title = "Movimientos de la Cuenta";
             $this->view->movimientos = $this->model->getMovientosCuenta($id);
 
-            $this->view->render("movimientos/main/index");
+            $this->view->render("cuentas/movimientos/index");
         }
     }
     
