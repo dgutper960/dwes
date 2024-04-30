@@ -49,8 +49,8 @@
                         <!-- botones de acción -->
                         <td>
                             <!-- botón mostrar -->
-                            <a href="<?= URL ?>movimientos/mostrar/<?= $movimiento->id ?>" title="Mostrar" class="btn btn-dark <?= (!in_array($_SESSION['id_rol'], $GLOBALS['movimientos']['mostrar'])) ? 'disabled' : '' ?>">
-                                <i class="bi bi-eye-fill"></i>
+                            <a href="<?= URL ?>movimientos/mostrar/<?= $movimiento->id ?>" title="Mostrar" class="btn btn-ligth <?= (!in_array($_SESSION['id_rol'], $GLOBALS['movimientos']['mostrar'])) ? 'disabled' : '' ?>">
+                                <i class="bi bi-eye btn-warning" style="font-size: 1.25em;"></i>
                             </a>
                         </td>
 

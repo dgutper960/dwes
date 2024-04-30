@@ -209,7 +209,7 @@ class Movimientos extends Controller
                 $_SESSION['mensaje'] = "Movimiento realizado con éxito.";
 
                 // Redireccionamos a la vista principal de movimientos
-                header("Location:" . URL . "movimientos");
+                header("Location:" . URL . "cuentas");
             }
         }
     }
