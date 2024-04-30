@@ -38,7 +38,7 @@ class usuariosModel extends Model
 
     // Inserta un registro en la tabla usuarios
     // Asigna un rol al registro insertado
-    public function create(classUser $user, $id_rol)
+    public function create(classUser $user, int $id_rol)
     {
         try {
 
@@ -63,11 +63,10 @@ class usuariosModel extends Model
 
             $stmt->execute();
 
-            //Guardamos en una variable el valor id de este último registro insertado
+            // Registro del id del último registro insertado
             $id_usuario = $pdo->lastInsertId();
 
-            //Ahora asociamos el rol al usuario
-            # Asignamos rol de registrado
+            // Asociamos el rol al usuario
             $sql = "INSERT INTO roles_users VALUES (
                 null,
                 :user_id,
@@ -85,8 +84,8 @@ class usuariosModel extends Model
         }
     }
 
-    # Método validateUniqueEmail
-    # Comprueba si un email está disponible
+    // Valida que un email no exista en la tabla
+    // Retorna 0 si el email de entrada no exste en la tabla
     public function validateUniqueEmail($email)
     {
         try {
@@ -97,19 +96,16 @@ class usuariosModel extends Model
             $pdoSt->execute();
             $count = $pdoSt->fetchColumn();
 
-            // Si el conteo es cero, significa que el email es único
+            // Si el email no existe, retorna 0
             return $count == 0;
         } catch (PDOException $e) {
-            // Manejo de errores específicos de PDO
-            // Puedes agregar mensajes de error más descriptivos según sea necesario
             include_once('template/partials/errorDB.php');
             exit();
         }
     }
 
-    # Método getUser
-    # Consulta SELECT a la tabla usuarios
-    public function getUser($id)
+    // Busca y retorna un usuario por id
+    public function getUser(int $id)
     {
         try {
             $sql = "SELECT * FROM users WHERE id = :id";
@@ -126,16 +122,21 @@ class usuariosModel extends Model
         }
     }
 
-    # Método getRolUsuario
-    # Consulta SELECT a la tabla roles
-    public function getRolUsuario($id)
+   // Retorna un objeto con las propiedades id y rol, correspondientes a un usuario
+   // Argumento: id del usuario a obtebner el rol
+    public function getRolUsuario(int $id)
     {
         try {
-            $sql = "SELECT roles.id, roles.name
-                    FROM roles
-                    INNER JOIN roles_users ON roles.id = roles_users.role_id
-                    INNER JOIN users ON roles_users.user_id = users.id
-                    WHERE users.id = :id";
+            $sql = "SELECT 
+                        roles.id, roles.name
+                    FROM
+                        roles
+                            INNER JOIN
+                        roles_users ON roles.id = roles_users.role_id
+                            INNER JOIN
+                        users ON roles_users.user_id = users.id
+                    WHERE
+                        users.id = :id";
 
             $pdo = $this->db->connect();
             $pdoSt = $pdo->prepare($sql);
@@ -149,14 +150,12 @@ class usuariosModel extends Model
         }
     }
 
-    # Método delete
-    # Permite eliminar un usuario, ejecuta DELETE 
-    public function delete($id)
+    // Elimina un registro de la tabla usuarios
+    // Arguimeto: id del usuario a eliminar
+    public function delete(int $id)
     {
         try {
-            $sql = " 
-                   DELETE FROM users WHERE id=:id;
-                   ";
+            $sql = "DELETE FROM users WHERE id=:id";
 
             $conexion = $this->db->connect();
             $pdoSt = $conexion->prepare($sql);
@@ -169,8 +168,7 @@ class usuariosModel extends Model
         }
     }
 
-    # Método order
-    # Permite ordenar la tabla por cualquiera de las columnas de la tabla
+    // Ordena los resultados según un criterio preseleccionado
     public function order(int $criterio)
     {
         try {
@@ -188,26 +186,18 @@ class usuariosModel extends Model
         }
     }
 
-    # Método filter
-    # Permite filtrar la tabla cuentas a partir de una expresión de búsqueda o filtrado
+    // Filtra los resultados según una expresión dada
     public function filter($expresion)
     {
         try {
 
-            $sql = " SELECT 
-                        users.id,
-                        users.name,
-                        users.email
-                    FROM 
+            $sql = "SELECT 
+                        id, name, email
+                    FROM
                         users
-                    WHERE 
-                        concat_ws(  ' ',
-                                    id,
-                                    name,
-                                    email
-                                )
-                    LIKE
-                        :expresion ";
+                    WHERE
+                        CONCAT_WS(' ', id, name, email) 
+                    LIKE :expresion";
 
 
             $conexion = $this->db->connect();
@@ -226,10 +216,8 @@ class usuariosModel extends Model
         }
     }
 
-    # Método update
-    # Actualiza los detalles de un usuario
-    # Método update
-    # Actualiza los detalles de un usuario, incluido el rol
+    // Actualiza los detalles de un usuario en la tabla
+    // Actualiza el rol del usuario en la tabla roles_users
     public function update(classUser $usuario, $id, $idRol)
     {
         try {
