@@ -86,7 +86,7 @@ class Usuarios extends Controller
         }
     }
 
-    // Procesa datos del formulario, los valida y los carga en create
+    // Inserta los datos del formulario, nuevo usuario, en el método create
     function create($param = [])
     {
         // Iniciar o continuar sesión
@@ -349,7 +349,7 @@ class Usuarios extends Controller
     }
 
 
-    // Procesa datos del formulario, valida y los carga en update
+    // 
     public function update($param = [])
     {
         // Iniciar sesión
@@ -374,8 +374,8 @@ class Usuarios extends Controller
         // Obtener el ID del usuario a editar
         $id = $param[0];
 
-        // Instanciamos usuario original para comparar datos
-        $originalUser = $this->model->getUser($id);
+        // Obtener el objeto de usuario original
+        $objOriginal = $this->model->getUser($id);
 
         // Obtener los datos del formulario y sanitizarlos
         $name = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -396,7 +396,7 @@ class Usuarios extends Controller
             $errores['email'] = 'El campo email es obligatorio. Valor restablecido.';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errores['email'] = 'El formato del email no es correcto';
-        } elseif ($email !== $originalUser->email && !$this->model->validateUniqueEmail($email)) {
+        } elseif ($email !== $objOriginal->email && !$this->model->validateUniqueEmail($email)) {
             $errores['email'] = 'El email ya está en uso';
         }
 
@@ -423,7 +423,7 @@ class Usuarios extends Controller
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         } else {
             // Mantener la password original si no se proporciona una nueva password
-            $hashedPassword = $originalUser->password;
+            $hashedPassword = $objOriginal->password;
         }
 
         // Crear un objeto de usuario con los datos actualizados

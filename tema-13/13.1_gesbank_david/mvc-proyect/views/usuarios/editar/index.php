@@ -70,28 +70,28 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Cambiar Contraseña</label>
                 <input type="password"
-                    class="form-control <?= (isset($this->errores['contraseña'])) ? 'is-invalid' : null ?>"
-                    name="contraseña">
+                    class="form-control <?= (isset($this->errores['password'])) ? 'is-invalid' : null ?>"
+                    name="password">
 
                 <!-- Mostrar posible error -->
-                <?php if (isset($this->errores['contraseña'])): ?>
+                <?php if (isset($this->errores['password'])): ?>
                     <span class="form-text text-danger" role="alert">
-                        <?= $this->errores['contraseña'] ?>
+                        <?= $this->errores['password'] ?>
                     </span>
                 <?php endif; ?>
             </div>
 
             <!-- Confirmar Contraseña -->
             <div class="mb-3">
-                <label for="confirmarContraseña" class="form-label">Confirmar Cambio Contraseña</label>
+                <label for="password_confirm" class="form-label">Confirmar Cambio Contraseña</label>
                 <input type="password"
-                    class="form-control <?= (isset($this->errores['confirmarContraseña'])) ? 'is-invalid' : null ?>"
-                    name="confirmarContraseña">
+                    class="form-control <?= (isset($this->errores['password_confirm'])) ? 'is-invalid' : null ?>"
+                    name="password_confirm">
 
                 <!-- Mostrar posible error -->
-                <?php if (isset($this->errores['confirmarContraseña'])): ?>
+                <?php if (isset($this->errores['password_confirm'])): ?>
                     <span class="form-text text-danger" role="alert">
-                        <?= $this->errores['confirmarContraseña'] ?>
+                        <?= $this->errores['password_confirm'] ?>
                     </span>
                 <?php endif; ?>
             </div>
