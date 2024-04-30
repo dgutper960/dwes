@@ -36,7 +36,7 @@
                 <input type="email" class="form-control" value="<?= $this->usuario->email ?>" readonly>
             </div>
 
-            <!-- Roles -->
+            <!-- Rol -->
             <div class="mb-3">
                 <label for="" class="form-label">Rol</label>
                 <input type="text" class="form-control" value="<?= $this->rol->name ?>" readonly>

@@ -86,7 +86,7 @@ class Usuarios extends Controller
         }
     }
 
-    // Inserta los datos del formulario, nuevo usuario, en el método create
+    // Procesa datos del formulario, los valida y los carga en create
     function create($param = [])
     {
         // Iniciar o continuar sesión
@@ -186,7 +186,7 @@ class Usuarios extends Controller
         }
     }
 
-    // Muestra los detalles de un susario 
+    // Muestra los detalles de un usuario 
     function mostrar($param = [])
     {
 
@@ -214,8 +214,7 @@ class Usuarios extends Controller
         }
     }
 
-    # Método delete
-    # Permite eliminar un usuario de la tabla
+    // Control para el borrado de un usuario
     function delete($param = [])
     {
 
@@ -245,8 +244,7 @@ class Usuarios extends Controller
         }
     }
 
-    # Método ordenar
-    # Permite ordenar la tabla usuario a partir de alguna de las columnas de la tabla
+    // Ordena los usuarios a partir de un criterio elegido
     function ordenar($param = [])
     {
         //Inicio o continuo sesión
@@ -270,8 +268,7 @@ class Usuarios extends Controller
         }
     }
 
-    # Método buscar
-    # Permite realizar una búsqueda en la tabla usuarios a partir de una expresión
+    // Filtra los resultados en tabla usuarios a partir una expresión dada
     function buscar($param = [])
     {
         //Inicio o continuo sesión
@@ -296,8 +293,7 @@ class Usuarios extends Controller
         }
     }
 
-    # Método editar
-    # Muestra los detalles de un usuario en un formulario de edición
+    // Controla las operaciones para el formulario de editar usuario
     public function editar($param = [])
     {
         // Iniciar o continuar sesión
@@ -313,51 +309,47 @@ class Usuarios extends Controller
             header('location:' . URL . 'usuario');
             exit();
         } else {
-            // Para generar la lista select dinámica de roles
-            $this->view->roles = $this->model->getAllRoles();
 
-            // Obtengo el id del elemento que voy a editar
+            // Cargamos el id del usuario en  edición
             $id = $param[0];
 
+            // Cargamos en la vista el array de roles
+            $this->view->roles = $this->model->getAllRoles();
+
             // Aasigno id a una propiedad de la vista
-            $this->view->id = $id;
+            // $this->view->id = $id;
 
-            // Cambiamos el título title
-            $this->view->title = "Editar - Gestión Usuario";
+            // Cargamos el título
+            $this->view->title = "Editando Usuario - GesBank";
 
-            // Creo la propiedad model dentro de la vista para usar el método para pillar el roln
-            $this->view->model = $this->model;
-
-            // Obtener objeto de la clase 
+            // Cargamos en la vista el usuario en edición 
             $this->view->usuario = $this->model->getUser($id);
 
-            // Obtener el rol del usuario actual
-            $this->view->rol = $this->model->getRolUsuario($id);
+            // Cargamos el rol del usuario en edición
+            $this->view->rol_user = $this->model->getRolUsuario($id);
 
-            // Comprobar si el formulario viene de una validación
+            // Si hay errores -> venimos de una no validación
             if (isset($_SESSION['error'])) {
-                // Mensaje de error
+                // Cargamos error
                 $this->view->error = $_SESSION['error'];
-
-                // Autorrellenar el formulario con los detalles del usuario
+                // Autorrellenamos
                 $this->view->usuario = $this->model->getUser($id);
 
-                // Recuperar array de errores específicos
+                // Cargamos errores
                 $this->view->errores = $_SESSION['errores'];
-
+                // Limpiamos variables de sesión
                 unset($_SESSION['error']);
                 unset($_SESSION['errores']);
                 unset($_SESSION['usuario']);
             }
 
-            // Se carga la vista
+            // Cargamos la vista
             $this->view->render('usuarios/editar/index');
         }
     }
 
 
-    # Método update.
-    # Actualiza los detalles de un usuario a partir de los datos del formulario de edición
+    // Procesa datos del formulario, valida y los carga en update
     public function update($param = [])
     {
         // Iniciar sesión
@@ -382,8 +374,8 @@ class Usuarios extends Controller
         // Obtener el ID del usuario a editar
         $id = $param[0];
 
-        // Obtener el objeto de usuario original
-        $objOriginal = $this->model->getUser($id);
+        // Instanciamos usuario original para comparar datos
+        $originalUser = $this->model->getUser($id);
 
         // Obtener los datos del formulario y sanitizarlos
         $name = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -404,7 +396,7 @@ class Usuarios extends Controller
             $errores['email'] = 'El campo email es obligatorio. Valor restablecido.';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errores['email'] = 'El formato del email no es correcto';
-        } elseif ($email !== $objOriginal->email && !$this->model->validateUniqueEmail($email)) {
+        } elseif ($email !== $originalUser->email && !$this->model->validateUniqueEmail($email)) {
             $errores['email'] = 'El email ya está en uso';
         }
 
@@ -431,7 +423,7 @@ class Usuarios extends Controller
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         } else {
             // Mantener la password original si no se proporciona una nueva password
-            $hashedPassword = $objOriginal->password;
+            $hashedPassword = $originalUser->password;
         }
 
         // Crear un objeto de usuario con los datos actualizados

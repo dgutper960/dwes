@@ -54,12 +54,12 @@
                 <?php endif; ?>
             </div>
 
-            <!-- Roles -->
+            <!-- Rol-->
             <div class="mb-3">
                 <label for="rol" class="form-label">Rol</label>
                 <select class="form-select" name="rol">
                     <?php foreach ($this->roles as $rol): ?>
-                        <option value="<?= $rol->id ?>" <?= ($rol->id == $this->model->getRoleOfUser($this->usuario->id)->id) ? 'selected' : '' ?>>
+                        <option value="<?= $rol->id ?>" selected >
                             <?= $rol->name ?>
                         </option>
                     <?php endforeach; ?>
