@@ -186,34 +186,6 @@ class Usuarios extends Controller
         }
     }
 
-    // Muestra los detalles de un usuario 
-    function mostrar($param = [])
-    {
-
-        // Iniciar o continuar sesión
-        session_start();
-
-        // Tomamos el id de la entrada (enviado por GET desde la vista)
-        $id = $param[0];
-
-        // Comprobar autenticación
-        if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "El usuario debe autenticarse";
-
-            header("location:" . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['usuarios']['mostrar']))) {
-            $_SESSION['mensaje'] = "Operación sin privilegios";
-            header('location:' . URL . 'usuarios');
-        } else {
-
-            $this->view->title = "Detalles del Usuario";
-            $this->view->usuario = $this->model->getUser($id);
-            $this->view->rol = $this->model->getRolUsuario($id);
-
-            $this->view->render("usuarios/mostrar/index");
-        }
-    }
-
     // Control para el borrado de un usuario
     function delete($param = [])
     {
@@ -244,54 +216,36 @@ class Usuarios extends Controller
         }
     }
 
-    // Ordena los usuarios a partir de un criterio elegido
-    function ordenar($param = [])
+    // Muestra los detalles de un usuario 
+    function mostrar($param = [])
     {
-        //Inicio o continuo sesión
+
+        // Iniciar o continuar sesión
         session_start();
+
+        // Tomamos el id de la entrada (enviado por GET desde la vista)
+        $id = $param[0];
 
         // Comprobar autenticación
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
 
             header("location:" . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['usuarios']['ordenar']))) {
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['usuarios']['mostrar']))) {
             $_SESSION['mensaje'] = "Operación sin privilegios";
             header('location:' . URL . 'usuarios');
         } else {
 
-            $criterio = $param[0];
-            $this->view->title = "Tabla Usuarios";
-            $this->view->usuarios = $this->model->order($criterio);
-            $this->view->model = $this->model;
-            $this->view->render("usuarios/main/index");
+            $this->view->title = "Detalles del Usuario";
+            $this->view->usuario = $this->model->getUser($id);
+            $this->view->rol = $this->model->getRolUsuario($id);
+
+            $this->view->render("usuarios/mostrar/index");
         }
     }
 
-    // Filtra los resultados en tabla usuarios a partir una expresión dada
-    function buscar($param = [])
-    {
-        //Inicio o continuo sesión
-        session_start();
-
-        // Comprobar autenticación
-        if (!isset($_SESSION['id'])) {
-            $_SESSION['mensaje'] = "El usuario debe autenticarse";
-
-            header("location:" . URL . "login");
-        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['usuarios']['buscar']))) {
-            $_SESSION['mensaje'] = "Operación sin privilegios";
-            header('location:' . URL . 'usuarios');
-        } else {
 
 
-            $expresion = $_GET["expresion"];
-            $this->view->title = "Tabla Usuarios";
-            $this->view->usuarios = $this->model->filter($expresion);
-            $this->view->model = $this->model;
-            $this->view->render("usuarios/main/index");
-        }
-    }
 
     // Controla las operaciones para el formulario de editar usuario
     public function editar($param = [])
@@ -374,7 +328,7 @@ class Usuarios extends Controller
         // Obtener el ID del usuario a editar
         $id = $param[0];
 
-        // Obtener el objeto de usuario original
+        // Instanciamos usuario original, validación del email
         $original_user = $this->model->getUser($id);
 
         // Obtener los datos del formulario y sanitizarlos
@@ -382,25 +336,33 @@ class Usuarios extends Controller
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
         $pasword_confirm = filter_input(INPUT_POST, 'password_confirm', FILTER_SANITIZE_SPECIAL_CHARS);
+        // Obtenemos el ID del rol seleccionado del formulario -> necesario al final
+        $id_rol = filter_input(INPUT_POST, 'rol', FILTER_SANITIZE_NUMBER_INT);
 
         // Validar los datos
         $errores = [];
 
-        // Validar nombre
+        //Nombre
+        //-> Obligatorio
         if (empty($nombre)) {
-            $errores['nombre'] = 'El campo nombre es obligatorio. Valor restablecido.';
+            $errores['nombre'] = 'El campo es obligatorio.';
         }
 
-        // Validar email
+        // Email
+        //-> Obligatorio
+        //-> debe ser un email válido 
+        //-> Valor único en la tabla
         if (empty($email)) {
-            $errores['email'] = 'El campo email es obligatorio. Valor restablecido.';
+            $errores['email'] = 'El campo es obligatorio.';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errores['email'] = 'El formato del email no es correcto';
         } elseif ($email !== $original_user->email && !$this->model->validateUniqueEmail($email)) {
             $errores['email'] = 'El email ya está en uso';
         }
 
-        // Validar Contraseña
+        // Confirmar contraseña
+        //-> Obligatorio
+        //-> Debe coincidir con el campo password
         if (!empty($password) || !empty($pasword_confirm)) {
             if (empty($password)) {
                 $errores['password'] = 'El campo es obligatorio';
@@ -414,16 +376,14 @@ class Usuarios extends Controller
             // Errores de validación
             $_SESSION['error'] = 'Formulario no validado';
             $_SESSION['errores'] = $errores;
+            // El id del usuario debe ser pasado en la URL
             header('Location:' . URL . 'usuarios/editar/' . $id);
             exit();
         }
 
         // Si la password no está vacía, cifrarla
         if (!empty($password)) {
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        } else {
-            // Mantener la password original si no se proporciona una nueva password
-            $hashedPassword = $original_user->password;
+            $password_hashed = password_hash($password, PASSWORD_DEFAULT); //-> PHP obtiene el cifrado más fuerte diponible
         }
 
         // Crear un objeto de usuario con los datos actualizados
@@ -431,14 +391,11 @@ class Usuarios extends Controller
             $id,
             $nombre,
             $email,
-            $hashedPassword
+            $password_hashed
         );
 
-        // Obtener el ID del rol seleccionado del formulario
-        $idRol = filter_input(INPUT_POST, 'rol', FILTER_SANITIZE_NUMBER_INT);
-
         // Actualizar el usuario y el rol en la base de datos
-        $this->model->update($usuario, $id, $idRol);
+        $this->model->update($usuario, $id, $id_rol);
 
         // Mensaje de éxito
         $_SESSION['mensaje'] = "Usuario editado correctamente";
@@ -447,4 +404,56 @@ class Usuarios extends Controller
         header('location:' . URL . 'usuarios');
         exit();
     }
+
+    // Ordena los usuarios a partir de un criterio elegido
+    function ordenar($param = [])
+    {
+        //Inicio o continuo sesión
+        session_start();
+
+        // Comprobar autenticación
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['usuarios']['ordenar']))) {
+            $_SESSION['mensaje'] = "Operación sin privilegios";
+            header('location:' . URL . 'usuarios');
+        } else {
+
+            $criterio = $param[0];
+            $this->view->title = "Tabla Usuarios";
+            $this->view->usuarios = $this->model->order($criterio);
+            $this->view->model = $this->model;
+            $this->view->render("usuarios/main/index");
+        }
+    }
+
+    // Filtra los resultados en tabla usuarios a partir una expresión dada
+    function buscar($param = [])
+    {
+        //Inicio o continuo sesión
+        session_start();
+
+        // Comprobar autenticación
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['mensaje'] = "El usuario debe autenticarse";
+
+            header("location:" . URL . "login");
+        } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['usuarios']['buscar']))) {
+            $_SESSION['mensaje'] = "Operación sin privilegios";
+            header('location:' . URL . 'usuarios');
+        } else {
+
+
+            $expresion = $_GET["expresion"];
+            $this->view->title = "Tabla Usuarios";
+            $this->view->usuarios = $this->model->filter($expresion);
+            $this->view->model = $this->model;
+            $this->view->render("usuarios/main/index");
+        }
+    }
+
+
 }
+

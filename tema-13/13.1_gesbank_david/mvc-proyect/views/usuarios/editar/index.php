@@ -23,7 +23,7 @@
         <?php include 'template/partials/error.php' ?>
 
         <!-- Formulario -->
-        <form action="<?= isset($this->usuario->id) ? URL . 'usuarios/update/' . $this->usuario->id : '#' ?>"
+        <form action="<?= URL . 'usuarios/update/' . $this->usuario->id ?>"
             method="POST">
 
             <!-- Nombre -->
@@ -56,7 +56,7 @@
 
             <!-- Rol-->
             <div class="mb-3">
-                <label for="rol" class="form-label">Rol</label>
+                <label for="rol" class="form-label">Seleccionar Rol</label>
                 <select class="form-select" name="rol">
                     <?php foreach ($this->roles as $rol): ?>
                         <option value="<?= $rol->id ?>" selected >
@@ -68,7 +68,7 @@
 
             <!-- Contraseña -->
             <div class="mb-3">
-                <label for="password" class="form-label">Cambiar Contraseña</label>
+                <label for="password" class="form-label">Nueva Contraseña</label>
                 <input type="password"
                     class="form-control <?= (isset($this->errores['password'])) ? 'is-invalid' : null ?>"
                     name="password">
@@ -83,7 +83,7 @@
 
             <!-- Confirmar Contraseña -->
             <div class="mb-3">
-                <label for="password_confirm" class="form-label">Confirmar Cambio Contraseña</label>
+                <label for="password_confirm" class="form-label">Confirmar Contraseña</label>
                 <input type="password"
                     class="form-control <?= (isset($this->errores['password_confirm'])) ? 'is-invalid' : null ?>"
                     name="password_confirm">
