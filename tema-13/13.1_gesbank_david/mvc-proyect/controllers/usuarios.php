@@ -105,10 +105,10 @@ class Usuarios extends Controller
             // Saneamos los datos del formulario
             $nombre = filter_var($_POST['nombre'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $email = filter_var($_POST['email'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
-            $rol = filter_var($_POST['rol'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $password = filter_var($_POST['password'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
             $password_confirm = filter_var($_POST['password_confirm'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
-
+            $rol = filter_var($_POST['rol'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+            
             // Creamos el usuario con los datos saneados
             $usuario = new classUser(
                 null,
@@ -175,7 +175,7 @@ class Usuarios extends Controller
                 header('location:' . URL . 'usuarios/nuevo/index');
             } else {
                 # Añadimos el registro a la tabla
-                $this->model->create($nombre, $email, $password, $rol);
+                $this->model->create($usuario, $rol);
 
                 //Crearemos un mensaje, indicando que se ha realizado dicha acción
                 $_SESSION['mensaje'] = "Usuario creado correctamente.";

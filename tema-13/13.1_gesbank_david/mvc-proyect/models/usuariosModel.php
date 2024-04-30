@@ -2,8 +2,7 @@
 
 class usuariosModel extends Model
 {
-    # Método get
-    # Consulta SELECT a la tabla clientes
+    // Extrae todos los usuarios
     public function getAllUsers()
     {
         try {
@@ -20,6 +19,7 @@ class usuariosModel extends Model
         }
     }
 
+    // Extrae todos los roles
     public function getAllRoles()
     {
         try {
@@ -36,16 +36,16 @@ class usuariosModel extends Model
         }
     }
 
-    # Método create
-    # Ejecuta INSERT sobre la tabla cuentas
-    public function create($nombre, $email, $password, $id_rol)
+    // Inserta un registro en la tabla usuarios
+    // Asigna un rol al registro insertado
+    public function create(classUser $user, $id_rol)
     {
         try {
 
-            //Encriptamos la password
-            $password = password_hash($password, PASSWORD_BCRYPT);
+            // PASSWORD_DEFAULT -> Selecciona el cifrado más fuerte disponible
+            $password_hashed = password_hash($user->password, PASSWORD_DEFAULT);
 
-            //Primero tenemos que crear el usuario
+            // Inserción del usuario
             $sql = "INSERT INTO users VALUES (
                 null,
                 :nombre,
@@ -57,9 +57,9 @@ class usuariosModel extends Model
             $pdo = $this->db->connect();
             $stmt = $pdo->prepare($sql);
 
-            $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR, 50);
-            $stmt->bindParam(':email', $email, PDO::PARAM_STR, 50);
-            $stmt->bindParam(':pass', $password, PDO::PARAM_STR, 60);
+            $stmt->bindParam(':nombre', $user->name, PDO::PARAM_STR, 50);
+            $stmt->bindParam(':email', $user->email, PDO::PARAM_STR, 50);
+            $stmt->bindParam(':pass', $password_hashed, PDO::PARAM_STR, 60);
 
             $stmt->execute();
 
