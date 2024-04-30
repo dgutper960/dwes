@@ -375,19 +375,19 @@ class Usuarios extends Controller
         $id = $param[0];
 
         // Obtener el objeto de usuario original
-        $objOriginal = $this->model->getUser($id);
+        $original_user = $this->model->getUser($id);
 
         // Obtener los datos del formulario y sanitizarlos
-        $name = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
-        $confirmPassword = filter_input(INPUT_POST, 'password_confirm', FILTER_SANITIZE_SPECIAL_CHARS);
+        $pasword_confirm = filter_input(INPUT_POST, 'password_confirm', FILTER_SANITIZE_SPECIAL_CHARS);
 
         // Validar los datos
         $errores = [];
 
         // Validar nombre
-        if (empty($name)) {
+        if (empty($nombre)) {
             $errores['nombre'] = 'El campo nombre es obligatorio. Valor restablecido.';
         }
 
@@ -396,16 +396,16 @@ class Usuarios extends Controller
             $errores['email'] = 'El campo email es obligatorio. Valor restablecido.';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errores['email'] = 'El formato del email no es correcto';
-        } elseif ($email !== $objOriginal->email && !$this->model->validateUniqueEmail($email)) {
+        } elseif ($email !== $original_user->email && !$this->model->validateUniqueEmail($email)) {
             $errores['email'] = 'El email ya está en uso';
         }
 
-        // Validar password
-        if (!empty($password) || !empty($confirmPassword)) {
+        // Validar Contraseña
+        if (!empty($password) || !empty($pasword_confirm)) {
             if (empty($password)) {
-                $errores['password'] = 'El campo password es obligatorio';
-            } elseif ($password !== $confirmPassword) {
-                $errores['password_confirm'] = 'Las passwords no coinciden';
+                $errores['password'] = 'El campo es obligatorio';
+            } elseif ($password !== $pasword_confirm) {
+                $errores['password_confirm'] = 'Las contraseñas no coinciden';
             }
         }
 
@@ -423,13 +423,13 @@ class Usuarios extends Controller
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         } else {
             // Mantener la password original si no se proporciona una nueva password
-            $hashedPassword = $objOriginal->password;
+            $hashedPassword = $original_user->password;
         }
 
         // Crear un objeto de usuario con los datos actualizados
         $usuario = new classUser(
             $id,
-            $name,
+            $nombre,
             $email,
             $hashedPassword
         );
