@@ -78,7 +78,7 @@ class Usuarios extends Controller
 
             # Si no hay errores -> Llegamos al formulario por priemra vez
             // Cargamos las propiedades necesarias para la vista
-            $this->view->title = "Nuevo Usuario - GesBank";
+            $this->view->title = "Panel Usuarios - GesBank";
             // Propiedad para la lista desplegable de roles
             $this->view->roles = $this->model->getAllRoles();
             // Cargamos la vista
@@ -236,7 +236,7 @@ class Usuarios extends Controller
             header('location:' . URL . 'usuarios');
         } else {
 
-            $this->view->title = "Detalles del Usuario";
+            $this->view->title = "Panel Usuarios - GesBank";
             $this->view->usuario = $this->model->getUser($id);
             $this->view->rol = $this->model->getRolUsuario($id);
 
@@ -271,7 +271,7 @@ class Usuarios extends Controller
             $this->view->roles = $this->model->getAllRoles();
 
             // Cargamos el título
-            $this->view->title = "Editando Usuario - GesBank";
+            $this->view->title = "Panel Usuarios - GesBank";
 
             // Cargamos en la vista el usuario en edición 
             $this->view->usuario = $this->model->getUser($id);
@@ -419,7 +419,7 @@ class Usuarios extends Controller
         } else {
 
             $criterio = $param[0];
-            $this->view->title = "Tabla Usuarios";
+            $this->view->title = "Panel Usuarios - GesBank";
             $this->view->usuarios = $this->model->order($criterio);
             $this->view->model = $this->model;
             $this->view->render("usuarios/main/index");
@@ -444,7 +444,7 @@ class Usuarios extends Controller
 
 
             $expresion = $_GET["expresion"];
-            $this->view->title = "Tabla Usuarios";
+            $this->view->title = "Panel Usuarios - GesBank";
             $this->view->usuarios = $this->model->filter($expresion);
             $this->view->model = $this->model;
             $this->view->render("usuarios/main/index");

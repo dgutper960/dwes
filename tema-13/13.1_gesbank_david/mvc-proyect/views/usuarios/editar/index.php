@@ -17,7 +17,7 @@
         <!-- cabecera -->
         <?php include "views/usuarios/partials/header.php" ?>
 
-        <legend>Detalles del Usuario</legend>
+        <legend>    Editando Usuario</legend>
 
         <!-- Mensaje de Error -->
         <?php include 'template/partials/error.php' ?>

@@ -29,7 +29,7 @@ class Movimientos extends Controller
             }
 
             # Creo la propiedad title de la vista
-            $this->view->title = "Tabla Movimientos";
+            $this->view->title = "Panel Movimientos - GesBank";
 
             # Creo la propiedad movimientos dentro de la vista
             # Del modelo asignado al controlador ejecuto el método getAllMovimientos();
@@ -78,7 +78,7 @@ class Movimientos extends Controller
             }
 
             // Añadimos el título a la vista
-            $this->view->title = "Sección Movimientos / Nuevo Movimiento ";
+            $this->view->title = "Panel Movimientos - GesBank";
             // Cargamos las cuentas (selección dinámica de cuentas).
             $this->view->cuentas = $this->model->getAllCuentas();
             // Mostramos el formulario de nueva cuenta
@@ -236,7 +236,7 @@ class Movimientos extends Controller
 
         } else {
 
-            $this->view->title = "Formulario Mostrar Movimiento";
+            $this->view->title = "Panel Movimientos - GesBank";
             $this->view->movimiento = $this->model->getMovimiento($id);
             $this->view->cuenta = $this->model->getCuenta($this->view->movimiento->cuenta);
 
@@ -262,7 +262,7 @@ class Movimientos extends Controller
         } else {
 
             $criterio = $param[0];
-            $this->view->title = "Tabla Movimientos";
+            $this->view->title = "Panel Movimientos - GesBank";
             $this->view->movimientos = $this->model->order($criterio);
             $this->view->render("movimientos/main/index");
         }
@@ -287,7 +287,7 @@ class Movimientos extends Controller
 
 
             $expresion = $_GET["expresion"];
-            $this->view->title = "Tabla Movimientos";
+            $this->view->title = "Panel Movimientos - GesBank";
             $this->view->movimientos = $this->model->filter($expresion);
             $this->view->render("movimientos/main/index");
         }

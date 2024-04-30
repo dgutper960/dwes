@@ -28,7 +28,7 @@ class Clientes extends Controller
                 unset($_SESSION['mensaje']);
             }
             # Creamos la propiedad title de la vista
-            $this->view->title = "Tabla Clientes";
+            $this->view->title = "Panel de Clientes - GesBank";
 
             # Añadimos a la propiedad de la vista "clientes" el resultado del método get(),
             // disponible en el modelo
