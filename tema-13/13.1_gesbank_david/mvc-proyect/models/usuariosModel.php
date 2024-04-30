@@ -4,7 +4,7 @@ class usuariosModel extends Model
 {
     # Método get
     # Consulta SELECT a la tabla clientes
-    public function getUsers()
+    public function getAllUsers()
     {
         try {
             $sql = "SELECT * from users";
@@ -20,7 +20,7 @@ class usuariosModel extends Model
         }
     }
 
-    public function getRoles()
+    public function getAllRoles()
     {
         try {
             $sql = "SELECT * from roles";
@@ -85,9 +85,9 @@ class usuariosModel extends Model
         }
     }
 
-    # Método isEmailUnique
+    # Método validateUniqueEmail
     # Comprueba si un email está disponible
-    public function isEmailUnique($email)
+    public function validateUniqueEmail($email)
     {
         try {
             $sql = "SELECT COUNT(*) FROM users WHERE email = :email";
@@ -107,9 +107,9 @@ class usuariosModel extends Model
         }
     }
 
-    # Método getUserByID
+    # Método getUser
     # Consulta SELECT a la tabla usuarios
-    public function getUserByID($id)
+    public function getUser($id)
     {
         try {
             $sql = "SELECT * FROM users WHERE id = :id";
@@ -126,9 +126,9 @@ class usuariosModel extends Model
         }
     }
 
-    # Método getRoleOfUser
+    # Método getRolUsuario
     # Consulta SELECT a la tabla roles
-    public function getRoleOfUser($id)
+    public function getRolUsuario($id)
     {
         try {
             $sql = "SELECT roles.id, roles.name
