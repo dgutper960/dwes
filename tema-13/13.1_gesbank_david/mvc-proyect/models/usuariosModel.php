@@ -218,26 +218,30 @@ class usuariosModel extends Model
 
     // Actualiza los detalles de un usuario en la tabla
     // Actualiza el rol del usuario en la tabla roles_users
-    public function update(classUser $usuario, $id, $idRol)
+    public function update(classUser $usuario, $id_rol)
     {
         try {
             // Obtener la conexión a la base de datos
             $conexion = $this->db->connect();
 
             // Actualizamos los detalles del usuario en la tabla users
-            $sql = "UPDATE users SET
-                    name = :name,
-                    email = :email,
-                    password = :password,
-                    update_at = NOW()
-                WHERE
-                    id=:id";
+            $sql = "UPDATE 
+                        users 
+                    SET 
+                        name = :name,
+                        email = :email,
+                        password = :password,
+                        update_at = NOW()
+                    WHERE
+                        id = :id";
+                        
             $pdoSt = $conexion->prepare($sql);
             // Vinculamos los parámetros
+            $pdoSt->bindParam(":id", $usuario->id, PDO::PARAM_INT);
             $pdoSt->bindParam(":name", $usuario->name, PDO::PARAM_STR, 50);
             $pdoSt->bindParam(":email", $usuario->email, PDO::PARAM_STR, 50);
             $pdoSt->bindParam(":password", $usuario->password, PDO::PARAM_STR, 60);
-            $pdoSt->bindParam(":id", $id, PDO::PARAM_INT);
+
             $pdoSt->execute();
 
             // Actualizamos el rol del usuario en la tabla roles_users
@@ -248,8 +252,8 @@ class usuariosModel extends Model
                     user_id = :user_id";
             $pdoSt = $conexion->prepare($sql);
             // Vinculamos los parámetros
-            $pdoSt->bindParam(":role_id", $idRol, PDO::PARAM_INT);
-            $pdoSt->bindParam(":user_id", $id, PDO::PARAM_INT);
+            $pdoSt->bindParam(":role_id", $id_rol, PDO::PARAM_INT);
+            $pdoSt->bindParam(":user_id", $usuario->id, PDO::PARAM_INT);
             $pdoSt->execute();
         } catch (PDOException $e) {
             require_once("template/partials/errorDB.php");

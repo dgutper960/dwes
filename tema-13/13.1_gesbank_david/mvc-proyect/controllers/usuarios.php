@@ -270,9 +270,6 @@ class Usuarios extends Controller
             // Cargamos en la vista el array de roles
             $this->view->roles = $this->model->getAllRoles();
 
-            // Aasigno id a una propiedad de la vista
-            // $this->view->id = $id;
-
             // Cargamos el título
             $this->view->title = "Editando Usuario - GesBank";
 
@@ -395,7 +392,7 @@ class Usuarios extends Controller
         );
 
         // Actualizar el usuario y el rol en la base de datos
-        $this->model->update($usuario, $id, $id_rol);
+        $this->model->update($usuario, $id_rol);
 
         // Mensaje de éxito
         $_SESSION['mensaje'] = "Usuario editado correctamente";
