@@ -6,7 +6,19 @@ class usuariosModel extends Model
     public function getAllUsers()
     {
         try {
-            $sql = "SELECT * from users";
+            $sql = "SELECT 
+                        users.id,
+                        users.name,
+                        users.email,
+                        users.password,
+                        roles_users.role_id,
+                        roles.name AS role_name
+                    FROM
+                        roles_users
+                            INNER JOIN
+                        users ON roles_users.user_id = users.id
+                            INNER JOIN
+                        roles ON roles_users.role_id = roles.id";
 
             $conexion = $this->db->connect();
             $pdoSt = $conexion->prepare($sql);
@@ -14,7 +26,7 @@ class usuariosModel extends Model
             $pdoSt->execute();
             return $pdoSt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -31,7 +43,7 @@ class usuariosModel extends Model
             $pdoSt->execute();
             return $pdoSt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -46,13 +58,15 @@ class usuariosModel extends Model
             $password_hashed = password_hash($user->password, PASSWORD_DEFAULT);
 
             // Inserción del usuario
-            $sql = "INSERT INTO users VALUES (
-                null,
-                :nombre,
-                :email,
-                :pass,
-                default,
-                default)";
+            $sql = "INSERT INTO users 
+                    VALUES (
+                            null,
+                            :nombre,
+                            :email,
+                            :pass,
+                            default,
+                            default
+                            )";
 
             $pdo = $this->db->connect();
             $stmt = $pdo->prepare($sql);
@@ -67,19 +81,21 @@ class usuariosModel extends Model
             $id_usuario = $pdo->lastInsertId();
 
             // Asociamos el rol al usuario
-            $sql = "INSERT INTO roles_users VALUES (
-                null,
-                :user_id,
-                :role_id,
-                default,
-                default)";
+            $sql = "INSERT INTO roles_users 
+                    VALUES (
+                            null,
+                            :user_id,
+                            :role_id,
+                            default,
+                            default
+                            )";
 
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':user_id', $id_usuario, PDO::PARAM_INT);
             $stmt->bindParam(':role_id', $id_rol, PDO::PARAM_INT);
             $stmt->execute();
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -99,7 +115,7 @@ class usuariosModel extends Model
             // Si el email no existe, retorna 0
             return $count == 0;
         } catch (PDOException $e) {
-            include_once('template/partials/errorDB.php');
+            include_once ('template/partials/errorDB.php');
             exit();
         }
     }
@@ -108,7 +124,21 @@ class usuariosModel extends Model
     public function getUser(int $id)
     {
         try {
-            $sql = "SELECT * FROM users WHERE id = :id";
+            $sql = "SELECT 
+                        users.id,
+                        users.name,
+                        users.email,
+                        users.password,
+                        roles_users.role_id,
+                        roles.name AS role_name
+                    FROM
+                        roles_users
+                            INNER JOIN
+                        users ON roles_users.user_id = users.id
+                            INNER JOIN
+                        roles ON roles_users.role_id = roles.id
+                    WHERE
+                        users.id = :id";
 
             $pdo = $this->db->connect();
             $pdoSt = $pdo->prepare($sql);
@@ -117,13 +147,13 @@ class usuariosModel extends Model
             $pdoSt->execute();
             return $pdoSt->fetch();
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
 
-   // Retorna un objeto con las propiedades id y rol, correspondientes a un usuario
-   // Argumento: id del usuario a obtebner el rol
+    // Retorna un objeto con las propiedades id y rol, correspondientes a un usuario
+    // Argumento: id del usuario a obtebner el rol
     public function getRolUsuario(int $id)
     {
         try {
@@ -145,7 +175,7 @@ class usuariosModel extends Model
             $pdoSt->execute();
             return $pdoSt->fetch();
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -163,7 +193,7 @@ class usuariosModel extends Model
             $pdoSt->execute();
             return $pdoSt;
         } catch (PDOException $error) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -172,7 +202,20 @@ class usuariosModel extends Model
     public function order(int $criterio)
     {
         try {
-            $sql = "SELECT * from users ORDER BY :criterio";
+            $sql = "SELECT 
+                        users.id,
+                        users.name,
+                        users.email,
+                        users.password,
+                        roles_users.role_id,
+                        roles.name AS role_name
+                    FROM
+                        roles_users
+                            INNER JOIN
+                        users ON roles_users.user_id = users.id
+                            INNER JOIN
+                        roles ON roles_users.role_id = roles.id
+                    ORDER BY :criterio";
 
             $conexion = $this->db->connect();
             $pdoSt = $conexion->prepare($sql);
@@ -181,7 +224,7 @@ class usuariosModel extends Model
             $pdoSt->execute();
             return $pdoSt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -192,26 +235,41 @@ class usuariosModel extends Model
         try {
 
             $sql = "SELECT 
-                        id, name, email
-                    FROM
-                        users
-                    WHERE
-                        CONCAT_WS(' ', id, name, email) 
-                    LIKE :expresion";
-
+            users.id,
+            users.name,
+            users.email,
+            roles_users.role_id,
+            roles.name AS role_name
+        FROM
+            roles_users
+                INNER JOIN
+            users ON roles_users.user_id = users.id
+                INNER JOIN
+            roles ON roles_users.role_id = roles.id
+        WHERE
+            users.id LIKE :expresion_id
+            OR users.name LIKE :expresion_name
+            OR users.email LIKE :expresion_email
+            OR roles_users.role_id LIKE :expresion_role_id
+            OR roles.name LIKE :expresion_role_name";
 
             $conexion = $this->db->connect();
 
-            $expresion = "%" . $expresion . "%";
+            $expresionValor = "%" . $expresion . "%";
             $pdoSt = $conexion->prepare($sql);
 
-            $pdoSt->bindValue(':expresion', $expresion, PDO::PARAM_STR);
+            $pdoSt->bindValue(':expresion_id', $expresionValor, PDO::PARAM_STR);
+            $pdoSt->bindValue(':expresion_name', $expresionValor, PDO::PARAM_STR);
+            $pdoSt->bindValue(':expresion_email', $expresionValor, PDO::PARAM_STR);
+            $pdoSt->bindValue(':expresion_role_id', $expresionValor, PDO::PARAM_STR);
+            $pdoSt->bindValue(':expresion_role_name', $expresionValor, PDO::PARAM_STR);
+            
             $pdoSt->setFetchMode(PDO::FETCH_OBJ);
             $pdoSt->execute();
 
             return $pdoSt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -234,7 +292,7 @@ class usuariosModel extends Model
                         update_at = NOW()
                     WHERE
                         id = :id";
-                        
+
             $pdoSt = $conexion->prepare($sql);
             // Vinculamos los parámetros
             $pdoSt->bindParam(":id", $usuario->id, PDO::PARAM_INT);
@@ -256,7 +314,7 @@ class usuariosModel extends Model
             $pdoSt->bindParam(":user_id", $usuario->id, PDO::PARAM_INT);
             $pdoSt->execute();
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }

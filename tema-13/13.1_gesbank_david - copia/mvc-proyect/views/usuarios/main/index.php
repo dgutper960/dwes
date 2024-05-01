@@ -28,6 +28,7 @@
                     <th>Id </th>
                     <th>Nombre</th>
                     <th>Email</th>
+                    <th>Rol</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -37,6 +38,7 @@
                         <td><?= $usuario->id ?></td>
                         <td><?= $usuario->name ?></td>
                         <td><?= $usuario->email ?></td>
+                        <td><?= $usuario->role_name ?></td>
    
                         <!-- botones de acción -->
                         <td>
