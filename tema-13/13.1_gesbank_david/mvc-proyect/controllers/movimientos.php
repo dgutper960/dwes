@@ -264,7 +264,7 @@ class Movimientos extends Controller
             $criterio = $param[0];
             $this->view->title = "Panel Movimientos - GesBank";
             $this->view->movimientos = $this->model->order($criterio);
-            $this->view->render("movimientos/main/index");
+            $this->view->render("cuentas/movimientos/index");
         }
     }
 

@@ -32,7 +32,7 @@ class movimientosModel extends Model
             return $pdoSt;
             // control de errores
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -40,7 +40,7 @@ class movimientosModel extends Model
 
     // Inserta un nuevo movimiento en la tabla
     // Argumento = Instancia de classMovimiento
-    public function create($movimiento)
+    public function create(classMovimiento $movimiento)
     {
         try {
             $sql = "INSERT INTO movimientos 
@@ -69,15 +69,28 @@ class movimientosModel extends Model
             $pdoSt->bindParam(":tipo", $movimiento->tipo, PDO::PARAM_STR);
             $pdoSt->bindParam(":cantidad", $movimiento->cantidad);
             $pdoSt->bindParam(":saldo", $movimiento->saldo);
-
-            // ejcución
             $pdoSt->execute();
+
+            // Incrementar num_movtos en la tabla cuentas (MOVIMIENTOS EN LA BBDD TODOS EN NULL)
+            $sql_increment = "UPDATE cuentas SET num_movtos = num_movtos + 1 WHERE id = :id_cuenta";
+            $pdoSt_increment = $conexion->prepare($sql_increment);
+            $pdoSt_increment->bindParam(":id_cuenta", $movimiento->id_cuenta, PDO::PARAM_INT);
+            $pdoSt_increment->execute();
+
+            // Actualizar la fecha del útimo movimento en cuentas
+            $sql_ult_mov = "UPDATE cuentas SET fecha_ul_mov = :fecha_hora WHERE id = :id_cuenta";
+            $pdoSt_ult_mov = $conexion->prepare($sql_ult_mov);
+            $pdoSt_ult_mov->bindParam(":id_cuenta", $movimiento->id_cuenta, PDO::PARAM_INT);
+            $pdoSt_ult_mov->bindParam(":fecha_hora", $movimiento->fecha_hora);
+            $pdoSt_ult_mov->execute();
+
             // control de errores
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
+
 
 
     // Retorna todas las cuentas de la tabla
@@ -92,7 +105,7 @@ class movimientosModel extends Model
             $pdoSt->execute();
             return $pdoSt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -120,7 +133,7 @@ class movimientosModel extends Model
             return $pdoSt->fetchColumn();
             // control de errores
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -143,7 +156,7 @@ class movimientosModel extends Model
             $pdoSt->bindParam(":saldo_actualizado", $saldo_actualizado, PDO::PARAM_INT);
             $pdoSt->execute();
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -177,7 +190,7 @@ class movimientosModel extends Model
 
             return $pdoSt->fetch();
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -210,7 +223,7 @@ class movimientosModel extends Model
 
             return $pdoSt->fetch();
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -241,7 +254,7 @@ class movimientosModel extends Model
             $pdoSt->execute();
             return $pdoSt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
@@ -283,7 +296,7 @@ class movimientosModel extends Model
 
             return $pdoSt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            require_once ("template/partials/errorDB.php");
             exit();
         }
     }
