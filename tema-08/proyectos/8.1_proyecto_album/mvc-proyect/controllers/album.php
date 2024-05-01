@@ -9,13 +9,14 @@ class Album extends Controller
         parent::__construct();
     }
 
+    // Muestra el CRUD de albumes
     function render()
     {
 
-        # inicio o continuo sesión
+        // Iniciar o continuar sesión 
         session_start();
 
-        # compruebo usuario autentificado
+        // Comprobar autenticación
         if (!isset($_SESSION['id'])) {
             $_SESSION['notify'] = "El usuario debe autenticarse";
             header("location:" . URL . "login");
@@ -29,26 +30,24 @@ class Album extends Controller
                 unset($_SESSION['mensaje']);
             }
 
-            # Creo la propiedad title de la vista
+            // Cargamos propiedad en la vista -> titulo
             $this->view->title = "Home - Panel Control Albumes";
 
-            # Creo la propiedad albums dentro de la vista
-            # Del modelo asignado al controlador ejecuto el método get();
+            // Cargamos propiedad en la vista -> albumes
             $this->view->albumes = $this->model->get();
 
             $this->view->render('album/main/index');
         }
     }
 
-    # Método show
-    # Muestra en un formulario de solo lectura los detalles de un album
+    // Muestra los detalles y el contenido de su carpeta
     public function show($param = [])
     {
 
-        //Iniciar o continuar sesión
+        // Iniciar o continuar sesión
         session_start();
 
-        //Comprobar si el usuario está identificado
+        // Comprobar autenticación
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
             header("location:" . URL . "login");
@@ -59,7 +58,7 @@ class Album extends Controller
 
             $id = $param[0];
 
-            // Método que incrementa el campo núm visitas
+            // Incrementamos el campo num_visitas
             $this->model->sumNumVisitas($id);
 
             $this->view->title = "Formulario Álbum Mostar";
@@ -68,14 +67,14 @@ class Album extends Controller
         }
     }
 
-
+    // Controla acciones en el formulario Nuevo
     function new()
     {
 
-        # iniciar o continuar  sesión
+        // Iniciar o continuar sesión
         session_start();
 
-        # compruebo usuario autentificado
+        // Comprobar autenticación
         if (!isset($_SESSION['id'])) {
             $_SESSION['notify'] = "El usuario debe autenticarse";
 
@@ -85,39 +84,41 @@ class Album extends Controller
             header('location:' . URL . 'album');
         } else {
 
-            # Crear un objeto album vacio
+            // Instancia de album
             $this->view->album = new classAlbum();
 
-            # Comprobar si vuelvo de  un registro no validado
+            // Si hay errores -> venimos de un formulario no válido
             if (isset($_SESSION['error'])) {
 
-                # Mensaje de error
+                // Cargamos el error para el mensaje
                 $this->view->error = $_SESSION['error'];
 
-                # Autorrellenar formulario con los detalles del  album
+                // Autorelleno del formulario
                 $this->view->album = unserialize($_SESSION['album']);
 
-                # Recupero array errores  específicos
+                // Cargamos los errores como propiedad de la vista
                 $this->view->errores = $_SESSION['errores'];
 
-                # Elimino las variables de sesión
+                // Limpiamos las variables de sesión
                 unset($_SESSION['error']);
                 unset($_SESSION['album']);
                 unset($_SESSION['errores']);
             }
 
-            # etiqueta title de la vista
-            $this->view->title = "Añadir - Gestión Album";
+            // Titulo del formulario
+            $this->view->title = "Nuevo Album - Gestión Album";
 
-
-            # cargo la vista con el formulario nuevo album
+            // Mostramos la vista nuevo album
             $this->view->render('album/new/index');
         }
     }
 
+    // Control de datos del formulario Nuevo; Sanitiza y valida
+    // Si todo va bién -> carga los datos en create();
+    // Si hay errores, -> carga el formulario
     function create($param = [])
     {
-        # Iniciar sesión
+        // Iniciar o continuar sesión
         session_start();
 
         if (!isset($_SESSION['id'])) {
@@ -127,7 +128,7 @@ class Album extends Controller
             $_SESSION['mensaje'] = "Acción restringida. Usuario sin privilegios";
             header('location:' . URL . 'album');
         } else {
-            # Seguridad. Saneamos los datos del formulario
+            // Saneamos los datos del formulario
             $titulo = filter_var($_POST['titulo'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
             $descripcion = filter_var($_POST['descripcion'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
             $autor = filter_var($_POST['autor'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -137,7 +138,7 @@ class Album extends Controller
             $etiquetas = filter_var($_POST['etiquetas'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
             $carpeta = filter_var($_POST['carpeta'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
-            # Crear el objeto de álbum con los datos saneados
+            // Instancamos album y cargamos los datos
             $album = new classAlbum(
                 null,
                 $titulo,
@@ -152,7 +153,7 @@ class Album extends Controller
                 $carpeta
             );
 
-            # Validación
+            // Validamos
             $errores = [];
 
             // Título
@@ -206,18 +207,19 @@ class Album extends Controller
                 $errores['carpeta'] = 'No se permiten espacios en blanco';
             }
 
-            # Comprobar validación
+            // Si hay errores -> venimos de formulario no válido
             if (!empty($errores)) {
-                # Errores de validación
+                // Cargamos la variables de sesión 
                 $_SESSION['album'] = serialize($album);
                 $_SESSION['error'] = 'Formulario no ha sido validado';
                 $_SESSION['errores'] = $errores;
+                // Redirigimos al formulario
                 header('location:' . URL . 'album/new');
             } else {
-                # Añadir registro a la tabla
+                // Si no hay errores -> llamada a create()
                 $this->model->create($album);
 
-                //Crear carpeta en imagenes
+                // Debemos crear una carpeta en la ruta "imagenes" para almacenar las imágenes del album
                 $carpeta = $album->carpeta;
                 $rutaCarpeta = "imagenes/$carpeta";
                 if (!file_exists($rutaCarpeta)) {
@@ -229,59 +231,60 @@ class Album extends Controller
         }
     }
 
+    // Controla acciones del formulario Editar
     function edit($param = [])
     {
 
-        # iniciamos sesión
+        // Iniciar o continuar sesión
         session_start();
 
         if (!isset($_SESSION['id'])) {
             $_SESSION['mensaje'] = "El usuario debe autenticarse";
-
             header("location:" . URL . "login");
+
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['edit']))) {
             $_SESSION['mensaje'] = "Acción restringida. Usuario sin privilegios";
             header('location:' . URL . 'album');
+
         } else {
 
             $id = $param[0];
 
-            # asigno id a una propiedad de la vista
+            // Asignamos propiedades a la vista
             $this->view->id = $id;
-
-            # title
             $this->view->title = "Editar - Panel de control Albumes";
+            $this->view->album = $this->model->getAlbum($id); // cargamos el album por id
 
-            # obtener objeto de la clase album
-            $this->view->album = $this->model->getAlbum($id);
-
-            # Comprobar si el formulario viene de una no validación
+            // Si hay errores -> venimos de un formulario no válido
             if (isset($_SESSION['error'])) {
 
-                # Mensaje de error
+                // Cargamos el error para el mensaje
                 $this->view->error = $_SESSION['error'];
 
-                # Autorrellenar formulario con los detalles del  album
+                // Autorelleno del formulario
                 $this->view->album = unserialize($_SESSION['album']);
 
-                # Recupero array errores  específicos
+                // Cargamos los errores como propiedad de la vista
                 $this->view->errores = $_SESSION['errores'];
 
-                # Elimino las variables de sesión
+                // Limpiamos las variables de sesión
                 unset($_SESSION['error']);
                 unset($_SESSION['album']);
                 unset($_SESSION['errores']);
             }
 
-            # cargo la vista
+            // Si no hay errores, cargamos la vista Editar
             $this->view->render('album/edit/index');
         }
     }
 
+    // Control de datos del formulario Editar; Sanitizar y validar.
+    // Si todo va bién -> carga los datos en update();
+    // Si hay errores, -> carga el formulario Editar
     public function update($param = [])
     {
 
-        # iniciar sesión
+        // Iniciar o continuar sesión
         session_start();
 
         if (!isset($_SESSION['id'])) {
@@ -293,7 +296,7 @@ class Album extends Controller
             header('location:' . URL . 'album');
         } else {
 
-            # 1. Seguridad. Saneamos los  datos del formulario
+            // Saneamos los  datos del formulario
             $titulo = filter_var($_POST['titulo'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS, 100);
             $descripcion = filter_var($_POST['descripcion'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
             $autor = filter_var($_POST['autor'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -305,7 +308,7 @@ class Album extends Controller
             $num_visitas = filter_var($_POST['num_visitas'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
             $carpeta = filter_var($_POST['carpeta'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
-            # 2. Creamos el objeto album a partir de  los datos saneados del  formuario
+            // Instanciamos un album y cargamos los datos
             $album = new classAlbum(
                 null,
                 $titulo,
@@ -320,10 +323,10 @@ class Album extends Controller
                 $carpeta
             );
 
-            # Cargo id del album que voya a actualizar
+            // Capturamos el id de entrada
             $id = $param[0];
 
-            # Obtengo el  objeto album original
+            // Cargamos el album original de la BBDD 
             $album_orig = $this->model->getAlbum($id);
 
             // Obtenemos la ruta de la carpeta original
@@ -332,7 +335,7 @@ class Album extends Controller
             // Obtenemos la ruta de la carpeta nueva
             $nuevaRutaCarpeta = "imagenes/" . $carpeta;
 
-            # Validación
+            // Validamos
             $errores = [];
 
             // Título 
@@ -386,41 +389,41 @@ class Album extends Controller
                 $errores['carpeta'] = 'No se permiten espacios en blanco';
             }
 
-            # Comprobar validación
+            // Si hay errores -> venimos de formulario no válido
             if (!empty($errores)) {
-                # Errores de validación
+                // Cargamos la variables de sesión 
                 $_SESSION['album'] = serialize($album);
                 $_SESSION['error'] = 'Formulario no ha sido validado';
                 $_SESSION['errores'] = $errores;
+                // Redirigimos al formulario
                 header('location:' . URL . 'album/edit/' . $id);
             } else {
-                if (!empty($carpeta) && is_dir($rutaCarpetaOriginal)) {
-                    // Renombramos la carpeta
-                    if (rename($rutaCarpetaOriginal, $nuevaRutaCarpeta)) {
-                        // Actualizamos el valor de la carpeta en el objeto del álbum
-                        $album->carpeta = $carpeta;
-                    } else {
-                        // Si no se puede renombrar la carpeta, agregar un mensaje de error
-                        $errores['carpeta'] = 'Error al renombrar la carpeta';
-                    }
-
-                    # Actualizar registro
-                    $this->model->update($album, $id, $rutaCarpetaOriginal);
-
-                    # Mensaje
-                    $_SESSION['mensaje'] = "Álbum actualizado correctamente";
-
-                    # Redirigimos al main de álbumes
-                    header('location:' . URL . 'album');
+                // Renombramos la carpeta
+                if (rename($rutaCarpetaOriginal, $nuevaRutaCarpeta)) {
+                    // Actualizamos el valor de la carpeta en el objeto del álbum
+                    $album->carpeta = $carpeta;
+                } else {
+                    // Si no se puede renombrar la carpeta, agregar un mensaje de error
+                    $errores['carpeta'] = 'Error al renombrar la carpeta';
                 }
+
+                # Actualizar registro
+                $this->model->update($album, $id, $rutaCarpetaOriginal);
+
+                # Mensaje
+                $_SESSION['mensaje'] = "Álbum actualizado correctamente";
+
+                # Redirigimos al main de álbumes
+                header('location:' . URL . 'album');
             }
         }
     }
 
+    // Ordena los registros mostrado en main según un criterio preseleccionado
     public function order($param = [])
     {
 
-        # inicio o continúo sesión
+        // Iniciar o continuar sesión
         session_start();
 
         if (!isset($_SESSION['id'])) {
@@ -432,25 +435,25 @@ class Album extends Controller
             header('location:' . URL . 'album');
         } else {
 
-            # Obtengo criterio de ordenación
+            // Obtenemos el criterio enviado al argumento
             $criterio = $param[0];
 
-            # Creo la propiedad title de la vista
+            // Cargamos propiedad en la vista
             $this->view->title = "Ordenar - Panel Control Album";
 
-            # Creo la propiedad albumes dentro de la vista
-            # Del modelo asignado al controlador ejecuto el método get();
+            // order() retorna consulta SQL con cláusula ORDER BY = $criterio (int)
             $this->view->albumes = $this->model->order($criterio);
 
-            # Cargo la vista principal de albumes
+            // Cargamos el main 
             $this->view->render('album/main/index');
         }
     }
 
+    // Filtra los resultados en el CRUD según una expresión dada
     public function filter($param = [])
     {
 
-        # inicio o continúo sesión
+        // Iniciar o continuar sesión
         session_start();
 
         if (!isset($_SESSION['id'])) {
@@ -461,27 +464,29 @@ class Album extends Controller
             header('location:' . URL . 'album');
         } else {
 
-            # Obtengo expresión de búsqueda
+            // Cargamos la expresión
             $expresion = $_GET['expresion'];
 
-            # Creo la propiedad title de la vista
+            // Cargamos propiedad en la vista
             $this->view->title = "Buscar - Panel de Albumes";
 
-            # Filtro a partir de la  expresión
+            // Llamada a filter() con la expresión como argumento
             $this->view->albumes = $this->model->filter($expresion);
 
-            # Cargo la vista principal de albumes
+            // Cargamos la vista main
             $this->view->render('album/main/index');
         }
     }
 
+    // Sube ficheros al directiorio del album
+    // Actualiza el número de fotos del album
     public function add($param = [])
     {
 
-        # iniciar o continuar  sesión
+        // Iniciar o continuar sesión
         session_start();
 
-        # compruebo usuario autentificado
+        // Comprobar autenticación
         if (!isset($_SESSION['id'])) {
             $_SESSION['notify'] = "El usuario debe autenticarse";
 
@@ -491,16 +496,16 @@ class Album extends Controller
             header('location:' . URL . 'album');
         } else {
 
-            # Comprobar si vuelvo de  un registro no validado
+            // Si hay errores -> venimos de un formulario no válido
             if (isset($_SESSION['error'])) {
 
-                # Mensaje de error
+                // Cargamos el error para el mensaje
                 $this->view->error = $_SESSION['error'];
 
-                # Recupero array errores  específicos
+                // Cargamos los errores como propiedad de la vista
                 $this->view->errores = $_SESSION['errores'];
 
-                # Elimino las variables de sesión
+                // Limpiamos las variables de sesión
                 unset($_SESSION['error']);
                 unset($_SESSION['errores']);
             }
@@ -511,17 +516,18 @@ class Album extends Controller
             $this->model->subirFicheros($_FILES['archivos'], $album->carpeta);
             // Contamos todo el contenido de la carpeta
             $num_fotos = count(glob("imagenes/" . $album->carpeta . "/*"));
-
+            // Actualizar el campo número de fotos
             $this->model->updateNumFotos($album->id, $num_fotos);
 
             header("location:" . URL . "album");
         }
     }
 
+    // Elimina un album de la tabla
     public function delete($param = [])
     {
 
-        # inicar sesión
+        // Iniciar o continuar sesión
         session_start();
 
         if (!isset($_SESSION['id'])) {
@@ -533,42 +539,55 @@ class Album extends Controller
             header('location:' . URL . 'album');
         } else {
 
-            # obtenemos id del  album
+            // Cargamos el id del album
             $id = $param[0];
 
-            //Para borrar la carpeta del album
-            //Obtenemos el nombre de la carpeta del álbum
+            // Al borrar un albúm debemos eliminar su directirio y contenido
+            // Obtenemos la ruta de la carpeta
             $album = $this->model->getAlbum($id);
             $carpeta = $album->carpeta;
             $rutaCarpeta = "imagenes/$carpeta";
 
-            # eliminar carpeta si existe
+            // Si la ruta es un directorio, llamamos al metodo de esta clase
             if (is_dir($rutaCarpeta)) {
                 $this->EliminarCarpeta($rutaCarpeta);
             }
 
-            # eliminar album
+            // Una vez borrado el contenido, eliminamos el album
             $this->model->delete($id);
 
-            # generar mensaje
             $_SESSION['mensaje'] = 'album eliminado correctamente';
 
-            # redirecciono al main de albumes
+            // Volvemos al main
             header('location:' . URL . 'album');
         }
     }
 
-    /**
-     * Elimina el contenido de una carpeta de forma recursiva
-     */
+
+    //Elimina el contenido de una carpeta y de todos sus hijos
     private function EliminarCarpeta($carpeta)
     {
-        if (!file_exists($carpeta)) return true;
-        if (!is_dir($carpeta)) return unlink($carpeta);
+        // Verificamos si la carpeta no existe, devuelve verdadero (ya ha sido eliminada)
+        if (!file_exists($carpeta))
+            return true;
+    
+        // Verificamos si la ruta no corresponde a una carpeta -> elimanos el archivo directamente
+        if (!is_dir($carpeta))
+            return unlink($carpeta);
+    
+        // Itera sobre los elementos de la carpeta
         foreach (scandir($carpeta) as $item) {
-            if ($item == '.' || $item == '..') continue;
-            if (!$this->EliminarCarpeta($carpeta . DIRECTORY_SEPARATOR . $item)) return false;
+            // Ignora los elementos '.' y '..' que representan el directorio actual y el directorio padre
+            if ($item == '.' || $item == '..')
+                continue;
+    
+            // Eliminamos los elementos de la carpeta de forma recursiva
+            if (!$this->EliminarCarpeta($carpeta . DIRECTORY_SEPARATOR . $item))
+                return false;
         }
+    
+        // Eliminamos la propia carpeta
         return rmdir($carpeta);
     }
+    
 }
