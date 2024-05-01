@@ -59,7 +59,7 @@
                 <label for="rol" class="form-label">Seleccionar Rol</label>
                 <select class="form-select" name="rol">
                     <?php foreach ($this->roles as $rol): ?>
-                        <option value="<?= $rol->id ?>" selected >
+                        <option value="<?= $rol->id ?>" <?= ($rol->id == $this->usuario->role_id) ? 'selected' : '' ?>>
                             <?= $rol->name ?>
                         </option>
                     <?php endforeach; ?>
