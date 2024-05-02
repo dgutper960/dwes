@@ -115,7 +115,7 @@ class Album extends Controller
 
     // Control de datos del formulario Nuevo; Sanitiza y valida
     // Si todo va bién -> carga los datos en create();
-    // Si hay errores, -> carga el formulario
+    // Si hay errores -> carga el formulario
     function create($param = [])
     {
         // Iniciar o continuar sesión
