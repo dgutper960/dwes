@@ -1,6 +1,3 @@
-<!-- Footer -->
-
-<!-- Footer -->
 
 <footer class="footer mt-auto py-3 fixed-bottom bg-light">
   <div class="container">
