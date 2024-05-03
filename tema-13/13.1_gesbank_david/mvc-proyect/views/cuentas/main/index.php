@@ -29,7 +29,7 @@
                     <th>Cliente</th>
                     <th>Fecha Alta</th>
                     <th>Fecha ultimo movimiento</th>
-                    <!-- <th class="text-end">Num_movtos</th> -->
+                    <th class="text-end">Num_movtos</th>
                     <th class="text-end">Saldo</th>
                     <th>Acciones</th>
 
@@ -43,7 +43,7 @@
                         <td><?= $cuenta->cliente ?></td>
                         <td><?= $cuenta->fecha_alta ?></td>
                         <td><?= $cuenta->fecha_ul_mov ?></td>
-                        <!-- <td class="text-end"><?= number_format($cuenta->num_movtos, 0, ',', '.') ?></td> -->
+                        <td class="text-end"><?= number_format($cuenta->num_movtos, 0, ',', '.') ?></td>
                         <td class="text-end"><?= number_format($cuenta->saldo, 2, ',', '.') ?> €</td>
                         <td style="display:flex; justify-content:space-between;">
                             <a href="<?= URL ?>cuentas/delete/<?= $cuenta->id ?>" title="Eliminar"
