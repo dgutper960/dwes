@@ -12,4 +12,4 @@
 
 // 4. Editar el CRUD de main para mostar el rol de cada usuario
 
-5. Editar la vista editar para mostrar el select del rol
+// 5. Editar la vista editar para mostrar el select del rol
