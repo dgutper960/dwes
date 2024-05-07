@@ -12,9 +12,9 @@ Route::get('/', function () {
 // });
 
 
-// Route::get('/student', function () {
-//     return 'Main de Alumnos';
-// });
+Route::get('/student', function () {
+    return 'Main de Alumnos';
+});
 
 
 // Route::get('/student/new', function () {
@@ -40,6 +40,7 @@ Route::get('/test', function () {
 Route::get('/api/user', function () {
     return "La física es el sistema operativo del Universo. Steven R Garman";
 });
+
 
 Route::get('/{nombre}/{apellidos}', function ($nombre, $apellidos) {
     return "Usuario: {$nombre} {$apellidos}";
