@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -62,3 +64,11 @@ Route::get('/cliente/cuenta/{cliente}/{stock?}', function ($cliente, $cuenta = n
         return "Perfil de {$cliente}.<br>Mostrando detalles de la cuenta {$cuenta}";
     }
 });
+
+// Asociamos una ruta a un controlador
+Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/new', [UserController::class, 'new']);
+// Ruta con parametro 
+Route::get('/user/view/{id}', [UserController::class, 'new']);
+
+Route::resource('Client', ClientController::class);
