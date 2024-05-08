@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
@@ -7,6 +8,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// LLamamos a la vista sin pasar por el controlador
+Route::get('/ejemplo', function () {
+    return view('ejemplo.home');
+});
+
+Route::get('/ejemplo', EjemploController::class);
 
 
 // Vinculamos cada Ruta con un método en una sola instrucción

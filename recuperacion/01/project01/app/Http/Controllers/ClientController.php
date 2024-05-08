@@ -11,7 +11,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return 'Mostrando CRUD de clientes';
+        // return 'Mostrando CRUD de clientes';
+        return view('clientes.home');
     }
 
     /**
