@@ -11,7 +11,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return 'Mostrando CRUD de clientes';
     }
 
     /**
@@ -19,7 +19,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return 'Nuevo Cliente';
     }
 
     /**
@@ -27,7 +27,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'Cliente creado correctamente';
     }
 
     /**
@@ -35,7 +35,7 @@ class ClientController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return "Mostrando detalles del cliente {$id}";
     }
 
     /**
@@ -43,7 +43,7 @@ class ClientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return "Formulario edición del cliente {$id}";
     }
 
     /**
@@ -51,7 +51,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return "Cliente {$id} actualizado correctamente";
     }
 
     /**
@@ -59,6 +59,6 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return "Cliente {$id} eliminado correctamente";
     }
 }

@@ -9,66 +9,14 @@ Route::get('/', function () {
 });
 
 
-// Route::get('/', function () {
-//     return 'HolaMundoLaravel';
-// });
-
-
-Route::get('/student', function () {
-    return 'Main de Alumnos';
+// Vinculamos cada Ruta con un método en una sola instrucción
+// La función name() es opcional. Asigna un nombre que puede ser usado para genera rutas dinámicas 
+Route::group(['prefix' => 'clientes'], function () {
+    Route::get('/', [ClientController::class, 'index'])->name('clientes.index');
+    Route::get('/create', [ClientController::class, 'create'])->name('clientes.create');
+    Route::post('/store', [ClientController::class, 'store'])->name('clientes.store');
+    Route::get('/show/{id}', [ClientController::class, 'show'])->name('clientes.show');
+    Route::get('/edit/{id}', [ClientController::class, 'edit'])->name('clientes.edit');
+    Route::post('/update/{id}', [ClientController::class, 'update'])->name('clientes.update');
+    Route::get('/delete/{id}', [ClientController::class, 'destroy'])->name('clientes.destroy');
 });
-
-
-// Route::get('/student/new', function () {
-//     return 'Crear Nuevo Alumno';
-// });
-
-// // Funcion con parámetros
-
-// Route::get('/student/view/{id}', function ($id) {
-//     return "Ver Detalles Alumno: $id";
-// });
-
-// // Funcion con parámetros opcionales
-
-// Route::get('/student/curso/{id}/{curso?}', function ($id, $curso = null) {
-//     return "Ver Detalles Alumno: $id Curso: $curso";
-// });
-
-Route::get('/test', function () {
-    return "David - DWES - 2DAW - Prueba";
-});
-
-Route::get('/api/user', function () {
-    return "La física es el sistema operativo del Universo. Steven R Garman";
-});
-
-
-Route::get('/{nombre}/{apellidos}', function ($nombre, $apellidos) {
-    return "Usuario: {$nombre} {$apellidos}";
-});
-
-
-Route::get('/user/view/{id?}', function ($id = null) {
-    if (!is_null($id)) {
-        return "Usuario id: {$id}";
-    } else {
-        return "El usuario no está registrado";
-    }
-});
-
-Route::get('/cliente/cuenta/{cliente}/{cuenta?}', function ($cliente, $cuenta = null) {
-    if(is_null($cuenta)){
-        return "Seleccione una cuenta de {$cliente}";
-    } else {
-        return "Perfil de {$cliente}. Mostrando detalles de la cuenta {$cuenta}";
-    }
-});
-
-// Asociamos una ruta a un controlador
-Route::get('/user', [UserController::class, 'index']);
-Route::get('/user/new', [UserController::class, 'new']);
-// Ruta con parametro 
-Route::get('/user/view/{id}', [UserController::class, 'new']);
-
-Route::resource('Client', ClientController::class);
