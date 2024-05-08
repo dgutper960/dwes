@@ -57,11 +57,11 @@ Route::get('/user/view/{id?}', function ($id = null) {
     }
 });
 
-Route::get('/cliente/cuenta/{cliente}/{stock?}', function ($cliente, $cuenta = null) {
+Route::get('/cliente/cuenta/{cliente}/{cuenta?}', function ($cliente, $cuenta = null) {
     if(is_null($cuenta)){
         return "Seleccione una cuenta de {$cliente}";
     } else {
-        return "Perfil de {$cliente}.<br>Mostrando detalles de la cuenta {$cuenta}";
+        return "Perfil de {$cliente}. Mostrando detalles de la cuenta {$cuenta}";
     }
 });
 
