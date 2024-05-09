@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\EjemploController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ArticuloController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,3 +29,6 @@ Route::group(['prefix' => 'clientes'], function () {
     Route::post('/update/{id}', [ClientController::class, 'update'])->name('clientes.update');
     Route::get('/delete/{id}', [ClientController::class, 'destroy'])->name('clientes.destroy');
 });
+
+// Accedemos al método index del controlador ArrticulosController
+Route::get('/articulos', [ArticuloController::class, 'index']);
