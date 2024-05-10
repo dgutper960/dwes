@@ -25,6 +25,6 @@ class Articulo extends Model
 
     public function categorias()
     {
-        return $this->hasMany('App\Categoria');
+        return $this->hasOne('App\Categoria');
     }
 }
