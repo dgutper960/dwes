@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Articulo extends Model
 {
@@ -23,8 +24,9 @@ class Articulo extends Model
         'Precio_Venta'
     ];
 
-    public function categorias()
+    // Relación 1:1 -> el nombre del metodo debe ir en singular
+    public function categoria(): BelongsTo
     {
-        return $this->hasOne('App\Categoria');
+        return $this->belongsTo(Categoria::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Categoria extends Model
 {
@@ -17,8 +18,11 @@ class Categoria extends Model
         'descripcion'
     ];
 
-    public function articulos()
+
+    // Relacion 1:N 
+    // Nombre del método en plural
+    public function articulos():HasMany
     {
-        return $this->hasMany('App\Articulo');
+        return $this->hasMany(Articulo::class);
     }
 }
