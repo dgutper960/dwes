@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB; // necesario en el
+use Illuminate\Support\Facades\DB; // necesario en el seeder
 use App\Models\Categoria; // necesario en la factoria
 
 class CategoriasSeeders extends Seeder
@@ -29,7 +29,7 @@ class CategoriasSeeders extends Seeder
         // ]);
 
         // Añadimos registros de la factoria
-        $categoria = Categoria::factory()->count(20)->create();
+        Categoria::factory()->count(20)->create();
 
     }
 }

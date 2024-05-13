@@ -35,7 +35,7 @@ class ArticulosSeeders extends Seeder
         // ]);
 
         // Añadimos registros de la factoria
-        $articulo = Articulo::factory()->count(40)->create();
+        Articulo::factory()->count(40)->create();
 
     }
 }
