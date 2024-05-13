@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;  // necesario en el seeder
+use App\Models\Articulo; // necesario en la factoiria
 
 class ArticulosSeeders extends Seeder
 {
@@ -13,21 +14,28 @@ class ArticulosSeeders extends Seeder
      */
     public function run(): void
     {
-        DB::table('articulos')->insert([
-            [
-                'Descripcion' => 'Lavadora LG',
-                'categoria_id' => 1,
-                'stock' => 15,
-                'Precio_Coste' => 430.99,
-                'Precio_Venta' => 699.99
-            ],
-            [
-                'Descripcion' => 'Sofá Cama Eco',
-                'categoria_id' => 2,
-                'stock' => 5,
-                'Precio_Coste' => 221.99,
-                'Precio_Venta' => 499.99
-            ]
-        ]);
+
+        // Minamos de forma manual (Seeder)
+
+        // DB::table('articulos')->insert([
+        //     [
+        //         'Descripcion' => 'Cafetera Nespresso',
+        //         'categoria_id' => 5,
+        //         'stock' => 20,
+        //         'Precio_Coste' => 149.99,
+        //         'Precio_Venta' => 249.99
+        //     ],
+        //     [
+        //         'Descripcion' => 'Silla Ergonómica',
+        //         'categoria_id' => 6,
+        //         'stock' => 12,
+        //         'Precio_Coste' => 89.99,
+        //         'Precio_Venta' => 179.99
+        //     ]
+        // ]);
+
+        // Añadimos registros de la factoria
+        $articulo = Articulo::factory()->count(40)->create();
+
     }
 }

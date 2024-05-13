@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB; // necesario en el
+use App\Models\Categoria; // necesario en la factoria
 
 class CategoriasSeeders extends Seeder
 {
@@ -13,24 +14,23 @@ class CategoriasSeeders extends Seeder
      */
     public function run(): void
     {
-        DB::table('categorias')->insert([
-            [
-                'categoria' => 'Menaje',
-                'descripcion' => 'Utensilios de cocina, vajillas, vasos y cubiertos'
-            ],
-            [
-                'categoria' => 'Electrodomésticos',
-                'descripcion' => 'Aparatos eléctricos para el hogar'
-            ],
-            [
-                'categoria' => 'Muebles',
-                'descripcion' => 'Mobiliario para el hogar'
-            ],
-            [
-                'categoria' => 'Decoración',
-                'descripcion' => 'Objetos decorativos para el hogar'
-            ]
-        ]);
+
+        // Minamos de forma manual
+
+        // DB::table('categorias')->insert([
+        //     [
+        //         'categoria' => 'Electrónica',
+        //         'descripcion' => 'Dispositivos electrónicos y accesorios'
+        //     ],
+        //     [
+        //         'categoria' => 'Jardinería',
+        //         'descripcion' => 'Herramientas y accesorios para el jardín'
+        //     ]
+        // ]);
+
+        // Añadimos registros de la factoria
+        $categoria = Categoria::factory()->count(20)->create();
+
     }
 }
 
