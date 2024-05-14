@@ -18,13 +18,18 @@
 </head>
 
 <body>
-    @include('partials.menu');
+
+    <nav>
+        @yield('menu')
+    </nav>
+
     <header>
         <!-- Titulos y subtitulos -->
         <div class="container">
             <h1 class="display-7">@yield('cabecera')</h1>
             <p class="lead">@yield('subcabecera')</p>
         </div>
+
     </header>
 
     <main>

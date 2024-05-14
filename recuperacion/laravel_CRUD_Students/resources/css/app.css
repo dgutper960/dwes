@@ -1,0 +1,6 @@
+/* public/css/custom.css */
+.img-75vh {
+    height: 80vh;
+    object-fit: cover;
+}
+

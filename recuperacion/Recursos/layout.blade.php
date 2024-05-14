@@ -17,8 +17,7 @@
     @include('partials.menu');
     <header>
       <hgroup>
-          <!-- Titulos y subtitulos -->
-          
+          <!-- Titulos y subtitulos -->  
           <div class="container">
               <h1 class="display-7">@yield('titulo')</h1>
               <p class="lead">@yield('subtitulo')</p>

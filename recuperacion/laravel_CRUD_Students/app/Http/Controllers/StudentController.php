@@ -12,6 +12,7 @@ class StudentController extends Controller
     public function index()
     {
         //
+        return 'Main de Students';
     }
 
     /**
