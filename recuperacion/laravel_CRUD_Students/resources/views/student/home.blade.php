@@ -5,7 +5,7 @@
 
 <!-- Cargamos el menu -->
 @section('menu')
-    @include('layouts.partials.menu')
+@include('layouts.partials.menu')
 @endsection
 
 @section('cabecera', 'Gestion Estudiantes')
@@ -13,34 +13,35 @@
 <!-- Indicamos el contenido de la sección contenido -->
 @section('main')
 
-<!-- Pintamos la tabla para mostrar los artículos -->
-    <table class="table">
-        <thead>
+<!-- Pintamos la tabla para mostrar los alumnos -->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Fecha Nac</th>
+            <th scope="col">Télefono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Curso</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Recorremos los articulos -->
+        @foreach ($students as $student)
             <tr>
-                <th scope="col">id</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Categoría</th>
-                <th scope="col">Unidades</th>
-                <th scope="col">Precio Coste</th>
-                <th scope="col">Precio Venta</th>
+                <th scope="row">{{ $student['id'] }}</th>
+                <td>{{ $student['name']}}</td>
+                <td>{{ $student['lastname'] }}</td>
+                <td>{{ $student['birt_date'] }}</td>
+                <td>{{ $student['phone'] }}</td>
+                <td>{{ $student['email'] }}</td>
+                <td>{{ $student->course->course }}</td>
             </tr>
-        </thead>
-        <tbody>
-            <!-- Recorremos los articulos -->
-            @foreach ($students as $student)
-                <tr>
-                    <th scope="row">{{ $student['id'] }}</th>
-                    <td>{{ $student['name']}}</td>
-                    <td>{{ $student['lastname'] }}</td>
-                    <td>{{ $student['birt_date'] }}</td>
-                    <td>{{ $student['phone'] }}</td>
-                    <td>{{ $student['email'] }}</td>
-                    <td>{{ $student->course->course }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+        @endforeach
+    </tbody>
+</table>
 
-    <!-- Mostramos el num de registros -->
-    <p>Número de registros: {{ count($students) }}</p>
+<!-- Mostramos el num de registros -->
+<p>Número de registros: {{ count($students) }}</p>
 @endsection
