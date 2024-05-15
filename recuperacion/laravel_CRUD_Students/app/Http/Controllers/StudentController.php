@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -11,8 +13,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
-        return 'Main de Students';
+        // Cargamos array de estudiantes con Elocuent
+        $studens = Student::all()->sortBy('id');
+
+        // Vista Main de estudientes -> Cargamos el array en la vista
+        return view('student.home', ['students'=> $studens]);
     }
 
     /**
