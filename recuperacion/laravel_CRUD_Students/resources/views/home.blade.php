@@ -25,7 +25,7 @@
                 <!-- <source media="(min-width: 1200px)" srcset="{{ asset('images/imagen-grande.jpg') }}">
                 <source media="(min-width: 768px)" srcset="{{ asset('images/imagen-mediana.jpg') }}">
                 <source media="(min-width: 576px)" srcset="{{ asset('images/imagen-pequeña.jpg') }}"> -->
-                <img src="{{ asset('images/index_students.jpg') }}" alt="Descripción de la imagen"
+                <img src="{{ asset('images/estudiantes.jpg') }}" alt="Descripción de la imagen"
                     class="img-fluid rounded">
             </picture>
         </div>
@@ -33,6 +33,6 @@
 </div>
 
 <!-- Texto principal -->
-<a class="btn btn-primary" href="{{route('students.index')}}" role="button">Alumnos</a>
+<!-- <a class="btn btn-primary" href="{{route('students.index')}}" role="button">Alumnos</a> -->
 
 @endsection

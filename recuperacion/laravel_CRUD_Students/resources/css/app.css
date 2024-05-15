@@ -1,6 +1,10 @@
 /* public/css/custom.css */
 .img-75vh {
-    height: 80vh;
+    height: 25vh;
     object-fit: cover;
+}
+
+.nav-item-custom {
+    font-size: 16px; /* Ajusta este valor según tus necesidades */
 }
 
