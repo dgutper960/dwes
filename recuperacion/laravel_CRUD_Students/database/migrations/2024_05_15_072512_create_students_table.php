@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('lastname', 45);
             $table->date('birt_date');
             $table->char('phone', 13)->nullable();
+            $table->string('city', 40);
+            $table->char('dni', 9)->unique();
             $table->string('email', 40)->unique();
             $table->unsignedBigInteger('course_id');
             $table->timestamps();

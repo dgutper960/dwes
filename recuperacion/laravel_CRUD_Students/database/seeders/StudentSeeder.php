@@ -21,6 +21,8 @@ class StudentSeeder extends Seeder
                     'lastname'=>'Gutiérrez Pérez',
                     'birt_date'=>'1984-10-28',
                     'phone'=> 6669999333,
+                    'city'=> 'Ubrique',
+                    'dni'=> '66998877W',
                     'email'=>'david@email.es',
                     'course_id'=> 2
                 ],
@@ -29,6 +31,8 @@ class StudentSeeder extends Seeder
                     'lastname'=>'Batista Bandera',
                     'birt_date'=>'1982-07-20',
                     'phone'=> 333666999,
+                    'city'=> 'Jerez',
+                    'dni'=> '33557788P',
                     'email'=>'martia@email.es',
                     'course_id'=> 1
                 ]
