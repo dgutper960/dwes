@@ -25,7 +25,14 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        // Muestra la vista de Nuevo Alumno
+
+        // Obtengo los cursos de la tabla ordenados por course
+        $cursos = Course::all()->sortBy('course');
+
+        // LLamo a la vista
+        return view('student.create', ['cursos' => $cursos]);
+
     }
 
     /**

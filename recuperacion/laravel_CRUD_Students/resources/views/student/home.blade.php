@@ -9,10 +9,16 @@
 @endsection
 
 @section('cabecera', 'Gestion Estudiantes')
+
+
+
 @section('subcabecera', 'Lista de Alumnos')
+
+
 <!-- Indicamos el contenido de la sección contenido -->
 @section('main')
 
+@include('student.partials.menu')
 <!-- Pintamos la tabla para mostrar los alumnos -->
 <table class="table">
     <thead>
