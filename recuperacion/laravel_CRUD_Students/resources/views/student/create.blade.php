@@ -132,9 +132,9 @@
         </div>
         </form>
         <!-- Fin Formulario -->
-        <br>
-        <br>
 
     </div>
 </div>
+<br>
+<br>
 @endsection

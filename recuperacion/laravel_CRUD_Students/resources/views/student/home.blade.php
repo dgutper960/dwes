@@ -18,6 +18,9 @@
 <!-- Indicamos el contenido de la sección contenido -->
 @section('main')
 
+<!-- Mostramos el mensaje -->
+@include('layouts.partials.alerts')
+
 @include('student.partials.menu')
 <!-- Pintamos la tabla para mostrar los alumnos -->
 <table class="table">
