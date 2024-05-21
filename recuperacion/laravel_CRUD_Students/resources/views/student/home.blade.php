@@ -48,14 +48,26 @@
                 <td>{{ $student['email'] }}</td>
                 <td>{{ $student->course->course }}</td>
                 <td>
-                    <!-- Botones de Acción -->
-                    <a href="{{ route('students.edit', $student->id)}}" title="Editar" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a>
-                    <a href="{{ route('students.show', $student->id)}}" title="Mostrar" class="btn btn-warning btn-sm"><i class="bi bi-eye-fill"></i></a>
-                    <form style="display:inline;" method="POST" action="{{ route('students.destroy', $student->id)}}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Borrar alumno {{$student->name}} de forma irreversible?')"><i class="bi bi-trash-fill"></i></button>
-                    </form>
+                    <div class="d-grid gap-2 d-md-block">
+                        <!-- Botones de Acción -->
+                        <!-- editar -->
+                        <a href="{{ route('students.edit', $student->id)}}" title="Editar" class="btn btn-primary btn-sm"><i
+                                class="bi bi-pencil"></i></a>
+                        <!-- mostrar -->
+                        <a href="{{ route('students.show', $student->id)}}" title="Mostrar"
+                            class="btn btn-warning btn-sm"><i class="bi bi-eye-fill"></i></a>
+                        
+                        <!-- borrar -->
+                        <form style="display:inline;" method="POST" action="{{ route('students.destroy', $student->id)}}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('¿Borrar alumno {{$student->name}} de forma irreversible?')"><i
+                                    class="bi bi-trash-fill"></i></button>
+                        </form>
+
+                    </div>
+
                 </td>
             </tr>
         @empty
