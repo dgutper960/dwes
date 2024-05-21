@@ -48,13 +48,13 @@ class StudentController extends Controller
         // Con los datos del formulario creamos un objeto de la clase Student
         // Validamos los datos del formulario
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'name' => 'required|string|max:35',
+            'lastname' => 'required|string|max:45',
             'birth_date' => 'required|date',
-            'phone' => 'required|string|max:15',
-            'city' => 'required|string|max:255',
-            'dni' => 'required|string|max:20|unique:students,dni',
-            'email' => 'required|email|max:255|unique:students,email',
+            'phone' => 'required|string|max:13',
+            'city' => 'required|string|max:40',
+            'dni' => 'required|string|max:9|unique:students,dni',
+            'email' => 'required|email|max:40|unique:students,email',
             'course_id' => 'required|integer|exists:courses,id',
         ]);
 
@@ -62,7 +62,7 @@ class StudentController extends Controller
         $alumno = Student::create([
             'name' => $validatedData['name'],
             'lastname' => $validatedData['lastname'],
-            'birth_date' => $validatedData['birth_date'],
+            'birt_date' => $validatedData['birth_date'],
             'phone' => $validatedData['phone'],
             'city' => $validatedData['city'],
             'dni' => $validatedData['dni'],
