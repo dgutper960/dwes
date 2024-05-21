@@ -81,7 +81,13 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Cargamos los datos en la vista y redirigimos
+
+        // Cargamos el alumno
+        $student = Student::find($id);
+
+        // Cargamos la vista con los datos
+        return view('student.show', ['student' => $student]);
     }
 
     /**
@@ -111,13 +117,13 @@ class StudentController extends Controller
         // Validamos los datos del formulario
         $request->validate([
             'name' => ['required', 'string', 'max:35'],
-            'lastname' => ['required','string','max:45'],
-            'birth_date' => ['required','date'],
-            'phone' => ['required','string','max:13'],
-            'city' => ['required','string','max:40'],
-            'dni' => ['required','string','max:9', Rule::unique('students')->ignore($id)],
-            'email' => ['required','email','max:40', Rule::unique('students')->ignore($id)],
-            'course_id' => ['required','integer','exists:courses,id'],
+            'lastname' => ['required', 'string', 'max:45'],
+            'birth_date' => ['required', 'date'],
+            'phone' => ['required', 'string', 'max:13'],
+            'city' => ['required', 'string', 'max:40'],
+            'dni' => ['required', 'string', 'max:9', Rule::unique('students')->ignore($id)],
+            'email' => ['required', 'email', 'max:40', Rule::unique('students')->ignore($id)],
+            'course_id' => ['required', 'integer', 'exists:courses,id'],
         ]);
 
 
