@@ -152,6 +152,11 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // ELiminar alumno
+        Student::destroy($id);
+
+        // Redireccion
+        return redirect()->route('students.index')->with('success', 'Alumno eliminado correctamente');
+
     }
 }
